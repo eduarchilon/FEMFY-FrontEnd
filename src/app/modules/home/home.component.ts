@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  title: string = 'femfy-ui';
+  title: string = 'femfy';
 
   isLogin: boolean = false;
 
@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
   //TODO: para probar las rutas con distinto layout
   changeLayout(): void {
     this.isLogin = !this.isLogin;
+    this.router.navigate(['']);
     console.log(this.isLogin);
   }
 }
