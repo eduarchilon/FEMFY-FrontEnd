@@ -8,14 +8,16 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
-  },
-  {
-    path: 'login-usuario',
-    component: LoginUsuarioComponent,
-  },
-  {
-    path: 'registro-usuario',
-    component: RegistroUsuarioComponent,
+    children: [
+      {
+        path: 'login-usuario',
+        component: LoginUsuarioComponent,
+      },
+      {
+        path: 'registro-usuario',
+        component: RegistroUsuarioComponent,
+      },
+    ],
   },
 ];
 

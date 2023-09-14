@@ -6,6 +6,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HomeRoutingModuleModule } from './modules/home/home-routing-module.module';
 import { CommonModule } from '@angular/common';
 import { HomeModule } from './modules/home/home.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +16,7 @@ import { HomeModule } from './modules/home/home.module';
     AppRoutingModule,
     AuthModule,
     HomeRoutingModuleModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
