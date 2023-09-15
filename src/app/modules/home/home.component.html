@@ -1,4 +1,38 @@
-<ng-container *ngIf="!isLogin">
+<!-- Navbar -->
+<div class="bg-blue-500 p-4 text-white sticky top-0 md:z-50">
+  <nav class="flex justify-between items-center">
+    <a href="#" class="text-xl font-bold">Mi Sitio</a>
+    <button class="md:hidden text-xl" (click)="menuToggle()">☰</button>
+    <div class="hidden md:flex space-x-4">
+      <a href="#">Inicio</a>
+      <a href="#">Acerca de</a>
+      <!-- Agrega más elementos del menú según tus necesidades -->
+    </div>
+  </nav>
+</div>
+
+<!-- Backdrop (fondo con opacidad) -->
+<div
+  #backfrop
+  (click)="backdropView()"
+  class="hidden fixed top-0 left-0 h-full w-full bg-black opacity-50 z-10"
+></div>
+
+<!-- Drawer (menú desplegable) -->
+<div
+  #drawer
+  class="bg-white fixed top-0 left-0 h-full w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-20"
+>
+  <button class="absolute top-2 right-2 text-xl" (click)="closeDrawerButton()">
+    ×
+  </button>
+  <ul class="space-y-4">
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Acerca de</a></li>
+  </ul>
+</div>
+
+<!-- <ng-container *ngIf="!isLogin">
   <app-header-default></app-header-default>
   <h2 class="text-[24px]">Home no logueado</h2>
   <h2>{{ title }}</h2>
@@ -41,4 +75,4 @@
     Cambiar layout
   </button>
   <app-footer-usuario></app-footer-usuario>
-</ng-container>
+</ng-container> -->
