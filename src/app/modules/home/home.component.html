@@ -1,11 +1,11 @@
 <!-- Navbar -->
-<div class="bg-blue-500 p-4 text-white sticky top-0 md:z-50">
-  <nav class="flex justify-between items-center">
-    <a href="#" class="text-xl font-bold">Mi Sitio</a>
+<div class="p-4 text-white sticky top-0 md:z-50 bg-gradient-to-r from-pink-600 to-pink-300 ">
+  <nav class="flex justify-between items-center bg-opacity-30">
+    <a routerLink="" class="text-xl font-bold">femfy</a>
     <button class="md:hidden text-xl" (click)="menuToggle()">☰</button>
     <div class="hidden md:flex space-x-4">
-      <a href="#">Inicio</a>
-      <a href="#">Acerca de</a>
+      <a routerLink="login-usuario">Ingresar</a>
+      <a routerLink="registro-usuario">Registrarse</a>
       <!-- Agrega más elementos del menú según tus necesidades -->
     </div>
   </nav>
@@ -27,10 +27,11 @@
     ×
   </button>
   <ul class="space-y-4">
-    <li><a href="#">Inicio</a></li>
-    <li><a href="#">Acerca de</a></li>
+    <li><a routerLink="login-usuario">Ingresar</a></li>
+    <li><a routerLink="registro-usuario">Registrarse</a></li>
   </ul>
 </div>
+<router-outlet></router-outlet>
 
 <!-- <ng-container *ngIf="!isLogin">
   <app-header-default></app-header-default>

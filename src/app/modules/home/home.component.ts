@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
+  HostListener,
   OnInit,
   ViewChild,
 } from '@angular/core';
@@ -20,9 +21,9 @@ export class HomeComponent implements OnInit {
   @ViewChild('drawer') drawer!: ElementRef;
   @ViewChild('backdrop') backdrop!: ElementRef;
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   //TODO: para probar las rutas con distinto layout
   changeLayout(): void {
@@ -46,6 +47,20 @@ export class HomeComponent implements OnInit {
   }
 
   backdropView(): void {
+    const drawer = this.drawer?.nativeElement;
+    drawer?.classList.add('-translate-x-full');
+    const backdrop = this.backdrop?.nativeElement;
+    backdrop?.classList.add('hidden');
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event): void {
+    if (window.innerWidth >= 768) {
+      this.hideMenuAndBackdrop();
+    }
+  }
+
+  hideMenuAndBackdrop() {
     const drawer = this.drawer?.nativeElement;
     drawer?.classList.add('-translate-x-full');
     const backdrop = this.backdrop?.nativeElement;
