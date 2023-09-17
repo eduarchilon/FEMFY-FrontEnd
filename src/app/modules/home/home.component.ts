@@ -1,12 +1,6 @@
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -14,56 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  title: string = 'femfy';
+  constructor(private router: Router, private authService: AuthService) {}
 
-  isLogin: boolean = false;
-
-  @ViewChild('drawer') drawer!: ElementRef;
-  @ViewChild('backdrop') backdrop!: ElementRef;
-
-  constructor(private router: Router) { }
-
-  ngOnInit(): void { }
-
-  //TODO: para probar las rutas con distinto layout
-  changeLayout(): void {
-    this.isLogin = !this.isLogin;
-    this.router.navigate(['']);
-    console.log(this.isLogin);
+  get isLogging(): boolean {
+    return this.authService.isLoggin;
   }
 
-  menuToggle(): void {
-    let drawer = this.drawer?.nativeElement;
-    drawer.classList.remove('-translate-x-full');
-    let backdrop = this.backdrop?.nativeElement;
-    backdrop?.classList.remove('hidden');
-  }
-
-  closeDrawerButton(): void {
-    const drawer = this.drawer?.nativeElement;
-    drawer?.classList.add('-translate-x-full');
-    const backdrop = this.backdrop?.nativeElement;
-    backdrop?.classList.add('hidden');
-  }
-
-  backdropView(): void {
-    const drawer = this.drawer?.nativeElement;
-    drawer?.classList.add('-translate-x-full');
-    const backdrop = this.backdrop?.nativeElement;
-    backdrop?.classList.add('hidden');
-  }
-
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event): void {
-    if (window.innerWidth >= 1024) {
-      this.hideMenuAndBackdrop();
-    }
-  }
-
-  hideMenuAndBackdrop() {
-    const drawer = this.drawer?.nativeElement;
-    drawer?.classList.add('-translate-x-full');
-    const backdrop = this.backdrop?.nativeElement;
-    backdrop?.classList.add('hidden');
-  }
+  ngOnInit(): void {}
 }
