@@ -13,7 +13,7 @@ xdescribe('LoginUsuarioComponent', () => {
     fixture = TestBed.createComponent(LoginUsuarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });x
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
