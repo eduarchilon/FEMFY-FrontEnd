@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
-    if (window.innerWidth >= 768) {
+    if (window.innerWidth >= 1024) {
       this.hideMenuAndBackdrop();
     }
   }

@@ -5,6 +5,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { HeaderDefaultComponent } from 'src/app/commons/header-default/header-default.component';
 import { HeaderUsuarioComponent } from 'src/app/commons/header-usuario/header-usuario.component';
 import { FooterUsuarioComponent } from 'src/app/commons/footer-usuario/footer-usuario.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -13,7 +15,7 @@ import { FooterUsuarioComponent } from 'src/app/commons/footer-usuario/footer-us
     HeaderUsuarioComponent,
     FooterUsuarioComponent,
   ],
-  imports: [CommonModule, AppRoutingModule],
+  imports: [CommonModule, AppRoutingModule, MatIconModule, MatDividerModule],
   exports: [],
 })
 export class HomeModule {}

@@ -1,9 +1,13 @@
 <!-- Navbar -->
-<div class="p-4 text-white sticky top-0 md:z-50 bg-gradient-to-r from-pink-600 to-pink-300 ">
+<div
+  class="py-4 text-white fixed top-0 md:z-50 bg-[transparent] w-[100vw] px-[5vw]"
+>
   <nav class="flex justify-between items-center bg-opacity-30">
     <a routerLink="" class="text-xl font-bold">femfy</a>
-    <button class="md:hidden text-xl" (click)="menuToggle()">☰</button>
-    <div class="hidden md:flex space-x-4">
+    <button mat-fab class="lg:hidden text-xl" (click)="menuToggle()">
+      <mat-icon class="text-[2rem] active:text-[2.5rem]">menu</mat-icon>
+    </button>
+    <div class="hidden lg:flex space-x-4">
       <a routerLink="login-usuario">Ingresar</a>
       <a routerLink="registro-usuario">Registrarse</a>
       <!-- Agrega más elementos del menú según tus necesidades -->
@@ -13,7 +17,7 @@
 
 <!-- Backdrop (fondo con opacidad) -->
 <div
-  #backfrop
+  #backdrop
   (click)="backdropView()"
   class="hidden fixed top-0 left-0 h-full w-full bg-black opacity-50 z-10"
 ></div>
@@ -21,14 +25,18 @@
 <!-- Drawer (menú desplegable) -->
 <div
   #drawer
-  class="bg-white fixed top-0 left-0 h-full w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-20"
+  class="bg-white fixed top-0 left-0 h-full w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
 >
-  <button class="absolute top-2 right-2 text-xl" (click)="closeDrawerButton()">
-    ×
+  <button  mat-fab class="absolute top-2 right-2 text-xl" (click)="closeDrawerButton()">
+    <mat-icon class="text-[1rem] active:text-[1.5rem]">close</mat-icon>
   </button>
-  <ul class="space-y-4">
-    <li><a routerLink="login-usuario">Ingresar</a></li>
-    <li><a routerLink="registro-usuario">Registrarse</a></li>
+  <ul class="space-y-4 my-8 px-2">
+    <li><a class="text-[20px] font-semibold active:text-[22px]" routerLink="">Home</a></li>
+    <mat-divider></mat-divider>
+    <li><a class="text-[20px] font-semibold active:text-[22px]" routerLink="login-usuario">Ingresar</a></li>
+    <mat-divider></mat-divider>
+    <li><a class="text-[20px] font-semibold active:text-[22px]" routerLink="registro-usuario">Registrarse</a></li>
+    <mat-divider></mat-divider>
   </ul>
 </div>
 <router-outlet></router-outlet>
