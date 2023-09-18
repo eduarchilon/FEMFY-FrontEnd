@@ -8,7 +8,7 @@ import { CalendarComponent } from './modules/calendar/calendar.component';
 
 const routes: Routes = [
   {
-    path: 'registro-usuario',
+    path: '',
     component: HomeComponent,
   },
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     component: LoginUsuarioComponent,
   },
   {
-    path: '',
+    path: 'registro-usuario',
     component: RegistroUsuarioComponent,
   },
   {
