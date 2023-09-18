@@ -21,6 +21,7 @@ export class HeaderUsuarioComponent implements OnInit {
 
   @ViewChild('drawer') drawer!: ElementRef;
   @ViewChild('backdrop') backdrop!: ElementRef;
+  @ViewChild('navBar') navBar!: ElementRef;
 
   ngOnInit(): void {}
 
@@ -31,7 +32,6 @@ export class HeaderUsuarioComponent implements OnInit {
   }
 
   handleRouter(path: string): void {
-    console.log(path)
     this.router.navigate([path]);
     this.closeDrawerButton();
   }
@@ -64,14 +64,20 @@ export class HeaderUsuarioComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event: Event): void {
     if (window.innerWidth >= 1024) {
-      this.hideMenuAndBackdrop();
+      const drawer = this.drawer?.nativeElement;
+      drawer?.classList.add('-translate-x-full');
+      const backdrop = this.backdrop?.nativeElement;
+      backdrop?.classList.add('hidden');
     }
   }
 
-  hideMenuAndBackdrop() {
-    const drawer = this.drawer?.nativeElement;
-    drawer?.classList.add('-translate-x-full');
-    const backdrop = this.backdrop?.nativeElement;
-    backdrop?.classList.add('hidden');
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    const navBar = this.navBar?.nativeElement;
+    if (window.scrollY >= 60 && window.innerWidth >= 1024) {
+      navBar?.classList.add('border-b-2', 'border-solid', 'border-white');
+    } else {
+      navBar?.classList.remove('border-b-2', 'border-solid', 'border-white');
+    }
   }
 }

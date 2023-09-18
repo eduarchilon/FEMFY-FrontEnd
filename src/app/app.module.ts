@@ -12,6 +12,7 @@ import { CommonModule } from '@angular/common';
 import { HomeModule } from './modules/home/home.module';
 import { CalendarModule } from './modules/calendar/calendar.module';
 import { CommonsModule } from './commons/commons.module';
+import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +25,7 @@ import { CommonsModule } from './commons/commons.module';
     CalendarModule,
     HomeModule,
     HomeRoutingModuleModule,
+    AuthRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

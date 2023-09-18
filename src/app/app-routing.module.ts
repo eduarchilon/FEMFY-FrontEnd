@@ -12,14 +12,6 @@ const routes: Routes = [
     component: HomeComponent,
   },
   {
-    path: 'login-usuario',
-    component: LoginUsuarioComponent,
-  },
-  {
-    path: 'registro-usuario',
-    component: RegistroUsuarioComponent,
-  },
-  {
     path: 'calendario',
     component: CalendarComponent,
   },
