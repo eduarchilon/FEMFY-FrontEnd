@@ -1,12 +1,24 @@
-<div
-  class="w-[100%] h-screen bg-cover bg-[#FF97A5] pt-24 px-[5vw]"
->
-  <h1 class="text-[40px]">REGISTRO</h1>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe fuga
-    blanditiis corrupti, necessitatibus animi voluptatem quisquam? Molestias
-    possimus fugiat ea. Nobis reiciendis doloremque animi laborum perspiciatis
-    ut ea aliquid.
-  </p>
-  <button routerLink="">Home</button>
+<div class="w-[100%] bg-cover bg-[#FF97A5] pt-24 px-[5vw] flex items-center text-white py-[100px]">
+
+  <div class="w-[50%]">
+    <div class="bg-[#FACAEC] px-[50px] rounded-[20px] w-[70%] flex flex-col items-center pt-[30px] pb-[100px]">
+      <img class="w-[100px] " src="../../../../assets/images/isotipo.svg">
+      <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">¡Bienvenida!</h2>
+      <form class="flex flex-col gap-[14px] w-[100%]">
+        <input class="rounded-[20px] py-[10px] px-[10px]" type="text" placeholder="Nombre de usuario">
+        <input class="rounded-[20px] py-[10px] px-[10px]" type="email" placeholder="Email">
+        <input class="rounded-[20px] py-[10px] px-[10px]" type="password" placeholder="Contraseña">
+        <input class="rounded-[20px] py-[10px] px-[10px]" type="password" placeholder="Repetir contraseña">
+        <input class="rounded-[20px] py-[10px] px-[10px]" type="date" placeholder="Fecha de nacimiento">
+        <button class="bg-[#D8B4F8] rounded-[20px] py-[10px] ">Registrar</button>
+      </form>
+      <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
+      <a routerLink="login-usuario" class="text-white">Ingresar</a>
+    </div>
+  </div>
+
+  <div class="w-[50%] flex items-center flex-col">
+    <img class="w-[230px] " src="../../../../assets/images/isotipo.svg">
+    <h1 class="text-[50px] font-bold px-[140px] text-center">Tu salud ginecológica en un solo lugar</h1>
+  </div>
 </div>
