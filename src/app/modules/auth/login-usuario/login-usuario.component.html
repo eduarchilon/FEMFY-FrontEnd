@@ -1,10 +1,21 @@
-<div class="w-[100%] h-screen bg-cover bg-[#FF97A5] pt-24 px-[5vw]">
-  <h1 class="text-[40px]">LOGIN</h1>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe fuga
-    blanditiis corrupti, necessitatibus animi voluptatem quisquam? Molestias
-    possimus fugiat ea. Nobis reiciendis doloremque animi laborum perspiciatis
-    ut ea aliquid.
-  </p>
-  <button routerLink="">Home</button>
+<div class="w-[100%] h-screen bg-cover py-32 bg-[#FF97A5] px-[5vw] flex justify-center text-white">
+  <div class="w-[50%] flex justify-center items-center flex-col max-lg:hidden">
+    <div>
+      <h1 class="text-[50px] max-xl:text-[70px] font-bold min-w-[85%] w-[inherit] text-left">Siempre es un placer poder
+        ayudarte.</h1>
+    </div>
+  </div>
+  <div class=" flex justify-center">
+    <div class="bg-[#FACAEC] rounded-[20px] xl:py-0 2xl:p-36 drop-shadow-xl flex flex-col items-center">
+      <img class="w-[100px] " src="../../../../assets/images/isotipo.svg">
+      <h2 class="text-[32px] font-bold text-center mb-14 pt-[2px]">¡Bienvenida!</h2>
+      <form class="flex flex-col gap-[14px] w-[100%]">
+        <input class="rounded-[20px] p-[10px]" type="email" placeholder="Email">
+        <input class="rounded-[20px] p-[10px] mb-14" type="password" placeholder="Contraseña">
+        <button class="bg-[#D8B4F8] rounded-[20px] py-[10px] ">Registrar</button>
+      </form>
+      <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
+      <a routerLink="/login-usuario" class="text-white">Registrate</a>
+    </div>
+  </div>
 </div>
