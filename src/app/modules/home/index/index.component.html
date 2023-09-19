@@ -1,24 +1,171 @@
-<div class="w-[100%] bg-cover bg-[#FF97A5] pt-24 px-[5vw] text-white">
-  <div class="w-[100%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0 flex flex-col items-center">
+<!-- <div class="w-[100%] bg-cover bg-[#FF97A5] pt-24 px-[5vw] text-white">
+  <div
+    class="w-[100%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0 flex flex-col items-center"
+  >
     <div
-      class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[80px] pb-[100px]">
-      <img class="w-[100px] " src="../../../../assets/images/isotipo.svg">
-      <h2 class="text-[32px] font-bold text-center w-[50%] pb-[15px] pt-[2px]">¿Ya tuviste tu primera menstruación?</h2>
-      <div class="checkbox-container pt-[30px] pb-[100px] text-black flex flex-col items-center gap-[5px] w-[100%]">
+      class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[80px] pb-[100px]"
+    >
+      <img class="w-[100px]" src="../../../../assets/images/isotipo.svg" />
+      <h2 class="text-[32px] font-bold text-center w-[50%] pb-[15px] pt-[2px]">
+        ¿Ya tuviste tu primera menstruación?
+      </h2>
+      <div
+        class="checkbox-container pt-[30px] pb-[100px] text-black flex flex-col items-center gap-[5px] w-[100%]"
+      >
         <label class="custom-checkbox-label">
-          <input type="checkbox" class="custom-checkbox">
+          <input type="checkbox" class="custom-checkbox" />
           <span class="rounded-50"></span>
           Sí
         </label>
-        <label class="custom-checkbox-label ">
-          <input type="checkbox" class="custom-checkbox bg-[#6B83FF] rounded-50">
+        <label class="custom-checkbox-label">
+          <input
+            type="checkbox"
+            class="custom-checkbox bg-[#6B83FF] rounded-50"
+          />
           No
         </label>
       </div>
-      <button class="bg-[#D8B4F8] w-[70%]  text-white m-auto rounded-[20px] py-[10px] ">Registrar</button>
+      <button
+        class="bg-[#D8B4F8] w-[70%] text-white m-auto rounded-[20px] py-[10px]"
+      >
+        Registrar
+      </button>
 
       <a routerLink="/login-usuario" class="text-white">Omitir</a>
     </div>
   </div>
+</div> -->
 
+<div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 px-[5vw] py-[100px]">
+  <div
+    class="text-white flex items-stretch gap-[5%] h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
+  >
+    <div
+      class="max-lg:w-[100%] flex flex-col gap-[46px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center"
+    >
+      <div class="flex flex-col items-center gap-[10px]">
+        <img
+          src="../../../../assets/images/chart-periodo.png"
+          alt="chart-periodo"
+        />
+        <button class="bg-[#D8B4F8] py-[10px] px-[20px] rounded-[20px]">
+          Registrar período
+        </button>
+      </div>
+      <div class="flex">
+        <div
+          class="bg-[#FCF8F8] rounded-[20px] flex flex-col items-center gap-[15px] p-[15px]"
+        >
+          <span class="text-black text-center"
+            >Registrá tu estado de ánimo</span
+          >
+          <button
+            class="bg-[#FEA8B1] active:bg-[#FF97A5] text-white flex items-center justify-center p-[20px] rounded-full"
+          >
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+        <div></div>
+      </div>
+    </div>
+    <div
+      class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
+    >
+      <div class="bg-[#FF97A5] p-[20px] rounded-[20px]">
+        <h4 class="text-[48px] font-bold text-[#545F71] pb-[20px]">
+          Consejos diarios
+        </h4>
+        <div class="flex justify-between gap-3">
+          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
+            Consejo 1
+          </div>
+          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
+            Consejo 1
+          </div>
+          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
+            Consejo 1
+          </div>
+        </div>
+      </div>
+      <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
+        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
+          <h5 class="p-[20px] text-black font-semibold text-[20px]">
+            Mis ciclos
+          </h5>
+          <mat-divider></mat-divider>
+          <div class="p-[20px]">
+            <h5>Duración del ciclo anterior</h5>
+            <span class="font-semibold">37 días</span>
+            <br />
+            <br />
+            <h5>Duración del periodo anterior</h5>
+            <span class="font-semibold">5 días</span>
+            <br />
+            <br />
+            <h5>Duración del ciclo mas corto</h5>
+            <span class="font-semibold">28 días</span>
+            <br />
+            <br />
+            <h5>Duración del periodo mas corto</h5>
+            <span class="font-semibold">3 días</span>
+            <br />
+            <br />
+            <h5>Duración del ciclo mas largo</h5>
+            <span class="font-semibold">70 días</span>
+            <br />
+            <br />
+            <h5>Duración del periodo mas largo</h5>
+            <span class="font-semibold">7 días</span>
+          </div>
+        </div>
+        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
+          <h5 class="p-[20px] text-black font-semibold text-[20px]">
+            Historial de clicos
+          </h5>
+          <mat-divider></mat-divider>
+          <div class="p-[20px] flex flex-col gap-[15px]">
+            <div>
+              <h5>Ciclo actual: 10 días</h5>
+              <span>Inicio 5 ago</span>
+              <br />
+              <br />
+              <mat-progress-bar
+                [color]="color"
+                [mode]="mode"
+                [value]="value"
+                [bufferValue]="bufferValue"
+              >
+              </mat-progress-bar>
+            </div>
+            <div>
+              <h5>70 días</h5>
+              <span>21 jun - 5 ago</span>
+              <br />
+              <br />
+              <mat-progress-bar
+                [color]="color"
+                [mode]="mode"
+                [value]="value"
+                [bufferValue]="bufferValue"
+              >
+              </mat-progress-bar>
+            </div>
+            <div>
+              <h5>31 días</h5>
+              <span>31 may - 21 jun</span>
+              <br />
+              <br />
+              <mat-progress-bar
+                [color]="color"
+                [mode]="mode"
+                [value]="value"
+                [bufferValue]="bufferValue"
+              >
+              </mat-progress-bar>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
