@@ -1,12 +1,24 @@
-<div
-  class="w-[100%] h-screen bg-cover bg-[#FF97A5] pt-24 px-[5vw]"
->
-  <h1 class="text-[40px]">INDEX</h1>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe fuga
-    blanditiis corrupti, necessitatibus animi voluptatem quisquam? Molestias
-    possimus fugiat ea. Nobis reiciendis doloremque animi laborum perspiciatis
-    ut ea aliquid.
-  </p>
-  <button routerLink="">Home</button>
+<div class="w-[100%] bg-cover bg-[#FF97A5] pt-24 px-[5vw] text-white">
+  <div class="w-[100%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0 flex flex-col items-center">
+    <div
+      class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[80px] pb-[100px]">
+      <img class="w-[100px] " src="../../../../assets/images/isotipo.svg">
+      <h2 class="text-[32px] font-bold text-center w-[50%] pb-[15px] pt-[2px]">¿Ya tuviste tu primera menstruación?</h2>
+      <div class="checkbox-container pt-[30px] pb-[100px] text-black flex flex-col items-center gap-[5px] w-[100%]">
+        <label class="custom-checkbox-label">
+          <input type="checkbox" class="custom-checkbox">
+          <span class="rounded-50"></span>
+          Sí
+        </label>
+        <label class="custom-checkbox-label ">
+          <input type="checkbox" class="custom-checkbox bg-[#6B83FF] rounded-50">
+          No
+        </label>
+      </div>
+      <button class="bg-[#D8B4F8] w-[70%]  text-white m-auto rounded-[20px] py-[10px] ">Registrar</button>
+
+      <a routerLink="/login-usuario" class="text-white">Omitir</a>
+    </div>
+  </div>
+
 </div>
