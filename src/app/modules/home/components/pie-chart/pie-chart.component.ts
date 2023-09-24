@@ -1,10 +1,4 @@
-import {
-  Component,
-  HostListener,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
 import { data, dataChildren } from 'src/app/constans/pie-chart-data';
 
@@ -118,20 +112,7 @@ const chat1: AgPolarSeriesOptions = {
   strokeWidth: 2,
   strokes: ['white'],
   tooltip: {
-    renderer: ({ datum }) => {
-      return [
-        `<div style="background-color: ${datum.color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: black; font-weight: bold;">`,
-        datum.label,
-        `</div>`,
-        `<div style="padding: 4px 8px;text-align: center;">`,
-        `  <strong style="text-align: center;">${datum.dayCount} días</strong>`,
-        `</div>`,
-      ].join('\n');
-    },
-    position: {
-      type: 'pointer',
-    },
-    showArrow: true,
+    enabled: false,
   },
   highlightStyle: {
     item: {
