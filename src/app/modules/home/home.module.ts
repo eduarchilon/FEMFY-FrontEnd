@@ -2,18 +2,28 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { HeaderDefaultComponent } from 'src/app/commons/header-default/header-default.component';
-import { HeaderUsuarioComponent } from 'src/app/commons/header-usuario/header-usuario.component';
-import { FooterUsuarioComponent } from 'src/app/commons/footer-usuario/footer-usuario.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { AuthService } from 'src/app/services/auth.service';
+import { LandingComponent } from './landing/landing.component';
+import { IndexComponent } from './index/index.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AgChartsAngularModule } from 'ag-charts-angular';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 @NgModule({
-  declarations: [
-    HomeComponent,
-    HeaderDefaultComponent,
-    HeaderUsuarioComponent,
-    FooterUsuarioComponent,
+  declarations: [HomeComponent, LandingComponent, IndexComponent, PieChartComponent],
+  imports: [
+    CommonModule,
+    AppRoutingModule,
+    MatIconModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatProgressBarModule,
+    AgChartsAngularModule,
   ],
-  imports: [CommonModule, AppRoutingModule],
-  exports: [],
+  exports: [HomeComponent, IndexComponent],
+  providers: [AuthService],
 })
 export class HomeModule {}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -7,17 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  title: string = 'femfy';
+  constructor(private router: Router, private authService: AuthService) {}
 
-  isLogin: boolean = false;
-
-  constructor(private router: Router) {}
-  ngOnInit(): void {}
-
-  //TODO: para probar las rutas con distinto layout
-  changeLayout(): void {
-    this.isLogin = !this.isLogin;
-    this.router.navigate(['']);
-    console.log(this.isLogin);
+  get isLogging(): boolean {
+    return this.authService.isLoggin;
   }
+
+  ngOnInit(): void {}
 }

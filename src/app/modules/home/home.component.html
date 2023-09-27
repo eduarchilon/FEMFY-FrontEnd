@@ -1,44 +1,7 @@
-<ng-container *ngIf="!isLogin">
-  <app-header-default></app-header-default>
-  <h2 class="text-[24px]">Home no logueado</h2>
-  <h2>{{ title }}</h2>
-
-  <button
-    class="rounded-none bg-[green] text-[white] px-[5px]"
-    routerLink="login-usuario"
-  >
-    Login usuario link
-  </button>
-  <br />
-  <br />
-  <button
-    class="rounded-none bg-[blue] text-[white] px-[5px]"
-    routerLink="registro-usuario"
-  >
-    Registro usuario link
-  </button>
-  <a></a>
-  <br />
-  <p>Pagina:</p>
-  <router-outlet></router-outlet>
-  <br />
-  <button
-    class="rounded-none bg-[blue] text-[white] px-[5px]"
-    (click)="changeLayout()"
-  >
-    Cambiar layout
-  </button>
+<ng-container *ngIf="!isLogging">
+  <app-landing></app-landing>
 </ng-container>
 
-<ng-container *ngIf="isLogin">
-  <app-header-usuario></app-header-usuario>
-  <h2>Home logueado</h2>
-  <h2>{{ title }}</h2>
-  <button
-    class="rounded-none bg-[blue] text-[white] px-[5px]"
-    (click)="changeLayout()"
-  >
-    Cambiar layout
-  </button>
-  <app-footer-usuario></app-footer-usuario>
+<ng-container *ngIf="isLogging">
+  <app-index></app-index>
 </ng-container>

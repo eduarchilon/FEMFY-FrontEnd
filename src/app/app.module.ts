@@ -1,4 +1,8 @@
-import { NgModule } from '@angular/core';
+import {
+  CUSTOM_ELEMENTS_SCHEMA,
+  NO_ERRORS_SCHEMA,
+  NgModule,
+} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -6,7 +10,9 @@ import { AuthModule } from './modules/auth/auth.module';
 import { HomeRoutingModuleModule } from './modules/home/home-routing-module.module';
 import { CommonModule } from '@angular/common';
 import { HomeModule } from './modules/home/home.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CalendarModule } from './modules/calendar/calendar.module';
+import { CommonsModule } from './commons/commons.module';
+import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,11 +20,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     BrowserModule,
     AppRoutingModule,
+    CommonsModule,
     AuthModule,
+    CalendarModule,
+    HomeModule,
     HomeRoutingModuleModule,
-    BrowserAnimationsModule,
+    AuthRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
 export class AppModule {}
