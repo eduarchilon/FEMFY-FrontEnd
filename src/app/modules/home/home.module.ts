@@ -9,9 +9,11 @@ import { LandingComponent } from './landing/landing.component';
 import { IndexComponent } from './index/index.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { AgChartsAngularModule } from 'ag-charts-angular';
+import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 
 @NgModule({
-  declarations: [HomeComponent, LandingComponent, IndexComponent],
+  declarations: [HomeComponent, LandingComponent, IndexComponent, PieChartComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -19,6 +21,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatDividerModule,
     MatButtonModule,
     MatProgressBarModule,
+    AgChartsAngularModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [AuthService],
