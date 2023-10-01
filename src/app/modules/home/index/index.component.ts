@@ -3,6 +3,7 @@ import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
 import { AgPolarChartOptions } from 'ag-charts-community';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -15,7 +16,14 @@ export class IndexComponent implements OnInit {
   value = 50;
   bufferValue = 75;
 
-  constructor(private router: Router) {}
+  user!: any; //cambiar objeto
 
-  ngOnInit(): void {}
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService._userFinded.subscribe((user: any) => {
+      this.user = user;
+      console.log(this.user);
+    });
+  }
 }

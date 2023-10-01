@@ -8,10 +8,13 @@ import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthRoutingModule } from './auth-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SpinnerService } from 'src/app/services/spinner.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
-  imports: [CommonModule, AuthRoutingModule],
+  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
+  providers: [SpinnerService],
 })
 export class AuthModule {}

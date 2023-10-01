@@ -8,7 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { MENU_LOGUEADO, MENU_NO_LOGUEADO } from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-header-usuario',
@@ -23,12 +23,14 @@ export class HeaderUsuarioComponent implements OnInit {
   @ViewChild('backdrop') backdrop!: ElementRef;
   @ViewChild('navBar') navBar!: ElementRef;
 
-  ngOnInit(): void {}
-
   constructor(private router: Router, private authService: AuthService) {}
 
-  get isLogging(): boolean {
-    return this.authService.isLoggin;
+  isLogging: boolean = false;
+
+  ngOnInit(): void {
+    this.authService._userFinded.subscribe((user: any) => {
+      user ? (this.isLogging = true) : (this.isLogging = false);
+    });
   }
 
   handleRouter(path: string): void {

@@ -13,6 +13,8 @@ import { HomeModule } from './modules/home/home.module';
 import { CalendarModule } from './modules/calendar/calendar.module';
 import { CommonsModule } from './commons/commons.module';
 import { AuthRoutingModule } from './modules/auth/auth-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +28,8 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
     HomeModule,
     HomeRoutingModuleModule,
     AuthRoutingModule,
+    HttpClientModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
