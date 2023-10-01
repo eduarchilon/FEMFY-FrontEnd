@@ -21,10 +21,10 @@ export class PieChartComponent implements OnInit {
       height: this.getWindowSize(),
       autoSize: true,
       padding: {
-        top: 10,
-        right: 10,
-        bottom: 10,
-        left: 10,
+        top: 5,
+        right: 5,
+        bottom: 5,
+        left: 5,
       },
       series: [chat1, chat2],
       legend: {
@@ -41,15 +41,15 @@ export class PieChartComponent implements OnInit {
     if (window.innerWidth < 380) {
       value = 300;
     } else if (window.innerWidth < 500) {
-      value = 350;
+      value = 340;
     } else if (window.innerWidth < 1024) {
-      value = 400;
+      value = 390;
     } else if (window.innerWidth < 1100) {
-      value = 280;
+      value = 270;
     } else if (window.innerWidth < 1200) {
-      value = 300;
+      value = 290;
     } else {
-      value = 350;
+      value = 320;
     }
     return value;
   }
@@ -60,15 +60,15 @@ export class PieChartComponent implements OnInit {
     if (window.innerWidth < 380) {
       this.sizeChart = 300;
     } else if (window.innerWidth < 500) {
-      this.sizeChart = 350;
+      this.sizeChart = 340;
     } else if (window.innerWidth < 1024) {
-      this.sizeChart = 400;
+      this.sizeChart = 390;
     } else if (window.innerWidth < 1100) {
-      this.sizeChart = 280;
+      this.sizeChart = 270;
     } else if (window.innerWidth < 1200) {
-      this.sizeChart = 300;
+      this.sizeChart = 290;
     } else {
-      this.sizeChart = 350;
+      this.sizeChart = 320;
     }
     this.options = {
       ...this.options,

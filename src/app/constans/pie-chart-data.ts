@@ -257,6 +257,13 @@ export let data2: DataPieChartChildren[] = [
     color: '#3b82f6',
     width: 0,
   },
+  {
+    id: 31,
+    dayCount: 14,
+    label: 'Periodo seguro',
+    color: '#3b82f6',
+    width: 0,
+  },
 ];
 
 const sumaTotal = data2.reduce((acumulador, elemento) => {
@@ -268,5 +275,5 @@ const fechaActual = new Date().getDate();
 export const dataChildren: DataPieChartChildren[] = data2.map((item: any) => ({
   ...item,
   width: (data2.length / sumaTotal) * 100,
-  color: item.id === fechaActual ? '#1d4ed8' : item.color,
+  color: item.id === fechaActual ? 'purple' : item.color,
 }));
