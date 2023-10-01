@@ -1,6 +1,6 @@
 {
-  "name": "femfy-ui",
-  "short_name": "femfy-ui",
+  "name": "femfy",
+  "short_name": "femfy",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
