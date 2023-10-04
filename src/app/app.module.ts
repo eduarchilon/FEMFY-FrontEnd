@@ -39,6 +39,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     }),
   ],
   providers: [],
+  
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
