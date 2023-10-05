@@ -1,0 +1,21 @@
+<div class="pt-10 mt-20">
+    <div class="container text-center mx-auto">
+        <h2 class="text-5xl font-bold mb-5">Foro</h2>
+        <span class="text-2xl text-white text-medium">Bienvenida el foro femfy, actualmente hay 459 usuarias
+            conectadas</span>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4 mt-10">
+            <div *ngFor="let topic of topics">
+                <div class="w-80 mx-auto shadow-2xl rounded-[20px] relative mb-10">
+                    <a [href]="getRedirectUrl(topic.id)">
+                        <img [src]=" getImageUrl(topic.img)" class="w-full rounded-[20px]">
+                        <div class="bg-[#FF97A5] rounded-full absolute bottom-[-20px] left-0 w-full">
+                            <h3 class="text-xl text-white text-semibold p-3">{{ topic.title }}</h3>
+                        </div>
+                    </a>
+                </div>
+                <span class="block text-base text-dark font-semibold">7.688 mensajes</span>
+                <span class="block text-base text-dark font-semibold">33 usuarias en línea</span>
+            </div>
+        </div>
+    </div>
+</div>

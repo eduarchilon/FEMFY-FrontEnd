@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { SurveyComponent } from 'src/app/survey/survey.component';
+import { ForumComponent } from 'src/app/modules/forum/forum.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
   {
     path: 'cuestionario',
     component: SurveyComponent,
+  },
+  {
+    path: 'foro',
+    component: ForumComponent,
   },
 ];
 
