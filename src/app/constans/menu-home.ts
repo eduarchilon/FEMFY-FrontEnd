@@ -24,4 +24,8 @@ export const MENU_LOGUEADO: Menu[] = [
     label: 'Calendario',
     path: 'calendario',
   },
+  {
+    label: 'Cuestionario',
+    path: 'cuestionario',
+  },
 ];
