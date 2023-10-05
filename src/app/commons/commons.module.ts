@@ -24,7 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     AppRoutingModule,
     MatProgressSpinnerModule,
   ],
-  exports: [HeaderUsuarioComponent, SpinnerComponent],
+  exports: [HeaderUsuarioComponent, FooterUsuarioComponent, SpinnerComponent],
   providers: [AuthService],
 })
 export class CommonsModule {}
