@@ -1,12 +1,14 @@
 <div
   #navBar
-  class="py-4 text-white fixed top-0 md:z-50 bg-[#FEA8B1] px-[5vw] w-[100vw] z-10"
+  class="py-4 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[5vw] w-[100vw] z-10"
 >
   <nav class="flex justify-between items-center">
     <!--<a routerLink="" class="text-xl font-bold"></a>-->
-    <div class="flex items-center gap-[10px]">
+    <div class="flex items-center gap-[10px] cursor-pointer" routerLink="">
       <img class="h-[40px]" src="./assets/images/isotipoFemfy.svg" alt="" />
-      <h1 class="font-bold text-[40px] text-black">femfy</h1>
+      <h1 style="user-select: none" class="font-bold text-[40px] text-black">
+        femfy
+      </h1>
     </div>
     <button mat-fab class="lg:hidden text-xl" (click)="menuToggle()">
       <mat-icon class="text-[2rem] active:text-[2.5rem]">menu</mat-icon>

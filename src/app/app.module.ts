@@ -1,7 +1,8 @@
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
-  NgModule, isDevMode,
+  NgModule,
+  isDevMode,
 } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SurveyComponent } from './survey/survey.component';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { appStore } from './redux/store/app.store';
 
 @NgModule({
   declarations: [AppComponent, SurveyComponent],
@@ -36,11 +40,13 @@ import { SurveyComponent } from './survey/survey.component';
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
+      registrationStrategy: 'registerWhenStable:30000',
     }),
+    StoreModule.forRoot(appStore),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
   providers: [],
-  
+
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

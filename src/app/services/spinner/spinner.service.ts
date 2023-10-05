@@ -9,7 +9,7 @@ import {
   MatDialogRef,
   MatDialogState,
 } from '@angular/material/dialog';
-import { SpinnerComponent } from '../commons/spinner/spinner.component';
+import { SpinnerComponent } from '../../commons/spinner/spinner.component';
 
 @Injectable({
   providedIn: 'root',

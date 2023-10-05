@@ -9,7 +9,7 @@ import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.co
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SpinnerService } from 'src/app/services/spinner.service';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],

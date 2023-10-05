@@ -23,7 +23,6 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.authService._userFinded.subscribe((user: any) => {
       this.user = user;
-      console.log(this.user);
     });
   }
 }

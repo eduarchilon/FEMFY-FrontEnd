@@ -4,7 +4,9 @@ import {
   MatCalendar,
   MatCalendarCellClassFunction,
 } from '@angular/material/datepicker';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { EventDayDrawerComponent } from './components/event-day-drawer/event-day-drawer.component';
 
 @Component({
   selector: 'app-calendar',
@@ -17,13 +19,18 @@ export class CalendarComponent {
   selected!: Date | any;
   numberDay!: number;
 
-  constructor(private router: Router, private dateAdapter: DateAdapter<any>) {
+  constructor(
+    private router: Router,
+    private dateAdapter: DateAdapter<any>,
+    public dialog: MatDialog
+  ) {
     this.dateAdapter.setLocale('es-ES');
   }
-
+  showFiller = false;
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
-  
+
   onSelect(event?: any): void {
+    this.openDialog();
     this.selected = event;
     const selectedDateIndex = this.selectedDates?.findIndex((date) =>
       this.dateAdapter?.sameDate(date, this.selected)
@@ -46,4 +53,11 @@ export class CalendarComponent {
     }
     return '';
   };
+
+  openDialog() {
+    const dialogRef = this.dialog.open(EventDayDrawerComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
 }

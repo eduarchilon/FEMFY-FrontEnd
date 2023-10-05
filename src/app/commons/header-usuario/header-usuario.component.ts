@@ -2,21 +2,27 @@ import {
   Component,
   ElementRef,
   HostListener,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { MENU_LOGUEADO, MENU_NO_LOGUEADO } from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
+import { UserResponse } from 'src/app/models/user.model';
+import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
+import { AppState } from 'src/app/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-header-usuario',
   templateUrl: './header-usuario.component.html',
   styleUrls: ['./header-usuario.component.scss'],
 })
-
 export class HeaderUsuarioComponent implements OnInit {
   menuNoLogueado: Menu[] = MENU_NO_LOGUEADO;
   menuLogueado: Menu[] = MENU_LOGUEADO;
@@ -25,14 +31,23 @@ export class HeaderUsuarioComponent implements OnInit {
   @ViewChild('backdrop') backdrop!: ElementRef;
   @ViewChild('navBar') navBar!: ElementRef;
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private localStorageService: LocalStorageService,
+    private store: Store<AppState>
+  ) {}
 
+  userResponse!: UserResponse;
   isLogging: boolean = false;
 
   ngOnInit(): void {
-    this.authService._userFinded.subscribe((user: any) => {
-      user ? (this.isLogging = true) : (this.isLogging = false);
+    this.store.select(selectUserLogin).subscribe((user: UserResponse) => {
+      this.userResponse = user;
+      this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
     });
+    const userLogin = this.localStorageService.getUserByLogin();
+    userLogin ? (this.isLogging = true) : (this.isLogging = false);
   }
 
   handleRouter(path: string): void {

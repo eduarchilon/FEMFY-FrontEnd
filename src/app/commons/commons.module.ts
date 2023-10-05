@@ -9,6 +9,8 @@ import { FooterUsuarioComponent } from './footer-usuario/footer-usuario.componen
 import { AuthService } from '../services/auth/auth.service';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LocalStorageService } from '../services/local-storage/local-storage.service';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDividerModule,
     AppRoutingModule,
     MatProgressSpinnerModule,
+    StoreModule,
   ],
   exports: [HeaderUsuarioComponent, FooterUsuarioComponent, SpinnerComponent],
-  providers: [AuthService],
+  providers: [AuthService, LocalStorageService],
 })
 export class CommonsModule {}
