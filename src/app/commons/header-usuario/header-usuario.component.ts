@@ -5,6 +5,7 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+
 import { Router } from '@angular/router';
 import { MENU_LOGUEADO, MENU_NO_LOGUEADO } from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
@@ -15,6 +16,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   templateUrl: './header-usuario.component.html',
   styleUrls: ['./header-usuario.component.scss'],
 })
+
 export class HeaderUsuarioComponent implements OnInit {
   menuNoLogueado: Menu[] = MENU_NO_LOGUEADO;
   menuLogueado: Menu[] = MENU_LOGUEADO;

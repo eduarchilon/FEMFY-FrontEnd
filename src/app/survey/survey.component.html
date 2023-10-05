@@ -1,0 +1,43 @@
+<div class="w-[100%] bg-cover pt-16 flex justify-center text-white mt-4">
+
+  <div class="w-[50%] flex justify-center items-center flex-col max-lg:hidden">
+    
+    <div>
+      <h1 class="text-[30px] max-xl:text-[60px] font-bold min-w-[85%] w-[inherit]">
+        Ayudanos a personalizar tu experiencia respondiento algunas pregúntas rápidas.
+      </h1>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="h-screen mt-4 ">
+    <div class="bg-[#FACAEC] rounded-[20px] p-12 xl:p-16 2xl:p-36 drop-shadow-xl flex flex-col items-center">
+
+      <img class="w-[100px]" src="./assets/images/isotipo.svg" />
+      <h2 class="text-[20px] font-bold text-center mb-14 pt-[2px]">
+        Pregunta 1. ¿Ya tuviste tu primera menstruación?
+      </h2>
+
+      <form class="flex flex-col gap-[14px] w-[100%]">
+
+        <label>
+            <input type="radio" name="opcion" value="opcion1" id="opcion1" checked>
+            1. Si
+          </label>
+          <label>
+            <input type="radio" name="opcion" value="opcion2" id="opcion2">
+            2. No
+          </label>
+
+        <button class="bg-[#D8B4F8] rounded-[20px] py-[10px] disabled:bg-gray-400 disabled:cursor-not-allowed" type="submit">
+          Siguiente
+        </button>
+
+      </form>
+
+      <a routerLink="/calendario" class="text-white mt-2">Omitir por ahora.</a>
+
+    </div>
+  </div>
