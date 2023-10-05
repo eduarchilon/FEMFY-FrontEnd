@@ -40,6 +40,7 @@ import { SurveyComponent } from './survey/survey.component';
     }),
   ],
   providers: [],
+  
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
