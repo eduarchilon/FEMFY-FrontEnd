@@ -17,9 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SurveyComponent } from './modules/survey/survey.component';
-import { ForumComponent } from './modules/forum/forum.component';
-import { TopicComponent } from './modules/forum/topic/topic.component';
 import { ForumModule } from './modules/forum/forum.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +29,7 @@ import { ForumModule } from './modules/forum/forum.module';
     CommonsModule,
     AuthModule,
     CalendarModule,
+    ProfileModule,
     ForumModule,
     HomeModule,
     SurveyComponent,
