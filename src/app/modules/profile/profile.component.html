@@ -1,0 +1,130 @@
+<div class="h-screen pt-10 mt-20">
+    <div class="container mx-auto">
+        <div class="flex">
+            <div class="w-2/3 me-5">
+                <h2 class="text-4xl font-bold mb-5">Modificar datos personales</h2>
+                <div class="bg-black/25 rounded-[20px] p-10">
+                    <div class="grid lg:grid-cols-3 gap-4 mb-3">
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Nombre</label>
+                            <input type="text" value="Sofia" class="rounded-full border w-full p-4">
+                        </div>
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Apellido</label>
+                            <input type="text" value="Suarez" class="rounded-full border w-full p-4">
+                        </div>
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Fecha de nacimiento</label>
+                            <input type="text" value="24/06/2001" class="rounded-full border w-full p-4">
+                        </div>
+                    </div>
+                    <div class="grid lg:grid-cols-3 gap-4 mb-10">
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Email</label>
+                            <input type="text" value="agustinanava0@outlook.com" class="rounded-full border w-full p-4">
+                        </div>
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Teléfono</label>
+                            <input type="text" value="11-5645-2364" class="rounded-full border w-full p-4">
+                        </div>
+                        <div>
+                            <label for="note" class="block text-xl mb-2">Localidad</label>
+                            <input type="text" value="San justo" class="rounded-full border w-full p-4">
+                        </div>
+                    </div>
+                    <div>
+                        <textarea class="w-full rounded-[20px] p-4 h-[143px]"></textarea>
+                    </div>
+                    <div class="mt-5 text-end">
+                        <button class="text-white rounded-full font-bold bg-[#AF6FE8] p-3">Guardar cambios</button>
+                    </div>
+                </div>
+                <div class="bg-black/25 rounded-[20px] p-10 mt-5">
+                    <div class="flex justify-center">
+                        <span class="text-4xl text-white me-3">Cargar estudios</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="46" height="46" fill="currentColor"
+                            class="bi bi-plus-circle !text-5xl text-[#EAA3FF] inline" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path
+                                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="w-1/3">
+                <div class="text-center pt-36">
+                    <div class="mb-5">
+                        <img src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
+                            class="rounded-full border border-8 border-[#DA047A] w-[337px] h-[337px] m-auto">
+                    </div>
+                    <span class="text-2xl text-white font-semibold underline underline-offset-4">Cambiar foto de perfil</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--<div class="h-screen pt-10 mt-20">
+    <div class="container mx-auto">
+        <div class="flex justify-between">
+            <div class="w-2/5 bg-white/50 rounded-[20px] p-10">
+                <h3 class="text-4xl font-medium mb-5">Cargar estudios</h3>
+                <div class="mb-3">
+                    <label for="studyType" class="block text-xl mb-2">Tipo de estudio</label>
+                    <select id="studyType" [(ngModel)]="selectedStudyType" class="rounded-full border w-full p-4">
+                        <option value="0" selected>Selecciona un tipo de estudio</option>
+                        <option *ngFor="let type of studyTypes" [value]="type">{{ type }}</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="note" class="block text-xl mb-2">Nota</label>
+                    <input type="text" placeholder="Notas del profesional" class="rounded-full border w-full p-4">
+                </div>
+                <div class="flex mt-5">
+                    <button class="text-white font-bold rounded-full bg-green-500 me-3 w-full p-3">Guardar</button>
+                    <button class="text-white font-bold rounded-full bg-red-500 w-full p-3">Cancelar</button>
+                </div>
+            </div>
+            <div class="w-2/5 bg-white/50 rounded-[20px] p-10">
+                <form class="flex items-center space-x-6">
+                    <input type="file"  class="block w-full text-sm text-slate-500
+                        file:mr-4 file:py-2 file:px-4
+                        file:rounded-full file:border-0
+                        file:text-sm file:font-semibold
+                        file:bg-violet-50 file:text-violet-700
+                        hover:file:bg-violet-100
+                      " />
+                </form>
+            </div>
+        </div>
+
+        <div class="mt-10">
+            <h3 class="text-4xl text-white font-bold mb-10">Lista de estudios cargados</h3>
+            <div  class="bg-white w-full rounded-[20px] p-10">
+                <table class="w-full table-auto border">
+                    <thead>
+                        <tr>
+                            <th class="text-start p-3">Titulo</th>
+                            <th class="text-start p-3">Nota del profesional</th>
+                            <th class="text-start p-3">Documento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="border-b">
+                            <td class="p-3">Sample Title 1</td>
+                            <td class="p-3">4.5</td>
+                            <td class="p-3"><a href="#">Document Link 1</a></td>
+                        </tr>
+                        <tr>
+                            <td class="p-3">Sample Title 2</td>
+                            <td class="p-3">3.8</td>
+                            <td class="p-3"><a href="#">Document Link 2</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>-->

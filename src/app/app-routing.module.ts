@@ -8,11 +8,16 @@ import { CalendarComponent } from './modules/calendar/calendar.component';
 import { ForumComponent } from './modules/forum/forum.component';
 import { TopicComponent } from './modules/forum/topic/topic.component';
 import { SurveyComponent } from './modules/survey/survey.component';
+import { ProfileComponent } from './modules/profile/profile.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+  },
+  {
+    path: 'perfil',
+    component: ProfileComponent,
   },
   {
     path: 'calendario',
