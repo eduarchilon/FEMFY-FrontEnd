@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
-import { SurveyComponent } from 'src/app/survey/survey.component';
 import { ForumComponent } from 'src/app/modules/forum/forum.component';
+import { SurveyComponent } from 'src/app/modules/survey/survey.component';
 
 const routes: Routes = [
   {

@@ -17,13 +17,15 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SurveyComponent } from './survey/survey.component';
 import { ForumComponent } from './modules/forum/forum.component';
 import { TopicComponent } from './modules/forum/topic/topic.component';
 import { ForumModule } from './modules/forum/forum.module';
+import { SurveyModule } from './modules/survey/survey.module';
+import { ProfileModule } from './modules/profile/profile.module';
+
 
 @NgModule({
-  declarations: [AppComponent, SurveyComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -31,10 +33,12 @@ import { ForumModule } from './modules/forum/forum.module';
     CommonsModule,
     AuthModule,
     CalendarModule,
+    ProfileModule,
     ForumModule,
     DocumentationModule,
     HomeModule,
     HomeRoutingModuleModule,
+    SurveyModule,
     AuthRoutingModule,
     HttpClientModule,
     MatDialogModule,
