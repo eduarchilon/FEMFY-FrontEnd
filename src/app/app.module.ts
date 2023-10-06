@@ -16,10 +16,10 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SurveyComponent } from './survey/survey.component';
+import { SurveyComponent } from './modules/survey/survey.component';
 
 @NgModule({
-  declarations: [AppComponent, SurveyComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -28,6 +28,7 @@ import { SurveyComponent } from './survey/survey.component';
     AuthModule,
     CalendarModule,
     HomeModule,
+    SurveyComponent,
     HomeRoutingModuleModule,
     AuthRoutingModule,
     HttpClientModule,
