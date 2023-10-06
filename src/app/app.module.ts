@@ -1,3 +1,4 @@
+import { DocumentationModule } from './modules/documentation/documentation.module';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
@@ -34,6 +35,7 @@ import { ProfileModule } from './modules/profile/profile.module';
     CalendarModule,
     ProfileModule,
     ForumModule,
+    DocumentationModule,
     HomeModule,
     HomeRoutingModuleModule,
     SurveyModule,

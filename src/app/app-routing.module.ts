@@ -7,8 +7,10 @@ import { LandingComponent } from './modules/home/landing/landing.component';
 import { CalendarComponent } from './modules/calendar/calendar.component';
 import { ForumComponent } from './modules/forum/forum.component';
 import { TopicComponent } from './modules/forum/topic/topic.component';
+import { DocumentationComponent } from './modules/documentation/documentation.component';
 import { SurveyComponent } from './modules/survey/survey.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+
 
 const routes: Routes = [
   {
@@ -34,6 +36,10 @@ const routes: Routes = [
   {
     path: 'foro/:id',
     component: TopicComponent,
+  },
+  {
+    path: 'documentation',
+    component: DocumentationComponent,
   }
 ];
 
