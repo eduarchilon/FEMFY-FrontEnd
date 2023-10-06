@@ -11,9 +11,21 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { AgChartsAngularModule } from 'ag-charts-angular';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { StoreModule } from '@ngrx/store';
+import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [HomeComponent, LandingComponent, IndexComponent, PieChartComponent],
+  declarations: [
+    HomeComponent,
+    LandingComponent,
+    IndexComponent,
+    PieChartComponent,
+    RegisterCicleComponent,
+  ],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -22,8 +34,11 @@ import { AuthService } from 'src/app/services/auth/auth.service';
     MatButtonModule,
     MatProgressBarModule,
     AgChartsAngularModule,
+    StoreModule,
+    MatDialogModule,
+    MatExpansionModule,
   ],
   exports: [HomeComponent, IndexComponent],
-  providers: [AuthService],
+  providers: [AuthService, LocalStorageService],
 })
 export class HomeModule {}

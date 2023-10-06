@@ -1,7 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
+import { UserResponse } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../local-storage/local-storage.service';
+import { constants } from 'src/app/constans/constants';
+import { Store } from '@ngrx/store';
+import { setUserLogin } from 'src/app/redux/actions/login.action';
+import { AppState } from 'src/app/redux/store/app.store';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +23,11 @@ export class AuthService {
   _userFinded = new BehaviorSubject<any>(null);
   user!: any; // cambiar a usuario
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorageService: LocalStorageService,
+    private store: Store<AppState>
+  ) {}
 
   getUsers(): Observable<any[]> {
     return this.http.get<any[]>(this.usersUrl);
@@ -26,12 +36,15 @@ export class AuthService {
   login(userName: string, password: string): Observable<any> {
     return this.getUsers().pipe(
       map((users: any[]) => {
-        const user = users.find(
+        const user: UserResponse | any = users.find(
           (user) => user?.userName === userName && user?.password === password
         );
         if (user) {
-          //localStorage.setItem('user', JSON.stringify(user)); //guardamos datos en local storage para mantener sesion
-          this._userFinded.next(user); //una vez aplicado el local storage esto se borra
+          this.store.dispatch(setUserLogin({ user: user }));
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER,
+            JSON.stringify(user)
+          );
           return user;
         }
       })

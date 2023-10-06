@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserLogin } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { SpinnerService } from 'src/app/services/spinner.service';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
   selector: 'app-login-usuario',
@@ -16,8 +16,7 @@ export class LoginUsuarioComponent implements OnInit {
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-
-  user!: UserLogin;
+  
   spinnerConsumer: string = 'LoginUsuarioComponent';
 
   constructor(

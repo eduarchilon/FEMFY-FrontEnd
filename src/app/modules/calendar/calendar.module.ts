@@ -7,9 +7,13 @@ import { MatCardModule } from '@angular/material/card';
 import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
+import { EventDayDrawerComponent } from './components/event-day-drawer/event-day-drawer.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  declarations: [CalendarComponent],
+  declarations: [CalendarComponent, EventDayDrawerComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -17,6 +21,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatCardModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
   ],
   exports: [],
   providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],

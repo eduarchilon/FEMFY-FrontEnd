@@ -1,37 +1,66 @@
-<div class="w-[100%] bg-cover pt-24 bg-[#FEA8B1] flex justify-between text-white px-[5vw]">
+<div
+  class="w-[100%] bg-cover pt-24 bg-[#FEA8B1] flex justify-between text-white px-[5vw]"
+>
   <div class="w-[50%] flex justify-center items-center flex-col max-lg:hidden">
     <div>
-      <h1 class="text-[50px] max-xl:text-[70px] font-bold min-w-[85%] w-[inherit] text-left">
+      <h1
+        class="text-[50px] max-xl:text-[70px] font-bold min-w-[85%] w-[inherit] text-left"
+      >
         Siempre es un placer poder ayudarte.
       </h1>
     </div>
   </div>
   <div class="">
-    <div class="bg-[#F4C8E8] rounded-[20px] p-10 xl:p-16 2xl:p-36 drop-shadow-xl flex flex-col items-center">
+    <div
+      class="bg-[#F4C8E8] rounded-[20px] p-10 xl:p-16 2xl:p-36 drop-shadow-xl flex flex-col items-center"
+    >
       <img class="w-[100px]" src="./assets/images/isotipo.svg" />
       <h2 class="text-[32px] font-bold text-center mb-14 pt-[2px]">
         ¡Bienvenida!
       </h2>
-      <form class="flex flex-col gap-[14px] w-[100%]" autocomplete="off" [formGroup]="formLogin"
-        (ngSubmit)="loginUser()">
-        <input class="rounded-[10px] p-[10px] text-black" type="text" placeholder="Usuario"
-          formControlName="userName" />
-        <mat-error class="text-xs" *ngIf="
+      <form
+        class="flex flex-col gap-[14px] w-[100%]"
+        autocomplete="off"
+        [formGroup]="formLogin"
+        (ngSubmit)="loginUser()"
+      >
+        <input
+          autocomplete="userName"
+          class="rounded-[10px] p-[10px] text-black"
+          type="text"
+          placeholder="Usuario"
+          formControlName="userName"
+        />
+        <mat-error
+          class="text-xs"
+          *ngIf="
             formLogin.get('userName')?.touched &&
             formLogin.get('userName')?.hasError('required')
-          ">
+          "
+        >
           El nombre de usuario es requerido
         </mat-error>
-        <input class="rounded-[10px] p-[10px] mb-14 text-black" type="password" placeholder="Contraseña"
-          formControlName="password" />
-        <mat-error class="text-xs" *ngIf="
+        <input
+          autocomplete="password"
+          class="rounded-[10px] p-[10px] mb-14 text-black"
+          type="password"
+          placeholder="Contraseña"
+          formControlName="password"
+        />
+        <mat-error
+          class="text-xs"
+          *ngIf="
             formLogin.get('password')?.touched &&
             formLogin.get('password')?.hasError('required')
-          ">
+          "
+        >
           El nombre de usuario es requerido
         </mat-error>
-        <button class="bg-[#AF6FE8] rounded-[20px] pt-1 py-[8px] disabled:cursor-not-allowed" type="submit"
-          [disabled]="formLogin.invalid">
+        <button
+          class="bg-[#AF6FE8] rounded-[20px] pt-1 py-[8px] disabled:cursor-not-allowed"
+          type="submit"
+          [disabled]="formLogin.invalid"
+        >
           Ingresar
         </button>
       </form>
