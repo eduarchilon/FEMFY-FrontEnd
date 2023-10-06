@@ -1,3 +1,4 @@
+import { DocumentationModule } from './modules/documentation/documentation.module';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
@@ -31,6 +32,7 @@ import { ForumModule } from './modules/forum/forum.module';
     AuthModule,
     CalendarModule,
     ForumModule,
+    DocumentationModule,
     HomeModule,
     HomeRoutingModuleModule,
     AuthRoutingModule,

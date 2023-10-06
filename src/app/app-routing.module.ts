@@ -8,6 +8,7 @@ import { CalendarComponent } from './modules/calendar/calendar.component';
 import { SurveyComponent } from './survey/survey.component';
 import { ForumComponent } from './modules/forum/forum.component';
 import { TopicComponent } from './modules/forum/topic/topic.component';
+import { DocumentationComponent } from './modules/documentation/documentation.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: 'foro/:id',
     component: TopicComponent,
+  },
+  {
+    path: 'documentation',
+    component: DocumentationComponent,
   }
 ];
 
