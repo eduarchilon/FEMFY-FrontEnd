@@ -1,3 +1,4 @@
+import { DocumentationModule } from './modules/documentation/documentation.module';
 import {
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
@@ -17,13 +18,17 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SurveyComponent } from './survey/survey.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appStore } from './redux/store/app.store';
+import { ForumComponent } from './modules/forum/forum.component';
+import { TopicComponent } from './modules/forum/topic/topic.component';
+import { ForumModule } from './modules/forum/forum.module';
+import { SurveyModule } from './modules/survey/survey.module';
+import { ProfileModule } from './modules/profile/profile.module';
 
 @NgModule({
-  declarations: [AppComponent, SurveyComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -31,8 +36,12 @@ import { appStore } from './redux/store/app.store';
     CommonsModule,
     AuthModule,
     CalendarModule,
+    ProfileModule,
+    ForumModule,
+    DocumentationModule,
     HomeModule,
     HomeRoutingModuleModule,
+    SurveyModule,
     AuthRoutingModule,
     HttpClientModule,
     MatDialogModule,

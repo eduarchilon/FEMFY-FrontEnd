@@ -28,4 +28,12 @@ export const MENU_LOGUEADO: Menu[] = [
     label: 'Cuestionario',
     path: 'cuestionario',
   },
+  {
+    label: 'Perfil',
+    path: 'perfil',
+  },
+  {
+    label: 'Foro',
+    path: 'foro',
+  },
 ];
