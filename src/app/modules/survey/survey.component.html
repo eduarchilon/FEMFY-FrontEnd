@@ -18,7 +18,8 @@
 
       <img class="w-[100px]" src="./assets/images/isotipo.svg" />
       <h2 class="text-[20px] font-bold text-center mb-14 pt-[2px]">
-        Pregunta 1. ¿Ya tuviste tu primera menstruación?
+        <app-pregunta></app-pregunta>
+                  
       </h2>
 
       <form class="flex flex-col gap-[14px] w-[100%]">
@@ -28,7 +29,7 @@
           <mat-radio-button value="2">No</mat-radio-button>
         </mat-radio-group>
 
-        <button class="bg-[#D8B4F8] rounded-[20px] py-[10px] disabled:bg-gray-400 disabled:cursor-not-allowed" type="submit">
+        <button (click)="mostrarSiguientePregunta()" class="bg-[#D8B4F8] rounded-[20px] py-[10px] disabled:bg-gray-400 disabled:cursor-not-allowed" type="submit">
           Siguiente
         </button>
 

@@ -16,10 +16,10 @@ import { AuthRoutingModule } from './modules/auth/auth-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SurveyComponent } from './modules/survey/survey.component';
 import { ForumComponent } from './modules/forum/forum.component';
 import { TopicComponent } from './modules/forum/topic/topic.component';
 import { ForumModule } from './modules/forum/forum.module';
+import { SurveyModule } from './modules/survey/survey.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,8 +32,8 @@ import { ForumModule } from './modules/forum/forum.module';
     CalendarModule,
     ForumModule,
     HomeModule,
-    SurveyComponent,
     HomeRoutingModuleModule,
+    SurveyModule,
     AuthRoutingModule,
     HttpClientModule,
     MatDialogModule,
