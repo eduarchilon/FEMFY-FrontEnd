@@ -14,6 +14,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { StoreModule } from '@ngrx/store';
 import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
+import { MatDialogModule } from '@angular/material/dialog';
+import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
     LandingComponent,
     IndexComponent,
     PieChartComponent,
+    RegisterCicleComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
     MatProgressBarModule,
     AgChartsAngularModule,
     StoreModule,
+    MatDialogModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [AuthService, LocalStorageService],

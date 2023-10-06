@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
 import { AgPolarChartOptions } from 'ag-charts-community';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { RegisterCicleComponent } from '../components/register-cicle/register-cicle.component';
 
 @Component({
   selector: 'app-index',
@@ -18,11 +20,23 @@ export class IndexComponent implements OnInit {
 
   user!: any; //cambiar objeto
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit(): void {
+    //cambiar
     this.authService._userFinded.subscribe((user: any) => {
       this.user = user;
     });
+  }
+
+  openCicleRegister(): void {
+    const dialogRef = this.dialog.open(RegisterCicleComponent);
+    // dialogRef.afterClosed().subscribe((result) => {
+    //   console.log(`Dialog result: ${result}`);
+    // });
   }
 }

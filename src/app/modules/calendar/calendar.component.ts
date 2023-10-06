@@ -55,7 +55,10 @@ export class CalendarComponent {
   };
 
   openDialog() {
-    const dialogRef = this.dialog.open(EventDayDrawerComponent);
+    const dialogRef = this.dialog.open(EventDayDrawerComponent, {
+      width: '60%',
+      height: '500px',
+    });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });
