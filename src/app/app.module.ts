@@ -17,6 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SurveyComponent } from './modules/survey/survey.component';
+import { ForumComponent } from './modules/forum/forum.component';
+import { TopicComponent } from './modules/forum/topic/topic.component';
+import { ForumModule } from './modules/forum/forum.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +30,7 @@ import { SurveyComponent } from './modules/survey/survey.component';
     CommonsModule,
     AuthModule,
     CalendarModule,
+    ForumModule,
     HomeModule,
     SurveyComponent,
     HomeRoutingModuleModule,
@@ -41,6 +45,7 @@ import { SurveyComponent } from './modules/survey/survey.component';
     }),
   ],
   providers: [],
+  
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

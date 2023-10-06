@@ -5,6 +5,8 @@ import { LoginUsuarioComponent } from './modules/auth/login-usuario/login-usuari
 import { RegistroUsuarioComponent } from './modules/auth/registro-usuario/registro-usuario.component';
 import { LandingComponent } from './modules/home/landing/landing.component';
 import { CalendarComponent } from './modules/calendar/calendar.component';
+import { ForumComponent } from './modules/forum/forum.component';
+import { TopicComponent } from './modules/forum/topic/topic.component';
 import { SurveyComponent } from './modules/survey/survey.component';
 
 const routes: Routes = [
@@ -20,6 +22,14 @@ const routes: Routes = [
     path: 'cuestionario',
     component: SurveyComponent,
   },
+  {
+    path: 'foro',
+    component: ForumComponent,
+  },
+  {
+    path: 'foro/:id',
+    component: TopicComponent,
+  }
 ];
 
 @NgModule({
