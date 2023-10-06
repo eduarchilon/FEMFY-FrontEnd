@@ -3,6 +3,7 @@ import { DateAdapter } from '@angular/material/core';
 import {
   MatCalendar,
   MatCalendarCellClassFunction,
+  DateRange,
 } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -27,16 +28,18 @@ export class CalendarComponent {
     this.dateAdapter.setLocale('es-ES');
   }
   showFiller = false;
+  @ViewChild('date') date!: MatCalendar<Date>;
   @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
-  onSelect(event?: any): void {
+  onSelect(event?: DateRange<any> | any): void {
     this.openDialog();
-    this.selected = event;
+    const selected = event;
+    const isSelected = this.isDaySelected(selected);
     const selectedDateIndex = this.selectedDates?.findIndex((date) =>
-      this.dateAdapter?.sameDate(date, this.selected)
+      this.dateAdapter?.sameDate(date, selected)
     );
     if (selectedDateIndex === -1) {
-      this.selectedDates?.push(this.selected);
+      this.selectedDates?.push(selected);
     } else {
       this.selectedDates?.splice(selectedDateIndex, 1);
     }
@@ -54,10 +57,23 @@ export class CalendarComponent {
     return '';
   };
 
+  isDaySelected(day: Date): boolean {
+    return !!this.selectedDates?.find((date) =>
+      this.dateAdapter?.sameDate(date, day)
+    );
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(EventDayDrawerComponent, {
-      width: '60%',
-      height: '500px',
+      panelClass: [
+        'max-md:!w-[80%]',
+        'max-sm:!w-[100%]',
+        '!max-w-[100vw]',
+        '!w-[60%]',
+        'max-md:!h-[80%]',
+        'max-sm:!h-[100%]',
+        '!h-[500px%]',
+      ],
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

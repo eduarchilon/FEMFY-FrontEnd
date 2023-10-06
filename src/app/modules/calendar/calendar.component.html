@@ -1,9 +1,12 @@
-<div class="w-[100%] py-40 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]">
+<div
+  class="w-[100%] py-40 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]"
+>
   <div class="w-[50%] max-lg:w-[100%]">
     <mat-card
       class="demo-inline-calendar-card w-[400px] max-lg:w-[60%] max-lg:m-auto max-sm:w-[100%]"
     >
       <mat-calendar
+        #date
         [dateClass]="dateClass"
         [selected]="selected"
         (selectedChange)="onSelect($event)"
@@ -17,4 +20,3 @@
     voluptatibus.
   </div>
 </div>
-

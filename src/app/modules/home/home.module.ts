@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RegisterCicleComponent } from './components/register-cicle/register-cic
     AgChartsAngularModule,
     StoreModule,
     MatDialogModule,
+    MatExpansionModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [AuthService, LocalStorageService],

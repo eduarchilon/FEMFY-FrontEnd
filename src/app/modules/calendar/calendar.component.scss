@@ -5,8 +5,14 @@
 button.example-custom-date-class {
   background: orange !important;
   border-radius: 100% !important;
-//   width: 90%;
-//   height: 90%;
+  //   width: 90%;
+  //   height: 90%;
+}
+
+button.example-custom-date-class-none {
+  background: unset !important;
+  //   width: 90%;
+  //   height: 90%;
 }
 
 // .mat-calendar-body-cell-content {
@@ -14,4 +20,8 @@ button.example-custom-date-class {
 //   left: 0% !important;
 //   width: 100% !important;
 //   height: 100% !important;
+// }
+
+// .calendar-dialog-container {
+//   width: 60px !important;
 // }
