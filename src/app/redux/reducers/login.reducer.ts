@@ -5,8 +5,7 @@ import { constants } from 'src/app/constans/constants';
 
 const userResponse = localStorage.getItem('userSession') || null;
 
-export const initialLoginState: UserResponse | any =
-  null || JSON.parse(userResponse || '');
+export const initialLoginState: UserResponse | any = null
 
 export const loginReducers = createReducer(
   initialLoginState,
