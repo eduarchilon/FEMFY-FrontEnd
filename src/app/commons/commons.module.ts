@@ -11,6 +11,8 @@ import { SpinnerComponent } from './spinner/spinner.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LocalStorageService } from '../services/local-storage/local-storage.service';
 import { StoreModule } from '@ngrx/store';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { StoreModule } from '@ngrx/store';
     AppRoutingModule,
     MatProgressSpinnerModule,
     StoreModule,
+    MatButtonModule,
+    MatMenuModule,
   ],
   exports: [HeaderUsuarioComponent, FooterUsuarioComponent, SpinnerComponent],
   providers: [AuthService, LocalStorageService],

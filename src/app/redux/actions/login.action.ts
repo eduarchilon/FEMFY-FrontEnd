@@ -3,5 +3,5 @@ import { UserResponse } from 'src/app/models/user.model';
 
 export const setUserLogin = createAction(
   '[Login] set the user empty or loaded',
-  props<{ user: UserResponse }>()
+  props<{ user: UserResponse | null }>()
 );

@@ -29,11 +29,18 @@ export const MENU_LOGUEADO: Menu[] = [
     path: 'cuestionario',
   },
   {
-    label: 'Perfil',
+    label: 'Foro',
+    path: 'foro',
+  },
+];
+
+export const MENU_PROFILE: Menu[] = [
+  {
+    label: 'Ver perfil',
     path: 'perfil',
   },
   {
-    label: 'Foro',
-    path: 'foro',
+    label: 'Subscripción',
+    path: 'subscripcion',
   },
 ];

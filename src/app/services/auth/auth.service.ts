@@ -8,6 +8,7 @@ import { constants } from 'src/app/constans/constants';
 import { Store } from '@ngrx/store';
 import { setUserLogin } from 'src/app/redux/actions/login.action';
 import { AppState } from 'src/app/redux/store/app.store';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,14 +20,16 @@ export class AuthService {
   isLoggin: boolean = false;
 
   //LOGIN
-  usersUrl: string = environment.apiUrl + '/usuario';
+  // usersUrl: string = environment.apiUrl + '/usuario';
+  usersUrl: string = environment.apiUrlLocal + '/user/getUsers';
   _userFinded = new BehaviorSubject<any>(null);
   user!: any; // cambiar a usuario
 
   constructor(
     private http: HttpClient,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router
   ) {}
 
   getUsers(): Observable<any[]> {
@@ -54,5 +57,16 @@ export class AuthService {
   loggingUser(): void {
     this.isLoggin = !this.isLoggin;
     this.isLoggingSubject.next(this.isLoggin);
+  }
+
+  logoutUser(): void {
+    this.localStorageService.deleteValue(constants.USER);
+    this.store.dispatch(setUserLogin({ user: null }));
+  }
+
+  testLocalHostServer(): void {
+    this.http
+      .get<any[]>('http://localhost:8090/api/v1/user/getUsers')
+      .subscribe((data) => console.log('Funcionando', data));
   }
 }

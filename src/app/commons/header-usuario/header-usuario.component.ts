@@ -10,7 +10,12 @@ import {
 
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { MENU_LOGUEADO, MENU_NO_LOGUEADO } from 'src/app/constans/menu-home';
+import { constants } from 'src/app/constans/constants';
+import {
+  MENU_LOGUEADO,
+  MENU_NO_LOGUEADO,
+  MENU_PROFILE,
+} from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
 import { UserResponse } from 'src/app/models/user.model';
 import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
@@ -26,6 +31,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 export class HeaderUsuarioComponent implements OnInit {
   menuNoLogueado: Menu[] = MENU_NO_LOGUEADO;
   menuLogueado: Menu[] = MENU_LOGUEADO;
+  menuProfile: Menu[] = MENU_PROFILE;
 
   @ViewChild('drawer') drawer!: ElementRef;
   @ViewChild('backdrop') backdrop!: ElementRef;
@@ -39,15 +45,21 @@ export class HeaderUsuarioComponent implements OnInit {
   ) {}
 
   userResponse!: UserResponse;
+  userStorage!: UserResponse;
   isLogging: boolean = false;
 
   ngOnInit(): void {
-    this.store.select(selectUserLogin).subscribe((user: UserResponse) => {
-      this.userResponse = user;
+    this.store.select(selectUserLogin).subscribe((data: any) => {
+      this.userResponse = data?.user;
+      if (!this.userResponse) {
+        this.userResponse = this.localStorageService.getUserByLogin();
+      }
       this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
     });
-    const userLogin = this.localStorageService.getUserByLogin();
-    userLogin ? (this.isLogging = true) : (this.isLogging = false);
+    // this.userStorage = this.userResponse
+    //   ? this.userResponse
+    //   : this.localStorageService.getUserByLogin();
+    // this.userStorage ? (this.isLogging = true) : (this.isLogging = false);
   }
 
   handleRouter(path: string): void {
@@ -98,5 +110,11 @@ export class HeaderUsuarioComponent implements OnInit {
     } else {
       navBar?.classList.remove('border-b-2', 'border-solid', 'border-white');
     }
+  }
+
+  logoutUser(): void {
+    this.isLogging = false;
+    this.authService.logoutUser();
+    this.router.navigate(['/']);
   }
 }
