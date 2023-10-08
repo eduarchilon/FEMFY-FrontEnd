@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -17,6 +17,8 @@ import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { ReactiveFormsModule } from '@angular/forms';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 
 @NgModule({
   declarations: [
@@ -37,8 +39,14 @@ import { MatExpansionModule } from '@angular/material/expansion';
     StoreModule,
     MatDialogModule,
     MatExpansionModule,
+    ReactiveFormsModule,
   ],
   exports: [HomeComponent, IndexComponent],
-  providers: [AuthService, LocalStorageService],
+  providers: [
+    AuthService,
+    LocalStorageService,
+    CicleService,
+    { provide: LOCALE_ID, useValue: 'es-ES' },
+  ],
 })
 export class HomeModule {}

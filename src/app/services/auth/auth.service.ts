@@ -21,6 +21,10 @@ export class AuthService {
 
   //LOGIN
   // usersUrl: string = environment.apiUrl + '/usuario';
+  // const headers = new HttpHeaders({
+  //   'Content-Type': 'application/json',
+  //   'Authorization': 'Bearer ' + tuTokenDeAutenticacion
+  // });
   usersUrl: string = environment.apiUrlLocal + '/user/getUsers';
   _userFinded = new BehaviorSubject<any>(null);
   user!: any; // cambiar a usuario

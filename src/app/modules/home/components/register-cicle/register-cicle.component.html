@@ -4,6 +4,16 @@
   </div>
   <mat-dialog-content>
     <h3 class="pb-3 text-[24px] font-semibold">Registrar datos del periodo</h3>
-    <input type="date" placeholder="Hola mundo" />
+    <form [formGroup]="formCycle" (ngSubmit)="registerCycle()">
+      <label>Inicio del ciclo</label>
+      <br />
+      <input type="date" formControlName="dateBeging" />
+      <br />
+      <label>Fin del ciclo</label>
+      <br />
+      <input type="date" formControlName="dateEnd" />
+      <button type="submit">Registrar ciclo</button>
+    </form>
+    <!-- <button (click)="getRegoister()">Ver ciclo</button> -->
   </mat-dialog-content>
 </div>
