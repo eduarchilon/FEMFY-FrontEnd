@@ -1,1 +1,11 @@
-<ag-charts-angular [options]="options"></ag-charts-angular>
+<ng-container *ngIf="cycleChart">
+  <ag-charts-angular [options]="options"></ag-charts-angular>
+</ng-container>
+<ng-container *ngIf="!cycleChart">
+  <div class="bg-black flex justify-center items-center rounded-full py-20">
+    <h5 class="text-white text-center max-w-[200px]">
+      No hay datos de ciclo registrado
+    </h5>
+  </div>
+</ng-container>
+<!-- <p>{{ cycleChart && cycleChart.dateBeging }}</p> -->
