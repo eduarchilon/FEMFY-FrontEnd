@@ -18,6 +18,7 @@ export class CicleHistorialComponent implements OnInit {
   value = 50;
   bufferValue = 75;
   idUser!: number;
+  cycleContainer: Cycle[] = [];
 
   constructor(
     private store: Store<AppState>,
@@ -30,6 +31,6 @@ export class CicleHistorialComponent implements OnInit {
     });
     this.cicleService
       .getAllCycles(this.idUser)
-      .subscribe((data: Cycle[]) => console.log(data));
+      .subscribe((data: Cycle[]) => (this.cycleContainer = data));
   }
 }
