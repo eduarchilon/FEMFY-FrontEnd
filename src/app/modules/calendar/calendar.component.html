@@ -8,7 +8,7 @@
       <div (click)="$event.stopPropagation()">
         <mat-calendar
           #calendar
-          (selectedChange)="select($event, calendar)"
+          (selectedChange)="select($event, calendar); selectDate($event)"
           [dateClass]="isSelected"
         ></mat-calendar>
       </div>
@@ -21,3 +21,4 @@
     voluptatibus.
   </div>
 </div>
+<p>{{ selectedDates }}</p>

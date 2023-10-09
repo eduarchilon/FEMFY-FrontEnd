@@ -19,6 +19,8 @@ import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import * as moment from 'moment';
 import { setDateCalendar } from 'src/app/redux/actions/calendar.action';
 import { selectDateCalendar } from 'src/app/redux/selectors/calendar.selector';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { EventCalendar } from 'src/app/models/event-calendar.model';
 
 @Component({
   selector: 'app-calendar',
@@ -36,6 +38,7 @@ export class CalendarComponent implements OnInit {
   _selectedDatesSubject = new BehaviorSubject<any[]>([]);
   // selectedDates$ = this.selectedDatesSubject.asObservable();
   dates: moment.Moment[] = [];
+  eventsDayCalendar: EventCalendar[] = [];
 
   constructor(
     private router: Router,
@@ -43,12 +46,14 @@ export class CalendarComponent implements OnInit {
     public dialog: MatDialog,
     private calendarService: CalendarService,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private spinnerService: SpinnerService
   ) {
     this.dateAdapter.setLocale('es-ES');
   }
 
   ngOnInit(): void {
+    this.dialog.closeAll();
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.userResponse = data?.user;
       if (!this.userResponse) {
@@ -59,6 +64,24 @@ export class CalendarComponent implements OnInit {
     this.calendarService
       .getEventsCalendar(this.userResponse?.idUser)
       .subscribe((data: any[]) => {
+        //filtro por eventos
+        const eventsIdUser = data.filter(
+          (item) => item.idUser === this.userResponse?.idUser
+        );
+        const arraysFiltrados: any = [];
+        const fechasProcesadas: any = [];
+        eventsIdUser.forEach((item) => {
+          const fecha = item.date;
+          if (!fechasProcesadas.includes(fecha)) {
+            const objetosConFecha = eventsIdUser.filter(
+              (obj) => obj.date === fecha
+            );
+            arraysFiltrados.push(objetosConFecha);
+            fechasProcesadas.push(fecha);
+          }
+        });
+        this.eventsDayCalendar = arraysFiltrados;
+        //filtro por fehas para eleccionar
         this.selectedDates = [
           ...Array.from(
             new Set(
@@ -78,7 +101,7 @@ export class CalendarComponent implements OnInit {
 
     this.store.select(selectDateCalendar).subscribe((item: any) => {
       item?.dates?.forEach((element: any) => {
-        element && this.select(moment(element), this.calendar);
+        this.select(moment(element), this.calendar);
       });
     });
   }
@@ -98,6 +121,7 @@ export class CalendarComponent implements OnInit {
   select(event?: any, calendar?: any) {
     const date: moment.Moment = event;
     const index = this.dates.findIndex((x) => x.isSame(date));
+    const isSelectable = this.isSelected(date);
     if (index < 0) {
       this.dates?.push(date);
     } else {
@@ -106,12 +130,20 @@ export class CalendarComponent implements OnInit {
     calendar?.updateTodaysDate();
   }
 
+  isDaySelected(day: moment.Moment): boolean {
+    return !!this.dates?.find((date: any) => date.date() === day.date());
+  }
+
+  selectDate(event: any) {
+    this.openDialog(event);
+  }
+
   showFiller = false;
   @ViewChild('date') date!: MatCalendar<Date>;
   @ViewChild('calendar') calendar!: MatCalendar<Date>;
   //@ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
-  openDialog() {
+  openDialog(data: any) {
     const dialogRef = this.dialog.open(EventDayDrawerComponent, {
       panelClass: [
         'max-md:!w-[80%]',
@@ -122,6 +154,10 @@ export class CalendarComponent implements OnInit {
         'max-sm:!h-[100%]',
         '!h-[500px%]',
       ],
+      data: {
+        data: data,
+        events: this.eventsDayCalendar,
+      },
     });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);

@@ -5,7 +5,8 @@
   <mat-dialog-content>
     <div class="pb-5">
       <h3 class="pb-3 text-[24px] font-semibold">Crear Evento</h3>
-      <h5 class="py-5">Fecha: {{ data | date : "dd/MM/yyyy" }}</h5>
+      <!-- <p>{{ eventDaySelected | json }}</p> -->
+      <!-- <h5 class="py-5">Fecha: {{ data | date : "dd/MM/yyyy" }}</h5> -->
       <form
         action=""
         class="flex flex-col gap-4"
@@ -37,54 +38,20 @@
     <div>
       <h3 class="py-3 text-[20px] font-semibold">Eventos creados</h3>
       <div class="flex flex-col gap-1">
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title>14:15 pm</mat-panel-title>
-            <mat-panel-description>
-              Tomar pastillas {{ panelOpenState ? "open" : "closed" }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title> 15:12 pm</mat-panel-title>
-            <mat-panel-description>
-              Comprar ibuprofeno {{ panelOpenState ? "open" : "closed" }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title> 15:12 pm</mat-panel-title>
-            <mat-panel-description>
-              Comprar ibuprofeno {{ panelOpenState ? "open" : "closed" }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
-        <mat-expansion-panel
-          (opened)="panelOpenState = true"
-          (closed)="panelOpenState = false"
-        >
-          <mat-expansion-panel-header>
-            <mat-panel-title> 15:12 pm</mat-panel-title>
-            <mat-panel-description>
-              Comprar ibuprofeno {{ panelOpenState ? "open" : "closed" }}
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <p>I'm visible because I am open</p>
-        </mat-expansion-panel>
+        <ng-container *ngFor="let item of eventDaySelected">
+          <mat-expansion-panel
+            (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false"
+          >
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ item.hour }}</mat-panel-title>
+              <mat-panel-description>
+                {{ item.description }} {{ panelOpenState ? "open" : "closed" }}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p>{{ item.title }}</p>
+          </mat-expansion-panel>
+        </ng-container>
       </div>
     </div>
   </mat-dialog-content>
