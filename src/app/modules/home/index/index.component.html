@@ -90,45 +90,7 @@
             Historial de clicos
           </h5>
           <div class="p-[20px] flex flex-col gap-[15px]">
-            <div>
-              <h5>Ciclo actual: 10 días</h5>
-              <span>Inicio 5 ago</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
-            <div>
-              <h5>70 días</h5>
-              <span>21 jun - 5 ago</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
-            <div>
-              <h5>31 días</h5>
-              <span>31 may - 21 jun</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
+            <app-cicle-historial></app-cicle-historial>
           </div>
         </div>
       </div>
