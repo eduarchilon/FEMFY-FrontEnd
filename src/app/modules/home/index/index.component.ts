@@ -36,13 +36,9 @@ export class IndexComponent implements OnInit {
   openCicleRegister(): void {
     const dialogRef = this.dialog.open(RegisterCicleComponent, {
       panelClass: [
-        'max-md:!w-[80%]',
+        'max-md:!w-[50%]',
         'max-sm:!w-[100%]',
-        '!max-w-[100vw]',
-        '!w-[60%]',
-        'max-md:!h-[80%]',
-        'max-sm:!h-[100%]',
-        '!h-[500px%]',
+        '!rounded-[20px]'
       ],
     });
     // dialogRef.afterClosed().subscribe((result) => {

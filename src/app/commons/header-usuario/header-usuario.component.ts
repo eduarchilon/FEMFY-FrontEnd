@@ -106,9 +106,9 @@ export class HeaderUsuarioComponent implements OnInit {
   onScroll(event: Event): void {
     const navBar = this.navBar?.nativeElement;
     if (window.scrollY >= 60 && window.innerWidth >= 1024) {
-      navBar?.classList.add('border-b-2', 'border-solid', 'border-white');
+      navBar?.classList.add('shadow-md');
     } else {
-      navBar?.classList.remove('border-b-2', 'border-solid', 'border-white');
+      navBar?.classList.remove('shadow-md');
     }
   }
 
