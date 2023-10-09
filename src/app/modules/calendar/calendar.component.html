@@ -5,12 +5,13 @@
     <mat-card
       class="demo-inline-calendar-card w-[400px] max-lg:w-[60%] max-lg:m-auto max-sm:w-[100%]"
     >
-      <mat-calendar
-        #date
-        [dateClass]="dateClass"
-        [selected]="selected"
-        (selectedChange)="onSelect($event)"
-      ></mat-calendar>
+      <div (click)="$event.stopPropagation()">
+        <mat-calendar
+          #calendar
+          (selectedChange)="select($event, calendar)"
+          [dateClass]="isSelected"
+        ></mat-calendar>
+      </div>
     </mat-card>
   </div>
   <div class="w-[50%] max-lg:w-[100%]">

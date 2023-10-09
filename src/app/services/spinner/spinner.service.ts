@@ -22,7 +22,7 @@ export class SpinnerService {
 
   constructor(
     public dialogSpinner: MatDialog,
-    rendererFactory: RendererFactory2
+    public rendererFactory: RendererFactory2
   ) {
     this.renderer = rendererFactory.createRenderer(null, null);
   }
@@ -83,6 +83,7 @@ export class SpinnerService {
     const dialogContainer = document.querySelector(
       '.mat-mdc-dialog-container .mdc-dialog__surface'
     );
+    this.renderer.addClass(dialogContainer, 'spinner-loading');
     this.renderer.setStyle(
       dialogContainer,
       'background-color',

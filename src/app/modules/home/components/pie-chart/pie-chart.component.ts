@@ -92,9 +92,9 @@ export class PieChartComponent implements OnInit {
 
   setPieChartContentData(cycleChart: Cycle): AgPolarSeriesOptions {
     let dateChart = new Date(cycleChart?.dateBeging || '');
-    const fechaActual = new Date('2023-10-15');
+    const fechaFinal = new Date('2023-10-15'); //new Date(cycleChart?.dateEnd || '');
     // Calcula la diferencia en milisegundos
-    const diferenciaMilisegundos = fechaActual.getTime() - dateChart.getTime();
+    const diferenciaMilisegundos = fechaFinal.getTime() - dateChart.getTime();
     // Calcula la diferencia en días
     const diferenciaDias = Math.ceil(
       diferenciaMilisegundos / (1000 * 60 * 60 * 24)
@@ -104,7 +104,7 @@ export class PieChartComponent implements OnInit {
     let data: DataPieChart[] = [
       {
         id: 1,
-        dayCount: diferenciaDias,
+        dayCount: diferenciaDias, //duracion de sangrado
         label: 'Sangrado',
         color: '#fda4af',
       },

@@ -13,7 +13,8 @@ export interface UserResponse {
   avatar: string;
   userName: string;
   isSuscripto: boolean;
-  id: string;
+  id: number;
+  idUser?: number;
 }
 
 export const emptyUserResponse = (): UserResponse => ({
@@ -25,5 +26,5 @@ export const emptyUserResponse = (): UserResponse => ({
   avatar: '',
   userName: '',
   isSuscripto: false,
-  id: '',
+  id: 0,
 });
