@@ -25,11 +25,15 @@ export const MENU_LOGUEADO: Menu[] = [
     path: 'calendario',
   },
   {
+    label: 'Estudios',
+    path: 'documentation',
+  },
+  {
     label: 'Cuestionario',
     path: 'cuestionario',
   },
   {
-    label: 'Foro',
+    label: 'Comunidad',
     path: 'foro',
   },
 ];
