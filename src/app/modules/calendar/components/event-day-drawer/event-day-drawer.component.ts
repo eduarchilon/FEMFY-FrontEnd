@@ -49,7 +49,7 @@ export class EventDayDrawerComponent implements OnInit {
         }
       });
     });
-
+    console.log(this.eventDaySelected);
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.userResponse = data?.user;
       if (!this.userResponse) {
@@ -67,28 +67,43 @@ export class EventDayDrawerComponent implements OnInit {
   }
 
   registerEevent(): void {
-    // this.calendarService
-    //   .setEvent({
-    //     idUser: this.userResponse?.idUser,
-    //     description: this.formRegisterEvent?.value?.description,
-    //     title: this.formRegisterEvent?.value?.title,
-    //     hour: this.formRegisterEvent?.value?.hour,
-    //     date: this.data?.data,
-    //   })
-    //   .subscribe({
-    //     next: (response: any) => {
-    //       this.spinnerService.showProgressSpinner(this.spinnerConsumer);
-    //       if (response) {
-    //         this.closeDialog();
-    //         this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
-    //         this.router.navigate(['/calendario']).then(() => {
-    //           location.reload();
-    //         });
-    //       } else {
-    //         this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
-    //       }
-    //     },
-    //     error: (error) => error,
-    //   });
+    this.closeDialog();
+    this.calendarService
+      .setEvent({
+        idUser: this.userResponse?.idUser,
+        description: this.formRegisterEvent?.value?.description,
+        title: this.formRegisterEvent?.value?.title,
+        hour: this.formRegisterEvent?.value?.hour,
+        date: this.data?.data,
+      })
+      .subscribe({
+        next: (response: any) => {
+          this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+          if (response) {
+            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+            this.router.navigate(['/calendario']).then(() => {
+              location.reload();
+            });
+          } else {
+            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+          }
+        },
+        error: (error) => error,
+      });
+  }
+
+  deleteEvent(event: any): void {
+    this.closeDialog();
+    this.calendarService.deleteEeventCalendar(event?.id).subscribe({
+      next: (response: any) => {
+        this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+        if (response) {
+          this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+          this.router.navigate(['/calendario']).then(() => {
+            location.reload();
+          });
+        }
+      },
+    });
   }
 }

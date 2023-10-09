@@ -46,10 +46,13 @@
             <mat-expansion-panel-header>
               <mat-panel-title>{{ item.hour }}</mat-panel-title>
               <mat-panel-description>
-                {{ item.description }} {{ panelOpenState ? "open" : "closed" }}
+                {{ item.title }}
               </mat-panel-description>
             </mat-expansion-panel-header>
-            <p>{{ item.title }}</p>
+            <div class="flex justify-between">
+              <p>{{ item.description }}</p>
+              <p (click)="deleteEvent(item)">borrar</p>
+            </div>
           </mat-expansion-panel>
         </ng-container>
       </div>

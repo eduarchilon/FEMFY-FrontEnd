@@ -3,6 +3,7 @@ import {
   Renderer2,
   RendererFactory2,
   RendererStyleFlags2,
+  ElementRef,
 } from '@angular/core';
 import {
   MatDialog,
@@ -73,7 +74,7 @@ export class SpinnerService {
     ) {
       this.dialogRefSpinner = this.dialogSpinner.open(SpinnerComponent, {
         disableClose: true,
-        panelClass: 'without-background',
+        panelClass: ['without-background', 'spinner-loading'],
       });
       this.toggleStyle();
     }

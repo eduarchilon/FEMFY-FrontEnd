@@ -62,7 +62,18 @@ mat-dialog-content {
   tap-highlight-color: rgba(0, 0, 0, 0); /* Para otros navegadores */
   touch-action: auto !important;
 }
+
+.without-background {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
 .spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+#spinner-loading {
   background-color: unset !important;
   box-shadow: unset !important;
 }

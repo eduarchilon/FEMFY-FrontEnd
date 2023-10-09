@@ -29,4 +29,12 @@ export class CalendarService {
       })
     );
   }
+
+  deleteEeventCalendar(idEvent: string): Observable<any> {
+    return this.http.delete<any>(`${this.usersUrl}/${idEvent}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

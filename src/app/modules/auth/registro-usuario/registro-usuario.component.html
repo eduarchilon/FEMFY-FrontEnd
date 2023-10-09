@@ -4,13 +4,13 @@
     <div class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[30px] pb-[100px]">
       <img class="w-[100px] " src="./assets/images/isotipo.svg">
       <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">¡Bienvenida!</h2>
-      <form class="flex flex-col gap-[14px] w-[100%]">
-        <input class="rounded-[10px] py-[10px] px-[10px]" type="text" placeholder="Nombre de usuario">
-        <input class="rounded-[10px] py-[10px] px-[10px]" type="email" placeholder="Email">
-        <input class="rounded-[10px] py-[10px] px-[10px]" type="password" placeholder="Contraseña">
-        <input class="rounded-[10px] py-[10px] px-[10px]" type="password" placeholder="Repetir contraseña">
-        <input class="rounded-[10px] py-[10px] px-[10px]" type="date" placeholder="Fecha de nacimiento">
-        <button class="bg-[#AF6FE8] rounded-[20px] py-[10px] ">Registrar</button>
+      <form class="flex flex-col gap-[14px] w-[100%]" [formGroup]="formRegister" (ngSubmit)="signupUser()">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="text" placeholder="Nombre de usuario" formControlName="userName">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="email" placeholder="Email" formControlName="email">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="password" placeholder="Contraseña" formControlName="password">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="password" placeholder="Repetir contraseña" formControlName="passwordRepeat">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="date" placeholder="Fecha de nacimiento" formControlName="birthdate">
+        <button class="bg-[#AF6FE8] rounded-[20px] py-[10px] " type="submit">Registrar</button>
       </form>
       <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
       <a routerLink="/login-usuario" class="text-white">Ingresar</a>

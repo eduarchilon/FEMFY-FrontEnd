@@ -144,7 +144,7 @@ export class CalendarComponent implements OnInit {
   //@ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
   openDialog(data: any) {
-    const dialogRef = this.dialog.open(EventDayDrawerComponent, {
+    this.dialog.open(EventDayDrawerComponent, {
       panelClass: [
         'max-md:!w-[80%]',
         'max-sm:!w-[100%]',
@@ -158,9 +158,6 @@ export class CalendarComponent implements OnInit {
         data: data,
         events: this.eventsDayCalendar,
       },
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
     });
   }
 }
