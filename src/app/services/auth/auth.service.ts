@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
-import { UserResponse } from 'src/app/models/user.model';
+import { BehaviorSubject, Observable, Subject, map, of } from 'rxjs';
+import { UserRequest, UserResponse } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { constants } from 'src/app/constans/constants';
@@ -25,7 +25,7 @@ export class AuthService {
   //   'Content-Type': 'application/json',
   //   'Authorization': 'Bearer ' + tuTokenDeAutenticacion
   // });
-  usersUrl: string = environment.apiUrlLocal + '/user/getUsers';
+  usersUrl: string = environment.apiUrlLocal + '/user';
   _userFinded = new BehaviorSubject<any>(null);
   user!: any; // cambiar a usuario
 
@@ -37,7 +37,7 @@ export class AuthService {
   ) {}
 
   getUsers(): Observable<any[]> {
-    return this.http.get<any[]>(this.usersUrl);
+    return this.http.get<any[]>(`${this.usersUrl}/getUsers`);
   }
 
   login(userName: string, password: string): Observable<any> {
@@ -56,6 +56,12 @@ export class AuthService {
         }
       })
     );
+  }
+
+  register(userRequest: UserRequest): Observable<any> {
+    return this.http
+      .post<UserRequest>(`${this.usersUrl}/createUser`, userRequest)
+      .pipe(map((response) => response));
   }
 
   loggingUser(): void {

@@ -1,1 +1,30 @@
-<p>cicle-historial works!</p>
+<div class="max-h-[500px] overflow-y-scroll pe-[20px]">
+  <div>
+    <h5>Ciclo actual: 10 días</h5>
+    <span>Inicio 5 ago</span>
+    <br />
+    <br />
+    <mat-progress-bar
+      [color]="color"
+      [mode]="mode"
+      [value]="value"
+      [bufferValue]="bufferValue"
+    >
+    </mat-progress-bar>
+  </div>
+  <ng-container *ngFor="let item of cycleContainer">
+    <div>
+      <h5>70 días</h5>
+      <span>21 jun - 5 ago</span>
+      <br />
+      <br />
+      <mat-progress-bar
+        [color]="color"
+        [mode]="mode"
+        [value]="value"
+        [bufferValue]="bufferValue"
+      >
+      </mat-progress-bar>
+    </div>
+  </ng-container>
+</div>

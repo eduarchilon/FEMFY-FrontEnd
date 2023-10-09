@@ -19,6 +19,7 @@ import { RegisterCicleComponent } from './components/register-cicle/register-cic
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { CicleHistorialComponent } from './components/cicle-historial/cicle-historial.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
     IndexComponent,
     PieChartComponent,
     RegisterCicleComponent,
+    CicleHistorialComponent
   ],
   imports: [
     CommonModule,

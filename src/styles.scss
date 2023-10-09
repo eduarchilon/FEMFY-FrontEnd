@@ -62,3 +62,39 @@ mat-dialog-content {
   tap-highlight-color: rgba(0, 0, 0, 0); /* Para otros navegadores */
   touch-action: auto !important;
 }
+
+.without-background {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+.spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+#spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+
+/* Estilizar la barra de desplazamiento vertical */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento vertical */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #4a90e2; /* Color del "pulgar" de la barra de desplazamiento */
+  border-radius: 4px; /* Borde redondeado del "pulgar" */
+}
+
+/* Estilizar la barra de desplazamiento horizontal */
+::-webkit-scrollbar-horizontal {
+  height: 8px; /* Altura de la barra de desplazamiento horizontal */
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #4a90e2; /* Color del "pulgar" de la barra de desplazamiento horizontal */
+  border-radius: 4px; /* Borde redondeado del "pulgar" */
+}

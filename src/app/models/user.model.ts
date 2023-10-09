@@ -5,19 +5,24 @@ export interface UserLogin {
 }
 
 export interface UserResponse {
-  birthday: Date | any;
-  email: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  avatar: string;
-  userName: string;
-  isSuscripto: boolean;
-  id: string;
+  birthdate?: Date | any;
+  email?: string;
+  firstName?: string;
+  lastName?: string;
+  phone?: string;
+  avatar?: string;
+  userName?: string;
+  isSuscripto?: boolean;
+  id?: number;
+  idUser?: number;
+}
+
+export interface UserRequest extends UserResponse {
+  password: string;
 }
 
 export const emptyUserResponse = (): UserResponse => ({
-  birthday: '',
+  birthdate: '',
   email: '',
   firstName: '',
   lastName: '',
@@ -25,5 +30,4 @@ export const emptyUserResponse = (): UserResponse => ({
   avatar: '',
   userName: '',
   isSuscripto: false,
-  id: '',
 });

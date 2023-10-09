@@ -1,13 +1,26 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import {
   MatCalendar,
   MatCalendarCellClassFunction,
   DateRange,
+  MatCalendarCellCssClasses,
 } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { EventDayDrawerComponent } from './components/event-day-drawer/event-day-drawer.component';
+import { CalendarService } from 'src/app/services/calendar/calendar.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { AppState } from 'src/app/redux/store/app.store';
+import { Store } from '@ngrx/store';
+import { UserResponse } from 'src/app/models/user.model';
+import { BehaviorSubject } from 'rxjs';
+import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
+import * as moment from 'moment';
+import { setDateCalendar } from 'src/app/redux/actions/calendar.action';
+import { selectDateCalendar } from 'src/app/redux/selectors/calendar.selector';
+import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { EventCalendar } from 'src/app/models/event-calendar.model';
 
 @Component({
   selector: 'app-calendar',
@@ -15,56 +28,123 @@ import { EventDayDrawerComponent } from './components/event-day-drawer/event-day
   styleUrls: ['./calendar.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
   selectedDates: Date[] = [];
   selected!: Date | any;
   numberDay!: number;
 
+  userResponse!: UserResponse;
+
+  _selectedDatesSubject = new BehaviorSubject<any[]>([]);
+  // selectedDates$ = this.selectedDatesSubject.asObservable();
+  dates: moment.Moment[] = [];
+  eventsDayCalendar: EventCalendar[] = [];
+
   constructor(
     private router: Router,
-    private dateAdapter: DateAdapter<any>,
-    public dialog: MatDialog
+    private dateAdapter: DateAdapter<Date>,
+    public dialog: MatDialog,
+    private calendarService: CalendarService,
+    private localStorageService: LocalStorageService,
+    private store: Store<AppState>,
+    private spinnerService: SpinnerService
   ) {
     this.dateAdapter.setLocale('es-ES');
   }
-  showFiller = false;
-  @ViewChild('date') date!: MatCalendar<Date>;
-  @ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
 
-  onSelect(event?: DateRange<any> | any): void {
-    this.openDialog();
-    const selected = event;
-    const isSelected = this.isDaySelected(selected);
-    const selectedDateIndex = this.selectedDates?.findIndex((date) =>
-      this.dateAdapter?.sameDate(date, selected)
-    );
-    if (selectedDateIndex === -1) {
-      this.selectedDates?.push(selected);
-    } else {
-      this.selectedDates?.splice(selectedDateIndex, 1);
-    }
-    this.calendar.updateTodaysDate();
+  ngOnInit(): void {
+    this.dialog.closeAll();
+    this.store.select(selectUserLogin).subscribe((data: any) => {
+      this.userResponse = data?.user;
+      if (!this.userResponse) {
+        this.userResponse = this.localStorageService.getUserByLogin();
+      }
+    });
+
+    this.calendarService
+      .getEventsCalendar(this.userResponse?.idUser)
+      .subscribe((data: any[]) => {
+        //filtro por eventos
+        const eventsIdUser = data.filter(
+          (item) => item.idUser === this.userResponse?.idUser
+        );
+        const arraysFiltrados: any = [];
+        const fechasProcesadas: any = [];
+        eventsIdUser.forEach((item) => {
+          const fecha = item.date;
+          if (!fechasProcesadas.includes(fecha)) {
+            const objetosConFecha = eventsIdUser.filter(
+              (obj) => obj.date === fecha
+            );
+            arraysFiltrados.push(objetosConFecha);
+            fechasProcesadas.push(fecha);
+          }
+        });
+        this.eventsDayCalendar = arraysFiltrados;
+        //filtro por fehas para eleccionar
+        this.selectedDates = [
+          ...Array.from(
+            new Set(
+              data
+                .filter(
+                  (dates: any) => dates?.idUser === this.userResponse?.idUser
+                )
+                .map((date: any) => date?.date)
+            )
+          ),
+        ];
+        this.store.dispatch(setDateCalendar({ dates: this.selectedDates }));
+        this._selectedDatesSubject.next(
+          this.selectedDates.map((item: any) => (item ? moment(item) : []))
+        );
+      });
+
+    this.store.select(selectDateCalendar).subscribe((item: any) => {
+      item?.dates?.forEach((element: any) => {
+        this.select(moment(element), this.calendar);
+      });
+    });
   }
 
-  dateClass: MatCalendarCellClassFunction<Date> = (cellDate, view) => {
-    if (
-      this.selectedDates?.some((selectedDate) =>
-        this.dateAdapter?.sameDate(selectedDate, cellDate)
-      )
-    ) {
-      return 'example-custom-date-class';
-    }
-    return '';
+  isSelected = (event: any) => {
+    this.store.select(selectDateCalendar).subscribe((item: any) => {
+      item?.dates?.forEach((element: any) => {
+        this.dates.push(moment(element));
+      });
+    });
+    const date = event as moment.Moment;
+    return this.dates.find((x) => x.isSame(date))
+      ? 'example-custom-date-class'
+      : '';
   };
 
-  isDaySelected(day: Date): boolean {
-    return !!this.selectedDates?.find((date) =>
-      this.dateAdapter?.sameDate(date, day)
-    );
+  select(event?: any, calendar?: any) {
+    const date: moment.Moment = event;
+    const index = this.dates.findIndex((x) => x.isSame(date));
+    const isSelectable = this.isSelected(date);
+    if (index < 0) {
+      this.dates?.push(date);
+    } else {
+      this.dates?.splice(index, 1);
+    }
+    calendar?.updateTodaysDate();
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(EventDayDrawerComponent, {
+  isDaySelected(day: moment.Moment): boolean {
+    return !!this.dates?.find((date: any) => date.date() === day.date());
+  }
+
+  selectDate(event: any) {
+    this.openDialog(event);
+  }
+
+  showFiller = false;
+  @ViewChild('date') date!: MatCalendar<Date>;
+  @ViewChild('calendar') calendar!: MatCalendar<Date>;
+  //@ViewChild(MatCalendar) calendar!: MatCalendar<Date>;
+
+  openDialog(data: any) {
+    this.dialog.open(EventDayDrawerComponent, {
       panelClass: [
         'max-md:!w-[80%]',
         'max-sm:!w-[100%]',
@@ -74,9 +154,10 @@ export class CalendarComponent {
         'max-sm:!h-[100%]',
         '!h-[500px%]',
       ],
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      data: {
+        data: data,
+        events: this.eventsDayCalendar,
+      },
     });
   }
 }
