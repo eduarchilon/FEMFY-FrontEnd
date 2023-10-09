@@ -1,18 +1,19 @@
-<div class="w-[100%] p-5">
-  <div class="w-full flex justify-start px-5">
+<div class="p-5">
+  <div class="flex justify-start px-5">
     <button (click)="closeDialog()">cerrar</button>
   </div>
-  <mat-dialog-content>
-    <h3 class="pb-3 text-[24px] font-semibold">Registrar datos del periodo</h3>
+  <mat-dialog-content class="text-center !m-auto">
+    <h3 class="pb-3 text-2xl font-semibold mb-10">Registrar datos del periodo</h3>
     <form [formGroup]="formCycle" (ngSubmit)="registerCycle()">
-      <label>Inicio del ciclo</label>
-      <br />
-      <input type="date" formControlName="dateBeging" />
-      <br />
-      <label>Fin del ciclo</label>
-      <br />
-      <input type="date" formControlName="dateEnd" />
-      <button type="submit">Registrar ciclo</button>
+      <div class="mb-5">
+        <label class="block text-xl mb-2">Inicio del ciclo</label>
+        <input type="date" formControlName="dateBeging" class="border-b-2" />
+      </div>
+      <div class="mb-10">
+        <label class="block text-xl mb-2">Fin del ciclo</label>
+        <input type="date" formControlName="dateEnd" class="border-b-2" />
+      </div>
+      <button class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px]" type="submit">Registrar ciclo</button>
     </form>
     <!-- <button (click)="getRegoister()">Ver ciclo</button> -->
   </mat-dialog-content>
