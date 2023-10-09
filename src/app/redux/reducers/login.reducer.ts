@@ -3,9 +3,11 @@ import { UserResponse, emptyUserResponse } from 'src/app/models/user.model';
 import { setUserLogin } from '../actions/login.action';
 import { constants } from 'src/app/constans/constants';
 
-const userResponse = localStorage.getItem('userSession') || null;
+const userResponse = localStorage.getItem('userSession');
 
-export const initialLoginState: UserResponse | any = null
+export const initialLoginState: UserResponse | any = userResponse
+  ? JSON.parse(userResponse || '')
+  : null;
 
 export const loginReducers = createReducer(
   initialLoginState,

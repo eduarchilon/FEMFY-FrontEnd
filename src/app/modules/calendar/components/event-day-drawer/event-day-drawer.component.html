@@ -5,15 +5,31 @@
   <mat-dialog-content>
     <div class="pb-5">
       <h3 class="pb-3 text-[24px] font-semibold">Crear Evento</h3>
-      <h5 class="py-5">Fecha: 14/07/2023</h5>
-      <form action="" class="flex flex-col gap-4">
+      <h5 class="py-5">Fecha: {{ data | date : "dd/MM/yyyy" }}</h5>
+      <form
+        action=""
+        class="flex flex-col gap-4"
+        [formGroup]="formRegisterEvent"
+        (ngSubmit)="registerEevent()"
+      >
         <div class="flex gap-5">
-          <input type="time" placeholder="" />
-          <p>14:00 pm</p>
+          <input
+            type="time"
+            placeholder=""
+            #hourDate
+            (input)="setHourToShow(hourDate.value)"
+            formControlName="hour"
+          />
+          <p>Hora seleccionada: {{ hourSelected }}</p>
         </div>
-        <textarea rows="4" class="bg-pink-400 !w-full pb-5"></textarea>
+        <input type="text" placeholder="titulo" formControlName="title" />
+        <textarea
+          rows="4"
+          class="bg-pink-400 !w-full pb-5"
+          formControlName="description"
+        ></textarea>
         <div>
-          <button>Crear</button>
+          <button type="submit">Crear</button>
         </div>
       </form>
     </div>
