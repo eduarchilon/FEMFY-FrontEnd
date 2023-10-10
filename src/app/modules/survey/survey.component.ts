@@ -21,12 +21,5 @@ export class SurveyComponent {
     'Pregunta 4. ¿Sos Regular o Irregluar?'
   ];
 
-  indicePreguntaActual: number = 0;
-
-  mostrarSiguientePregunta() {
-    if (this.indicePreguntaActual < this.preguntas.length - 1) {
-      this.indicePreguntaActual++;
-    }
-  }
 
 }
