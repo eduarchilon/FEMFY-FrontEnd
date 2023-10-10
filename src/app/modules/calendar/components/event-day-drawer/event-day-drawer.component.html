@@ -1,10 +1,10 @@
 <div class="w-[100%] p-5">
-  <div class="w-full flex justify-start px-5">
+  <div class="flex justify-start px-5">
     <button (click)="closeDialog()">cerrar</button>
   </div>
   <mat-dialog-content>
     <div class="pb-5">
-      <h3 class="pb-3 text-[24px] font-semibold">Crear Evento</h3>
+      <h3 class="text-4xl font-semibold mb-5">Crear nuevo evento</h3>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
       <!-- <h5 class="py-5">Fecha: {{ data | date : "dd/MM/yyyy" }}</h5> -->
       <form
@@ -20,23 +20,24 @@
             #hourDate
             (input)="setHourToShow(hourDate.value)"
             formControlName="hour"
+            class="border-b-2 text-lg mb-3"
           />
           <p>Hora seleccionada: {{ hourSelected }}</p>
         </div>
-        <input type="text" placeholder="titulo" formControlName="title" />
+        <input type="text" placeholder="titulo" formControlName="title" class="border-b-2 text-lg mb-3 p-3" />
         <textarea
           rows="4"
-          class="bg-pink-400 !w-full pb-5"
+          class="bg-gray-100 text-lg text-dark !w-full p-3 rounded-[20px]"
           formControlName="description"
         ></textarea>
         <div>
-          <button type="submit">Crear</button>
+          <button class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px]" type="submit">Crear</button>
         </div>
       </form>
     </div>
     <mat-divider></mat-divider>
     <div>
-      <h3 class="py-3 text-[20px] font-semibold">Eventos creados</h3>
+      <h3 class="py-3 text-2xl font-semibold">Mis eventos</h3>
       <div class="flex flex-col gap-1">
         <ng-container *ngFor="let item of eventDaySelected">
           <mat-expansion-panel

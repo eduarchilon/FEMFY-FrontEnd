@@ -1,24 +1,39 @@
-<div
-  class="w-[100%] py-40 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]"
->
+<div class="pt-32 pb-24 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]">
   <div class="w-[50%] max-lg:w-[100%]">
     <mat-card
-      class="demo-inline-calendar-card w-[400px] max-lg:w-[60%] max-lg:m-auto max-sm:w-[100%]"
-    >
+      class="demo-inline-calendar-card w-[600px] max-lg:w-[60%] max-lg:m-auto max-sm:w-[100%] !rounded-[20px] shadow-xl">
       <div (click)="$event.stopPropagation()">
-        <mat-calendar
-          #calendar
-          (selectedChange)="select($event, calendar); selectDate($event)"
-          [dateClass]="isSelected"
-        ></mat-calendar>
+        <mat-calendar #calendar (selectedChange)="select($event, calendar); selectDate($event)"
+          [dateClass]="isSelected"></mat-calendar>
       </div>
     </mat-card>
   </div>
   <div class="w-[50%] max-lg:w-[100%]">
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias provident ut
-    error ullam natus? Atque, voluptatem error neque aliquam libero tempore
-    totam animi sequi quibusdam, nihil assumenda mollitia. Dolorem,
-    voluptatibus.
+    <h2 class="text-5xl text-white font-bold mb-10 md:mb-28">Ovulación y dias fértiles</h2>
+    <div class="flex text-white mb-10">
+      <img width="100px" height="100px"
+        src="../../../assets/images/isotipo.svg">
+      <div class="my-auto ml-10">
+        <span class="text-2xl">Siguiente periodio:</span>
+        <p class="text-lg mt-5">Faltan 23 días</p>
+      </div>
+    </div>
+    <div class="flex text-white mb-10">
+      <img width="100px" height="100px"
+        src="https://gravida.com/wp-content/uploads/2016/01/ovum.png">
+      <div class="my-auto ml-10">
+        <span class="text-2xl">Predicción día de ovulación:</span>
+        <p class="text-lg mt-5">Faltan 15 días</p>
+      </div>
+    </div>
+    <div class="flex text-white mb-10">
+      <img width="100px" height="100px"
+        src="https://th.bing.com/th/id/R.10c4dd6a751ddb0ef4b4897a2aaf6f98?rik=zUkA1iUuxUFG6w&riu=http%3a%2f%2fclipart-library.com%2fimages%2fkT85qG9Lc.png&ehk=5RcemOKTQCzs3%2bpUNmF7hPuU0gnp%2bbtCJXdDZ60mQJs%3d&risl=&pid=ImgRaw&r=0">
+      <div class="my-auto ml-10">
+        <span class="text-2xl">Predicción días fértiles:</span>
+        <p class="text-lg mt-5">Faltan 6 días</p>
+      </div>
+    </div>
   </div>
 </div>
-<p>{{ selectedDates }}</p>
+<!--<p>{{ selectedDates }}</p>-->
