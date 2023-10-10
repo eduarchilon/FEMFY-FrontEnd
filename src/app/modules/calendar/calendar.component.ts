@@ -146,13 +146,10 @@ export class CalendarComponent implements OnInit {
   openDialog(data: any) {
     this.dialog.open(EventDayDrawerComponent, {
       panelClass: [
-        'max-md:!w-[80%]',
-        'max-sm:!w-[100%]',
-        '!max-w-[100vw]',
-        '!w-[60%]',
-        'max-md:!h-[80%]',
-        'max-sm:!h-[100%]',
-        '!h-[500px%]',
+        'max-md:!w-[50%]',
+        'max-sm:!w-[90%]',
+        '!w-[40%]',
+        '!rounded-[20px]',
       ],
       data: {
         data: data,
