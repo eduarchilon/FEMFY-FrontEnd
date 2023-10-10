@@ -32,7 +32,7 @@
           formControlName="userName"
         />
         <mat-error
-          class="text-xs"
+          class="text-xs text-black"
           *ngIf="
             formLogin.get('userName')?.touched &&
             formLogin.get('userName')?.hasError('required')
@@ -42,22 +42,22 @@
         </mat-error>
         <input
           autocomplete="password"
-          class="rounded-[10px] p-[10px] mb-14 text-black"
+          class="rounded-[10px] p-[10px] text-black"
           type="password"
           placeholder="Contraseña"
           formControlName="password"
         />
         <mat-error
-          class="text-xs"
+          class="text-xs text-black"
           *ngIf="
             formLogin.get('password')?.touched &&
             formLogin.get('password')?.hasError('required')
           "
         >
-          El nombre de usuario es requerido
+          La contraseña es requerida
         </mat-error>
         <button
-          class="bg-[#AF6FE8] rounded-[20px] pt-1 py-[8px] disabled:cursor-not-allowed"
+          class="bg-[#AF6FE8] rounded-[20px] mt-14 pt-1 py-[8px] disabled:cursor-not-allowed"
           type="submit"
           [disabled]="formLogin.invalid"
         >
