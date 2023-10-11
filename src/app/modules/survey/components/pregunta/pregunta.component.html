@@ -120,11 +120,10 @@
         />
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()" type="submit">
-            Reset
-          </button>
+          <button mat-button matStepperNext type="submit">Finalizar</button>
         </div>
       </form>
+      <button mat-button (click)="stepper.reset()">Reset</button>
     </mat-step>
   </mat-stepper>
   <button type="submit" class="text-black">Enviar</button>
