@@ -31,6 +31,7 @@ import {
   MAT_MOMENT_DATE_FORMATS,
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -55,6 +56,7 @@ registerLocaleData(localeEs, 'es-ES');
     CalendarService,
     LocalStorageService,
     SpinnerService,
+    CicleService,
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
