@@ -1,1 +1,120 @@
-<p>pregunta works!</p>
+<!-- <form class="flex flex-col gap-[14px] w-[100%]">
+  <mat-radio-group
+    class="flex flex-col w-48 m-auto mb-5"
+    aria-label="Select an option"
+  >
+    <mat-radio-button value="1">Si</mat-radio-button>
+    <mat-radio-button value="2">No</mat-radio-button>
+  </mat-radio-group>
+
+  <button
+    (click)="mostrarSiguientePregunta()"
+    class="bg-[#A35EDF] rounded-[20px] py-[10px] w-48 m-auto mb-3"
+    type="submit"
+  >
+    Siguiente
+  </button>
+</form> -->
+
+<div class="w-[90%]">
+  <mat-stepper #stepper>
+    <mat-step>
+      <p class="text-black">Pregunta 1. ¿Ya tuviste tu primera menstruación?</p>
+      <mat-radio-group
+        class="flex flex-col w-48 m-auto mb-5"
+        aria-label="Select an option"
+      >
+        <mat-radio-button value="1" (click)="stepper.next()"
+          >Si</mat-radio-button
+        >
+        <mat-radio-button value="2" (click)="redirection()"
+          >No</mat-radio-button
+        >
+      </mat-radio-group>
+      <div>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="formOneRegister">
+        <p class="text-black">
+          Pregunta 2. ¿Qué día fue tu última menstruación?
+        </p>
+        <input
+          matInput
+          type="date"
+          class="text-black"
+          formControlName="lastTime"
+        />
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="formTwoRegister">
+        <p class="text-black">
+          Pregunta 3. ¿Que duración tuvo tu último período?
+        </p>
+        <input
+          type="number"
+          class="text-black"
+          formControlName="lastCycleDuration"
+        />
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="formFourRegister">
+        <p class="text-black">Pregunta 4. ¿Sos Regular?</p>
+        <mat-radio-group
+          class="flex flex-col w-48 m-auto mb-5"
+          aria-label="Select an option"
+          formControlName="regular"
+        >
+          <mat-radio-button value="1">Si</mat-radio-button>
+          <mat-radio-button value="2">No</mat-radio-button>
+        </mat-radio-group>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="formThreeRegister">
+        <p class="text-black">
+          Pregunta 5. ¿Que duración tuvo ese ultimo ciclo regular?
+        </p>
+        <input
+          type="number"
+          class="text-black"
+          formControlName="regularCycleDuration"
+        />
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <form [formGroup]="formFiveRegister">
+        <p class="text-black">Pregunta 5. ¿Que duración tuvo el sangrado?</p>
+        <input
+          type="number"
+          class="text-black"
+          formControlName="bleedingDuration"
+        />
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button (click)="stepper.reset()">Reset</button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+  <button type="submit" class="text-black">Enviar</button>
+</div>

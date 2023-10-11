@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { emptyUserResponse } from 'src/app/models/user.model';
+import { QuestionService } from 'src/app/services/question/question.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -19,10 +21,14 @@ export class RegistroUsuarioComponent {
     email: new FormControl('', Validators.required),
   });
 
+  spinnerConsumer: string = 'RegistroUsuarioComponent';
+
   constructor(
     private authService: AuthService,
     private spinnerService: SpinnerService,
-    private router: Router
+    private router: Router,
+    private questionsService: QuestionService,
+    private localStorageService: LocalStorageService
   ) {}
 
   signupUser(): void {
@@ -35,7 +41,39 @@ export class RegistroUsuarioComponent {
       })
       .subscribe({
         next: (response: any) => {
-          return response;
+          this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+          if (response) {
+            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+            this.authService
+              .login(response?.userName, response?.password)
+              .subscribe({
+                next: (authenticatedUser: any) => {
+                  this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+                  if (authenticatedUser) {
+                    this.spinnerService.hideProgressSpinner(
+                      this.spinnerConsumer
+                    );
+                    this.questionsService
+                      .createUserMenstruationQuestion({
+                        userId:
+                          this.localStorageService.getUserByLogin()?.idUser,
+                      })
+                      .subscribe({
+                        next: (response) => console.log(response),
+                        error: (error) => error,
+                      });
+                    this.router.navigate(['cuestionario']);
+                  } else {
+                    this.spinnerService.hideProgressSpinner(
+                      this.spinnerConsumer
+                    );
+                  }
+                },
+                error: (error) => error,
+              });
+          } else {
+            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+          }
         },
         error: (error) => error,
       });
