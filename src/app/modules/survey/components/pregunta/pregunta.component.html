@@ -16,115 +16,95 @@
   </button>
 </form> -->
 
-<div class="w-[90%]">
+<div class="m-auto">
   <mat-stepper #stepper>
     <mat-step>
-      <p class="text-black">Pregunta 1. ¿Ya tuviste tu primera menstruación?</p>
-      <mat-radio-group
-        class="flex flex-col w-48 m-auto mb-5"
-        aria-label="Select an option"
-      >
-        <mat-radio-button value="1" (click)="stepper.next()"
-          >Si</mat-radio-button
-        >
-        <mat-radio-button value="2" (click)="redirection()"
-          >No</mat-radio-button
-        >
+      <div class="mt-10">
+        <span class="text-4xl">Pregunta 1</span>
+      </div>
+      <p class="text-2xl text-black !my-5">¿Ya tuviste tu primera menstruación?</p>
+      <mat-radio-group class="flex flex-col w-48 m-auto mb-5" aria-label="Select an option">
+        <mat-radio-button value="1" (click)="stepper.next()">Si</mat-radio-button>
+        <mat-radio-button value="2" (click)="redirection()">No</mat-radio-button>
       </mat-radio-group>
       <div>
-        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperNext class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">Siguiente</button>
       </div>
     </mat-step>
     <mat-step>
       <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
-        <p class="text-black">
-          Pregunta 2. ¿Qué día fue tu última menstruación?
-        </p>
-        <input
-          matInput
-          type="date"
-          class="text-black"
-          formControlName="lastTime"
-        />
+        <div class="mt-10">
+          <span class="text-4xl">Pregunta 2</span>
+        </div>
+        <p class="text-2xl text-black !my-5">¿Qué día fue tu última menstruación?</p>
+        <input matInput type="date" class="text-gray-500 rounded-full p-3 mb-5" formControlName="lastTime" />
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">Siguiente</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
       <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
-        <p class="text-black">
-          Pregunta 3. ¿Que duración tuvo tu último período?
-        </p>
-        <input
-          type="number"
-          class="text-black"
-          formControlName="lastCycleDuration"
-        />
+        <div class="mt-10">
+          <span class="text-4xl">Pregunta 3</span>
+        </div>
+        <p class="text-2xl text-black !my-5">¿Que duración tuvo tu último período?</p>
+        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3" formControlName="lastCycleDuration" />
+        <span class="text-gray-500">Días</span>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">Siguiente</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form
-        [formGroup]="formFourRegister"
-        (ngSubmit)="submitFormFourRegister()"
-      >
-        <p class="text-black">Pregunta 4. ¿Sos Regular?</p>
-        <mat-radio-group
-          class="flex flex-col w-48 m-auto mb-5"
-          aria-label="Select an option"
-          formControlName="regular"
-        >
+      <form [formGroup]="formFourRegister" (ngSubmit)="submitFormFourRegister()">
+        <div class="mt-10">
+          <span class="text-4xl">Pregunta 4</span>
+        </div>
+        <p class="text-2xl text-black !my-5">¿Sos Regular?</p>
+        <mat-radio-group class="flex flex-col w-48 m-auto mb-5" aria-label="Select an option" formControlName="regular">
           <mat-radio-button value="1">Si</mat-radio-button>
           <mat-radio-button value="2">No</mat-radio-button>
         </mat-radio-group>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">Siguiente</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form
-        [formGroup]="formThreeRegister"
-        (ngSubmit)="submitFormThreeRegister()"
-      >
-        <p class="text-black">
-          Pregunta 5. ¿Que duración tuvo ese ultimo ciclo regular?
-        </p>
-        <input
-          type="number"
-          class="text-black"
-          formControlName="regularCycleDuration"
-        />
+      <form [formGroup]="formThreeRegister" (ngSubmit)="submitFormThreeRegister()">
+        <div class="mt-10">
+          <span class="text-4xl">Pregunta 4</span>
+        </div>
+        <p class="text-2xl text-black !my-5">¿Que duración tuvo ese ultimo ciclo regular?</p>
+        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3" formControlName="regularCycleDuration" />
+        <span class="text-gray-500">Días</span>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Next</button>
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">Siguiente</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form
-        [formGroup]="formFiveRegister"
-        (ngSubmit)="submitFormFiveRegister()"
-      >
-        <p class="text-black">Pregunta 5. ¿Que duración tuvo el sangrado?</p>
-        <input
-          type="number"
-          class="text-black"
-          formControlName="bleedingDuration"
-        />
+      <form [formGroup]="formFiveRegister" (ngSubmit)="submitFormFiveRegister()">
+        <div class="mt-10">
+          <span class="text-4xl">Pregunta 5</span>
+        </div>
+        <p class="text-2xl text-black !my-5">¿Que duración tuvo el sangrado?</p>
+        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3" formControlName="bleedingDuration" />
+        <span class="text-gray-500">Días</span>
         <div>
-          <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext type="submit">Finalizar</button>
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
+          <button mat-button type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+            Finalixar
         </div>
       </form>
-      <button mat-button (click)="stepper.reset()">Reset</button>
+      <button mat-button (click)="stepper.reset()" type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+        Reiniciar
+      </button>
     </mat-step>
   </mat-stepper>
-  <button type="submit" class="text-black">Enviar</button>
 </div>
