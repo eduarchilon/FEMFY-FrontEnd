@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
 import { data, dataChildren } from 'src/app/constans/pie-chart-data';
@@ -30,7 +31,8 @@ export class PieChartComponent implements OnInit {
   constructor(
     private store: Store<AppState>,
     private cicleService: CicleService,
-    private questionsService: QuestionService
+    private questionsService: QuestionService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -144,7 +146,7 @@ export class PieChartComponent implements OnInit {
       showInLegend: false,
       listeners: {
         nodeClick: (event: any) => {
-          handleChart('Pie 1', event?.datum);
+          this.router.navigate(['calendario']);
         },
       },
       sectorLabelKey: 'label',
@@ -225,7 +227,7 @@ export class PieChartComponent implements OnInit {
       innerRadiusRatio: 0.8,
       listeners: {
         nodeClick: (event: any) => {
-          handleChart('Pie 2', event?.datum);
+          this.router.navigate(['calendario']);
         },
       },
       sectorLabelKey: 'id',
@@ -240,7 +242,16 @@ export class PieChartComponent implements OnInit {
       strokeWidth: 2,
       strokes: ['white'],
       tooltip: {
-        renderer: () => '',
+        renderer: ({ datum, color, sectorLabelKey }) => {
+          return [
+            `<div style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;">`,
+            datum['label'],
+            `</div>`,
+            `<div style="padding: 4px 8px;">`,
+            `  <strong>Día ${datum.id}</strong>`,
+            `</div>`,
+          ].join('\n');
+        },
         interaction: {
           enabled: false,
         },

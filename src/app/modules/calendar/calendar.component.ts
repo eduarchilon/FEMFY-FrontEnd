@@ -14,13 +14,20 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { AppState } from 'src/app/redux/store/app.store';
 import { Store } from '@ngrx/store';
 import { UserResponse } from 'src/app/models/user.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, finalize, map } from 'rxjs';
 import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import * as moment from 'moment';
-import { setDateCalendar } from 'src/app/redux/actions/calendar.action';
-import { selectDateCalendar } from 'src/app/redux/selectors/calendar.selector';
+import {
+  setDateCalendar,
+  setDayPeriod,
+} from 'src/app/redux/actions/calendar.action';
+import {
+  selectDateCalendar,
+  selectDayInitialPeriod,
+} from 'src/app/redux/selectors/calendar.selector';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 
 @Component({
   selector: 'app-calendar',
@@ -39,6 +46,8 @@ export class CalendarComponent implements OnInit {
   // selectedDates$ = this.selectedDatesSubject.asObservable();
   dates: moment.Moment[] = [];
   eventsDayCalendar: EventCalendar[] = [];
+  initCycle!: any;
+  Otherdates: moment.Moment[] = [];
 
   constructor(
     private router: Router,
@@ -47,7 +56,8 @@ export class CalendarComponent implements OnInit {
     private calendarService: CalendarService,
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
-    private spinnerService: SpinnerService
+    private spinnerService: SpinnerService,
+    private cicleService: CicleService
   ) {
     this.dateAdapter.setLocale('es-ES');
   }
@@ -60,6 +70,13 @@ export class CalendarComponent implements OnInit {
         this.userResponse = this.localStorageService.getUserByLogin();
       }
     });
+
+    this.cicleService
+      .getAllCycles(this.localStorageService.getUserByLogin()?.idUser)
+      .subscribe((data: any) => {
+        console.log(data[0]);
+        this.store.dispatch(setDayPeriod({ initialDate: data[0]?.dateBeging }));
+      });
 
     this.calendarService
       .getEventsCalendar(this.userResponse?.idUser)
@@ -104,6 +121,10 @@ export class CalendarComponent implements OnInit {
         this.select(moment(element), this.calendar);
       });
     });
+
+    this.store.select(selectDayInitialPeriod).subscribe((day: any) => {
+      this.Otherdates.push(moment(day?.initialDate));
+    });
   }
 
   isSelected = (event: any) => {
@@ -113,15 +134,10 @@ export class CalendarComponent implements OnInit {
       });
     });
     const date = event as moment.Moment;
-    const date2 = moment(new Date(2023, 9, 6));
-
-    let color: string = '';
-    const Otherdates: moment.Moment[] = [];
-    Otherdates.push(date2);
     return (
       (this.dates.find((x) => x.isSame(date))
         ? 'example-custom-date-class'
-        : '') || (Otherdates.find((x) => x.isSame(date)) ? 'colores' : '')
+        : '') || (this.Otherdates.find((x) => x.isSame(date)) ? 'colores' : '')
     );
   };
 

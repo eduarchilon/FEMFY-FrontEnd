@@ -38,7 +38,7 @@ export class CicleService {
       );
   }
 
-  getAllCycles(idUser: number): Observable<any> {
+  getAllCycles(idUser: number | any): Observable<any> {
     return this.http
       .get<any[]>(`${this.usersUrl}/getCycleHistory/${idUser}`)
       .pipe(
