@@ -40,7 +40,7 @@ export const MENU_PROFILE: Menu[] = [
     path: 'perfil',
   },
   {
-    label: 'Subscripción',
-    path: 'subscripcion',
+    label: 'Suscripción',
+    path: 'suscripcion',
   },
 ];
