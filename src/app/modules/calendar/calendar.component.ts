@@ -129,6 +129,7 @@ export class CalendarComponent implements OnInit {
 
   isSelected = (event: any) => {
     this.store.select(selectDateCalendar).subscribe((item: any) => {
+     // console.log("holi", item);
       item?.dates?.forEach((element: any) => {
         this.dates.push(moment(element));
       });

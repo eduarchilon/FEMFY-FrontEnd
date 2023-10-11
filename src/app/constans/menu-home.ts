@@ -29,10 +29,6 @@ export const MENU_LOGUEADO: Menu[] = [
     path: 'documentation',
   },
   {
-    label: 'Cuestionario',
-    path: 'cuestionario',
-  },
-  {
     label: 'Comunidad',
     path: 'foro',
   },
