@@ -33,48 +33,57 @@
       </div>
     </div>
     <div
-      class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]">
-       <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
+      class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
+    >
       <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
-        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-          <h5
-            class="p-[20px] text-white rounded-t-[20px] bg-[#DA047A] font-semibold text-[20px]"
-          >
-            Mis ciclos 
-          </h5>
-          <div class="p-[20px]">
-            <h5>Duración del ciclo anterior <i class="fa-solid fa-clock-rotate-left"></i></h5>
-            <span class="font-semibold">37 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo anterior</h5>
-            <span class="font-semibold">5 días</span>
-            <br />
-            <br />
-            <h5>Duración del ciclo mas corto</h5>
-            <span class="font-semibold">28 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo mas corto</h5>
-            <span class="font-semibold">3 días</span>
-            <br />
-            <br />
-            <h5>Duración del ciclo mas largo</h5>
-            <span class="font-semibold">70 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo mas largo</h5>
-            <span class="font-semibold">7 días</span>
+        <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
+          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
+            <h5
+              class="p-[20px] text-white rounded-t-[20px] bg-[#DA047A] font-semibold text-[20px]"
+            >
+              Mis ciclos
+            </h5>
+            <div class="p-[20px]">
+              <h5>
+                Duración del ciclo anterior
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </h5>
+              <span class="font-semibold"
+                >{{ myCycle.lastCycleDuration }} días</span
+              >
+              <br />
+              <br />
+              <h5>Duración del periodo anterior</h5>
+              <span class="font-semibold"
+                >{{ myCycle.regularCycleDuration }} días</span
+              >
+              <br />
+              <br />
+              <h5>Duración del ciclo mas corto</h5>
+              <span class="font-semibold">28 días</span>
+              <br />
+              <br />
+              <h5>Duración del periodo mas corto</h5>
+              <span class="font-semibold">3 días</span>
+              <br />
+              <br />
+              <h5>Duración del ciclo mas largo</h5>
+              <span class="font-semibold">70 días</span>
+              <br />
+              <br />
+              <h5>Duración del periodo mas largo</h5>
+              <span class="font-semibold">7 días</span>
+            </div>
           </div>
-        </div>
-        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-          <h5
-            class="p-[20px] text-white bg-[#DA047A] rounded-t-[20px] font-semibold text-[20px]"
-          >
-            Historial de ciclos
-          </h5>
-          <div class="p-[20px] flex flex-col gap-[15px]">
-            <app-cicle-historial></app-cicle-historial>
+          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
+            <h5
+              class="p-[20px] text-white bg-[#DA047A] rounded-t-[20px] font-semibold text-[20px]"
+            >
+              Historial de ciclos
+            </h5>
+            <div class="p-[20px] flex flex-col gap-[15px]">
+              <app-cicle-historial></app-cicle-historial>
+            </div>
           </div>
         </div>
       </div>

@@ -12,6 +12,7 @@ import { selectCycle } from 'src/app/redux/selectors/cycle.selctor';
 import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { QuestionService } from 'src/app/services/question/question.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -28,10 +29,16 @@ export class PieChartComponent implements OnInit {
 
   constructor(
     private store: Store<AppState>,
-    private cicleService: CicleService
+    private cicleService: CicleService,
+    private questionsService: QuestionService
   ) {}
 
   ngOnInit(): void {
+    // this.questionsService
+    //   .getAllQuestionUserMenstruation()
+    //   .subscribe((data: any) => {
+    //     console.log(data);
+    //   });
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.idUser = data?.idUser;
     });
@@ -41,7 +48,7 @@ export class PieChartComponent implements OnInit {
     if (!this.cycleChart) {
       this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
         this.cycleChart = data[data?.length - 1];
-        console.log(this.cycleChart);
+        console.log(data);
         chat12 = this.setPieChartContentData(this.cycleChart);
         chat13 = this.setPieContainerData(chat12, this.cycleChart);
         this.options = {
@@ -269,7 +276,6 @@ export class PieChartComponent implements OnInit {
 
   @HostListener('window:resize', ['$event'])
   onResizeWidth(event: any): void {
-    console.log(window.innerWidth);
     if (window.innerWidth < 380) {
       this.sizeChart = 300;
     } else if (window.innerWidth < 500) {
