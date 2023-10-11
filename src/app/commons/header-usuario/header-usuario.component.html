@@ -18,10 +18,10 @@
         " routerLinkActive="text-white font-semibold bg-[#DA057A] rounded-full"
         [routerLinkActiveOptions]="{ exact: true }" routerLink="{{ menu.path }}">{{ menu.label }}</a>
       <ng-container *ngIf="isLogging">
-        <button class="m-auto" mat-button [matMenuTriggerFor]="menuProfileButton">
+        <button class="m-auto rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px]" [matMenuTriggerFor]="menuProfileButton">
           <img
             src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
-            class="rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px] m-auto">
+            class="m-auto w-[100%] h-[100%] object-cover rounded-full">
         </button>
         <mat-menu #menuProfileButton="matMenu" class="p-3">
           <ng-container *ngFor="let item of menuProfile">
