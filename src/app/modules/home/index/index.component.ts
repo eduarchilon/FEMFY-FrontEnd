@@ -9,6 +9,8 @@ import { RegisterCicleComponent } from '../components/register-cicle/register-ci
 import { QuestionService } from 'src/app/services/question/question.service';
 import { Cycle } from 'src/app/models/cicle.model';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-index',
@@ -21,6 +23,7 @@ export class IndexComponent implements OnInit {
   value = 50;
   bufferValue = 75;
   myCycle: QuestionUserMenstruation = {};
+  cycles: Cycle[] = [];
 
   user!: any; //cambiar objeto
 
@@ -28,7 +31,9 @@ export class IndexComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     public dialog: MatDialog,
-    private questionsService: QuestionService
+    private questionsService: QuestionService,
+    private cicleService: CicleService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +47,11 @@ export class IndexComponent implements OnInit {
     this.authService._userFinded.subscribe((user: any) => {
       this.user = user;
     });
+    this.cicleService
+      .getAllCycles(this.localStorageService.getUserByLogin()?.idUser)
+      .subscribe((data: any) => {
+        this.cycles = data;
+      });
   }
 
   openCicleRegister(): void {

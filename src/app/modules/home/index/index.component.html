@@ -55,7 +55,12 @@
               Historial de ciclos
             </h5>
             <div class="p-[20px] flex flex-col gap-[15px]">
-              <app-cicle-historial></app-cicle-historial>
+              <ng-container *ngIf="cycles.length < 1">
+                <h5>Todavía no existen datos cargados.</h5>
+              </ng-container>
+              <ng-container *ngIf="cycles.length > 0">
+                <app-cicle-historial></app-cicle-historial>
+              </ng-container>
             </div>
           </div>
         </div>
