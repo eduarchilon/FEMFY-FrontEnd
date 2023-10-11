@@ -1,36 +1,12 @@
-<div
-  class="w-[100%] bg-cover pt-24 bg-[#FEA8B1] flex justify-between text-white px-[5vw]"
->
-  <div class="w-[50%] flex justify-center items-center flex-col max-lg:hidden">
-    <div>
-      <h1
-        class="text-[50px] max-xl:text-[70px] font-bold min-w-[85%] w-[inherit] text-left"
-      >
-        Siempre es un placer poder ayudarte.
-      </h1>
-    </div>
-  </div>
-  <div class="">
-    <div
-      class="bg-[#F4C8E8] rounded-[20px] p-10 xl:p-16 2xl:p-36 drop-shadow-xl flex flex-col items-center"
-    >
-      <img class="w-[100px]" src="./assets/images/isotipo.svg" />
-      <h2 class="text-[32px] font-bold text-center mb-14 pt-[2px]">
-        ¡Bienvenida!
-      </h2>
-      <form
-        class="flex flex-col gap-[14px] w-[100%]"
-        autocomplete="off"
-        [formGroup]="formLogin"
-        (ngSubmit)="loginUser()"
-      >
-        <input
-          autocomplete="userName"
-          class="rounded-[10px] p-[10px] text-black"
-          type="text"
-          placeholder="Usuario"
-          formControlName="userName"
-        />
+<div class="h-screen w-[100%] bg-cover bg-[#FEA8B1] pt-24 flex items-center text-white py-[100px] px-[5vw]">
+
+  <div class="w-[50%] max-lg:w-[100%]  max-lg:px-[20%] max-md:px-[10%] max-sm:px-0">
+    <div class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[30px] pb-[100px]">
+      <img class="w-[100px]" src="./assets/images/isotipo.svg">
+      <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">¡Bienvenida!</h2>
+
+      <form class="flex flex-col gap-[14px] w-[100%]" autocomplete="off" [formGroup]="formLogin" (ngSubmit)="loginUser()">
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" autocomplete="userName" type="text" placeholder="Usuario" formControlName="userName">
         <mat-error
           class="text-xs text-black"
           *ngIf="
@@ -40,13 +16,7 @@
         >
           El nombre de usuario es requerido
         </mat-error>
-        <input
-          autocomplete="password"
-          class="rounded-[10px] p-[10px] text-black"
-          type="password"
-          placeholder="Contraseña"
-          formControlName="password"
-        />
+        <input class="rounded-[10px] py-[10px] px-[10px] text-black" autocomplete="password" type="password" placeholder="Contraseña" formControlName="password">
         <mat-error
           class="text-xs text-black"
           *ngIf="
@@ -56,16 +26,20 @@
         >
           La contraseña es requerida
         </mat-error>
-        <button
-          class="bg-[#AF6FE8] rounded-[20px] mt-14 pt-1 py-[8px] disabled:cursor-not-allowed"
-          type="submit"
-          [disabled]="formLogin.invalid"
-        >
-          Ingresar
-        </button>
+        <button class="bg-[#AF6FE8] rounded-[20px] py-[10px] disabled:cursor-not-allowed" type="submit" [disabled]="formLogin.invalid">Ingresar</button>
+
       </form>
-      <a class="text-white pt-[5px]">Olvidé mi contraseña</a>
+
+      <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
       <a routerLink="/login-usuario" class="text-white">Registrate</a>
+
+
     </div>
   </div>
+
+    <div class="w-[50%] flex items-center flex-col max-lg:hidden">
+      <img class="w-[230px] " src="./assets/images/isotipo.svg">
+      <h1 class="text-[50px] max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center">Siempre es un placer poder ayudarte.</h1>
+    </div>
+
 </div>
