@@ -10,6 +10,7 @@ import { TopicComponent } from './modules/forum/topic/topic.component';
 import { DocumentationComponent } from './modules/documentation/documentation.component';
 import { SurveyComponent } from './modules/survey/survey.component';
 import { ProfileComponent } from './modules/profile/profile.component';
+import { IndexComponent } from './modules/home/index/index.component';
 
 
 const routes: Routes = [
