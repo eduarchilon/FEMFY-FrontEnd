@@ -20,6 +20,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { CicleHistorialComponent } from './components/cicle-historial/cicle-historial.component';
+import { QuestionService } from 'src/app/services/question/question.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { CicleHistorialComponent } from './components/cicle-historial/cicle-hist
     IndexComponent,
     PieChartComponent,
     RegisterCicleComponent,
-    CicleHistorialComponent
+    CicleHistorialComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +49,7 @@ import { CicleHistorialComponent } from './components/cicle-historial/cicle-hist
     AuthService,
     LocalStorageService,
     CicleService,
+    QuestionService,
     { provide: LOCALE_ID, useValue: 'es-ES' },
   ],
 })

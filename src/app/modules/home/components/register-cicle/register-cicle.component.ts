@@ -7,6 +7,7 @@ import { setCycle } from 'src/app/redux/actions/cycle.action';
 import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
@@ -31,7 +32,8 @@ export class RegisterCicleComponent implements OnInit {
     private cicleService: CicleService,
     private store: Store<AppState>,
     private spinnerService: SpinnerService,
-    private router: Router
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -48,13 +50,13 @@ export class RegisterCicleComponent implements OnInit {
   registerCycle(): void {
     this.cicleService
       .registerCycle({
-        dateBeging: this.formCycle?.value?.dateBeging,
+        dateBeging: new Date(this.formCycle?.value?.dateBeging),
         daysOfBleeding: this.formCycle?.value?.daysOfBleeding,
-        idUser: this.idUser,
+        idUser: this.localStorageService.getUserByLogin()?.idUser,
       })
       .subscribe({
         next: (response: any) => {
-          this.closeDialog();
+          // this.closeDialog();
           if (response) {
             this.router.navigate(['/']).then(() => {
               location.reload();

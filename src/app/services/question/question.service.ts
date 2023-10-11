@@ -35,4 +35,12 @@ export class QuestionService {
       })
     );
   }
+
+  getAllQuestionUserMenstruation(): Observable<any> {
+    return this.http.get<any[]>(`${this.usersUrl}/getAllQuestions`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }
