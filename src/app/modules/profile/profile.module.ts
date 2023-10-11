@@ -4,6 +4,9 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ProfileComponent } from './profile.component';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -11,7 +14,9 @@ import { FormsModule } from '@angular/forms'; // Import FormsModule
     CommonModule,
     FormsModule,
     BrowserModule,
-    AppRoutingModule
-  ]
+    AppRoutingModule,
+    StoreModule
+  ],
+  providers:[AuthService, LocalStorageService]
 })
 export class ProfileModule { }
