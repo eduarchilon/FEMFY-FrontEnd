@@ -41,7 +41,7 @@ export class PieChartComponent implements OnInit {
     if (!this.cycleChart) {
       this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
         this.cycleChart = data[data?.length - 1];
-        
+        console.log(this.cycleChart);
         chat12 = this.setPieChartContentData(this.cycleChart);
         chat13 = this.setPieContainerData(chat12, this.cycleChart);
         this.options = {
@@ -64,32 +64,32 @@ export class PieChartComponent implements OnInit {
         };
       });
     }
-    this.store.select(selectCycle).subscribe((data: any) => {
-      console.log(data);
+    // this.store.select(selectCycle).subscribe((data: any) => {
+    //   console.log(data);
 
-      this.cycleChart = data?.cycle;
+    //   this.cycleChart = data?.cycle;
 
-      chat12 = this.setPieChartContentData(this.cycleChart);
-      chat13 = this.setPieContainerData(chat12, this.cycleChart);
-      this.options = {
-        width: this.getWindowSize(),
-        height: this.getWindowSize(),
-        autoSize: true,
-        padding: {
-          top: 5,
-          right: 5,
-          bottom: 5,
-          left: 5,
-        },
-        series: [chat12, chat13],
-        legend: {
-          enabled: false,
-        },
-        background: {
-          visible: false,
-        },
-      };
-    });
+    //   chat12 = this.setPieChartContentData(this.cycleChart);
+    //   chat13 = this.setPieContainerData(chat12, this.cycleChart);
+    //   this.options = {
+    //     width: this.getWindowSize(),
+    //     height: this.getWindowSize(),
+    //     autoSize: true,
+    //     padding: {
+    //       top: 5,
+    //       right: 5,
+    //       bottom: 5,
+    //       left: 5,
+    //     },
+    //     series: [chat12, chat13],
+    //     legend: {
+    //       enabled: false,
+    //     },
+    //     background: {
+    //       visible: false,
+    //     },
+    //   };
+    // });
 
     this.sizeChart = window.innerWidth;
   }
@@ -174,7 +174,8 @@ export class PieChartComponent implements OnInit {
 
   setPieContainerData(
     optionSeries: AgPolarSeriesOptions | any,
-    cycleChart: Cycle
+    cycleChart: Cycle,
+    initDay?: any
   ): AgPolarSeriesOptions {
     const categorizedData: CategorizedData = {};
     // data.forEach((item) => {
@@ -207,7 +208,7 @@ export class PieChartComponent implements OnInit {
       (item: any) => ({
         ...item,
         width: (newDataArray.length / sumaTotal) * 100,
-        color: item.id === fechaActual ? 'purple' : item.color,
+        color: item.id === dataChildren[0]?.id ? 'purple' : item.color,
       })
     );
 
