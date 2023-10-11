@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import { AppState } from '../store/app.store';
 
 export const selectIdQuestionMenstruationFeature = (state: AppState) =>
-  state.dates;
+  state.idQuestionMenstruation;
 
 export const selectIdQuestionMenstruation = createSelector(
   selectIdQuestionMenstruationFeature,

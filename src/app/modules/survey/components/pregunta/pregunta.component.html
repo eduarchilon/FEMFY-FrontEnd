@@ -36,7 +36,7 @@
       </div>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formOneRegister">
+      <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
         <p class="text-black">
           Pregunta 2. ¿Qué día fue tu última menstruación?
         </p>
@@ -48,12 +48,12 @@
         />
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext type="submit">Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formTwoRegister">
+      <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
         <p class="text-black">
           Pregunta 3. ¿Que duración tuvo tu último período?
         </p>
@@ -64,12 +64,15 @@
         />
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext type="submit">Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formFourRegister">
+      <form
+        [formGroup]="formFourRegister"
+        (ngSubmit)="submitFormFourRegister()"
+      >
         <p class="text-black">Pregunta 4. ¿Sos Regular?</p>
         <mat-radio-group
           class="flex flex-col w-48 m-auto mb-5"
@@ -81,12 +84,15 @@
         </mat-radio-group>
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext type="submit">Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formThreeRegister">
+      <form
+        [formGroup]="formThreeRegister"
+        (ngSubmit)="submitFormThreeRegister()"
+      >
         <p class="text-black">
           Pregunta 5. ¿Que duración tuvo ese ultimo ciclo regular?
         </p>
@@ -97,12 +103,15 @@
         />
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button matStepperNext>Next</button>
+          <button mat-button matStepperNext type="submit">Next</button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formFiveRegister">
+      <form
+        [formGroup]="formFiveRegister"
+        (ngSubmit)="submitFormFiveRegister()"
+      >
         <p class="text-black">Pregunta 5. ¿Que duración tuvo el sangrado?</p>
         <input
           type="number"
@@ -111,7 +120,9 @@
         />
         <div>
           <button mat-button matStepperPrevious>Back</button>
-          <button mat-button (click)="stepper.reset()">Reset</button>
+          <button mat-button (click)="stepper.reset()" type="submit">
+            Reset
+          </button>
         </div>
       </form>
     </mat-step>

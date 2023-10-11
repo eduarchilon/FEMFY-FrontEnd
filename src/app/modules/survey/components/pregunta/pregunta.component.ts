@@ -12,6 +12,7 @@ import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
+import { selectIdQuestionMenstruationFeature } from './../../../../redux/selectors/question.selector';
 
 @Component({
   selector: 'app-pregunta',
@@ -52,6 +53,11 @@ export class PreguntaComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
   ngOnInit(): void {
+    this.store
+      .select(selectIdQuestionMenstruationFeature)
+      .subscribe((data: any) => {
+        this.idRegister = data?.idQuestion;
+      });
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.userResponse = data?.user;
       if (!this.userResponse) {
@@ -69,6 +75,7 @@ export class PreguntaComponent implements OnInit {
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
+        id: this.idRegister,
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
@@ -80,6 +87,7 @@ export class PreguntaComponent implements OnInit {
   submitFormTwoRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
+        id: this.idRegister,
         lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
       })
       .subscribe({
@@ -91,6 +99,7 @@ export class PreguntaComponent implements OnInit {
   submitFormThreeRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
+        id: this.idRegister,
         regularCycleDuration:
           this.formThreeRegister?.value?.regularCycleDuration,
       })
@@ -103,6 +112,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFourRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
+        id: this.idRegister,
         regular: this.formFourRegister?.value.regular === '1' ? true : false,
       })
       .subscribe({
@@ -114,6 +124,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFiveRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
+        id: this.idRegister,
         bleedingDuration: this.formFourRegister?.value?.bleedingDuration,
       })
       .subscribe({
