@@ -122,10 +122,11 @@ export class PreguntaComponent implements OnInit {
   }
 
   submitFormFiveRegister(): void {
+    // console.log(this.formFiveRegister?.value?.bleedingDuration)
     this.questionsService
       .updateUserMenstruationQuestion({
         id: this.idRegister,
-        bleedingDuration: this.formFourRegister?.value?.bleedingDuration,
+        bleedingDuration: this.formFiveRegister?.value?.bleedingDuration,
       })
       .subscribe({
         next: (response: any) => response,

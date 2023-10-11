@@ -60,7 +60,10 @@ export class AuthService {
 
   register(userRequest: UserRequest): Observable<any> {
     return this.http
-      .post<UserRequest>(`${this.usersUrl}/createUser`, userRequest)
+      .post<UserRequest>(`${this.usersUrl}/createUser`, {
+        typeUserID: 1,
+        ...userRequest,
+      })
       .pipe(map((response) => response));
   }
 

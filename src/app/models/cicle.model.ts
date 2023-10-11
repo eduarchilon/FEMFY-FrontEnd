@@ -4,4 +4,5 @@ export interface Cycle {
   id?: number;
   idUser?: number;
   status?: string;
+  daysOfBleeding?: number | any;
 }
