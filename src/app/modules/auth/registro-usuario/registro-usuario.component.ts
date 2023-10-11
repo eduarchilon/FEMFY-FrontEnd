@@ -9,6 +9,8 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/redux/store/app.store';
 import { setIdQuestionMenstruation } from 'src/app/redux/actions/question.action';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { constants } from 'src/app/constans/constants';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -32,7 +34,8 @@ export class RegistroUsuarioComponent {
     private router: Router,
     private questionsService: QuestionService,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private cicleService: CicleService
   ) {}
 
   signupUser(): void {
@@ -64,7 +67,22 @@ export class RegistroUsuarioComponent {
                       })
                       .subscribe({
                         next: (response) => {
-                          console.log(response);
+                          this.localStorageService.setKeyValueLocalStorage(
+                            constants.ID_REGISTER,
+                            response?.id
+                          );
+                          // this.cicleService
+                          //   .registerCycle({
+                          //     idUser: response?.userId,
+                          //     dateBeging: new Date(),
+                          //     daysOfBleeding: 0,
+                          //     dateEnd: new Date(),
+                          //     status: '',
+                          //   })
+                          //   .subscribe({
+                          //     next: (response) => response,
+                          //     error: (error) => error,
+                          //   });
                           this.store.dispatch(
                             setIdQuestionMenstruation({
                               idQuestion: response?.id,

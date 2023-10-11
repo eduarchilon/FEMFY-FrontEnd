@@ -11,11 +11,12 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
   imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  providers: [SpinnerService, AuthService],
+  providers: [SpinnerService, AuthService, CicleService],
 })
 export class AuthModule {}

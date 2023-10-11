@@ -13,6 +13,7 @@ import { AppState } from 'src/app/redux/store/app.store';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { selectIdQuestionMenstruationFeature } from './../../../../redux/selectors/question.selector';
+import { constants } from 'src/app/constans/constants';
 
 @Component({
   selector: 'app-pregunta',
@@ -75,7 +76,7 @@ export class PreguntaComponent implements OnInit {
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.idRegister,
+        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
@@ -87,7 +88,7 @@ export class PreguntaComponent implements OnInit {
   submitFormTwoRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.idRegister,
+        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
         lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
       })
       .subscribe({
@@ -99,7 +100,7 @@ export class PreguntaComponent implements OnInit {
   submitFormThreeRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.idRegister,
+        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
         regularCycleDuration:
           this.formThreeRegister?.value?.regularCycleDuration,
       })
@@ -112,7 +113,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFourRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.idRegister,
+        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
         regular: this.formFourRegister?.value.regular === '1' ? true : false,
       })
       .subscribe({
@@ -122,34 +123,22 @@ export class PreguntaComponent implements OnInit {
   }
 
   submitFormFiveRegister(): void {
+    // console.log(this.formFiveRegister?.value?.bleedingDuration)
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.idRegister,
-        bleedingDuration: this.formFourRegister?.value?.bleedingDuration,
+        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        bleedingDuration: this.formFiveRegister?.value?.bleedingDuration,
       })
       .subscribe({
-        next: (response: any) => response,
+        next: (response: any) => {
+          return response;
+        },
         error: (error) => error,
       });
+    this.router.navigate(['/']).then(() => {
+      location.reload();
+    });
   }
-
-  // registerBasicQuestions(): void {
-  //   this.questionsService
-  //     .createUserMenstruationQuestion({
-  //       userId: 2,
-  //       lastTime: this.formRegisterQuestion?.value.lastTime,
-  //       lastCycleDuration: this.formRegisterQuestion?.value.lastCycleDuration,
-  //       regular:
-  //         this.formRegisterQuestion?.value.regular === '1' ? true : false,
-  //       regularCycleDuration:
-  //         this.formRegisterQuestion?.value.regularCycleDuration,
-  //       bleedingDuration: this.formRegisterQuestion?.value.bleedingDuration,
-  //     })
-  //     .subscribe({
-  //       next: (response) => console.log(response),
-  //       error: (error) => error,
-  //     });
-  // }
 
   redirection(): void {
     this.router.navigate(['']);

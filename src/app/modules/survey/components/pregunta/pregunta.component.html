@@ -98,11 +98,13 @@
         <span class="text-gray-500">Días</span>
         <div>
           <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">Volver</button>
-          <button mat-button (click)="stepper.reset()" type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
-            Reiniciar
-          </button>
+          <button mat-button type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+            Finalixar
         </div>
       </form>
+      <button mat-button (click)="stepper.reset()" type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+        Reiniciar
+      </button>
     </mat-step>
   </mat-stepper>
 </div>

@@ -20,11 +20,10 @@ export class CicleService {
       .post<any>(`${this.usersUrl}/registerCycleStart`, cycle)
       .pipe(
         map((response) => {
-          this.store.dispatch(setCycle({ cycle: response }));
+          // this.store.dispatch(setCycle({ cycle: response }));
           return response;
         })
       );
-    // this.store.dispatch(setCycle({ cycle: response }));
   }
 
   getCycle(idUser: number | any, dateBeging: Date | any): Observable<any> {

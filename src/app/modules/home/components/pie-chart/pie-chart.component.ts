@@ -41,6 +41,7 @@ export class PieChartComponent implements OnInit {
     if (!this.cycleChart) {
       this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
         this.cycleChart = data[data?.length - 1];
+        console.log(this.cycleChart);
         chat12 = this.setPieChartContentData(this.cycleChart);
         chat13 = this.setPieContainerData(chat12, this.cycleChart);
         this.options = {
@@ -63,29 +64,32 @@ export class PieChartComponent implements OnInit {
         };
       });
     }
-    this.store.select(selectCycle).subscribe((data: any) => {
-      this.cycleChart = data?.cycle;
-      chat12 = this.setPieChartContentData(this.cycleChart);
-      chat13 = this.setPieContainerData(chat12, this.cycleChart);
-      this.options = {
-        width: this.getWindowSize(),
-        height: this.getWindowSize(),
-        autoSize: true,
-        padding: {
-          top: 5,
-          right: 5,
-          bottom: 5,
-          left: 5,
-        },
-        series: [chat12, chat13],
-        legend: {
-          enabled: false,
-        },
-        background: {
-          visible: false,
-        },
-      };
-    });
+    // this.store.select(selectCycle).subscribe((data: any) => {
+    //   console.log(data);
+
+    //   this.cycleChart = data?.cycle;
+
+    //   chat12 = this.setPieChartContentData(this.cycleChart);
+    //   chat13 = this.setPieContainerData(chat12, this.cycleChart);
+    //   this.options = {
+    //     width: this.getWindowSize(),
+    //     height: this.getWindowSize(),
+    //     autoSize: true,
+    //     padding: {
+    //       top: 5,
+    //       right: 5,
+    //       bottom: 5,
+    //       left: 5,
+    //     },
+    //     series: [chat12, chat13],
+    //     legend: {
+    //       enabled: false,
+    //     },
+    //     background: {
+    //       visible: false,
+    //     },
+    //   };
+    // });
 
     this.sizeChart = window.innerWidth;
   }
@@ -99,12 +103,11 @@ export class PieChartComponent implements OnInit {
     const diferenciaDias = Math.ceil(
       diferenciaMilisegundos / (1000 * 60 * 60 * 24)
     );
-    console.log(diferenciaDias);
-    
+
     let data: DataPieChart[] = [
       {
         id: 1,
-        dayCount: diferenciaDias, //duracion de sangrado
+        dayCount: cycleChart?.daysOfBleeding, //duracion de sangrado
         label: 'Sangrado',
         color: '#fda4af',
       },
@@ -171,7 +174,8 @@ export class PieChartComponent implements OnInit {
 
   setPieContainerData(
     optionSeries: AgPolarSeriesOptions | any,
-    cycleChart: Cycle
+    cycleChart: Cycle,
+    initDay?: any
   ): AgPolarSeriesOptions {
     const categorizedData: CategorizedData = {};
     // data.forEach((item) => {
@@ -183,7 +187,7 @@ export class PieChartComponent implements OnInit {
     // });
     // console.log(categorizedData)
     const newDataArray: DataPieChartChildren[] = [];
-    optionSeries?.data?.forEach((item:any) => {
+    optionSeries?.data?.forEach((item: any) => {
       for (let i = 1; i <= item.dayCount; i++) {
         newDataArray.push({
           id: newDataArray.length + 1,
@@ -197,15 +201,17 @@ export class PieChartComponent implements OnInit {
     const sumaTotal = newDataArray.reduce((acumulador, elemento) => {
       return acumulador + elemento.dayCount;
     }, 0);
-    
+
     const fechaActual = new Date().getDate();
     // Calcula los valores de "width" y normaliza para que sumen 100%
-    const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map((item: any) => ({
-      ...item,
-      width: (newDataArray.length / sumaTotal) * 100,
-      color: item.id === fechaActual ? 'purple' : item.color,
-    }));
-    
+    const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
+      (item: any) => ({
+        ...item,
+        width: (newDataArray.length / sumaTotal) * 100,
+        color: item.id === dataChildren[0]?.id ? 'purple' : item.color,
+      })
+    );
+
     return {
       type: 'pie',
       data: dataChildrenSeries,
