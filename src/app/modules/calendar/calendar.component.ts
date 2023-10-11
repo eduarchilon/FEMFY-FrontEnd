@@ -113,9 +113,16 @@ export class CalendarComponent implements OnInit {
       });
     });
     const date = event as moment.Moment;
-    return this.dates.find((x) => x.isSame(date))
-      ? 'example-custom-date-class'
-      : '';
+    const date2 = moment(new Date(2023, 9, 6));
+
+    let color: string = '';
+    const Otherdates: moment.Moment[] = [];
+    Otherdates.push(date2);
+    return (
+      (this.dates.find((x) => x.isSame(date))
+        ? 'example-custom-date-class'
+        : '') || (Otherdates.find((x) => x.isSame(date)) ? 'colores' : '')
+    );
   };
 
   select(event?: any, calendar?: any) {

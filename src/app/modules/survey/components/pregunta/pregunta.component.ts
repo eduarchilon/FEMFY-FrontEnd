@@ -66,24 +66,60 @@ export class PreguntaComponent implements OnInit {
     }
   }
 
-  submitFormOneRegister():void{
-    
+  submitFormOneRegister(): void {
+    this.questionsService
+      .updateUserMenstruationQuestion({
+        lastTime: this.formOneRegister?.value?.lastTime,
+      })
+      .subscribe({
+        next: (response: any) => response,
+        error: (error) => error,
+      });
   }
 
-  submitFormTwoRegister():void{
-
+  submitFormTwoRegister(): void {
+    this.questionsService
+      .updateUserMenstruationQuestion({
+        lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
+      })
+      .subscribe({
+        next: (response: any) => response,
+        error: (error) => error,
+      });
   }
 
-  submitFormThreeRegister():void{
-    
+  submitFormThreeRegister(): void {
+    this.questionsService
+      .updateUserMenstruationQuestion({
+        regularCycleDuration:
+          this.formThreeRegister?.value?.regularCycleDuration,
+      })
+      .subscribe({
+        next: (response: any) => response,
+        error: (error) => error,
+      });
   }
 
-  submitFormFourRegister():void{
-    
+  submitFormFourRegister(): void {
+    this.questionsService
+      .updateUserMenstruationQuestion({
+        regular: this.formFourRegister?.value.regular === '1' ? true : false,
+      })
+      .subscribe({
+        next: (response: any) => response,
+        error: (error) => error,
+      });
   }
 
-  submitFormFiveRegister():void{
-    
+  submitFormFiveRegister(): void {
+    this.questionsService
+      .updateUserMenstruationQuestion({
+        bleedingDuration: this.formFourRegister?.value?.bleedingDuration,
+      })
+      .subscribe({
+        next: (response: any) => response,
+        error: (error) => error,
+      });
   }
 
   // registerBasicQuestions(): void {

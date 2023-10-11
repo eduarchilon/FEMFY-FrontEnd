@@ -17,8 +17,19 @@ export class QuestionService {
   createUserMenstruationQuestion(
     event: QuestionUserMenstruation
   ): Observable<any> {
-    console.log(event)
+    console.log(event);
     return this.http.post<any>(`${this.usersUrl}/createQuestion`, event).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  updateUserMenstruationQuestion(
+    event: QuestionUserMenstruation
+  ): Observable<any> {
+    console.log(event);
+    return this.http.put<any>(`${this.usersUrl}/updateQuestion`, event).pipe(
       map((response) => {
         return response;
       })

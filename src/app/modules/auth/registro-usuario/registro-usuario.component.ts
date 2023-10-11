@@ -44,33 +44,33 @@ export class RegistroUsuarioComponent {
           this.spinnerService.showProgressSpinner(this.spinnerConsumer);
           if (response) {
             this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
-            this.authService
-              .login(response?.userName, response?.password)
-              .subscribe({
-                next: (authenticatedUser: any) => {
-                  this.spinnerService.showProgressSpinner(this.spinnerConsumer);
-                  if (authenticatedUser) {
-                    this.spinnerService.hideProgressSpinner(
-                      this.spinnerConsumer
-                    );
-                    this.questionsService
-                      .createUserMenstruationQuestion({
-                        userId:
-                          this.localStorageService.getUserByLogin()?.idUser,
-                      })
-                      .subscribe({
-                        next: (response) => console.log(response),
-                        error: (error) => error,
-                      });
-                    this.router.navigate(['cuestionario']);
-                  } else {
-                    this.spinnerService.hideProgressSpinner(
-                      this.spinnerConsumer
-                    );
-                  }
-                },
-                error: (error) => error,
-              });
+            // this.authService
+            //   .login(response?.userName, response?.password)
+            //   .subscribe({
+            //     next: (authenticatedUser: any) => {
+            //       this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+            //       if (authenticatedUser) {
+            //         this.spinnerService.hideProgressSpinner(
+            //           this.spinnerConsumer
+            //         );
+            //         this.questionsService
+            //           .createUserMenstruationQuestion({
+            //             userId:
+            //               this.localStorageService.getUserByLogin()?.idUser,
+            //           })
+            //           .subscribe({
+            //             next: (response) => console.log(response),
+            //             error: (error) => error,
+            //           });
+            //         this.router.navigate(['cuestionario']);
+            //       } else {
+            //         this.spinnerService.hideProgressSpinner(
+            //           this.spinnerConsumer
+            //         );
+            //       }
+            //     },
+            //     error: (error) => error,
+            //   });
           } else {
             this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
           }
