@@ -1,6 +1,6 @@
 {
   "name": "Femfy",
-  "short_name": "<h1 style='font-size: 40px;'>Femfy</h1>",
+  "short_name": "Femfy",
   "theme_color": "#FEA8B1",
   "background_color": "#FEA8B1",
   "display": "standalone",
