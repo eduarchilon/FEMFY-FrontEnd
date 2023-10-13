@@ -12,11 +12,20 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { CommonsModule } from 'src/app/commons/commons.module';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
-  imports: [CommonModule, AuthRoutingModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    AuthRoutingModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    CommonsModule,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  providers: [SpinnerService, AuthService, CicleService],
+  providers: [SpinnerService, AuthService, CicleService, LoaderService],
 })
 export class AuthModule {}

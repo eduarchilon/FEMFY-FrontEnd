@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { UserLogin } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
@@ -16,13 +17,16 @@ export class LoginUsuarioComponent implements OnInit {
     userName: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
   });
-  
+
+  isUserNotFinded: boolean = false;
+
   spinnerConsumer: string = 'LoginUsuarioComponent';
 
   constructor(
     private authService: AuthService,
     private spinnerService: SpinnerService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {}
@@ -32,12 +36,13 @@ export class LoginUsuarioComponent implements OnInit {
       .login(this.formLogin?.value?.userName, this.formLogin?.value?.password)
       .subscribe({
         next: (authenticatedUser: any) => {
-          this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+          this.loaderService.showLoader();
           if (authenticatedUser) {
-            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+            this.loaderService.hideLoader();
             this.router.navigate(['/']);
           } else {
-            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+            this.loaderService.hideLoader();
+            this.isUserNotFinded = true;
           }
         },
         error: (error) => error,

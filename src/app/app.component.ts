@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { TokenSwPush } from './models/token-push.model';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from './services/notification/notification.service';
+import { LoaderService } from './services/loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +16,7 @@ export class AppComponent {
 
   constructor(
     private swPush: SwPush,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   ngOnInit(): void {

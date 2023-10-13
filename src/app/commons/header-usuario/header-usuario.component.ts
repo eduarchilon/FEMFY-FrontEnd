@@ -115,6 +115,8 @@ export class HeaderUsuarioComponent implements OnInit {
   logoutUser(): void {
     this.isLogging = false;
     this.authService.logoutUser();
-    this.router.navigate(['/']);
+    this.router.navigate(['/']).then(() => {
+      location.reload();
+    });
   }
 }
