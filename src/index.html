@@ -17,15 +17,17 @@
     />
     <link rel="manifest" href="manifest.webmanifest" />
     <meta name="theme-color" content="#FEA8B1" />
-    <link rel="manifest" href="manifest.webmanifest" />
   </head>
   <body>
     <app-root></app-root>
-    <div id="app-name">
-      <span style="font-weight: bold; font-size: 24px; color: #000000"
-        >femfy</span
-      >
-    </div>
+    <style>
+      .app-name {
+        font-family: "Raleway", system-ui, sans-serif;
+        font-size: 24px;
+        font-weight: bold;
+        color: black;
+      }
+    </style>
     <script>
       localStorage.removeItem("theme");
       localStorage.theme = "light";

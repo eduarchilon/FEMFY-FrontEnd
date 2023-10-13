@@ -1,5 +1,5 @@
 {
-  "name": "Femfy",
+  "name": "femfy",
   "short_name": "Femfy",
   "theme_color": "#FEA8B1",
   "background_color": "#FEA8B1",
@@ -55,5 +55,6 @@
       "type": "image/png",
       "purpose": "any"
     }
-  ]
+  ],
+  "name_class": "app-name"
 }
