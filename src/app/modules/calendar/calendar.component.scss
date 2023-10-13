@@ -24,32 +24,42 @@ button.example-custom-date-class-none {
   color: white;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #DA057A!important;
+  background-color: #da057a !important;
 }
 
-.mat-mdc-button .mdc-button__label{
+.mat-mdc-button .mdc-button__label {
   color: white;
 }
 
 .mat-calendar-arrow {
-  fill: white!important;
+  fill: white !important;
 }
 
-button.example-custom-date-class{
-  color: white!important;
-  background: #A35EDF!important;
+button.example-custom-date-class {
+  color: white !important;
+  background: #a35edf !important;
 }
 
-.mat-calendar-body-today:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-  border-color: #A35EDF!important;
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  border-color: #a35edf !important;
 }
 
-button.colores{
+button.colores {
   background-color: yellow !important;
 }
 
-.colores{
+.colores {
   background-color: yellow !important;
+}
+
+button.colores-next {
+  background-color: rgb(255, 31, 1) !important;
+}
+
+.colores-next {
+  background-color: rgb(255, 31, 1) !important;
 }
 // .mat-calendar-body-cell-content {
 //   top: 0% !important;

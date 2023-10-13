@@ -1,4 +1,7 @@
-<div #navBar class="py-4 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[5vw] w-[100vw] z-10">
+<div
+  #navBar
+  class="py-4 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[5vw] w-[100vw] z-10"
+>
   <nav class="flex justify-between items-center">
     <!--<a routerLink="" class="text-xl font-bold"></a>-->
     <div class="flex items-center gap-[10px] cursor-pointer" routerLink="">
@@ -11,53 +14,89 @@
       <mat-icon class="text-[2rem]">menu</mat-icon>
     </button>
     <div class="hidden lg:flex space-x-4 text-[20px]">
-      <a class="p-3" *ngFor="
+      <a
+        class="p-3"
+        *ngFor="
           let menu of filterMenuDesktop(
             isLogging ? menuLogueado : menuNoLogueado
           )
-        " routerLinkActive="text-white font-semibold bg-[#DA057A] rounded-full"
-        [routerLinkActiveOptions]="{ exact: true }" routerLink="{{ menu.path }}">{{ menu.label }}</a>
+        "
+        routerLinkActive="text-white font-semibold bg-[#DA057A] rounded-full"
+        [routerLinkActiveOptions]="{ exact: true }"
+        routerLink="{{ menu.path }}"
+        >{{ menu.label }}</a
+      >
       <ng-container *ngIf="isLogging">
-        <button class="m-auto rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px]" [matMenuTriggerFor]="menuProfileButton">
+        <button
+          class="m-auto rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px]"
+          [matMenuTriggerFor]="menuProfileButton"
+        >
           <img
             src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
-            class="m-auto w-[100%] h-[100%] object-cover rounded-full">
+            class="m-auto w-[100%] h-[100%] object-cover rounded-full"
+          />
         </button>
-        <mat-menu #menuProfileButton="matMenu" class="p-3">
+        <mat-menu #menuProfileButton="matMenu">
           <ng-container *ngFor="let item of menuProfile">
-            <button mat-menu-item routerLinkActive="text-[black] font-semibold"
-              [routerLinkActiveOptions]="{ exact: true }" routerLink="{{ item.path }}">
+            <button
+              class="px-3 py-2 hover:bg-black/5 w-[100%] text-left"
+              routerLinkActive="text-[black] font-semibold"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="{{ item.path }}"
+            >
               {{ item.label }}
             </button>
-            <mat-divider></mat-divider>
+            <div class="px-2">
+              <mat-divider></mat-divider>
+            </div>
           </ng-container>
-          <button (click)="logoutUser()">Cerrar sesión</button>
+          <button class="px-3 py-2 hover:bg-black/5 w-[100%] text-left" (click)="logoutUser()">
+            Cerrar sesión
+          </button>
         </mat-menu>
       </ng-container>
     </div>
   </nav>
 </div>
 
-<div #backdrop (click)="backdropView()" class="hidden fixed top-0 left-0 h-screen w-full bg-black opacity-50 z-10">
-</div>
+<div
+  #backdrop
+  (click)="backdropView()"
+  class="hidden fixed top-0 left-0 h-screen w-full bg-black opacity-50 z-10"
+></div>
 
-<div #drawer
-  class="bg-white fixed top-0 left-0 h-screen w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+<div
+  #drawer
+  class="bg-white fixed top-0 left-0 h-screen w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
+>
   <button class="absolute top-2 right-2 text-xl" (click)="closeDrawerButton()">
     <mat-icon class="text-[1rem] active:text-[1.5rem]">close</mat-icon>
   </button>
   <img
     src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
-    class="rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px] m-auto max-lg:hidden">
+    class="rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px] m-auto max-lg:hidden"
+  />
   <ul class="space-y-4 my-8 px-2">
-    <ng-container *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado">
+    <ng-container
+      *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
+    >
       <li>
-        <a class="text-[20px] font-semibold active:text-[22px]" (click)="handleRouter(menu.path)"
-          routerLink="{{ menu.path }}" routerLinkActive="text-[#FF97A5]" [routerLinkActiveOptions]="{ exact: true }">{{
-          menu.label }}</a>
+        <a
+          class="text-[20px] font-semibold active:text-[22px]"
+          (click)="handleRouter(menu.path)"
+          routerLink="{{ menu.path }}"
+          routerLinkActive="text-[#FF97A5]"
+          [routerLinkActiveOptions]="{ exact: true }"
+          >{{ menu.label }}</a
+        >
       </li>
       <mat-divider></mat-divider>
     </ng-container>
   </ul>
-  <button class="text-white font-semibold bg-[#DA057A] rounded-full w-full p-3 max-lg:hidden" (click)="logoutUser()">Cerrar sesión</button>
+  <button
+    class="text-white font-semibold bg-[#DA057A] rounded-full w-full p-3 max-lg:hidden"
+    (click)="logoutUser()"
+  >
+    Cerrar sesión
+  </button>
 </div>

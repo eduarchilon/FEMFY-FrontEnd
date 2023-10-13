@@ -13,12 +13,14 @@ import { LocalStorageService } from '../services/local-storage/local-storage.ser
 import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     HeaderUsuarioComponent,
     FooterUsuarioComponent,
     SpinnerComponent,
+    LoaderComponent,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,12 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     MatMenuModule,
   ],
-  exports: [HeaderUsuarioComponent, FooterUsuarioComponent, SpinnerComponent],
+  exports: [
+    HeaderUsuarioComponent,
+    FooterUsuarioComponent,
+    SpinnerComponent,
+    LoaderComponent,
+  ],
   providers: [AuthService, LocalStorageService],
 })
 export class CommonsModule {}

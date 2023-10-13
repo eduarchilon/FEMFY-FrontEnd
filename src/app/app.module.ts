@@ -27,6 +27,7 @@ import { ForumModule } from './modules/forum/forum.module';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { LoaderService } from './services/loader/loader.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,7 +56,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     StoreModule.forRoot(appStore),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
+  providers: [LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
 
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
