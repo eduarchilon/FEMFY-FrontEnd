@@ -1,16 +1,63 @@
-<div class="w-[100%] bg-cover bg-[#FEA8B1] pt-150 flex items-center text-white py-[100px]  px-[5vw]">
-
-  <div class="w-[50%] max-lg:w-[100%]  max-lg:px-[20%] max-md:px-[10%] max-sm:px-0">
-    <div class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[30px] pb-[100px]">
-      <img class="w-[100px] " src="./assets/images/isotipo.svg">
-      <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">¡Bienvenida!</h2>
-      <form class="flex flex-col gap-[14px] w-[100%]" [formGroup]="formRegister" (ngSubmit)="signupUser()">
-        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="text" placeholder="Nombre de usuario" formControlName="userName">
-        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="email" placeholder="Email" formControlName="email">
-        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="password" placeholder="Contraseña" formControlName="password">
-        <input class="rounded-[10px] py-[10px] px-[10px] text-black" type="password" placeholder="Repetir contraseña" formControlName="passwordRepeat">
-        <input class="rounded-[10px] py-[10px] px-[10px] text-slate-400" type="date" placeholder="Fecha de nacimiento" formControlName="birthdate">
-        <button class="bg-[#AF6FE8] rounded-[20px] py-[10px] " type="submit">Registrar</button>
+<div
+  class="w-[100%] bg-cover bg-[#FEA8B1] pt-150 flex items-center text-white py-[100px] px-[5vw]"
+>
+  <div
+    class="w-[50%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0"
+  >
+    <div
+      class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[30px] pb-[100px]"
+    >
+      <img class="w-[100px]" src="./assets/images/isotipo.svg" />
+      <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">
+        ¡Bienvenida!
+      </h2>
+      <div
+        class="py-5 text-[red] font-semibold text-center"
+        *ngIf="userNameFinded || emailFinded"
+      >
+        <p *ngIf="userNameFinded" class="pb-2">
+          El nombre de usuario ya existe.
+        </p>
+        <p *ngIf="emailFinded">El email ya posee una cuenta</p>
+      </div>
+      <form
+        class="flex flex-col gap-[14px] w-[100%]"
+        [formGroup]="formRegister"
+        (ngSubmit)="signupUser()"
+      >
+        <input
+          class="rounded-[10px] py-[10px] px-[10px] text-black"
+          type="text"
+          placeholder="Nombre de usuario"
+          formControlName="userName"
+        />
+        <input
+          class="rounded-[10px] py-[10px] px-[10px] text-black"
+          type="email"
+          placeholder="Email"
+          formControlName="email"
+        />
+        <input
+          class="rounded-[10px] py-[10px] px-[10px] text-black"
+          type="password"
+          placeholder="Contraseña"
+          formControlName="password"
+        />
+        <input
+          class="rounded-[10px] py-[10px] px-[10px] text-black"
+          type="password"
+          placeholder="Repetir contraseña"
+          formControlName="passwordRepeat"
+        />
+        <input
+          class="rounded-[10px] py-[10px] px-[10px] text-slate-400"
+          type="date"
+          placeholder="Fecha de nacimiento"
+          formControlName="birthdate"
+        />
+        <button class="bg-[#AF6FE8] rounded-[20px] py-[10px]" type="submit">
+          Registrar
+        </button>
       </form>
       <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
       <a routerLink="/login-usuario" class="text-white">Ingresar</a>
@@ -18,7 +65,11 @@
   </div>
 
   <div class="w-[50%] flex items-center flex-col max-lg:hidden">
-    <img class="w-[230px] " src="./assets/images/isotipo.svg">
-    <h1 class="text-[50px] max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center">Tu salud ginecológica en un solo lugar.</h1>
+    <img class="w-[230px]" src="./assets/images/isotipo.svg" />
+    <h1
+      class="text-[50px] max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center"
+    >
+      Tu salud ginecológica en un solo lugar.
+    </h1>
   </div>
 </div>

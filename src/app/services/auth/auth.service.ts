@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, of } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map, of, switchMap } from 'rxjs';
 import { UserRequest, UserResponse } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../local-storage/local-storage.service';
@@ -59,12 +59,34 @@ export class AuthService {
   }
 
   register(userRequest: UserRequest): Observable<any> {
-    return this.http
-      .post<UserRequest>(`${this.usersUrl}/createUser`, {
-        typeUserID: 1,
-        ...userRequest,
+    return this.getUsers().pipe(
+      map((data: any) => {
+        const existingUser = data.find((user: UserResponse) => {
+          return (
+            user?.userName === userRequest?.userName ||
+            user?.email === userRequest?.email
+          );
+        });
+
+        if (existingUser) {
+          if (existingUser.userName === userRequest.userName) {
+            return existingUser.userName; // Usuario con el mismo nombre de usuario
+          }
+
+          if (existingUser.email === userRequest.email) {
+            return existingUser.email; // Usuario con el mismo correo electrónico
+          }
+        } else {
+          // El usuario no existe, realizar el registro
+          return this.http
+            .post<UserRequest>(`${this.usersUrl}/createUser`, {
+              typeUserID: 1,
+              ...userRequest,
+            })
+            .pipe(map((response: any) => response));
+        }
       })
-      .pipe(map((response) => response));
+    );
   }
 
   loggingUser(): void {
@@ -77,9 +99,9 @@ export class AuthService {
     this.store.dispatch(setUserLogin({ user: null }));
   }
 
-  testLocalHostServer(): void {
-    this.http
-      .get<any[]>('http://localhost:8090/api/v1/user/getUsers')
-      .subscribe((data) => console.log('Funcionando', data));
-  }
+  // testLocalHostServer(): void {
+  //   this.http
+  //     .get<any[]>('http://localhost:8090/api/v1/user/getUsers')
+  //     .subscribe((data) => console.log('Funcionando', data));
+  // }
 }
