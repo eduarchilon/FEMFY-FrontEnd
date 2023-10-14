@@ -13,7 +13,6 @@ export interface UserResponse {
   avatar?: string;
   userName?: string;
   isSuscripto?: boolean;
-  id?: number;
   idUser?: number;
 }
 

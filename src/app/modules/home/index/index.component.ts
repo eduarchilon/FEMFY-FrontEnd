@@ -7,10 +7,11 @@ import { AgPolarChartOptions } from 'ag-charts-community';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { RegisterCicleComponent } from '../components/register-cicle/register-cicle.component';
 import { QuestionService } from 'src/app/services/question/question.service';
-import { Cycle } from 'src/app/models/cicle.model';
+import { Cycle, CycleHistorial } from 'src/app/models/cicle.model';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { constants } from 'src/app/constans/constants';
 
 @Component({
   selector: 'app-index',
@@ -23,7 +24,7 @@ export class IndexComponent implements OnInit {
   value = 50;
   bufferValue = 75;
   myCycle: QuestionUserMenstruation = {};
-  cycles: Cycle[] = [];
+  cycles: CycleHistorial[] = [];
 
   user!: any; //cambiar objeto
 
@@ -37,29 +38,43 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.questionsService
-      .getAllQuestionUserMenstruation()
-      .subscribe((data: any) => {
-        this.myCycle = data[0];
-        console.log(this.myCycle);
-      });
-    //cambiar
-    this.authService._userFinded.subscribe((user: any) => {
-      this.user = user;
-    });
-    this.cicleService
-      .getAllCycles(this.localStorageService.getUserByLogin()?.idUser)
-      .subscribe((data: any) => {
-        this.cycles = data;
-      });
+    const userId = this.localStorageService.getUserByLogin()?.idUser;
+    const initRegisterId = this.localStorageService.getLocalStorage(
+      constants.ID_REGISTER
+    );
+    if (initRegisterId) {
+      this.questionsService
+        .getAllQuestionUserMenstruation()
+        .subscribe((questions: QuestionUserMenstruation[] | any) => {
+          const questionsCycle = questions?.filter(
+            (question: QuestionUserMenstruation) => question?.userId === userId
+          );
+          this.cycles.push({
+            dateBeging: questionsCycle[0]?.lastTime,
+            dateEnd: questionsCycle[0]?.lastTime,
+            daysOfBleeding: questionsCycle[0]?.bleedingDuration,
+          });
+        });
+    } else {
+      this.cicleService
+        .getAllCycles(userId)
+        .subscribe((cycles: Cycle[] | any) => {
+          if (cycles?.length === 1) {
+            this.cycles = cycles?.slice(1);
+          } else {
+            this.cycles = cycles?.slice(1);
+          }
+        });
+    }
   }
 
   openCicleRegister(): void {
     const dialogRef = this.dialog.open(RegisterCicleComponent, {
       panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
     });
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+  }
+
+  setCycle(dateBeging: Date | any, bleedingDuration: number | any): string {
+    return '28';
   }
 }

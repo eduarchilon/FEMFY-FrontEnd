@@ -7,13 +7,20 @@
       </h1>
 
       <div class="mt-10">
-        <div class="bg-[#FACAEC] rounded-[20px] p-12 drop-shadow-xl flex flex-col items-center">
+        <div
+          class="bg-[#FACAEC] rounded-[20px] p-12 drop-shadow-xl flex flex-col items-center"
+        >
           <img class="w-[100px] mb-10" src="./assets/images/isotipo.svg" />
           <h2 class="text-[20px] font-bold text-center mb-10">
             <app-pregunta [preguntas]="preguntas"></app-pregunta>
           </h2>
 
-          <a routerLink="/calendario" class="text-lg text-medium text-[#DA057A] mt-2 hover:underline">Omitir todo.</a>
+          <button
+            (click)="omitBasicForm()"
+            class="text-lg text-medium text-[#DA057A] mt-2 hover:underline"
+          >
+            Omitir todo.
+          </button>
         </div>
       </div>
     </div>

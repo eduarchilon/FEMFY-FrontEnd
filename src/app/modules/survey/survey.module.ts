@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @NgModule({
   declarations: [SurveyComponent, PreguntaComponent],
@@ -25,5 +26,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
   ],
+  providers: [LocalStorageService],
 })
 export class SurveyModule {}
