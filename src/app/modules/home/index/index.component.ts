@@ -25,6 +25,9 @@ export class IndexComponent implements OnInit {
   bufferValue = 75;
   myCycle: QuestionUserMenstruation = {};
   cycles: CycleHistorial[] = [];
+  initRegisterId: number = this.localStorageService.getLocalStorage(
+    constants.ID_REGISTER
+  );
 
   user!: any; //cambiar objeto
 
@@ -39,10 +42,7 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
-    const initRegisterId = this.localStorageService.getLocalStorage(
-      constants.ID_REGISTER
-    );
-    if (initRegisterId) {
+    if (this.initRegisterId) {
       this.questionsService
         .getAllQuestionUserMenstruation()
         .subscribe((questions: QuestionUserMenstruation[] | any) => {

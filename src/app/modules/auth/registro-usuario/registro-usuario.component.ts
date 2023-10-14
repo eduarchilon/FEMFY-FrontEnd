@@ -91,7 +91,7 @@ export class RegistroUsuarioComponent implements OnInit {
                       .registerCycle({
                         idUser:
                           this.localStorageService.getUserByLogin()?.idUser,
-                        dateBeging: '',
+                        dateBeging: new Date(),
                         daysOfBleeding: 0,
                         status: '',
                       })
@@ -105,58 +105,6 @@ export class RegistroUsuarioComponent implements OnInit {
             },
           });
           this.loaderService.hideLoader();
-
-          //   // this.authService
-          //   //   .login(response?.userName, response?.password)
-          //   //   .subscribe({
-          //   //     next: (authenticatedUser: any) => {
-          //   //       this.spinnerService.showProgressSpinner(this.spinnerConsumer);
-          //   //       if (authenticatedUser) {
-          //   //         this.spinnerService.hideProgressSpinner(
-          //   //           this.spinnerConsumer
-          //   //         );
-          //   //         this.questionsService
-          //   //           .createUserMenstruationQuestion({
-          //   //             userId:
-          //   //               this.localStorageService.getUserByLogin()?.idUser,
-          //   //           })
-          //   //           .subscribe({
-          //   //             next: (response) => {
-          //   //               this.localStorageService.setKeyValueLocalStorage(
-          //   //                 constants.ID_REGISTER,
-          //   //                 response?.id
-          //   //               );
-          //   //               // this.cicleService
-          //   //               //   .registerCycle({
-          //   //               //     idUser: response?.userId,
-          //   //               //     dateBeging: new Date(),
-          //   //               //     daysOfBleeding: 0,
-          //   //               //     dateEnd: new Date(),
-          //   //               //     status: '',
-          //   //               //   })
-          //   //               //   .subscribe({
-          //   //               //     next: (response) => response,
-          //   //               //     error: (error) => error,
-          //   //               //   });
-          //   //               this.store.dispatch(
-          //   //                 setIdQuestionMenstruation({
-          //   //                   idQuestion: response?.id,
-          //   //                 })
-          //   //               );
-          //   //             },
-          //   //             error: (error) => error,
-          //   //           });
-          //   //         this.router.navigate(['cuestionario']);
-          //   //       } else {
-          //   //         this.spinnerService.hideProgressSpinner(
-          //   //           this.spinnerConsumer
-          //   //         );
-          //   //       }
-          //   //     },
-          //   //     error: (error) => error,
-          //   //   });
-          // } else {
-          //   this.loaderService.showLoader();
         },
         error: (error) => error,
       });
