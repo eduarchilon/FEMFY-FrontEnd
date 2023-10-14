@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Store } from '@ngrx/store';
-import { Cycle } from 'src/app/models/cicle.model';
+import { Cycle, CycleHistorial } from 'src/app/models/cicle.model';
 import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
@@ -13,6 +13,8 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
   styleUrls: ['./cicle-historial.component.scss'],
 })
 export class CicleHistorialComponent implements OnInit {
+  @Input() cycleHistorial: CycleHistorial[] = [];
+
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
@@ -26,11 +28,6 @@ export class CicleHistorialComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.idUser = data?.idUser;
-    });
-    this.cicleService
-      .getAllCycles(this.idUser)
-      .subscribe((data: Cycle[]) => (this.cycleContainer = data));
+    console.log(this.cycleHistorial);
   }
 }
