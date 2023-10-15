@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
@@ -21,6 +21,8 @@ import { QuestionService } from 'src/app/services/question/question.service';
   styleUrls: ['./pie-chart.component.scss'],
 })
 export class PieChartComponent implements OnInit {
+  @Input() cycles: Cycle[] = [];
+  cyclesLength!: number;
   //PIE-CHART
   options!: AgPolarChartOptions;
   sizeChart: number = 0;
@@ -36,11 +38,8 @@ export class PieChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.questionsService
-    //   .getAllQuestionUserMenstruation()
-    //   .subscribe((data: any) => {
-    //     console.log(data);
-    //   });
+    console.log(this.cycles);
+    this.cyclesLength = this.cycles.length;
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.idUser = data?.idUser;
     });
@@ -50,7 +49,6 @@ export class PieChartComponent implements OnInit {
     if (!this.cycleChart) {
       this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
         this.cycleChart = data[data?.length - 1];
-        console.log(data);
         chat12 = this.setPieChartContentData(this.cycleChart);
         chat13 = this.setPieContainerData(chat12, this.cycleChart);
         this.options = {
@@ -73,33 +71,6 @@ export class PieChartComponent implements OnInit {
         };
       });
     }
-    // this.store.select(selectCycle).subscribe((data: any) => {
-    //   console.log(data);
-
-    //   this.cycleChart = data?.cycle;
-
-    //   chat12 = this.setPieChartContentData(this.cycleChart);
-    //   chat13 = this.setPieContainerData(chat12, this.cycleChart);
-    //   this.options = {
-    //     width: this.getWindowSize(),
-    //     height: this.getWindowSize(),
-    //     autoSize: true,
-    //     padding: {
-    //       top: 5,
-    //       right: 5,
-    //       bottom: 5,
-    //       left: 5,
-    //     },
-    //     series: [chat12, chat13],
-    //     legend: {
-    //       enabled: false,
-    //     },
-    //     background: {
-    //       visible: false,
-    //     },
-    //   };
-    // });
-
     this.sizeChart = window.innerWidth;
   }
 
@@ -146,7 +117,7 @@ export class PieChartComponent implements OnInit {
       showInLegend: false,
       listeners: {
         nodeClick: (event: any) => {
-          this.router.navigate(['calendario']);
+          // this.router.navigate(['calendario']);
         },
       },
       sectorLabelKey: 'label',
@@ -227,7 +198,7 @@ export class PieChartComponent implements OnInit {
       innerRadiusRatio: 0.8,
       listeners: {
         nodeClick: (event: any) => {
-          this.router.navigate(['calendario']);
+          // this.router.navigate(['calendario']); //pie de numeros
         },
       },
       sectorLabelKey: 'id',
@@ -247,13 +218,13 @@ export class PieChartComponent implements OnInit {
             `<div style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;">`,
             datum['label'],
             `</div>`,
-            `<div style="padding: 4px 8px;">`,
-            `  <strong>Día ${datum.id}</strong>`,
+            `<div style="padding: 10px 8px;">`,
+            `  <strong class="flex justify-between"><p>Día ${datum.id}</p><a href="https://femfy-stage.vercel.app/calendario"><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
             `</div>`,
           ].join('\n');
         },
         interaction: {
-          enabled: false,
+          enabled: true,
         },
         showArrow: false,
       },

@@ -5,10 +5,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ForumComponent } from './forum.component';
 import { TopicComponent } from './topic/topic.component';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @NgModule({
   declarations: [ForumComponent, TopicComponent],
   imports: [CommonModule, BrowserModule, AppRoutingModule],
-  providers: [SpinnerService],
+  providers: [SpinnerService, LoaderService],
 })
 export class ForumModule {}

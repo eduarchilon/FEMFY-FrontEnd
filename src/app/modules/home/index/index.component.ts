@@ -42,30 +42,11 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
-    if (this.initRegisterId) {
-      this.questionsService
-        .getAllQuestionUserMenstruation()
-        .subscribe((questions: QuestionUserMenstruation[] | any) => {
-          const questionsCycle = questions?.filter(
-            (question: QuestionUserMenstruation) => question?.userId === userId
-          );
-          this.cycles.push({
-            dateBeging: questionsCycle[0]?.lastTime,
-            dateEnd: questionsCycle[0]?.lastTime,
-            daysOfBleeding: questionsCycle[0]?.bleedingDuration,
-          });
-        });
-    } else {
-      this.cicleService
-        .getAllCycles(userId)
-        .subscribe((cycles: Cycle[] | any) => {
-          if (cycles?.length === 1) {
-            this.cycles = cycles?.slice(1);
-          } else {
-            this.cycles = cycles?.slice(1);
-          }
-        });
-    }
+    this.cicleService.getAllCycles(userId).subscribe({
+      next: (cycles: Cycle[] | any[]) => {
+        this.cycles = [...cycles];
+      },
+    });
   }
 
   openCicleRegister(): void {

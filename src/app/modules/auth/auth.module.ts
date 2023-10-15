@@ -15,6 +15,7 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { CommonsModule } from 'src/app/commons/commons.module';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -26,6 +27,12 @@ import { CommonsModule } from 'src/app/commons/commons.module';
     CommonsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
-  providers: [SpinnerService, AuthService, CicleService, LoaderService],
+  providers: [
+    SpinnerService,
+    AuthService,
+    CicleService,
+    LoaderService,
+    NotificationService,
+  ],
 })
 export class AuthModule {}

@@ -21,6 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { CicleHistorialComponent } from './components/cicle-historial/cicle-historial.component';
 import { QuestionService } from 'src/app/services/question/question.service';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { QuestionService } from 'src/app/services/question/question.service';
     MatDialogModule,
     MatExpansionModule,
     ReactiveFormsModule,
+    MatMenuModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [
