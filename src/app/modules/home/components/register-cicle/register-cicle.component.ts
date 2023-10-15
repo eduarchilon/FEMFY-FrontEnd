@@ -68,9 +68,4 @@ export class RegisterCicleComponent implements OnInit {
       });
   }
 
-  // getRegoister(): void {
-  //   this.cicleService
-  //     .getCycle(this.idUser, '2023-10-07')
-  //     .subscribe((data: any) => console.log(data));
-  // }
 }

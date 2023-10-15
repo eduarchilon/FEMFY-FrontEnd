@@ -38,9 +38,13 @@ export const MENU_PROFILE: Menu[] = [
   {
     label: 'Ver perfil',
     path: 'perfil',
+    icon: 'person',
+    iconColor: 'primary',
   },
   {
     label: 'Suscripción',
     path: 'suscripcion',
+    icon: 'subscriptions',
+    iconColor: 'accent',
   },
 ];

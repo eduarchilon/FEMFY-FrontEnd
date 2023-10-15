@@ -1,6 +1,6 @@
 export interface Cycle {
   dateBeging?: Date | any | string;
-  dateEnd?: Date;
+  dateEnd?: Date| any | string;
   id?: number;
   idUser?: number;
   status?: string;

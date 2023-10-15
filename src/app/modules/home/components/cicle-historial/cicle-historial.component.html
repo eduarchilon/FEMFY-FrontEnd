@@ -1,9 +1,14 @@
 <div class="max-h-[500px] overflow-y-scroll pe-[20px]">
   <div>
-    <h5>Ciclo actual: 10 días</h5>
-    <span>Inicio 5 ago</span>
-    <br />
-    <br />
+    <h5 class="font-semibold text-white">
+      Ciclo actual: <span class="font-normal">{{ actualDaysCycle }} días</span>
+    </h5>
+    <h5 class="font-semibold text-white">
+      Inicio:
+      <span class="font-normal">{{
+        cycles[0].dateBeging | date : "dd MMM"
+      }}</span>
+    </h5>
     <mat-progress-bar
       [color]="color"
       [mode]="mode"
@@ -12,19 +17,37 @@
     >
     </mat-progress-bar>
   </div>
-  <ng-container *ngFor="let item of cycleContainer">
-    <div>
-      <h5>70 días</h5>
-      <span>21 jun - 5 ago</span>
-      <br />
-      <br />
-      <mat-progress-bar
-        [color]="color"
-        [mode]="mode"
-        [value]="value"
-        [bufferValue]="bufferValue"
-      >
-      </mat-progress-bar>
-    </div>
-  </ng-container>
+  <br />
+  <mat-divider></mat-divider>
+  <br />
+  <div class="flex flex-col gap-4">
+    <ng-container *ngFor="let item of cycleHistorial">
+      <div>
+        <h5 class="font-semibold">
+          Duración del ciclo:
+          <span class="font-normal"
+            >{{
+              calculateCycleDurantion(item.dateBeging, item.dateEnd)
+            }}
+            días</span
+          >
+        </h5>
+        <h5 class="font-semibold">
+          Fechas:
+          <span class="font-normal"
+            >{{ item.dateBeging | date : "dd MMM" }} al
+            {{ item.dateEnd | date : "dd MMM" }}</span
+          >
+        </h5>
+        <mat-progress-bar
+          [color]="color"
+          [mode]="mode"
+          [value]="value"
+          [bufferValue]="bufferValue"
+        >
+        </mat-progress-bar>
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </div>
 </div>

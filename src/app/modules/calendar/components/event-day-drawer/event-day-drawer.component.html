@@ -1,6 +1,8 @@
 <div class="w-[100%] p-5">
-  <div class="flex justify-start px-5">
-    <button (click)="closeDialog()" class="cursor-pointer">X</button>
+  <div class="flex justify-end px-5">
+    <button (click)="closeDialog()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
   <mat-dialog-content>
     <div class="pb-5">
@@ -24,14 +26,24 @@
           />
           <p>Hora seleccionada: {{ hourSelected }}</p>
         </div>
-        <input type="text" placeholder="Título" formControlName="title" class="border-b-2 text-lg mb-3 p-3" />
+        <input
+          type="text"
+          placeholder="Título"
+          formControlName="title"
+          class="border-b-2 text-lg mb-3 p-3"
+        />
         <textarea
           rows="4"
           class="bg-gray-100 text-lg text-dark !w-full p-3 rounded-[20px]"
           formControlName="description"
         ></textarea>
         <div>
-          <button class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px]" type="submit">Crear</button>
+          <button
+            class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px]"
+            type="submit"
+          >
+            Crear
+          </button>
         </div>
       </form>
     </div>
@@ -52,7 +64,12 @@
             </mat-expansion-panel-header>
             <div class="flex justify-between">
               <p>{{ item.description }}</p>
-              <p class="text-red-600 cursor-pointer"  (click)="deleteEvent(item)">Borrar</p>
+              <p
+                class="text-red-600 cursor-pointer"
+                (click)="deleteEvent(item)"
+              >
+                Borrar
+              </p>
             </div>
           </mat-expansion-panel>
         </ng-container>

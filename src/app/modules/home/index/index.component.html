@@ -3,11 +3,37 @@
     class="text-white flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
   >
     <div
-      class="max-lg:w-[100%] flex flex-col-reverse gap-[46px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
+      class="max-lg:w-[100%] flex flex-col gap-[30px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
     >
+      <div class="flex justify-end w-[100%]">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon color="primary">edit_road</mat-icon>
+            <span>Editar días de sangrado</span>
+          </button>
+          <div class="w-[100%] px-2">
+            <mat-divider></mat-divider>
+          </div>
+          <button mat-menu-item>
+            <mat-icon color="warn">delete</mat-icon>
+            <span>Eliminar ciclo</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div class="flex flex-col">
+        <span class="text-white text-center">Hoy es </span>
+        <span class="text-white text-center font-bold text-[30px]">
+          11 de Octubre</span
+        >
+      </div>
       <div class="flex flex-col items-center gap-[10px]">
         <div class="rounded-full bg-white mb-5">
-          <app-pie-chart></app-pie-chart>
+          <ng-container>
+            <app-pie-chart [cycles]="cycles"></app-pie-chart>
+          </ng-container>
         </div>
         <button
           class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
@@ -16,60 +42,23 @@
           Registrar período
         </button>
       </div>
-      <div class="flex flex-col">
-        <span class="text-white text-center">Hoy es </span>
-        <span class="text-white text-center font-bold text-[30px]">
-          11 de Octubre</span
-        >
-        <!-- <div
-          class="bg-[#FCF8F8] rounded-[20px] flex flex-col items-center gap-[15px] p-[15px]"
-        >
-          <span class="text-black text-center"
-            >Registrá tu estado de ánimo</span
-          >
-          <button
-            class="bg-[#AF6FE8] text-white flex items-center justify-center p-[20px] rounded-full"
-          >
-            <mat-icon>add</mat-icon>
-          </button>
-        </div>-->
-        <div></div>
-      </div>
     </div>
     <div
       class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
     >
-      <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
+      <div class="flex gap-10 w-[100%] text-black max-lg:flex-col h-[100%]">
         <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
           <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
             <h5
               class="p-[20px] text-white rounded-t-[20px] bg-[#DA047A] font-semibold text-[20px]"
             >
-              Mis ciclos
+              Recomendaciones
             </h5>
             <div class="p-[20px]">
-              <ng-container *ngIf="cycles[0]?.dateBeging">
-                <h5>
-                  Duración del ciclo anterior
-                  <i class="fa-solid fa-clock-rotate-left"></i>
-                </h5>
-                <span class="font-semibold"
-                  >{{
-                    setCycle(cycles[0].dateBeging, cycles[0].bleedingDuration)
-                  }}
-                  días</span
-                >
-              </ng-container>
-              <br />
-              <br />
-              <ng-container *ngIf="cycles[0]?.daysOfBleeding">
-                <h5>Duración del periodo anterior</h5>
-                <span class="font-semibold"
-                  >{{ cycles[0].daysOfBleeding }} días</span
-                >
-              </ng-container>
-              <br />
-              <br />
+              <h5>
+                Recomendaciones
+                <i class="fa-solid fa-clock-rotate-left"></i>
+              </h5>
             </div>
           </div>
           <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
@@ -79,12 +68,12 @@
               Historial de ciclos
             </h5>
             <div class="p-[20px] flex flex-col gap-[15px]">
-              <ng-container *ngIf="initRegisterId">
+              <ng-container *ngIf="cycles.length === 0">
                 <h5>Todavía no existen datos cargados.</h5>
               </ng-container>
-              <ng-container *ngIf="!initRegisterId && cycles.length > 0">
+              <ng-container *ngIf="cycles.length > 0">
                 <app-cicle-historial
-                  [cycleHistorial]="cycles"
+                  [cycles]="cycles"
                 ></app-cicle-historial>
               </ng-container>
             </div>

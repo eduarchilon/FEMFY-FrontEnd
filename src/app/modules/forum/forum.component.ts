@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class ForumComponent {
   constructor(
     private http: HttpClient,
     private spinnerService: SpinnerService,
-    private router: Router
+    private router: Router,
+    private loaderService: LoaderService
   ) {}
 
   spinnerConsumer: string = 'ForumComponent';
@@ -24,13 +26,12 @@ export class ForumComponent {
   ngOnInit() {
     this.getTopics().subscribe({
       next: (response: any) => {
-        console.log(response);
-        this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+        this.loaderService.showLoader();
         if (response) {
           this.topics = response;
-          this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+          this.loaderService.hideLoader();
         } else {
-          this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+          this.loaderService.hideLoader();
         }
       },
     });

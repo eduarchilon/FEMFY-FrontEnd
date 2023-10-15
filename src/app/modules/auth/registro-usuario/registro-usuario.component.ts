@@ -14,6 +14,11 @@ import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
+import { NotificationService } from 'src/app/services/notification/notification.service';
+import {
+  notificationKey,
+  notificationPayloadContent,
+} from 'src/app/models/notification.model';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -42,7 +47,8 @@ export class RegistroUsuarioComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
     private cicleService: CicleService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {}
@@ -68,13 +74,21 @@ export class RegistroUsuarioComponent implements OnInit {
             this.emailFinded = response;
             this.loaderService.hideLoader();
           }
-          response.subscribe({
+          response?.subscribe({
             next: (res: UserResponse | any) => {
               this.authService.login(res?.userName, res?.password).subscribe({
                 next: (userLogin: UserResponse | any) => {
                   this.loaderService.showLoader();
                   if (userLogin) {
                     this.loaderService.hideLoader();
+                    this.notificationService
+                      .enviarNotificacion(
+                        '¡Bienvenida a Femfy!',
+                        'Gracias por registrarte 😊'
+                      )
+                      .subscribe({
+                        next: (res: any) => res,
+                      });
                     this.router.navigate(['cuestionario']);
                     this.questionsService
                       .createUserMenstruationQuestion({

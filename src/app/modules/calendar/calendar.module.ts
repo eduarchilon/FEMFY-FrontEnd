@@ -32,6 +32,8 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -48,6 +50,8 @@ registerLocaleData(localeEs, 'es-ES');
     MatExpansionModule,
     StoreModule,
     ReactiveFormsModule,
+    MatIconModule,
+    MatButtonModule,
   ],
   exports: [],
   providers: [

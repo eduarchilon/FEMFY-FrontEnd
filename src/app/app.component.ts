@@ -3,6 +3,8 @@ import { TokenSwPush } from './models/token-push.model';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from './services/notification/notification.service';
 import { LoaderService } from './services/loader/loader.service';
+import { LocalStorageService } from './services/local-storage/local-storage.service';
+import { constants } from './constans/constants';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +19,7 @@ export class AppComponent {
   constructor(
     private swPush: SwPush,
     private notificationService: NotificationService,
+    private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
@@ -28,7 +31,14 @@ export class AppComponent {
       .requestSubscription({
         serverPublicKey: this.VAPID_PUBLIC_KEY,
       })
-      .then((res: any) => (this.respuesta = res))
-      .catch((err) => (this.respuesta = err));
+      .then((res: any) => {
+        this.respuesta = res;
+        this.localStorageService.deleteValue(constants.NOTIFICATION_KEY);
+        this.localStorageService.setKeyValueLocalStorage(
+          constants.NOTIFICATION_KEY,
+          JSON.stringify(this.respuesta)
+        );
+      })
+      .catch((err) => err);
   }
 }

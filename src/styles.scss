@@ -78,7 +78,6 @@ mat-dialog-content {
   box-shadow: unset !important;
 }
 
-
 /* Estilizar la barra de desplazamiento vertical */
 ::-webkit-scrollbar {
   width: 8px; /* Ancho de la barra de desplazamiento vertical */
@@ -97,4 +96,16 @@ mat-dialog-content {
 ::-webkit-scrollbar-thumb:horizontal {
   background-color: #4a90e2; /* Color del "pulgar" de la barra de desplazamiento horizontal */
   border-radius: 4px; /* Borde redondeado del "pulgar" */
+}
+
+.ag-chart-tooltip.ag-chart-tooltip-no-interaction,
+.ag-chart-tooltip {
+  z-index: 1 !important;
+  position: absolute !important;
+}
+
+.ag-chart-tooltip.ag-chart-tooltip-no-animation,
+.ag-chart-tooltip {
+  z-index: 1 !important;
+  position: absolute !important;
 }

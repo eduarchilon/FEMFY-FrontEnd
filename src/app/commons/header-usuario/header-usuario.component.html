@@ -39,18 +39,20 @@
         <mat-menu #menuProfileButton="matMenu">
           <ng-container *ngFor="let item of menuProfile">
             <button
-              class="px-3 py-2 hover:bg-black/5 w-[100%] text-left"
+              mat-menu-item
               routerLinkActive="text-[black] font-semibold"
               [routerLinkActiveOptions]="{ exact: true }"
               routerLink="{{ item.path }}"
             >
+              <mat-icon color="{{ item.iconColor }}">{{ item.icon }}</mat-icon>
               {{ item.label }}
             </button>
             <div class="px-2">
               <mat-divider></mat-divider>
             </div>
           </ng-container>
-          <button class="px-3 py-2 hover:bg-black/5 w-[100%] text-left" (click)="logoutUser()">
+          <button mat-menu-item (click)="logoutUser()">
+            <mat-icon color="warn">logout</mat-icon>
             Cerrar sesión
           </button>
         </mat-menu>
