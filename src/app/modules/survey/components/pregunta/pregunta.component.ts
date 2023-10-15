@@ -14,13 +14,19 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { QuestionService } from 'src/app/services/question/question.service';
 import { selectIdQuestionMenstruationFeature } from './../../../../redux/selectors/question.selector';
 import { constants } from 'src/app/constans/constants';
+import { SurveyComponent } from '../../survey.component';
 
 @Component({
   selector: 'app-pregunta',
   templateUrl: './pregunta.component.html',
   styleUrls: ['./pregunta.component.scss'],
 })
+
+
 export class PreguntaComponent implements OnInit {
+
+
+
   @Input() preguntas: string[] = [];
   indicePreguntaActual: number = 0;
   userResponse!: UserResponse;
@@ -51,7 +57,8 @@ export class PreguntaComponent implements OnInit {
     private router: Router,
     private questionsService: QuestionService,
     private store: Store<AppState>,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private surveyComponent: SurveyComponent
   ) {}
   ngOnInit(): void {
     this.store
@@ -143,4 +150,6 @@ export class PreguntaComponent implements OnInit {
   redirection(): void {
     this.router.navigate(['']);
   }
+
+
 }
