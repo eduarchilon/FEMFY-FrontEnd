@@ -3,7 +3,7 @@
     <div class="md:w-2/5 m-auto">
       <h1 class="text-4xl text-center font-bold">
         Ayudanos a personalizar tu experiencia respondiendo algunas preguntas
-        rápidas
+        rápidas.
       </h1>
 
       <div class="mt-10">
@@ -16,9 +16,9 @@
           </h2>
 
           <button
+            *ngIf="showSkipButton"
             (click)="omitBasicForm()"
-            class="text-lg text-medium text-[#DA057A] mt-2 hover:underline"
-          >
+            class="text-lg text-medium text-[#DA057A] mt-2 hover:underline">
             Omitir todo.
           </button>
         </div>

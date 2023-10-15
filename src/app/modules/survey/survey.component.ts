@@ -28,4 +28,10 @@ export class SurveyComponent {
     this.router.navigate(['']);
     // this.localStorageService.deleteValue(constants.ID_REGISTER);
   }
+
+  showSkipButton = false;
+
+  toggleSkipButtonVisibility(show: boolean) {
+    this.showSkipButton = show;
+  }
 }
