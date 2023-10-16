@@ -41,6 +41,8 @@ export class DatePickerComponent implements OnInit {
   initBleeding: moment.Moment | null = null;
   finishBleeding: moment.Moment | null = null;
 
+  eventsNotification: EventCalendar[] = [];
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -54,7 +56,6 @@ export class DatePickerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cdr.detectChanges();
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //Register Cycle
     this.cicleService
@@ -67,6 +68,7 @@ export class DatePickerComponent implements OnInit {
     this.calendarService
       .getEventsCalendar(userId)
       .subscribe((eventsCalendar: any[]) => {
+        this.eventsNotification = eventsCalendar;
         eventsCalendar
           ?.filter((item) => item?.idUser === userId)
           ?.forEach((event: any) =>
