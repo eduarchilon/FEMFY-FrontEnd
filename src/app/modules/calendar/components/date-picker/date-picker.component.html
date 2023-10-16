@@ -1,0 +1,12 @@
+<mat-card
+  *ngIf="daysSelected.length > 0"
+  class="demo-inline-calendar-card w-[600px] max-lg:w-[60%] max-lg:m-auto max-sm:w-[100%] !rounded-[20px] shadow-xl"
+>
+  <div (click)="$event.stopPropagation()">
+    <mat-calendar
+      #calendar
+      (selectedChange)="select($event, calendar); selectDate($event)"
+      [dateClass]="isSelected"
+    ></mat-calendar>
+  </div>
+</mat-card>

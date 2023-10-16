@@ -48,7 +48,11 @@ export class CicleService {
       );
   }
 
-  editCycle(cicle: Cycle): void {
-    console.log(cicle);
+  editCycle(cicle: Cycle): Observable<any> {
+    return this.http.put<any[]>(`${this.usersUrl}/updateCycle`, cicle).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 }

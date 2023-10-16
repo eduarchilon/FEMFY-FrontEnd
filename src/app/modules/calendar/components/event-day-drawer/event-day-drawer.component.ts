@@ -1,6 +1,17 @@
-import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Inject,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
@@ -11,6 +22,8 @@ import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { data } from 'src/app/constans/pie-chart-data';
+import { EventCalendar } from 'src/app/models/event-calendar.model';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-event-day-drawer',
@@ -22,6 +35,8 @@ export class EventDayDrawerComponent implements OnInit {
   userResponse!: UserResponse;
   hourSelected: string = '';
   eventDaySelected: any[] = []; // eventos por hora
+  eventsDayCalendar: EventCalendar[] = [];
+  selectedDates: Date[] = []; //Eventos de la fecha seleccionada
 
   formRegisterEvent: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
@@ -37,25 +52,48 @@ export class EventDayDrawerComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
     private spinnerService: SpinnerService,
+    private loaderService: LoaderService,
     private router: Router,
+    private changeDetectorRef: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: any //fecha
   ) {}
 
   ngOnInit(): void {
-    this.data?.events?.forEach((date: any) => {
-      date?.forEach((item: any) => {
-        if (moment(new Date(item.date)).date() === this.data?.data?.date()) {
-          this.eventDaySelected.push(item);
-        }
+    const userId = this.localStorageService.getUserByLogin()?.idUser;
+    //TODO: cambiar api para que se pueda buscar por idUser
+    this.calendarService
+      .getEventsCalendar(userId)
+      .subscribe((eventsCalendar: any[]) => {
+        //filtro por usuario
+        const eventsIdUser = eventsCalendar.filter(
+          (item) => item.idUser === userId
+        );
+        const arraysFiltrados: any = [];
+        const procedDates: any = [];
+        eventsIdUser?.forEach((event: any) => {
+          const dayEvent = event?.date;
+          if (!procedDates.includes(dayEvent)) {
+            const objetosConFecha = eventsIdUser.filter(
+              (obj) => obj.date === dayEvent
+            );
+            arraysFiltrados.push(objetosConFecha); //eventos filtrados
+            procedDates.push(dayEvent); // fechas procesadas osea no repetidas
+          }
+        });
+        this.eventsDayCalendar = arraysFiltrados;
+        this.eventsDayCalendar?.forEach((date: any) => {
+          //filtro por fecha
+          date?.forEach((item: any) => {
+            if (
+              moment(new Date(item.date)).date() ===
+              this.data?.daySelected?.date()
+            ) {
+              this.eventDaySelected.push(item);
+              console.log(this.eventDaySelected);
+            }
+          });
+        });
       });
-    });
-    console.log(this.eventDaySelected);
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.userResponse = data?.user;
-      if (!this.userResponse) {
-        this.userResponse = this.localStorageService.getUserByLogin();
-      }
-    });
   }
 
   setHourToShow(hour: string) {
@@ -68,24 +106,25 @@ export class EventDayDrawerComponent implements OnInit {
 
   registerEevent(): void {
     this.closeDialog();
+    this.loaderService.showLoader();
     this.calendarService
       .setEvent({
-        idUser: this.userResponse?.idUser,
+        idUser: this.localStorageService.getUserByLogin()?.idUser,
         description: this.formRegisterEvent?.value?.description,
         title: this.formRegisterEvent?.value?.title,
         hour: this.formRegisterEvent?.value?.hour,
-        date: this.data?.data,
+        date: this.data?.daySelected,
       })
       .subscribe({
         next: (response: any) => {
-          this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+          this.loaderService.showLoader();
           if (response) {
-            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
-            this.router.navigate(['/calendario']).then(() => {
-              location.reload();
-            });
+            this.loaderService.hideLoader();
+            // this.router.navigate(['/calendario']).then(() => {
+            //   location.reload();
+            // });
           } else {
-            this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
+            this.loaderService.hideLoader();
           }
         },
         error: (error) => error,
@@ -93,17 +132,18 @@ export class EventDayDrawerComponent implements OnInit {
   }
 
   deleteEvent(event: any): void {
-    this.closeDialog();
+    this.loaderService.showLoader();
     this.calendarService.deleteEeventCalendar(event?.id).subscribe({
       next: (response: any) => {
-        this.spinnerService.showProgressSpinner(this.spinnerConsumer);
+        this.loaderService.showLoader();
         if (response) {
-          this.spinnerService.hideProgressSpinner(this.spinnerConsumer);
-          this.router.navigate(['/calendario']).then(() => {
-            location.reload();
-          });
+          this.loaderService.hideLoader();
+          // this.router.navigate(['/calendario']).then(() => {
+          //   location.reload();
+          // });
         }
       },
     });
+    this.changeDetectorRef.detectChanges();
   }
 }
