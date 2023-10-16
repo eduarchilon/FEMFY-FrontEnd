@@ -102,11 +102,12 @@ export class RegistroUsuarioComponent implements OnInit {
                           question?.id
                         );
                       });
+                    //por defecto
                     this.cicleService
                       .registerCycle({
                         idUser:
                           this.localStorageService.getUserByLogin()?.idUser,
-                        dateBeging: new Date(), //por defecto
+                        dateBeging: new Date(),
                         daysOfBleeding: 0,
                         status: '',
                       })

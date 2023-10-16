@@ -17,7 +17,10 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventDayDrawerComponent } from '../event-day-drawer/event-day-drawer.component';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
-import { MatCalendar } from '@angular/material/datepicker';
+import { DateRange, MatCalendar } from '@angular/material/datepicker';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { selectDayInitialPeriod } from 'src/app/redux/selectors/calendar.selector';
+import { Cycle } from 'src/app/models/cicle.model';
 
 @Component({
   selector: 'app-date-picker',
@@ -31,6 +34,13 @@ export class DatePickerComponent implements OnInit {
   @ViewChild('date') date!: MatCalendar<Date>;
   @ViewChild('calendar') calendar!: MatCalendar<Date>;
 
+  @Input() cycle: Cycle | any | null = null;
+
+  initCycle: moment.Moment | null = null;
+  endCycle: moment.Moment | null = null;
+  initBleeding: moment.Moment | null = null;
+  finishBleeding: moment.Moment | null = null;
+
   constructor(
     private router: Router,
     public dialog: MatDialog,
@@ -39,11 +49,20 @@ export class DatePickerComponent implements OnInit {
     private store: Store<AppState>,
     private spinnerService: SpinnerService,
     private cicleService: CicleService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private loaderService: LoaderService
   ) {}
 
   ngOnInit(): void {
+    this.cdr.detectChanges();
     const userId = this.localStorageService.getUserByLogin()?.idUser;
+    //Register Cycle
+    this.cicleService
+      .getCycle(userId, this.cycle?.dateBeging)
+      .subscribe((res: any) => {
+        this.initCycle = moment(res?.dateBeging);
+      });
+
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
       .getEventsCalendar(userId)
@@ -53,23 +72,39 @@ export class DatePickerComponent implements OnInit {
           ?.forEach((event: any) =>
             this.daysSelected.push(moment(event?.date))
           );
-        this.daysSelected.push(moment(new Date(1992, 8, 15))); //TODO: habra fecha seteada del ciclo
+        this.daysSelected.push(
+          moment(this.localStorageService.getUserByLogin()?.birthdate) //ejemplo agregando el cumple no es evento
+        ); //TODO: habra fecha seteada del ciclo
       });
+    this.cdr.detectChanges();
   }
 
   isSelected = (event: any) => {
+    const index = this.daysSelected?.findIndex((date: any) =>
+      date?.isSame(this.initCycle)
+    );
+    //elimino la lista de eventos del inicio del ciclo para diferenciarlo
+    if (index !== -1) {
+      this.daysSelected?.splice(index, 1);
+    }
     const date = event as moment.Moment;
-    return this.daysSelected?.find((x) => x.isSame(date)) ? 'selected' : '';
+    return (
+      (this.daysSelected?.find((x) => x.isSame(date)) ? 'selected' : '') ||
+      (moment(this.initCycle)?.isSame(date) ? 'init-cycle' : '')
+    );
   };
 
   select(event?: any, calendar?: any): void {
-    const date: moment.Moment = event;
-    const index = this.daysSelected?.findIndex((x) => x.isSame(date));
-    if (index < 0) {
-      this.daysSelected?.push(date);
-    } else {
-      this.daysSelected?.splice(index, 1);
-    }
+    const eventFinded = this.daysSelected?.find((date: any) =>
+      date?.isSame(event)
+    );
+    // const date: moment.Moment = event;
+    // const index = this.daysSelected?.findIndex((x) => x.isSame(date));
+    // if (index < 0) {
+    //   this.daysSelected?.push(date);
+    // } else {
+    //   this.daysSelected?.splice(index, 1);
+    // }
     calendar?.updateTodaysDate();
   }
 

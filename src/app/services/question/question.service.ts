@@ -28,7 +28,6 @@ export class QuestionService {
   updateUserMenstruationQuestion(
     event: QuestionUserMenstruation
   ): Observable<any> {
-    console.log(event);
     return this.http.put<any>(`${this.usersUrl}/updateQuestion`, event).pipe(
       map((response) => {
         return response;

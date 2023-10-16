@@ -24,6 +24,14 @@ export class AppComponent {
 
   ngOnInit(): void {
     this.subscribeToNotifications();
+    setInterval(() => {
+      const ahora = new Date();
+      const horaActual = ahora.getHours();
+      const minutosActuales = ahora.getMinutes();
+      if (horaActual === 18 && minutosActuales === 24) {
+        this.mostrarMensaje();
+      }
+    }, 5000);
   }
 
   subscribeToNotifications(): void {
@@ -40,5 +48,9 @@ export class AppComponent {
         );
       })
       .catch((err) => err);
+  }
+
+  mostrarMensaje() {
+    console.log('¡Hola Mundo!');
   }
 }
