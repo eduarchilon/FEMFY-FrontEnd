@@ -34,10 +34,16 @@ import {
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
-  declarations: [CalendarComponent, EventDayDrawerComponent],
+  declarations: [
+    CalendarComponent,
+    EventDayDrawerComponent,
+    DatePickerComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,
@@ -67,6 +73,7 @@ registerLocaleData(localeEs, 'es-ES');
       deps: [MAT_DATE_LOCALE],
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
+    LoaderService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

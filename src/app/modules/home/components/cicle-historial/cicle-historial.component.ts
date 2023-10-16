@@ -16,14 +16,16 @@ import { calculateCycleDurantionWithDates } from 'src/app/utils/average-period.u
 export class CicleHistorialComponent implements OnInit {
   @Input() cycles: CycleHistorial[] = [];
 
-  color: ThemePalette = 'primary';
+  color: ThemePalette = 'warn';
   mode: ProgressBarMode = 'determinate';
   value = 50;
   bufferValue = 75;
   idUser!: number;
 
   cycleHistorial: Cycle[] = [];
+
   actualDaysCycle!: number;
+  actualDurationCycle!: Date;
 
   constructor(
     private store: Store<AppState>,
@@ -32,16 +34,14 @@ export class CicleHistorialComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualDaysCycle = calculateCycleDurantionWithDates(
-      new Date(this.cycles[0]?.dateBeging),
-      new Date(this.cycles[0]?.dateEnd)
+      new Date(this.cycles[this.cycles?.length - 1]?.dateBeging),
+      new Date(this.cycles[this.cycles?.length - 1]?.dateEnd)
     );
-    this.cycleHistorial = this.cycles.slice(1);
+    this.actualDurationCycle = this.cycles[this.cycles?.length - 1]?.dateBeging;
+    this.cycleHistorial = this.cycles?.slice(0, this.cycles?.length - 1);
   }
 
   calculateCycleDurantion(dateBeging: Date, dateEnd: Date): number {
-    return calculateCycleDurantionWithDates(
-      new Date(dateBeging),
-      new Date(dateEnd)
-    );
+    return calculateCycleDurantionWithDates(dateBeging, dateEnd);
   }
 }

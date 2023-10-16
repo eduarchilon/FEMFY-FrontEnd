@@ -11,6 +11,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 
 @NgModule({
   declarations: [SurveyComponent, PreguntaComponent],
@@ -26,6 +27,6 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
     MatFormFieldModule,
     MatInputModule,
   ],
-  providers: [LocalStorageService],
+  providers: [LocalStorageService, CicleService],
 })
 export class SurveyModule {}

@@ -6,7 +6,7 @@
     <h5 class="font-semibold text-white">
       Inicio:
       <span class="font-normal">{{
-        cycles[0].dateBeging | date : "dd MMM"
+        actualDurationCycle | date : "dd MMM"
       }}</span>
     </h5>
     <mat-progress-bar
@@ -40,7 +40,7 @@
           >
         </h5>
         <mat-progress-bar
-          [color]="color"
+          [color]="'primary'"
           [mode]="mode"
           [value]="value"
           [bufferValue]="bufferValue"

@@ -19,6 +19,7 @@ import {
   notificationKey,
   notificationPayloadContent,
 } from 'src/app/models/notification.model';
+import { Cycle } from 'src/app/models/cicle.model';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -105,13 +106,15 @@ export class RegistroUsuarioComponent implements OnInit {
                       .registerCycle({
                         idUser:
                           this.localStorageService.getUserByLogin()?.idUser,
-                        dateBeging: new Date(),
+                        dateBeging: new Date(), //por defecto
                         daysOfBleeding: 0,
                         status: '',
                       })
-                      .subscribe({
-                        next: (response) => console.log(response),
-                        error: (error) => error,
+                      .subscribe((cycle: Cycle | any) => {
+                        this.localStorageService.setKeyValueLocalStorage(
+                          constants.ID_FIRST_CYCLE,
+                          cycle?.id
+                        );
                       });
                   }
                 },

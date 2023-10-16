@@ -8,7 +8,7 @@
     <div class="pb-5">
       <h3 class="text-4xl font-semibold mb-5">Crear nuevo evento</h3>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
-      <!-- <h5 class="py-5">Fecha: {{ data | date : "dd/MM/yyyy" }}</h5> -->
+      <h5 class="py-5">Fecha: {{ data?.daySelected | date : "dd MMM" }}</h5>
       <form
         action=""
         class="flex flex-col gap-4"

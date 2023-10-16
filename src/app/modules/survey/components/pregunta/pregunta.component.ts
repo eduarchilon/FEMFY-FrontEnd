@@ -15,18 +15,14 @@ import { QuestionService } from 'src/app/services/question/question.service';
 import { selectIdQuestionMenstruationFeature } from './../../../../redux/selectors/question.selector';
 import { constants } from 'src/app/constans/constants';
 import { SurveyComponent } from '../../survey.component';
+import { CicleService } from 'src/app/services/cicle/cicle.service';
 
 @Component({
   selector: 'app-pregunta',
   templateUrl: './pregunta.component.html',
   styleUrls: ['./pregunta.component.scss'],
 })
-
-
 export class PreguntaComponent implements OnInit {
-
-
-
   @Input() preguntas: string[] = [];
   indicePreguntaActual: number = 0;
   userResponse!: UserResponse;
@@ -58,7 +54,8 @@ export class PreguntaComponent implements OnInit {
     private questionsService: QuestionService,
     private store: Store<AppState>,
     private localStorageService: LocalStorageService,
-    private surveyComponent: SurveyComponent
+    private surveyComponent: SurveyComponent,
+    private cycleServie: CicleService
   ) {}
   ngOnInit(): void {
     this.store
@@ -87,7 +84,20 @@ export class PreguntaComponent implements OnInit {
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
-        next: (response: any) => response,
+        next: (response: any) => {
+          this.cycleServie
+            .editCycle({
+              dateBeging: this.formOneRegister?.value?.lastTime,
+              dateEnd: this.formOneRegister?.value?.lastTime,
+              daysOfBleeding: 7,
+              id: this.localStorageService.parseLocalStorage(
+                constants.ID_FIRST_CYCLE
+              ),
+              idUser: this.localStorageService.getUserByLogin()?.idUser,
+              status: '',
+            })
+            .subscribe((res) => console.log(res));
+        },
         error: (error) => error,
       });
   }
@@ -150,6 +160,4 @@ export class PreguntaComponent implements OnInit {
   redirection(): void {
     this.router.navigate(['']);
   }
-
-
 }
