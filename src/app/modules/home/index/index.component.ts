@@ -24,12 +24,13 @@ export class IndexComponent implements OnInit {
   value = 50;
   bufferValue = 75;
   myCycle: QuestionUserMenstruation = {};
+
+  cycleChart!: Cycle;
+
   cycles: CycleHistorial[] = [];
   initRegisterId: number = this.localStorageService.getLocalStorage(
     constants.ID_REGISTER
   );
-
-  user!: any; //cambiar objeto
 
   constructor(
     private router: Router,
@@ -42,10 +43,9 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
-    this.cicleService.getAllCycles(userId).subscribe({
-      next: (cycles: Cycle[] | any[]) => {
-        this.cycles = [...cycles];
-      },
+    this.cicleService.getAllCycles(userId).subscribe((data: any) => {
+      this.cycles = [...data];
+      this.cycleChart = this.cycles[this.cycles?.length - 1];
     });
   }
 
@@ -57,5 +57,20 @@ export class IndexComponent implements OnInit {
 
   setCycle(dateBeging: Date | any, bleedingDuration: number | any): string {
     return '28';
+  }
+
+  finishActualCicle(cycleChart: Cycle): void {
+    console.log(cycleChart);
+  }
+
+  editActualCycle(cycleChart: Cycle): void {
+    console.log(cycleChart);
+    // this.cicleService.editCycle({}).subscribe({
+    //   next: (res: any) => res,
+    // });
+  }
+
+  deleteActualCycle(cycleChart: Cycle): void {
+    console.log(cycleChart);
   }
 }

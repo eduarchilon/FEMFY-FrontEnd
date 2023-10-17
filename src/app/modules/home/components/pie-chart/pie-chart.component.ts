@@ -2,18 +2,15 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
-import { data, dataChildren } from 'src/app/constans/pie-chart-data';
+import { dataChildren } from 'src/app/constans/pie-chart-data';
 import { Cycle } from 'src/app/models/cicle.model';
 import {
   DataPieChart,
   DataPieChartChildren,
 } from 'src/app/models/data-pie-chart';
-import { setCycle } from 'src/app/redux/actions/cycle.action';
-import { selectCycle } from 'src/app/redux/selectors/cycle.selctor';
-import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
-import { QuestionService } from 'src/app/services/question/question.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -28,48 +25,40 @@ export class PieChartComponent implements OnInit {
   sizeChart: number = 0;
   dateBegind!: Date;
   cycleChart!: Cycle;
-  idUser!: number;
 
   constructor(
     private store: Store<AppState>,
     private cicleService: CicleService,
-    private questionsService: QuestionService,
+    private localStorageService: LocalStorageService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cycles);
-    this.cyclesLength = this.cycles.length;
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.idUser = data?.idUser;
-    });
-
+    const userId = this.localStorageService.getUserByLogin()?.idUser;
     let chat12: AgPolarSeriesOptions = {};
     let chat13: AgPolarSeriesOptions = {};
     if (!this.cycleChart) {
-      this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
-        this.cycleChart = data[data?.length - 1];
-        chat12 = this.setPieChartContentData(this.cycleChart);
-        chat13 = this.setPieContainerData(chat12, this.cycleChart);
-        this.options = {
-          width: this.getWindowSize(),
-          height: this.getWindowSize(),
-          autoSize: true,
-          padding: {
-            top: 5,
-            right: 5,
-            bottom: 5,
-            left: 5,
-          },
-          series: [chat12, chat13],
-          legend: {
-            enabled: false,
-          },
-          background: {
-            visible: false,
-          },
-        };
-      });
+      this.cycleChart = this.cycles[this.cycles?.length - 1];
+      chat12 = this.setPieChartContentData(this.cycleChart);
+      chat13 = this.setPieContainerData(chat12, this.cycleChart);
+      this.options = {
+        width: this.getWindowSize(),
+        height: this.getWindowSize(),
+        autoSize: true,
+        padding: {
+          top: 5,
+          right: 5,
+          bottom: 5,
+          left: 5,
+        },
+        series: [chat12, chat13],
+        legend: {
+          enabled: false,
+        },
+        background: {
+          visible: false,
+        },
+      };
     }
     this.sizeChart = window.innerWidth;
   }
