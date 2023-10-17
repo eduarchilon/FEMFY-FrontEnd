@@ -37,8 +37,9 @@ export class PieChartComponent implements OnInit {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     let chat12: AgPolarSeriesOptions = {};
     let chat13: AgPolarSeriesOptions = {};
-    if (!this.cycleChart) {
+    if (this.cycles) {
       this.cycleChart = this.cycles[this.cycles?.length - 1];
+      console.log(this.cycles)
       chat12 = this.setPieChartContentData(this.cycleChart);
       chat13 = this.setPieContainerData(chat12, this.cycleChart);
       this.options = {
@@ -94,7 +95,7 @@ export class PieChartComponent implements OnInit {
       },
       {
         id: 4,
-        dayCount: 10,
+        dayCount: 20,
         label: '2do. Periodo seguro',
         color: '#bfdbfe',
       },
