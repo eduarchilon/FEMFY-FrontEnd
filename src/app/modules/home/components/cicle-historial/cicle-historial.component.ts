@@ -32,7 +32,9 @@ export class CicleHistorialComponent implements OnInit {
 
   ngOnInit(): void {
     this.actualDurationCycle = this.cycles[this.cycles?.length - 1]?.dateBeging;
-    this.cycleHistorial = this.cycles?.slice(0, this.cycles?.length - 1);
+    this.cycleHistorial = this.cycles.filter(
+      (objet: any) => objet?.dateEnd !== null
+    );
   }
 
   calculateCycleDurantion(dateBeging: Date, dateEnd: Date): number {

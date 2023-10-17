@@ -55,4 +55,8 @@ export class CicleService {
       })
     );
   }
+
+  deleteCycle(idCycle: any): Observable<any> {
+    return this.http.delete(`${this.usersUrl}/delete/${idCycle}`);
+  }
 }

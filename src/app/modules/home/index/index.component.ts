@@ -12,6 +12,9 @@ import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { constants } from 'src/app/constans/constants';
+import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.component';
+import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
+import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
 
 @Component({
   selector: 'app-index',
@@ -60,17 +63,29 @@ export class IndexComponent implements OnInit {
   }
 
   finishActualCicle(cycleChart: Cycle): void {
-    console.log(cycleChart);
+    const dialogRef = this.dialog.open(FinishCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
   }
 
   editActualCycle(cycleChart: Cycle): void {
-    console.log(cycleChart);
-    // this.cicleService.editCycle({}).subscribe({
-    //   next: (res: any) => res,
-    // });
+    const dialogRef = this.dialog.open(EditCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
   }
 
   deleteActualCycle(cycleChart: Cycle): void {
-    console.log(cycleChart);
+    const dialogRef = this.dialog.open(DeleteCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
   }
 }

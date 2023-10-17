@@ -35,7 +35,7 @@
             <app-pie-chart [cycles]="cycles"></app-pie-chart>
           </ng-container>
         </div>
-        <ng-container *ngIf="cycleChart">
+        <ng-container>
           <button
             class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
             (click)="finishActualCicle(cycleChart)"
@@ -43,12 +43,12 @@
             Finalizar ciclo actual
           </button>
         </ng-container>
-        <ng-container *ngIf="!cycleChart">
+        <ng-container>
           <button
             class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
             (click)="openCicleRegister()"
           >
-            Registrar período
+            Registrar nuevo ciclo
           </button>
         </ng-container>
       </div>

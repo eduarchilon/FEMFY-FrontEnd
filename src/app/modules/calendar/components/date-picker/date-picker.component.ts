@@ -59,8 +59,10 @@ export class DatePickerComponent implements OnInit {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //Register Cycle
     this.cicleService
-      .getCycle(userId, this.cycle?.dateBeging)
+      .getCycle(userId, this.cycle?.dateBeging) //TODO: ojo con la fecha no es igual al valor que tiene java
       .subscribe((res: any) => {
+        console.log(res);
+        
         this.initCycle = moment(res?.dateBeging);
       });
 
