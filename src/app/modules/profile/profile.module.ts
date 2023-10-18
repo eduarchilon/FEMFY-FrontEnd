@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ProfileComponent } from './profile.component';
 import { FormsModule } from '@angular/forms'; // Import FormsModule
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { ReactiveFormsModule } from '@angular/forms'
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { StoreModule } from '@ngrx/store';
 
@@ -15,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
     FormsModule,
     BrowserModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     StoreModule
   ],
   providers:[AuthService, LocalStorageService]
