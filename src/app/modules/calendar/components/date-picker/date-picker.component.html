@@ -10,3 +10,13 @@
     ></mat-calendar>
   </div>
 </mat-card>
+<ng-container *ngIf="eventsNotification.length > 0">
+  <app-events-notification
+    [events]="eventsNotification"
+  ></app-events-notification>
+</ng-container>
+<ng-container *ngIf="daysSelected.length <= 0">
+  <div class="flex justify-center items-center w-[100%] h-[100%]">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>

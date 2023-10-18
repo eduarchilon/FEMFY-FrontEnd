@@ -8,7 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { constants } from 'src/app/constans/constants';
 import {
@@ -47,6 +47,7 @@ export class HeaderUsuarioComponent implements OnInit {
   userResponse!: UserResponse;
   userStorage!: UserResponse;
   isLogging: boolean = false;
+  isSurveyInit = false;
 
   ngOnInit(): void {
     this.store.select(selectUserLogin).subscribe((data: any) => {
@@ -55,6 +56,16 @@ export class HeaderUsuarioComponent implements OnInit {
         this.userResponse = this.localStorageService.getUserByLogin();
       }
       this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.router.url === '/cuestionario') {
+          this.isSurveyInit = true;
+        } else {
+          this.isSurveyInit = false;
+        }
+      }
     });
     // this.userStorage = this.userResponse
     //   ? this.userResponse

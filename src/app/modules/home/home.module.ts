@@ -22,6 +22,9 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { CicleHistorialComponent } from './components/cicle-historial/cicle-historial.component';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { MatMenuModule } from '@angular/material/menu';
+import { EditCycleComponent } from './components/edit-cycle/edit-cycle.component';
+import { DeleteCycleComponent } from './components/delete-cycle/delete-cycle.component';
+import { FinishCycleComponent } from './components/finish-cycle/finish-cycle.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +34,9 @@ import { MatMenuModule } from '@angular/material/menu';
     PieChartComponent,
     RegisterCicleComponent,
     CicleHistorialComponent,
+    EditCycleComponent,
+    DeleteCycleComponent,
+    FinishCycleComponent,
   ],
   imports: [
     CommonModule,

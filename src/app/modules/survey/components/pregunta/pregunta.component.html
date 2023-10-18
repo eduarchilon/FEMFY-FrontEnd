@@ -1,43 +1,47 @@
-<!-- <form class="flex flex-col gap-[14px] w-[100%]">
-  <mat-radio-group
-    class="flex flex-col w-48 m-auto mb-5"
-    aria-label="Select an option"
-  >
-    <mat-radio-button value="1">Si</mat-radio-button>
-    <mat-radio-button value="2">No</mat-radio-button>
-  </mat-radio-group>
-
-  <button
-    (click)="mostrarSiguientePregunta()"
-    class="bg-[#A35EDF] rounded-[20px] py-[10px] w-48 m-auto mb-3"
-    type="submit"
-  >
-    Siguiente
-  </button>
-</form> -->
-
 <div class="m-auto">
   <mat-stepper #stepper>
     <mat-step>
       <p class="text-2xl text-black !my-5">
         ¿Ya tuviste tu primera menstruación?
       </p>
-      <mat-radio-group class="flex flex-col w-48 m-auto mb-5" aria-label="Select an option">
-        <mat-radio-button value="1" (click)="stepper.next()">Si</mat-radio-button>
-        <mat-radio-button value="2" (click)="redirection()">No</mat-radio-button>
+      <mat-radio-group
+        class="flex flex-col w-48 m-auto mb-5"
+        aria-label="Select an option"
+      >
+        <mat-radio-button class="text-center" value="1" (click)="stepper.next()"
+          >Si</mat-radio-button
+        >
+        <mat-radio-button class="text-center" value="2" (click)="redirection()"
+          >No</mat-radio-button
+        >
       </mat-radio-group>
     </mat-step>
-    <mat-step >
+    <mat-step>
       <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
         <p class="text-2xl text-black !my-5">
           ¿Qué día fue tu última menstruación?
         </p>
-        <input matInput type="date" class="text-gray-500 rounded-full p-3 mb-5" formControlName="lastTime"/>
+        <input
+          matInput
+          type="date"
+          class="text-gray-500 rounded-full p-3 mb-5"
+          formControlName="lastTime"
+        />
         <div>
-          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">
+          <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
             Volver
           </button>
-          <button mat-button matStepperNext [disabled]="!formOneRegister.valid" type="submit" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+          <button
+            mat-button
+            matStepperNext
+            [disabled]="!formOneRegister.valid"
+            type="submit"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+          >
             Siguiente
           </button>
         </div>
@@ -46,67 +50,128 @@
     <mat-step>
       <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
         <p class="text-2xl text-black !my-5">
-          ¿Qué duración tuvo tu último período?
+          ¿Qué duración tuvo aproximadamente ese último ciclo?
         </p>
-        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="lastCycleDuration"/>
+        <input
+          type="number"
+          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+          formControlName="lastCycleDuration"
+        />
         <span class="text-gray-500">Días</span>
         <div>
-          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">
+          <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
             Volver
           </button>
-          <button mat-button matStepperNext type="submit" [disabled]="!formTwoRegister.valid" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+          <button
+            mat-button
+            matStepperNext
+            type="submit"
+            [disabled]="!formTwoRegister.valid"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+          >
             Siguiente
           </button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formFourRegister" (ngSubmit)="submitFormFourRegister()">
+      <form
+        [formGroup]="formFourRegister"
+        (ngSubmit)="submitFormFourRegister()"
+      >
         <p class="text-2xl text-black !my-5">¿Sos Regular?</p>
-        <mat-radio-group class="flex flex-col w-48 m-auto mb-5" aria-label="Select an option" formControlName="regular">
+        <mat-radio-group
+          class="flex flex-col w-48 m-auto mb-5"
+          aria-label="Select an option"
+          formControlName="regular"
+        >
           <mat-radio-button value="1">Si</mat-radio-button>
           <mat-radio-button value="2">No</mat-radio-button>
         </mat-radio-group>
         <div>
-          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">
+          <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
             Volver
           </button>
-          <button mat-button matStepperNext type="submit" [disabled]="!formFourRegister.valid" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+          <button
+            mat-button
+            matStepperNext
+            type="submit"
+            [disabled]="!formFourRegister.valid"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+          >
             Siguiente
           </button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formThreeRegister" (ngSubmit)="submitFormThreeRegister()">
+      <form
+        [formGroup]="formThreeRegister"
+        (ngSubmit)="submitFormThreeRegister()"
+      >
         <p class="text-2xl text-black !my-5">
-          ¿Qué duración tuvo ese último ciclo regular?
+          ¿Qué duración tienen regularmente tu ciclos?
         </p>
-        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="regularCycleDuration"/>
+        <input
+          type="number"
+          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+          formControlName="regularCycleDuration"
+        />
         <span class="text-gray-500">Días</span>
         <div>
-          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">
+          <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
             Volver
           </button>
-          <button mat-button matStepperNext type="submit" [disabled]="!formThreeRegister.valid" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+          <button
+            mat-button
+            matStepperNext
+            type="submit"
+            [disabled]="!formThreeRegister.valid"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+          >
             Siguiente
           </button>
         </div>
       </form>
     </mat-step>
     <mat-step>
-      <form [formGroup]="formFiveRegister" (ngSubmit)="submitFormFiveRegister()">
+      <form
+        [formGroup]="formFiveRegister"
+        (ngSubmit)="submitFormFiveRegister()"
+      >
         <p class="text-2xl text-black !my-5">¿Qué duración tuvo el sangrado?</p>
-        <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="bleedingDuration"/>
+        <input
+          type="number"
+          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+          formControlName="bleedingDuration"
+        />
         <span class="text-gray-500">Días</span>
         <div class="my-5">
-          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3">
+          <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
             Volver
           </button>
-          <button mat-button type="submit" [disabled]="!formFiveRegister.valid" class="!text-white !rounded-full !bg-[#AF6FE8] !p-5">
+          <button
+            mat-button
+            type="submit"
+            [disabled]="!formFiveRegister.valid"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+          >
             Finalizar
           </button>
         </div>

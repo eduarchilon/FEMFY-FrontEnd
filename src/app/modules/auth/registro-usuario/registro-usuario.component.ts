@@ -15,11 +15,18 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import {
-  notificationKey,
-  notificationPayloadContent,
-} from 'src/app/models/notification.model';
+import { notificationPayloadContent } from 'src/app/models/notification.model';
 import { Cycle } from 'src/app/models/cicle.model';
+import {
+  FormGroupDirective,
+  NgForm,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { NgIf } from '@angular/common';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -32,7 +39,7 @@ export class RegistroUsuarioComponent implements OnInit {
     password: new FormControl('', Validators.required),
     passwordRepeat: new FormControl('', Validators.required),
     birthdate: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
+    email: new FormControl('', [Validators.required, Validators.email]),
   });
 
   spinnerConsumer: string = 'RegistroUsuarioComponent';
@@ -53,77 +60,101 @@ export class RegistroUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
-
   signupUser(): void {
     this.userNameFinded = '';
     this.emailFinded = '';
-    this.authService
-      .register({
-        userName: this.formRegister?.value?.userName,
-        password: this.formRegister?.value?.password,
-        birthdate: this.formRegister?.value?.birthdate,
-        email: this.formRegister?.value?.email,
-      })
-      .subscribe({
-        next: (response: Observable<any> | any) => {
-          this.loaderService.showLoader();
-          if (response === this.formRegister?.value?.userName) {
-            this.userNameFinded = response;
-            this.loaderService.hideLoader();
-          }
-          if (response === this.formRegister?.value?.email) {
-            this.emailFinded = response;
-            this.loaderService.hideLoader();
-          }
-          response?.subscribe({
-            next: (res: UserResponse | any) => {
-              this.authService.login(res?.userName, res?.password).subscribe({
-                next: (userLogin: UserResponse | any) => {
-                  this.loaderService.showLoader();
-                  if (userLogin) {
-                    this.loaderService.hideLoader();
-                    this.notificationService
-                      .enviarNotificacion(
-                        '¡Bienvenida a Femfy!',
-                        'Gracias por registrarte 😊'
-                      )
-                      .subscribe({
-                        next: (res: any) => res,
-                      });
-                    this.router.navigate(['cuestionario']);
-                    this.questionsService
-                      .createUserMenstruationQuestion({
-                        userId:
-                          this.localStorageService.getUserByLogin()?.idUser,
-                      })
-                      .subscribe((question: QuestionUserMenstruation | any) => {
-                        this.localStorageService.setKeyValueLocalStorage(
-                          constants.ID_REGISTER,
-                          question?.id
+
+    if (this.formRegister.invalid) {
+      this.formRegister.markAsTouched();
+    } else {
+      // Validar contraseñas que no coinciden
+      const password = this.formRegister.get('password')?.value;
+      const passwordRepeat = this.formRegister.get('passwordRepeat')?.value;
+      if (password !== passwordRepeat) {
+        // Las contraseñas no coinciden, muestra un mensaje de error y detén el registro
+        console.log('Las contraseñas no coinciden');
+        return;
+      }
+
+      // Validar fecha de nacimiento mayor que el día de hoy
+      const birthdate = new Date(this.formRegister.get('birthdate')?.value);
+      const today = new Date();
+      if (birthdate > today) {
+        // La fecha de nacimiento es mayor que hoy, muestra un mensaje de error y detén el registro
+        console.log('La fecha de nacimiento no puede ser mayor que hoy');
+        return;
+      }
+
+      this.authService
+        .register({
+          userName: this.formRegister?.value?.userName,
+          password: this.formRegister?.value?.password,
+          birthdate: this.formRegister?.value?.birthdate,
+          email: this.formRegister?.value?.email,
+        })
+        .subscribe({
+          next: (response: Observable<any> | any) => {
+            this.loaderService.showLoader();
+            if (response === this.formRegister?.value?.userName) {
+              this.userNameFinded = response;
+              this.loaderService.hideLoader();
+            }
+            if (response === this.formRegister?.value?.email) {
+              this.emailFinded = response;
+              this.loaderService.hideLoader();
+            }
+            response?.subscribe({
+              next: (res: UserResponse | any) => {
+                this.authService.login(res?.userName, res?.password).subscribe({
+                  next: (userLogin: UserResponse | any) => {
+                    this.loaderService.showLoader();
+                    if (userLogin) {
+                      this.loaderService.hideLoader();
+                      this.notificationService
+                        .enviarNotificacion(
+                          '¡Bienvenida a Femfy!',
+                          'Gracias por registrarte 😊'
+                        )
+                        .subscribe({
+                          next: (res: any) => res,
+                        });
+                      this.router.navigate(['cuestionario']);
+                      this.questionsService
+                        .createUserMenstruationQuestion({
+                          userId:
+                            this.localStorageService.getUserByLogin()?.idUser,
+                        })
+                        .subscribe(
+                          (question: QuestionUserMenstruation | any) => {
+                            this.localStorageService.setKeyValueLocalStorage(
+                              constants.ID_REGISTER,
+                              question?.id
+                            );
+                          }
                         );
-                      });
-                    this.cicleService
-                      .registerCycle({
-                        idUser:
-                          this.localStorageService.getUserByLogin()?.idUser,
-                        dateBeging: new Date(), //por defecto
-                        daysOfBleeding: 0,
-                        status: '',
-                      })
-                      .subscribe((cycle: Cycle | any) => {
-                        this.localStorageService.setKeyValueLocalStorage(
-                          constants.ID_FIRST_CYCLE,
-                          cycle?.id
-                        );
-                      });
-                  }
-                },
-              });
-            },
-          });
-          this.loaderService.hideLoader();
-        },
-        error: (error) => error,
-      });
+                      this.cicleService
+                        .registerCycle({
+                          idUser:
+                            this.localStorageService.getUserByLogin()?.idUser,
+                          dateBeging: new Date(), //por defecto
+                          daysOfBleeding: 0,
+                          status: '',
+                        })
+                        .subscribe((cycle: Cycle | any) => {
+                          this.localStorageService.setKeyValueLocalStorage(
+                            constants.ID_FIRST_CYCLE,
+                            cycle?.id
+                          );
+                        });
+                    }
+                  },
+                });
+              },
+            });
+            this.loaderService.hideLoader();
+          },
+          error: (error) => error,
+        });
+    }
   }
 }

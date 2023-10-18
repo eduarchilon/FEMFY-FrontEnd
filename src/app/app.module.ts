@@ -28,6 +28,7 @@ import { SurveyModule } from './modules/survey/survey.module';
 import { ProfileModule } from './modules/profile/profile.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoaderService } from './services/loader/loader.service';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,6 +48,7 @@ import { LoaderService } from './services/loader/loader.service';
     AuthRoutingModule,
     HttpClientModule,
     MatDialogModule,
+    RouterModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable

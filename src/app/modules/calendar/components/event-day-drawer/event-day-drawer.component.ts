@@ -120,9 +120,9 @@ export class EventDayDrawerComponent implements OnInit {
           this.loaderService.showLoader();
           if (response) {
             this.loaderService.hideLoader();
-            // this.router.navigate(['/calendario']).then(() => {
-            //   location.reload();
-            // });
+            this.router.navigate(['/calendario']).then(() => {
+              location.reload();
+            });
           } else {
             this.loaderService.hideLoader();
           }
@@ -138,9 +138,9 @@ export class EventDayDrawerComponent implements OnInit {
         this.loaderService.showLoader();
         if (response) {
           this.loaderService.hideLoader();
-          // this.router.navigate(['/calendario']).then(() => {
-          //   location.reload();
-          // });
+          this.router.navigate(['/calendario']).then(() => {
+            location.reload();
+          });
         }
       },
     });
