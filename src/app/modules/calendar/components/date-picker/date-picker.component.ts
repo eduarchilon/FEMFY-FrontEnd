@@ -58,19 +58,6 @@ export class DatePickerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (
-      this.myRegisterQuestion &&
-      this.myRegisterQuestion.lastCycleDuration &&
-      this.myRegisterQuestion.regularCycleDuration
-    ) {
-      const endCycle =
-        (this.myRegisterQuestion.lastCycleDuration +
-          this.myRegisterQuestion.regularCycleDuration) /
-        2;
-      const fecha = new Date('2023-10-17');
-      fecha.setDate(fecha.getDate() + endCycle);
-      console.log(fecha);
-    }
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //Register Cycle
     this.cicleService

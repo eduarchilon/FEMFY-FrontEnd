@@ -187,10 +187,12 @@ export class PieChartComponent implements OnInit {
           this.myRegisterQuestion.regularCycleDuration) /
         2;
     }
+    const diff =
+      new Date().getDate() - new Date(this.cycleChart?.dateBeging)?.getDate();
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
         item.width = (newDataArray.length / sumaTotal) * 100;
-        if (item.id === dataChildren[0]?.id) {
+        if (item.id === diff) {
           item.color = 'red';
         } else if (item.id === dataChildren[Math.round(endCycle)]?.id) {
           item.color = 'green';
