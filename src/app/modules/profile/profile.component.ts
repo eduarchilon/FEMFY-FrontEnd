@@ -56,12 +56,13 @@ export class ProfileComponent implements OnInit {
     const updatedUserData = this.profileForm.value;
     const idUser = this.userResponse.idUser;
 
-    this.http.put<any[]>(this.apiUrl, {
+    this.http.post(this.apiUrl, {
       ...updatedUserData,
       idUser: idUser
     }).subscribe(
       (data: any) => console.log(data)
-    );
+    )
   }
 
+  
 }
