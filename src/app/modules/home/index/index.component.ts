@@ -19,6 +19,8 @@ import { constants } from 'src/app/constans/constants';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
+  public fechaActual: Date = new Date();
+  public fechaFormateada: string = this.formatDate(this.fechaActual);
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
@@ -31,6 +33,8 @@ export class IndexComponent implements OnInit {
 
   user!: any; //cambiar objeto
 
+
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -38,8 +42,14 @@ export class IndexComponent implements OnInit {
     private questionsService: QuestionService,
     private cicleService: CicleService,
     private localStorageService: LocalStorageService
+
   ) {}
 
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
+  }
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     this.cicleService.getAllCycles(userId).subscribe({
@@ -47,6 +57,8 @@ export class IndexComponent implements OnInit {
         this.cycles = [...cycles];
       },
     });
+
+    
   }
 
   openCicleRegister(): void {
