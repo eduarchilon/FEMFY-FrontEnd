@@ -39,6 +39,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventsNotificationComponent } from './components/events-notification/events-notification.component';
+import { QuestionService } from 'src/app/services/question/question.service';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -80,6 +81,7 @@ registerLocaleData(localeEs, 'es-ES');
     },
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     LoaderService,
+    QuestionService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

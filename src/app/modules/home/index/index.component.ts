@@ -28,7 +28,7 @@ export class IndexComponent implements OnInit {
   mode: ProgressBarMode = 'determinate';
   value = 50;
   bufferValue = 75;
-  myCycle: QuestionUserMenstruation = {};
+  myRegisterQuestion!: QuestionUserMenstruation;
 
   cycleChart!: Cycle;
 
@@ -54,6 +54,15 @@ export class IndexComponent implements OnInit {
     return `${day} de ${month}`;
   }
   ngOnInit(): void {
+    const idRegisterQuestion = JSON.parse(
+      this.localStorageService.getLocalStorage(constants.ID_REGISTER)
+    );
+    this.questionsService
+      .getAllQuestionUserMenstruationById(idRegisterQuestion)
+      .subscribe((data: any) => {
+        this.myRegisterQuestion = data;
+      });
+
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     this.cicleService.getAllCycles(userId).subscribe((data: any) => {
       this.cycles = [...data];

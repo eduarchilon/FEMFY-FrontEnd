@@ -8,6 +8,7 @@ import {
   DataPieChart,
   DataPieChartChildren,
 } from 'src/app/models/data-pie-chart';
+import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
@@ -19,6 +20,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 })
 export class PieChartComponent implements OnInit {
   @Input() cycles: Cycle[] = [];
+  @Input() myRegisterQuestion!: QuestionUserMenstruation;
   cyclesLength!: number;
   //PIE-CHART
   options!: AgPolarChartOptions;
@@ -39,7 +41,7 @@ export class PieChartComponent implements OnInit {
     let chat13: AgPolarSeriesOptions = {};
     if (this.cycles) {
       this.cycleChart = this.cycles[this.cycles?.length - 1];
-      console.log(this.cycles)
+      console.log(this.cycles);
       chat12 = this.setPieChartContentData(this.cycleChart);
       chat13 = this.setPieContainerData(chat12, this.cycleChart);
       this.options = {
@@ -95,7 +97,7 @@ export class PieChartComponent implements OnInit {
       },
       {
         id: 4,
-        dayCount: 20,
+        dayCount: 14,
         label: '2do. Periodo seguro',
         color: '#bfdbfe',
       },
@@ -174,12 +176,27 @@ export class PieChartComponent implements OnInit {
 
     const fechaActual = new Date().getDate();
     // Calcula los valores de "width" y normaliza para que sumen 100%
+    let endCycle = 28;
+    if (
+      this.myRegisterQuestion &&
+      this.myRegisterQuestion.lastCycleDuration &&
+      this.myRegisterQuestion.regularCycleDuration
+    ) {
+      endCycle =
+        (this.myRegisterQuestion.lastCycleDuration +
+          this.myRegisterQuestion.regularCycleDuration) /
+        2;
+    }
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
-      (item: any) => ({
-        ...item,
-        width: (newDataArray.length / sumaTotal) * 100,
-        color: item.id === dataChildren[0]?.id ? 'purple' : item.color,
-      })
+      (item: any) => {
+        item.width = (newDataArray.length / sumaTotal) * 100;
+        if (item.id === dataChildren[0]?.id) {
+          item.color = 'red';
+        } else if (item.id === dataChildren[Math.round(endCycle)]?.id) {
+          item.color = 'green';
+        }
+        return item;
+      }
     );
 
     return {

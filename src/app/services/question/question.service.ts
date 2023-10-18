@@ -42,4 +42,14 @@ export class QuestionService {
       })
     );
   }
+
+  getAllQuestionUserMenstruationById(
+    idRegister: number | any
+  ): Observable<any> {
+    return this.http.get<any[]>(`${this.usersUrl}/${idRegister}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }
