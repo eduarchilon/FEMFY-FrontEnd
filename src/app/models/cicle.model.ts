@@ -1,6 +1,6 @@
 export interface Cycle {
   dateBeging?: Date | any | string;
-  dateEnd?: Date| any | string;
+  dateEnd?: Date | any | string;
   id?: number;
   idUser?: number;
   status?: string;
@@ -13,4 +13,11 @@ export interface CycleHistorial extends Cycle {
   regular?: boolean;
   regularCycleDuration?: number;
   bleedingDuration?: number;
+}
+
+export interface FisrtCycle {
+  initCycle?: Date | any;
+  cycleDuration?: number | string | any;
+  regularCycle?: number | string | any;
+  dayOfBleding?: number | string | any;
 }

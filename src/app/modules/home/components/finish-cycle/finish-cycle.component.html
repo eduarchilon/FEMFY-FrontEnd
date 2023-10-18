@@ -1,0 +1,30 @@
+<div class="p-5">
+  <div class="flex justify-end px-5">
+    <button (click)="closeDialog()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="!m-auto">
+    <h3 class="pb-3 text-2xl font-semibold">Finalizar ciclo</h3>
+    <div class="mb-10">
+      <label class="block mb-2"
+        >*Puede finalizar el ciclo hoy o elegir la fecha donde finalizó</label
+      >
+      <input type="date" class="border-b-2" #endDate />
+    </div>
+    <div class="flex justify-between gap-4">
+      <button
+        (click)="saveFinishCycle(cycleChart, endDate.value)"
+        class="flex-1 bg-[#ff3434] text-white py-[10px] px-[20px] rounded-[20px]"
+      >
+        Guardar
+      </button>
+      <button
+        class="flex-1 bg-[#776fe8] text-white py-[10px] px-[20px] rounded-[20px]"
+        (click)="closeDialog()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </mat-dialog-content>
+</div>

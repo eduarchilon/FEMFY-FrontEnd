@@ -15,9 +15,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import {
-  notificationPayloadContent,
-} from 'src/app/models/notification.model';
+import { notificationPayloadContent } from 'src/app/models/notification.model';
 import { Cycle } from 'src/app/models/cicle.model';
 import {
   FormGroupDirective,
@@ -33,9 +31,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 @Component({
   selector: 'app-registro-usuario',
   templateUrl: './registro-usuario.component.html',
-  styleUrls: ['./registro-usuario.component.scss']
+  styleUrls: ['./registro-usuario.component.scss'],
 })
-
 export class RegistroUsuarioComponent implements OnInit {
   formRegister: FormGroup = new FormGroup({
     userName: new FormControl('', Validators.required),
@@ -60,9 +57,9 @@ export class RegistroUsuarioComponent implements OnInit {
     private cicleService: CicleService,
     private loaderService: LoaderService,
     private notificationService: NotificationService
-  ) { }
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   signupUser(): void {
     this.userNameFinded = '';
     this.emailFinded = '';
@@ -70,9 +67,6 @@ export class RegistroUsuarioComponent implements OnInit {
     if (this.formRegister.invalid) {
       this.formRegister.markAsTouched();
     } else {
-
-
-
       // Validar contraseñas que no coinciden
       const password = this.formRegister.get('password')?.value;
       const passwordRepeat = this.formRegister.get('passwordRepeat')?.value;
@@ -130,12 +124,14 @@ export class RegistroUsuarioComponent implements OnInit {
                           userId:
                             this.localStorageService.getUserByLogin()?.idUser,
                         })
-                        .subscribe((question: QuestionUserMenstruation | any) => {
-                          this.localStorageService.setKeyValueLocalStorage(
-                            constants.ID_REGISTER,
-                            question?.id
-                          );
-                        });
+                        .subscribe(
+                          (question: QuestionUserMenstruation | any) => {
+                            this.localStorageService.setKeyValueLocalStorage(
+                              constants.ID_REGISTER,
+                              question?.id
+                            );
+                          }
+                        );
                       this.cicleService
                         .registerCycle({
                           idUser:
@@ -161,5 +157,4 @@ export class RegistroUsuarioComponent implements OnInit {
         });
     }
   }
-
 }

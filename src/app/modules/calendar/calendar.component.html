@@ -2,7 +2,9 @@
   class="pt-32 pb-24 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]"
 >
   <div class="w-[50%] max-lg:w-[100%]">
-    <app-date-picker></app-date-picker>
+    <ng-container *ngIf="cycle">
+      <app-date-picker [cycle]="cycle"></app-date-picker>
+    </ng-container>
   </div>
   <div class="w-[50%] max-lg:w-[100%]">
     <h2 class="text-5xl text-white font-bold mb-10 md:mb-28">
@@ -12,7 +14,7 @@
       <img
         width="100px"
         height="100px"
-        src="../../../assets/images/isotipo.svg"
+        src="./assets/images/isotipo.svg"
       />
       <div class="my-auto ml-10">
         <span class="text-2xl">Siguiente períodio:</span>
@@ -42,7 +44,7 @@
       </div>
     </div>
     <div class="flex text-white mb-10">
-      <img width="90px" height="90px" src="../../../assets/images/yellow.png" />
+      <img width="90px" height="90px" src="./assets/images/yellow.png" />
       <div class="my-auto ml-10">
         <span class="text-2xl">Día de inicio del período</span>
       </div>

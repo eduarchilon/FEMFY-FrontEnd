@@ -36,6 +36,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { DatePickerComponent } from './components/date-picker/date-picker.component';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { EventsNotificationComponent } from './components/events-notification/events-notification.component';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -43,6 +46,7 @@ registerLocaleData(localeEs, 'es-ES');
     CalendarComponent,
     EventDayDrawerComponent,
     DatePickerComponent,
+    EventsNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +62,8 @@ registerLocaleData(localeEs, 'es-ES');
     ReactiveFormsModule,
     MatIconModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
   ],
   exports: [],
   providers: [

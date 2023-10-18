@@ -1,4 +1,5 @@
 /** No CSS for this example */
+//DIAS CON EVENTOS
 button.selected {
   background: rgb(255, 242, 0) !important;
   border-radius: 100% !important;
@@ -6,6 +7,16 @@ button.selected {
 
 .selected {
   background: rgb(255, 242, 0) !important;
+  border-radius: 100% !important;
+}
+
+button.init-cycle {
+  background: rgb(255, 21, 0) !important;
+  border-radius: 100% !important;
+}
+
+.init-cycle {
+  background: rgb(255, 21, 0) !important;
   border-radius: 100% !important;
 }
 
