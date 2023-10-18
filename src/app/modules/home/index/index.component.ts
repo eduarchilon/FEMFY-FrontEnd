@@ -22,6 +22,8 @@ import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.co
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
+  public fechaActual: Date = new Date();
+  public fechaFormateada: string = this.formatDate(this.fechaActual);
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
@@ -35,6 +37,8 @@ export class IndexComponent implements OnInit {
     constants.ID_REGISTER
   );
 
+  user!: any; //cambiar objeto
+
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -44,6 +48,11 @@ export class IndexComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
+  }
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     this.cicleService.getAllCycles(userId).subscribe((data: any) => {

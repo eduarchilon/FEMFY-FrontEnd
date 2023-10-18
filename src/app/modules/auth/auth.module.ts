@@ -3,12 +3,12 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   NO_ERRORS_SCHEMA,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { RegistroUsuarioComponent } from './registro-usuario/registro-usuario.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AuthRoutingModule } from './auth-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
@@ -16,6 +16,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { CommonsModule } from 'src/app/commons/commons.module';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -25,6 +28,11 @@ import { NotificationService } from 'src/app/services/notification/notification.
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     CommonsModule,
+    FormsModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgIf,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [
@@ -35,4 +43,4 @@ import { NotificationService } from 'src/app/services/notification/notification.
     NotificationService,
   ],
 })
-export class AuthModule {}
+export class AuthModule { }
