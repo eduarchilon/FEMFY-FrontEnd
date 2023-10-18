@@ -21,6 +21,7 @@ import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { selectDayInitialPeriod } from 'src/app/redux/selectors/calendar.selector';
 import { Cycle } from 'src/app/models/cicle.model';
+import { QuestionUserMenstruation } from 'src/app/models/question.model';
 
 @Component({
   selector: 'app-date-picker',
@@ -35,6 +36,7 @@ export class DatePickerComponent implements OnInit {
   @ViewChild('calendar') calendar!: MatCalendar<Date>;
 
   @Input() cycle: Cycle | any | null = null;
+  @Input() myRegisterQuestion!: QuestionUserMenstruation;
 
   initCycle: moment.Moment | null = null;
   endCycle: moment.Moment | null = null;
@@ -56,14 +58,37 @@ export class DatePickerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    if (
+      this.myRegisterQuestion &&
+      this.myRegisterQuestion.lastCycleDuration &&
+      this.myRegisterQuestion.regularCycleDuration
+    ) {
+      const endCycle =
+        (this.myRegisterQuestion.lastCycleDuration +
+          this.myRegisterQuestion.regularCycleDuration) /
+        2;
+      const fecha = new Date('2023-10-17');
+      fecha.setDate(fecha.getDate() + endCycle);
+      console.log(fecha);
+    }
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //Register Cycle
     this.cicleService
       .getCycle(userId, this.cycle?.dateBeging) //TODO: ojo con la fecha no es igual al valor que tiene java
       .subscribe((res: any) => {
-        console.log(res);
-        
         this.initCycle = moment(res?.dateBeging);
+        this.endCycle = moment(res?.dateBeging);
+        if (
+          this.myRegisterQuestion &&
+          this.myRegisterQuestion.lastCycleDuration &&
+          this.myRegisterQuestion.regularCycleDuration
+        ) {
+          const endCycle =
+            (this.myRegisterQuestion.lastCycleDuration +
+              this.myRegisterQuestion.regularCycleDuration) /
+            2;
+          this.endCycle?.add(endCycle, 'days');
+        }
       });
 
     //TODO: cambiar api para que se pueda buscar por idUser
@@ -94,7 +119,8 @@ export class DatePickerComponent implements OnInit {
     const date = event as moment.Moment;
     return (
       (this.daysSelected?.find((x) => x.isSame(date)) ? 'selected' : '') ||
-      (moment(this.initCycle)?.isSame(date) ? 'init-cycle' : '')
+      (moment(this.initCycle)?.isSame(date) ? 'init-cycle' : '') ||
+      (moment(this.endCycle)?.isSame(date) ? 'end-cycle' : '')
     );
   };
 

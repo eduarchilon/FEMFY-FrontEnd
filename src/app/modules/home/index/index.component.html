@@ -31,10 +31,25 @@
           {{ fechaFormateada }}</span
         >
       </div>
+      <ng-container *ngIf="cycles.length > 0">
+        <div class="flex justify-between w-[100%] items-center">
+          <div class="flex gap-2">
+            <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
+            Día de ciclo
+          </div>
+          <div class="flex gap-2">
+            <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
+            Fin del ciclo
+          </div>
+        </div>
+      </ng-container>
       <div class="flex flex-col items-center gap-[10px]">
         <div class="rounded-full bg-white mb-5">
           <ng-container *ngIf="cycles.length > 0">
-            <app-pie-chart [cycles]="cycles"></app-pie-chart>
+            <app-pie-chart
+              [cycles]="cycles"
+              [myRegisterQuestion]="myRegisterQuestion"
+            ></app-pie-chart>
           </ng-container>
           <ng-container *ngIf="cycles.length === 0">
             <div
