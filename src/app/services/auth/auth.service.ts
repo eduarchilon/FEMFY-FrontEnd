@@ -40,6 +40,10 @@ export class AuthService {
     return this.http.get<any[]>(`${this.usersUrl}/getUsers`);
   }
 
+  getUserId(): string {
+    return sessionStorage['userId'];
+  }
+
   login(userName: string, password: string): Observable<any> {
     return this.getUsers().pipe(
       map((users: any[]) => {
