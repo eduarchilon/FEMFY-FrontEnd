@@ -5,42 +5,78 @@
     <div
       class="max-lg:w-[100%] flex flex-col gap-[30px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
     >
-      <div class="flex justify-end w-[100%]">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item>
-            <mat-icon color="primary">edit_road</mat-icon>
-            <span>Editar días de sangrado</span>
+      <ng-container *ngIf="cycles.length > 0">
+        <div class="flex justify-end w-[100%]">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
           </button>
-          <div class="w-[100%] px-2">
-            <mat-divider></mat-divider>
-          </div>
-          <button mat-menu-item>
-            <mat-icon color="warn">delete</mat-icon>
-            <span>Eliminar ciclo</span>
-          </button>
-        </mat-menu>
-      </div>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="editActualCycle(cycleChart)">
+              <mat-icon color="primary">edit_road</mat-icon>
+              <span>Editar días de sangrado</span>
+            </button>
+            <div class="w-[100%] px-2">
+              <mat-divider></mat-divider>
+            </div>
+            <button mat-menu-item (click)="deleteActualCycle(cycleChart)">
+              <mat-icon color="warn">delete</mat-icon>
+              <span>Eliminar ciclo</span>
+            </button>
+          </mat-menu>
+        </div>
+      </ng-container>
       <div class="flex flex-col">
         <span class="text-white text-center">Hoy es </span>
         <span class="text-white text-center font-bold text-[30px]">
-          11 de Octubre</span
+          {{ fechaFormateada }}</span
         >
       </div>
+      <ng-container *ngIf="cycles.length > 0">
+        <div class="flex justify-between w-[100%] items-center">
+          <div class="flex gap-2">
+            <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
+            Día de ciclo
+          </div>
+          <div class="flex gap-2">
+            <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
+            Fin del ciclo
+          </div>
+        </div>
+      </ng-container>
       <div class="flex flex-col items-center gap-[10px]">
         <div class="rounded-full bg-white mb-5">
-          <ng-container>
-            <app-pie-chart [cycles]="cycles"></app-pie-chart>
+          <ng-container *ngIf="cycles.length > 0">
+            <app-pie-chart
+              [cycles]="cycles"
+              [myRegisterQuestion]="myRegisterQuestion"
+            ></app-pie-chart>
+          </ng-container>
+          <ng-container *ngIf="cycles.length === 0">
+            <div
+              class="bg-black flex justify-center items-center rounded-full py-20"
+            >
+              <h5 class="text-white text-center max-w-[200px]">
+                No hay datos de ciclo registrado
+              </h5>
+            </div>
           </ng-container>
         </div>
-        <button
-          class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-          (click)="openCicleRegister()"
-        >
-          Registrar período
-        </button>
+        <ng-container *ngIf="cycles.length > 0">
+          <button
+            class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
+            (click)="finishActualCicle(cycleChart)"
+          >
+            Finalizar ciclo actual
+          </button>
+        </ng-container>
+        <ng-container>
+          <button
+            class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
+            (click)="openCicleRegister()"
+          >
+            Registrar nuevo ciclo
+          </button>
+        </ng-container>
       </div>
     </div>
     <div
@@ -75,9 +111,7 @@
                 <h5>Todavía no existen datos cargados.</h5>
               </ng-container>
               <ng-container *ngIf="cycles.length > 0">
-                <app-cicle-historial
-                  [cycles]="cycles"
-                ></app-cicle-historial>
+                <app-cicle-historial [cycles]="cycles"></app-cicle-historial>
               </ng-container>
             </div>
           </div>

@@ -7,5 +7,5 @@ export const setDateCalendar = createAction(
 
 export const setDayPeriod = createAction(
   '[Clendar] set the initial perid',
-  props<{ initialDate: Date | any[] }>()
+  props<{ initialDate: Date | any }>()
 );

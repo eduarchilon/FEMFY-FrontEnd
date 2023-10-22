@@ -2,18 +2,16 @@ import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
-import { data, dataChildren } from 'src/app/constans/pie-chart-data';
+import { dataChildren } from 'src/app/constans/pie-chart-data';
 import { Cycle } from 'src/app/models/cicle.model';
 import {
   DataPieChart,
   DataPieChartChildren,
 } from 'src/app/models/data-pie-chart';
-import { setCycle } from 'src/app/redux/actions/cycle.action';
-import { selectCycle } from 'src/app/redux/selectors/cycle.selctor';
-import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
+import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
-import { QuestionService } from 'src/app/services/question/question.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -22,54 +20,48 @@ import { QuestionService } from 'src/app/services/question/question.service';
 })
 export class PieChartComponent implements OnInit {
   @Input() cycles: Cycle[] = [];
+  @Input() myRegisterQuestion!: QuestionUserMenstruation;
   cyclesLength!: number;
   //PIE-CHART
   options!: AgPolarChartOptions;
   sizeChart: number = 0;
   dateBegind!: Date;
   cycleChart!: Cycle;
-  idUser!: number;
 
   constructor(
     private store: Store<AppState>,
     private cicleService: CicleService,
-    private questionsService: QuestionService,
+    private localStorageService: LocalStorageService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cycles);
-    this.cyclesLength = this.cycles.length;
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.idUser = data?.idUser;
-    });
-
+    const userId = this.localStorageService.getUserByLogin()?.idUser;
     let chat12: AgPolarSeriesOptions = {};
     let chat13: AgPolarSeriesOptions = {};
-    if (!this.cycleChart) {
-      this.cicleService.getAllCycles(this.idUser).subscribe((data: Cycle[]) => {
-        this.cycleChart = data[data?.length - 1];
-        chat12 = this.setPieChartContentData(this.cycleChart);
-        chat13 = this.setPieContainerData(chat12, this.cycleChart);
-        this.options = {
-          width: this.getWindowSize(),
-          height: this.getWindowSize(),
-          autoSize: true,
-          padding: {
-            top: 5,
-            right: 5,
-            bottom: 5,
-            left: 5,
-          },
-          series: [chat12, chat13],
-          legend: {
-            enabled: false,
-          },
-          background: {
-            visible: false,
-          },
-        };
-      });
+    if (this.cycles) {
+      this.cycleChart = this.cycles[this.cycles?.length - 1];
+      console.log(this.cycles);
+      chat12 = this.setPieChartContentData(this.cycleChart);
+      chat13 = this.setPieContainerData(chat12, this.cycleChart);
+      this.options = {
+        width: this.getWindowSize(),
+        height: this.getWindowSize(),
+        autoSize: true,
+        padding: {
+          top: 5,
+          right: 5,
+          bottom: 5,
+          left: 5,
+        },
+        series: [chat12, chat13],
+        legend: {
+          enabled: false,
+        },
+        background: {
+          visible: false,
+        },
+      };
     }
     this.sizeChart = window.innerWidth;
   }
@@ -105,7 +97,7 @@ export class PieChartComponent implements OnInit {
       },
       {
         id: 4,
-        dayCount: 10,
+        dayCount: 14,
         label: '2do. Periodo seguro',
         color: '#bfdbfe',
       },
@@ -184,12 +176,27 @@ export class PieChartComponent implements OnInit {
 
     const fechaActual = new Date().getDate();
     // Calcula los valores de "width" y normaliza para que sumen 100%
+    let endCycle = 28;
+    if (
+      this.myRegisterQuestion &&
+      this.myRegisterQuestion.lastCycleDuration &&
+      this.myRegisterQuestion.regularCycleDuration
+    ) {
+      endCycle =
+        (this.myRegisterQuestion.lastCycleDuration +
+          this.myRegisterQuestion.regularCycleDuration) /
+        2;
+    }
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
-      (item: any) => ({
-        ...item,
-        width: (newDataArray.length / sumaTotal) * 100,
-        color: item.id === dataChildren[0]?.id ? 'purple' : item.color,
-      })
+      (item: any) => {
+        item.width = (newDataArray.length / sumaTotal) * 100;
+        if (item.id === dataChildren[0]?.id) {
+          item.color = 'red';
+        } else if (item.id === dataChildren[Math.round(endCycle)]?.id) {
+          item.color = 'green';
+        }
+        return item;
+      }
     );
 
     return {

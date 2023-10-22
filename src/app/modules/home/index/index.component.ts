@@ -12,6 +12,9 @@ import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { constants } from 'src/app/constans/constants';
+import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.component';
+import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
+import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
 
 @Component({
   selector: 'app-index',
@@ -19,11 +22,16 @@ import { constants } from 'src/app/constans/constants';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
+  public fechaActual: Date = new Date();
+  public fechaFormateada: string = this.formatDate(this.fechaActual);
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
   bufferValue = 75;
-  myCycle: QuestionUserMenstruation = {};
+  myRegisterQuestion!: QuestionUserMenstruation;
+
+  cycleChart!: Cycle;
+
   cycles: CycleHistorial[] = [];
   initRegisterId: number = this.localStorageService.getLocalStorage(
     constants.ID_REGISTER
@@ -40,12 +48,25 @@ export class IndexComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
+  }
   ngOnInit(): void {
+    const idRegisterQuestion = JSON.parse(
+      this.localStorageService.getLocalStorage(constants.ID_REGISTER)
+    );
+    this.questionsService
+      .getAllQuestionUserMenstruationById(idRegisterQuestion)
+      .subscribe((data: any) => {
+        this.myRegisterQuestion = data;
+      });
+
     const userId = this.localStorageService.getUserByLogin()?.idUser;
-    this.cicleService.getAllCycles(userId).subscribe({
-      next: (cycles: Cycle[] | any[]) => {
-        this.cycles = [...cycles];
-      },
+    this.cicleService.getAllCycles(userId).subscribe((data: any) => {
+      this.cycles = [...data];
+      this.cycleChart = this.cycles[this.cycles?.length - 1];
     });
   }
 
@@ -57,5 +78,32 @@ export class IndexComponent implements OnInit {
 
   setCycle(dateBeging: Date | any, bleedingDuration: number | any): string {
     return '28';
+  }
+
+  finishActualCicle(cycleChart: Cycle): void {
+    const dialogRef = this.dialog.open(FinishCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
+  }
+
+  editActualCycle(cycleChart: Cycle): void {
+    const dialogRef = this.dialog.open(EditCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
+  }
+
+  deleteActualCycle(cycleChart: Cycle): void {
+    const dialogRef = this.dialog.open(DeleteCycleComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        cycleChart,
+      },
+    });
   }
 }

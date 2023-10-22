@@ -1,21 +1,19 @@
 <div class="max-h-[500px] overflow-y-scroll pe-[20px]">
   <div>
-    <h5 class="font-semibold text-white">
-      Ciclo actual: <span class="font-normal">{{ actualDaysCycle }} días</span>
-    </h5>
+    <h5 class="font-semibold text-white">Estas en tu ciclo actual</h5>
     <h5 class="font-semibold text-white">
       Inicio:
       <span class="font-normal">{{
         actualDurationCycle | date : "dd MMM"
       }}</span>
     </h5>
-    <mat-progress-bar
+    <!--  <mat-progress-bar
       [color]="color"
       [mode]="mode"
       [value]="value"
       [bufferValue]="bufferValue"
     >
-    </mat-progress-bar>
+    </mat-progress-bar>-->
   </div>
   <br />
   <mat-divider></mat-divider>
@@ -33,19 +31,24 @@
           >
         </h5>
         <h5 class="font-semibold">
-          Fechas:
+          Fecha:
           <span class="font-normal"
             >{{ item.dateBeging | date : "dd MMM" }} al
             {{ item.dateEnd | date : "dd MMM" }}</span
           >
         </h5>
-        <mat-progress-bar
+        <h5 class="font-semibold">
+          Duración del perdiodo:
+          <span class="font-normal">{{ item.daysOfBleeding }} días </span>
+        </h5>
+        <!-- <mat-progress-bar
           [color]="'primary'"
           [mode]="mode"
           [value]="value"
           [bufferValue]="bufferValue"
         >
-        </mat-progress-bar>
+        </mat-progress-bar
+        > -->
       </div>
       <mat-divider></mat-divider>
     </ng-container>

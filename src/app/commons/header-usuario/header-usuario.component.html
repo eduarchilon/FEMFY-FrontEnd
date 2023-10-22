@@ -10,10 +10,17 @@
         femfy
       </h1>
     </div>
-    <button class="lg:hidden text-xl" (click)="menuToggle()">
+    <button
+      *ngIf="isSurveyInit === false"
+      class="lg:hidden text-xl"
+      (click)="menuToggle()"
+    >
       <mat-icon class="text-[2rem]">menu</mat-icon>
     </button>
-    <div class="hidden lg:flex space-x-4 text-[20px]">
+    <div
+      *ngIf="isSurveyInit === false"
+      class="hidden lg:flex space-x-4 text-[20px]"
+    >
       <a
         class="p-3"
         *ngFor="

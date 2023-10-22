@@ -28,7 +28,6 @@ export class QuestionService {
   updateUserMenstruationQuestion(
     event: QuestionUserMenstruation
   ): Observable<any> {
-    console.log(event);
     return this.http.put<any>(`${this.usersUrl}/updateQuestion`, event).pipe(
       map((response) => {
         return response;
@@ -38,6 +37,16 @@ export class QuestionService {
 
   getAllQuestionUserMenstruation(): Observable<any> {
     return this.http.get<any[]>(`${this.usersUrl}/getAllQuestions`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  getAllQuestionUserMenstruationById(
+    idRegister: number | any
+  ): Observable<any> {
+    return this.http.get<any[]>(`${this.usersUrl}/${idRegister}`).pipe(
       map((response) => {
         return response;
       })

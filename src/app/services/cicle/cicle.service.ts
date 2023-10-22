@@ -26,7 +26,7 @@ export class CicleService {
       );
   }
 
-  getCycle(idUser: number | any, dateBeging: Date | any): Observable<any> {
+  getCycle(idUser: number | any, dateBeging: Date): Observable<any> {
     return this.http
       .get<any[]>(
         `${this.usersUrl}/getCycle/${idUser}?dateBeging=${dateBeging}`
@@ -54,5 +54,9 @@ export class CicleService {
         return response;
       })
     );
+  }
+
+  deleteCycle(idCycle: any): Observable<any> {
+    return this.http.delete(`${this.usersUrl}/delete/${idCycle}`);
   }
 }
