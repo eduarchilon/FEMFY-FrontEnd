@@ -29,6 +29,7 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoaderService } from './services/loader/loader.service';
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,6 +50,8 @@ import { RouterModule } from '@angular/router';
     HttpClientModule,
     MatDialogModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -58,6 +61,7 @@ import { RouterModule } from '@angular/router';
     StoreModule.forRoot(appStore),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
   ],
+  
   providers: [LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
 
   bootstrap: [AppComponent],
