@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoaderComponent } from './loader/loader.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { LoaderComponent } from './loader/loader.component';
     MatProgressSpinnerModule,
     StoreModule,
     MatButtonModule,
+    MatTooltipModule,
     MatMenuModule,
   ],
   exports: [
