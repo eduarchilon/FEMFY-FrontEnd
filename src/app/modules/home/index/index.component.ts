@@ -3,7 +3,6 @@ import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Router } from '@angular/router';
-import { AgPolarChartOptions } from 'ag-charts-community';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { RegisterCicleComponent } from '../components/register-cicle/register-cicle.component';
 import { QuestionService } from 'src/app/services/question/question.service';
@@ -33,6 +32,8 @@ export class IndexComponent implements OnInit {
   cycleChart!: Cycle;
 
   cycles: CycleHistorial[] = [];
+  cyclesWithEndNull: CycleHistorial[] = [];
+  cyclesWithOutEndNull: CycleHistorial[] = [];
   initRegisterId: number = this.localStorageService.getLocalStorage(
     constants.ID_REGISTER
   );
@@ -65,7 +66,13 @@ export class IndexComponent implements OnInit {
 
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     this.cicleService.getAllCycles(userId).subscribe((data: any) => {
-      this.cycles = [...data];
+      this.cyclesWithEndNull = data?.filter(
+        (item: any) => item?.dateEnd === null
+      );
+      this.cyclesWithOutEndNull = data?.filter(
+        (item: any) => item?.dateEnd !== null
+      );
+      this.cycles = data;
       this.cycleChart = this.cycles[this.cycles?.length - 1];
     });
   }

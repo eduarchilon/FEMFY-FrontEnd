@@ -3,30 +3,18 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
-import { UserResponse, emptyUserResponse } from 'src/app/models/user.model';
+import { UserResponse } from 'src/app/models/user.model';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/redux/store/app.store';
-import { setIdQuestionMenstruation } from 'src/app/redux/actions/question.action';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import { notificationPayloadContent } from 'src/app/models/notification.model';
 import { Cycle } from 'src/app/models/cicle.model';
-import {
-  FormGroupDirective,
-  NgForm,
-  FormsModule,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { NgIf } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-registro-usuario',

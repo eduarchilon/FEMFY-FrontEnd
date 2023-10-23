@@ -1,51 +1,82 @@
 <div
-  class="pt-32 pb-24 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw]"
+  class="pt-32 pb-24 flex max-lg:flex-col gap-[5%] max-lg:gap-[30px] px-[5vw] h-fit"
 >
   <div class="w-[50%] max-lg:w-[100%]">
-    <ng-container *ngIf="cycle && myRegisterQuestion">
-      <app-date-picker
-        [cycle]="cycle"
-        [myRegisterQuestion]="myRegisterQuestion"
-      ></app-date-picker>
-    </ng-container>
+    <div class="w-[80%] max-lg:w-[100%]">
+      <ng-container *ngIf="cycle && myRegisterQuestion">
+        <app-date-picker
+          [cycle]="cycle"
+          [myRegisterQuestion]="myRegisterQuestion"
+        ></app-date-picker>
+      </ng-container>
+    </div>
   </div>
-  <div class="w-[50%] max-lg:w-[100%]">
-    <h2 class="text-5xl text-white font-bold mb-10 md:mb-28">
-      Ovulación y días fértiles
+  <div class="w-[50%] max-lg:w-[100%] flex flex-col gap-10 max-lg:gap-16">
+    <div class="flex justify-between">
+      <div class="flex flex-col gap-3">
+        <div class="flex gap-2 items-center max-sm:text-sm">
+          <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
+          Ciclo
+        </div>
+        <div class="flex gap-2 items-center max-sm:text-sm">
+          <div
+            class="w-[40px] h-[20px] border border-indigo-600 rounded-lg"
+          ></div>
+          Hoy
+        </div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <div class="flex gap-2 items-center max-sm:text-sm">
+          <div class="w-[40px] h-[20px] bg-[yellow] rounded-lg"></div>
+          Registros
+        </div>
+        <div class="flex gap-2 items-center max-sm:text-sm">
+          <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
+          Ovulacíon
+        </div>
+      </div>
+    </div>
+    <h2
+      class="text-4xl text-white font-bold max-xl:text-3xl max-lg:text-2xl max-lg:text-center"
+    >
+      Calendario de información
     </h2>
-    <div class="flex text-white mb-10">
-      <img width="100px" height="100px" src="./assets/images/isotipo.svg" />
-      <div class="my-auto ml-10">
-        <span class="text-2xl">Siguiente períodio:</span>
-        <p class="text-lg mt-5">Faltan 23 días</p>
+    <div class="flex flex-col h-[100%] gap-10 max-xl:gap-5">
+      <div class="flex items-center gap-5">
+        <img
+          class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+          src="./assets/images/isotipo.svg"
+        />
+        <div class="">
+          <span class="text-2xl font-semibold max-lg:text-xl"
+            >Siguiente períodio:</span
+          >
+          <p class="text-lg">Faltan 23 días</p>
+        </div>
       </div>
-    </div>
-    <div class="flex text-white mb-10">
-      <img
-        width="100px"
-        height="100px"
-        src="https://gravida.com/wp-content/uploads/2016/01/ovum.png"
-      />
-      <div class="my-auto ml-10">
-        <span class="text-2xl">Predicción día de ovulación:</span>
-        <p class="text-lg mt-5">Faltan 15 días</p>
+      <div class="flex items-center gap-5">
+        <img
+          class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+          src="https://gravida.com/wp-content/uploads/2016/01/ovum.png"
+        />
+        <div class="">
+          <span class="text-2xl font-semibold max-lg:text-xl"
+            >Predicción día de ovulación:</span
+          >
+          <p class="text-lg">Faltan 15 días</p>
+        </div>
       </div>
-    </div>
-    <div class="flex text-white mb-10">
-      <img
-        width="100px"
-        height="100px"
-        src="https://th.bing.com/th/id/R.10c4dd6a751ddb0ef4b4897a2aaf6f98?rik=zUkA1iUuxUFG6w&riu=http%3a%2f%2fclipart-library.com%2fimages%2fkT85qG9Lc.png&ehk=5RcemOKTQCzs3%2bpUNmF7hPuU0gnp%2bbtCJXdDZ60mQJs%3d&risl=&pid=ImgRaw&r=0"
-      />
-      <div class="my-auto ml-10">
-        <span class="text-2xl">Predicción días fértiles:</span>
-        <p class="text-lg mt-5">Faltan 6 días</p>
-      </div>
-    </div>
-    <div class="flex text-white mb-10">
-      <div class="bg-red-600 w-[100px] h-[100px] rounded-full"></div>
-      <div class="my-auto ml-10">
-        <span class="text-2xl">Día de inicio del período</span>
+      <div class="flex items-center gap-5">
+        <img
+          class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+          src="https://th.bing.com/th/id/R.10c4dd6a751ddb0ef4b4897a2aaf6f98?rik=zUkA1iUuxUFG6w&riu=http%3a%2f%2fclipart-library.com%2fimages%2fkT85qG9Lc.png&ehk=5RcemOKTQCzs3%2bpUNmF7hPuU0gnp%2bbtCJXdDZ60mQJs%3d&risl=&pid=ImgRaw&r=0"
+        />
+        <div class="">
+          <span class="text-2xl font-semibold max-lg:text-xl"
+            >Predicción días fértiles:</span
+          >
+          <p class="text-lg">Faltan 6 días</p>
+        </div>
       </div>
     </div>
   </div>

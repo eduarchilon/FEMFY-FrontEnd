@@ -87,9 +87,10 @@ export class PreguntaComponent implements OnInit {
       })
       .subscribe({
         next: (response: any) => {
+          const lastTime = new Date(this.formOneRegister?.value?.lastTime);
           this.cycleServie
             .editCycle({
-              dateBeging: new Date(this.formOneRegister?.value?.lastTime),
+              dateBeging: lastTime.setDate(lastTime.getDate() - 5),
               id: this.localStorageService.parseLocalStorage(
                 constants.ID_FIRST_CYCLE
               ),

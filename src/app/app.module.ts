@@ -29,6 +29,9 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoaderService } from './services/loader/loader.service';
 import { RouterModule } from '@angular/router';
+import { MatIconService } from './services/mat-icon/mat-icon.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -60,11 +63,19 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     }),
     StoreModule.forRoot(appStore),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    MatIconModule,
+    MatButtonModule,
   ],
-  
-  providers: [LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
-
+  providers: [
+    LoaderService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    MatIconService,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private customMatIcon: MatIconService) {
+    this.customMatIcon.registerMatIcons();
+  }
+}

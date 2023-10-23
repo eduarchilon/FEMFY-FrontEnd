@@ -33,12 +33,18 @@
       </div>
       <ng-container *ngIf="cycles.length > 0">
         <div class="flex justify-between w-[100%] items-center">
-          <div class="flex gap-2">
+          <div class="flex gap-2 items-center">
             <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
             Día de ciclo
           </div>
-          <div class="flex gap-2">
+          <div class="flex gap-2 items-center">
             <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
+            Día de ovulación
+          </div>
+        </div>
+        <div class="flex justify-between w-[100%] items-center">
+          <div class="flex gap-2 items-center">
+            <div class="w-[40px] h-[20px] bg-[#000000] rounded-lg"></div>
             Fin del ciclo
           </div>
         </div>
@@ -47,8 +53,10 @@
         <div class="rounded-full bg-white mb-5">
           <ng-container *ngIf="cycles.length > 0">
             <app-pie-chart
+              [cyclesWithEndNull]="cyclesWithEndNull"
               [cycles]="cycles"
               [myRegisterQuestion]="myRegisterQuestion"
+              [cyclesWithOutEndNull]="cyclesWithOutEndNull"
             ></app-pie-chart>
           </ng-container>
           <ng-container *ngIf="cycles.length === 0">
@@ -92,11 +100,14 @@
             </h5>
             <div class="p-[20px] list-disc">
               <h5>
-               <li> Recordá tomar el anticonceptivo del día de hoy.</li>
+                <li>Recordá tomar el anticonceptivo del día de hoy.</li>
               </h5>
 
               <h5 class="mt-5">
-                <li>Te recomendamos gestionar tus próximos turnos para PAP y COLPO ya que vencen en 30 días.</li>
+                <li>
+                  Te recomendamos gestionar tus próximos turnos para PAP y COLPO
+                  ya que vencen en 30 días.
+                </li>
               </h5>
             </div>
           </div>
