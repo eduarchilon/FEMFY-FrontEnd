@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DocumentationService } from 'src/app/services/documentation/documentation.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 
 
 @Component({
@@ -26,7 +27,8 @@ export class DocumentationComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private documentationService: DocumentationService
+    private documentationService: DocumentationService,
+    private storage: Storage
     ) { }
 
   ngOnInit(): void {
@@ -37,11 +39,26 @@ export class DocumentationComponent implements OnInit {
     const files: FileList = event.target.files;
     if (files.length > 0) {
       this.selectedFile = files[0];
+
+      console.log(files[0]);
+
       this.convertFileToBase64(this.selectedFile);
     }
   }
 
+ /* uploadFile($event: any){
+    const file = $event.target.files[0];
+
+    const imageRef = ref(this.storage, `documentation/${file.name}`);
+
+    uploadBytes(imageRef, file).then(x =>{
+      console.log(x);
+    }).catch(error => console.log(error));
+
+  }*/
+
   uploadFile(): void {
+
     if (this.selectedFile) {
       const formData = new FormData();
 

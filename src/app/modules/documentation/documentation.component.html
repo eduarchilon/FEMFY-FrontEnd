@@ -2,7 +2,7 @@
 
     <form action=""
     [formGroup]="formDocumentation"
-    (ngSubmit)="uploadFile()">
+    (ngSubmit)="fileSelected($event)">
     <h2 class="text-5xl text-white font-bold mb-10">Documentación</h2>
     <div class="md:flex justify-between">
         <div class="md:w-2/5 bg-white/50 rounded-[20px] p-10 mb-10 md:mb-0">
@@ -31,7 +31,7 @@
                 <label for="file" class="cursor-pointer text ">
                     Cargue desde aquí
                 </label>
-                <input type="file" id="file" name="documentation" class="hidden"/>
+                <input type="file" id="file" name="documentation" class="hidden" (change)="fileSelected($event)"/>
                 </span>
 
             </div>

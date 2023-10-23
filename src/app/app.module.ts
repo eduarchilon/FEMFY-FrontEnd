@@ -29,6 +29,9 @@ import { ProfileModule } from './modules/profile/profile.module';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoaderService } from './services/loader/loader.service';
 import { RouterModule } from '@angular/router';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage,getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -57,6 +60,8 @@ import { RouterModule } from '@angular/router';
     }),
     StoreModule.forRoot(appStore),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideStorage(() => getStorage()),
   ],
   providers: [LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
 
