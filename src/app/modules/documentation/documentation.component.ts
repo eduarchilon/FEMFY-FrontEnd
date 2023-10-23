@@ -14,11 +14,17 @@ import { Storage, ref, uploadBytes } from '@angular/fire/storage';
 export class DocumentationComponent implements OnInit {
 
   formDocumentation: FormGroup = new FormGroup({
+    description: new FormControl('', Validators.required),
     fileBase64: new FormControl('', Validators.required),
     fileExt: new FormControl('', Validators.required),
     fileName: new FormControl('', Validators.required),
     idFile: new FormControl('', Validators.required),
     idUser: new FormControl(this.authService.getUserId(), Validators.required),
+    studyDate: new FormControl('', Validators.required),
+    typeStudy: new FormGroup({
+      description: new FormControl('', Validators.required),
+      idTypeStudy: new FormControl('', Validators.required)
+    })
   });
 
   selectedFile: File | null = null;
@@ -62,12 +68,20 @@ export class DocumentationComponent implements OnInit {
     if (this.selectedFile) {
       const formData = new FormData();
 
-      formData.append('fileBase64', this.formDocumentation.get('fileBase64')?.value);
+      formData.append('description', this.formDocumentation.get('description')?.value);
+      formData.append('fileBase64', this.fileBase64);
       formData.append('fileExt', this.formDocumentation.get('fileExt')?.value);
       formData.append('fileName', this.formDocumentation.get('fileName')?.value);
       formData.append('idFile', this.formDocumentation.get('idFile')?.value);
       formData.append('idUser', this.formDocumentation.get('idUser')?.value);
-
+      formData.append('studyDate', this.formDocumentation.get('studyDate')?.value);
+  
+      // Crear el objeto 'typeStudy' y convertirlo a JSON
+      const typeStudy = {
+        description: this.formDocumentation.get('typeStudy.description')?.value,
+        idTypeStudy: this.formDocumentation.get('typeStudy.idTypeStudy')?.value
+      };
+      formData.append('typeStudy', JSON.stringify(typeStudy));
 
       this.documentationService.uploadFile(formData).subscribe(
         (response) => {
