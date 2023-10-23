@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
 import { MatIconService } from './services/mat-icon/mat-icon.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +53,8 @@ import { MatButtonModule } from '@angular/material/button';
     HttpClientModule,
     MatDialogModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -68,7 +71,6 @@ import { MatButtonModule } from '@angular/material/button';
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     MatIconService,
   ],
-
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

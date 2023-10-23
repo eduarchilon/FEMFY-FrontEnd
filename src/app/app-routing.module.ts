@@ -11,6 +11,7 @@ import { DocumentationComponent } from './modules/documentation/documentation.co
 import { SurveyComponent } from './modules/survey/survey.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { IndexComponent } from './modules/home/index/index.component';
+import { ConversationComponent } from './modules/forum/conversation/conversation.component';
 
 
 const routes: Routes = [
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'foro',
     component: ForumComponent,
+  },
+  {
+    path: 'foro/conversation',
+    component: ConversationComponent,
   },
   {
     path: 'foro/:id',
