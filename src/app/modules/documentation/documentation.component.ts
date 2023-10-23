@@ -83,6 +83,8 @@ export class DocumentationComponent implements OnInit {
       };
       formData.append('typeStudy', JSON.stringify(typeStudy));
 
+      console.log(formData);
+
       this.documentationService.uploadFile(formData).subscribe(
         (response) => {
           console.log('Datos enviados con éxito', response);
