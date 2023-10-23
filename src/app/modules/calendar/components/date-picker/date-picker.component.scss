@@ -10,26 +10,34 @@ button.selected {
   border-radius: 100% !important;
 }
 
-button.init-cycle {
-  background: rgb(255, 21, 0) !important;
+button.day-ovulation {
+  background: rgb(1, 177, 56) !important;
   border-radius: 100% !important;
 }
 
-.init-cycle {
-  background: rgb(255, 21, 0) !important;
+.day-ovulation {
+  background: rgb(1, 177, 56) !important;
   border-radius: 100% !important;
 }
 
-button.end-cycle {
-  background: rgb(40, 170, 0) !important;
-  border-radius: 100% !important;
-}
+// button.end-cycle {
+//   background: rgb(40, 170, 0) !important;
+//   border-radius: 100% !important;
+// }
 
-.end-cycle {
-  background: rgb(40, 170, 0) !important;
-  border-radius: 100% !important;
-}
+// .end-cycle {
+//   background: rgb(40, 170, 0) !important;
+//   border-radius: 100% !important;
+// }
 
 .drop-calendar {
   width: 30rem;
+}
+
+.mat-calendar-body-in-range::before {
+  background-color: rgba(253, 60, 60, 0.363) !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: rgba(253, 60, 60, 0.563) !important;
 }

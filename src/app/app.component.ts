@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TokenSwPush } from './models/token-push.model';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from './services/notification/notification.service';
 import { LoaderService } from './services/loader/loader.service';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { constants } from './constans/constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
 
   constructor(
     private swPush: SwPush,
+    private router: Router,
     private notificationService: NotificationService,
     private localStorageService: LocalStorageService
   ) {}
@@ -40,5 +42,29 @@ export class AppComponent {
         );
       })
       .catch((err) => err);
+  }
+
+  lastScrollTop = 0;
+  scrolledUp: boolean = true;
+
+  @HostListener('window:scroll', ['$event'])
+  onScroll(event: Event): void {
+    const st = window.pageYOffset || document.documentElement.scrollTop;
+    if (st > this.lastScrollTop) {
+      this.scrolledUp = false;
+    } else {
+      this.scrolledUp = true;
+    }
+    this.lastScrollTop = st;
+    const documentHeight = document.documentElement.scrollHeight;
+    const windowHeight = window.innerHeight;
+    const currentPosition = st + windowHeight;
+    if (currentPosition >= documentHeight) {
+      this.scrolledUp = true;
+    }
+  }
+
+  isActiveRoute(route: string): boolean {
+    return this.router.url === route;
   }
 }

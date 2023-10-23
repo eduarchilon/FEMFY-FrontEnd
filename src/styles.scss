@@ -84,7 +84,7 @@ mat-dialog-content {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #4a90e2; /* Color del "pulgar" de la barra de desplazamiento */
+  background-color: #d4d7d9; /* Color del "pulgar" de la barra de desplazamiento */
   border-radius: 4px; /* Borde redondeado del "pulgar" */
 }
 
@@ -94,7 +94,7 @@ mat-dialog-content {
 }
 
 ::-webkit-scrollbar-thumb:horizontal {
-  background-color: #4a90e2; /* Color del "pulgar" de la barra de desplazamiento horizontal */
+  background-color: #d4d7d9; /* Color del "pulgar" de la barra de desplazamiento horizontal */
   border-radius: 4px; /* Borde redondeado del "pulgar" */
 }
 
@@ -108,4 +108,9 @@ mat-dialog-content {
 .ag-chart-tooltip {
   z-index: 1 !important;
   position: absolute !important;
+}
+
+.mat-icon-white {
+  color: #ffffff !important;
+  fill: #ffffff !important;
 }

@@ -6,7 +6,10 @@ import {
 import { CommonModule } from '@angular/common';
 import { CalendarComponent } from './calendar.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { MatDatepickerModule } from '@angular/material/datepicker';
+import {
+  MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER,
+  MatDatepickerModule,
+} from '@angular/material/datepicker';
 import { MatCardModule } from '@angular/material/card';
 import {
   DateAdapter,
@@ -82,6 +85,7 @@ registerLocaleData(localeEs, 'es-ES');
     { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
     LoaderService,
     QuestionService,
+    MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })

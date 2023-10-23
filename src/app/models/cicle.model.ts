@@ -21,3 +21,10 @@ export interface FisrtCycle {
   regularCycle?: number | string | any;
   dayOfBleding?: number | string | any;
 }
+
+export interface PredictionCycle {
+  numberOvulation: number; //dia en donde se seteara la ovulacion
+  countNextPeriod: number; //dias faltantes para el proximo periodo
+  countRestOvuation: number; //dias faltantes para la ovulacion
+  countRestFertile: number;
+}
