@@ -22,6 +22,7 @@ import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
 
 @Component({
   selector: 'app-header-usuario',
@@ -48,6 +49,9 @@ export class HeaderUsuarioComponent implements OnInit {
   userStorage!: UserResponse;
   isLogging: boolean = false;
   isSurveyInit = false;
+
+  icon: any = CYCLE_STATE?.ovulationDay;
+
 
   ngOnInit(): void {
     this.store.select(selectUserLogin).subscribe((data: any) => {
@@ -76,10 +80,6 @@ export class HeaderUsuarioComponent implements OnInit {
   handleRouter(path: string): void {
     this.router.navigate([path]);
     this.closeDrawerButton();
-  }
-
-  filterMenuDesktop(menu: Menu[]): Menu[] {
-    return menu.filter((item) => item.path !== '');
   }
 
   menuToggle(): void {
