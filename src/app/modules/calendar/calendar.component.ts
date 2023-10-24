@@ -7,6 +7,9 @@ import { Router } from '@angular/router';
 import { constants } from 'src/app/constans/constants';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
+import { AppState } from 'src/app/redux/store/app.store';
+import { Store } from '@ngrx/store';
+import { selectNumberOfOvulation } from 'src/app/redux/selectors/calendar.selector';
 
 @Component({
   selector: 'app-calendar',
@@ -21,12 +24,16 @@ export class CalendarComponent implements OnInit {
   );
   myRegisterQuestion!: QuestionUserMenstruation;
 
+  nextPeriod: number = 0;
+  nextOvulation: number = 0;
+
   constructor(
     public dialog: MatDialog,
     private localStorageService: LocalStorageService,
     private cicleService: CicleService,
     private router: Router,
-    private questionsService: QuestionService
+    private questionsService: QuestionService,
+    private store: Store<AppState>
   ) {
     // this.dateAdapter.setLocale('es-ES');
   }
@@ -36,6 +43,14 @@ export class CalendarComponent implements OnInit {
     this.cicleService.getAllCycles(userId).subscribe({
       next: (cycles: Cycle[] | any[]) => {
         this.cycle = cycles[cycles?.length - 1];
+        this.store.select(selectNumberOfOvulation).subscribe((data: any) => {
+          this.nextPeriod = Number(
+            new Date(this.cycle?.dateBeging)?.getDate() +
+              data?.numberOvulation * 2 -
+              new Date().getDate()
+          );
+          this.nextOvulation = data?.numberOvulation;
+        });
       },
     });
     const idRegisterQuestion = JSON.parse(

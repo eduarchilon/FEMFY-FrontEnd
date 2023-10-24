@@ -3,6 +3,8 @@ export interface DataPieChart {
   dayCount: number;
   label: string;
   color: string;
+  fase?: string;
+  isOvulation?: boolean;
 }
 
 export interface DataPieChartChildren extends DataPieChart {
