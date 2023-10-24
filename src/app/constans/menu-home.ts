@@ -48,3 +48,49 @@ export const MENU_PROFILE: Menu[] = [
     iconColor: 'accent',
   },
 ];
+
+export const MAT_MOBILE_NO_LOGGUEADO: Menu[] = [
+  {
+    label: 'Inicio',
+    path: '',
+    icon: 'home',
+  },
+  {
+    label: 'Ingresar',
+    path: 'login-usuario',
+    icon: 'login',
+  },
+  {
+    label: 'Registrarse',
+    path: 'registro-usuario',
+    icon: 'person_add',
+  },
+];
+
+export const MAT_MOBILE_LOGUEADO: Menu[] = [
+  {
+    label: 'Inicio',
+    path: '',
+    icon: 'home',
+  },
+  {
+    label: 'Calendario',
+    path: 'calendario',
+    icon: 'event',
+  },
+  {
+    label: 'Estudios',
+    path: 'documentation',
+    icon: 'source',
+  },
+  {
+    label: 'Comunidad',
+    path: 'foro',
+    icon: 'groups',
+  },
+  // {
+  //   label: 'Más',
+  //   path: '',
+  //   icon: 'more_vert',
+  // },
+];

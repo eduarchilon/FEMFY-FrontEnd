@@ -21,8 +21,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appStore } from './redux/store/app.store';
-import { ForumComponent } from './modules/forum/forum.component';
-import { TopicComponent } from './modules/forum/topic/topic.component';
 import { ForumModule } from './modules/forum/forum.module';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ProfileModule } from './modules/profile/profile.module';
@@ -30,12 +28,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { LoaderService } from './services/loader/loader.service';
 import { RouterModule } from '@angular/router';
 import { MatIconService } from './services/mat-icon/mat-icon.service';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideStorage,getStorage } from '@angular/fire/storage';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -66,8 +62,6 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     }),
     StoreModule.forRoot(appStore),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    MatIconModule,
-    MatButtonModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
   ],

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoaderComponent } from './loader/loader.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FooterUsuarioComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +42,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     FooterUsuarioComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   providers: [AuthService, LocalStorageService],
 })
