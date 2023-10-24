@@ -76,29 +76,18 @@ export class DatePickerComponent implements OnInit {
             data?.numberOvulation,
             'days'
           );
-          console.log(data?.numberOvulation);
-          
-        });
-        this.endCycle = moment(res?.dateBeging);
-        this.sampleRange = new DateRange(this.initCycle, this.endCycle);
-        if (
-          this.myRegisterQuestion &&
-          this.myRegisterQuestion.lastCycleDuration &&
-          this.myRegisterQuestion.regularCycleDuration
-        ) {
-          const endCycle =
-            (this.myRegisterQuestion.lastCycleDuration +
-              this.myRegisterQuestion.regularCycleDuration) /
-            2;
-          this.endCycle?.add(endCycle, 'days');
-          const predictionNextPeriod = this.endCycle.diff(
+          this.endCycle = moment(res?.dateBeging).add(
+            this.cycle?.daysOfBleeding - 1,
+            'days'
+          );
+          // this.endCycle?.add(this.cycle.dayOfBleding, 'days');
+          const predictionNextPeriod = this.endCycle?.diff(
             moment(new Date()),
             'days'
           );
-          console.log(predictionNextPeriod);
-        }
+        });
+        this.sampleRange = new DateRange(this.initCycle, this.endCycle);
       });
-
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
       .getEventsCalendar(userId)

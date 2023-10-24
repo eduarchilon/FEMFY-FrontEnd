@@ -16,7 +16,7 @@
       <div class="flex flex-col gap-3">
         <div class="flex gap-2 items-center max-sm:text-sm">
           <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
-          Ciclo
+          Periodo
         </div>
         <div class="flex gap-2 items-center max-sm:text-sm">
           <div
@@ -51,7 +51,7 @@
           <span class="text-2xl font-semibold max-lg:text-xl"
             >Siguiente períodio:</span
           >
-          <p class="text-lg">Faltan 23 días</p>
+          <p class="text-lg">Faltan {{ nextPeriod }} días</p>
         </div>
       </div>
       <div class="flex items-center gap-5">
@@ -63,7 +63,7 @@
           <span class="text-2xl font-semibold max-lg:text-xl"
             >Predicción día de ovulación:</span
           >
-          <p class="text-lg">Faltan 15 días</p>
+          <p class="text-lg">Faltan {{ nextOvulation }} días</p>
         </div>
       </div>
       <div class="flex items-center gap-5">
@@ -75,7 +75,7 @@
           <span class="text-2xl font-semibold max-lg:text-xl"
             >Predicción días fértiles:</span
           >
-          <p class="text-lg">Faltan 6 días</p>
+          <p class="text-lg">Faltan {{ nextOvulation - 4 }} días</p>
         </div>
       </div>
     </div>

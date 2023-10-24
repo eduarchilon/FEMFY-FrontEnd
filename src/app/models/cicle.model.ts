@@ -1,3 +1,5 @@
+import { DataPieChartChildren } from './data-pie-chart';
+
 export interface Cycle {
   dateBeging?: Date | any | string;
   dateEnd?: Date | any | string;
@@ -27,4 +29,9 @@ export interface PredictionCycle {
   countNextPeriod: number; //dias faltantes para el proximo periodo
   countRestOvuation: number; //dias faltantes para la ovulacion
   countRestFertile: number;
+}
+
+export interface CyclePhaseState {
+  statePhase: DataPieChartChildren;
+  ovulationNumber: number;
 }

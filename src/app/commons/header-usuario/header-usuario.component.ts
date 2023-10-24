@@ -23,6 +23,7 @@ import { AppState } from 'src/app/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
+import { selectCyclePhaseState } from 'src/app/redux/selectors/cycle.selctor';
 
 @Component({
   selector: 'app-header-usuario',
@@ -50,10 +51,25 @@ export class HeaderUsuarioComponent implements OnInit {
   isLogging: boolean = false;
   isSurveyInit = false;
 
-  icon: any = CYCLE_STATE?.ovulationDay;
-
+  icon!: any;
 
   ngOnInit(): void {
+    this.store.select(selectCyclePhaseState).subscribe((data: any) => {
+      if (
+        data?.cycleState?.statePhase?.fase === 'fertileDay' &&
+        data?.cycleState?.statePhase?.id === data?.cycleState?.ovulationNumber
+      ) {
+        this.icon = CYCLE_STATE?.ovulationDay;
+      } else if (data?.cycleState?.statePhase?.fase === 'folicularDay') {
+        this.icon = CYCLE_STATE?.folicularDay;
+      } else if (data?.cycleState?.statePhase?.fase === 'menstrualDay') {
+        this.icon = CYCLE_STATE?.menstrualDay;
+      } else if (data?.cycleState?.statePhase?.fase === 'fertileDay') {
+        this.icon = CYCLE_STATE?.fertileDay;
+      } else if (data?.cycleState?.statePhase?.fase === 'luteaDay') {
+        this.icon = CYCLE_STATE?.luteaDay;
+      }
+    });
     this.store.select(selectUserLogin).subscribe((data: any) => {
       this.userResponse = data?.user;
       if (!this.userResponse) {

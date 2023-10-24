@@ -90,7 +90,7 @@ export class PreguntaComponent implements OnInit {
           const lastTime = new Date(this.formOneRegister?.value?.lastTime);
           this.cycleServie
             .editCycle({
-              dateBeging: lastTime.setDate(lastTime.getDate() - 5),
+              dateBeging: lastTime.setDate(lastTime.getDate()),
               id: this.localStorageService.parseLocalStorage(
                 constants.ID_FIRST_CYCLE
               ),
