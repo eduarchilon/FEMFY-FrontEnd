@@ -9,7 +9,7 @@
             <h2 class="text-4xl font-bold text-white mb-5">Cargar nuevo estudio</h2>
             <div class="mb-3">
                 <label for="typeStudy" class="block text-white text-xl mb-2">Tipo de estudio</label>
-                <select id="typeStudy" class="rounded-full border w-full p-4">
+                <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
                     <option value="0" selected>Selecciona un tipo de estudio</option>
                     <option value="1">Colposcopia</option>
                     <option value="2">Papanicolaou</option>
@@ -24,8 +24,8 @@
             </div>
 
             <div class="mb-3">
-                <label for="description" class="block text-white text-xl mb-2">Descripción</label>
-                <input type="text" class="rounded-full border w-full p-4" formControlName="description" placeholder="Descripción del estudio" />
+                <label for="description" class="block text-white text-xl mb-2">Descripción o nota</label>
+                <input type="text" class="rounded-full border w-full p-4" formControlName="description" placeholder="Descripción o nota del estudio" />
             </div>
 
             <div class="mb-3">
@@ -33,13 +33,8 @@
                 <input type="date" class="rounded-full border w-full p-4" formControlName="studyDate" placeholder="Fecha del estudio" />
             </div>
 
-            <div class="mb-3">
-                <label for="note" class="block text-white text-xl mb-2">Nota</label>
-                <input type="text" placeholder="Notas del profesional" class="rounded-full border w-full p-4">
-            </div>
-
             <div class="flex mt-5">
-                <button class="text-white font-bold rounded-full bg-green-500 me-3 w-full p-3" type="submit" (click)="uploadFile()">Guardar estudio</button>
+                <button class="text-white font-bold rounded-full bg-green-500 me-3 w-full p-3" type="submit">Guardar estudio</button>
                 <button class="text-white font-bold rounded-full bg-red-500 w-full p-3">Cancelar</button>
             </div>
         </div>

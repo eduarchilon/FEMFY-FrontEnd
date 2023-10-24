@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { DocumentationService } from 'src/app/services/documentation/documentation.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
-
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-documentation',
@@ -15,16 +15,11 @@ export class DocumentationComponent implements OnInit {
 
   formDocumentation: FormGroup = new FormGroup({
     description: new FormControl('', Validators.required),
-    fileBase64: new FormControl('', Validators.required),
-    fileExt: new FormControl('', Validators.required),
     fileName: new FormControl('', Validators.required),
-    idFile: new FormControl('', Validators.required),
-    idUser: new FormControl(this.authService.getUserId(), Validators.required),
+    idUser: new FormControl('', Validators.required),
     studyDate: new FormControl('', Validators.required),
-    typeStudy: new FormGroup({
-      description: new FormControl('', Validators.required),
-      idTypeStudy: new FormControl('', Validators.required)
-    })
+    typeStudy: new FormControl('', Validators.required)
+
   });
 
   selectedFile: File | null = null;
@@ -34,8 +29,22 @@ export class DocumentationComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private documentationService: DocumentationService,
-    private storage: Storage
-    ) { }
+    private localStorageService: LocalStorageService,
+    private fb: FormBuilder
+    ) { 
+
+      this.formDocumentation = this.fb.group({
+        description: ['', Validators.required],
+        fileBase64: [''], // Este campo lo llenarás cuando se cargue un archivo
+        fileExt: [''], // Este campo lo llenarás cuando se cargue un archivo
+        fileName: ['', Validators.required],
+        idUser: ['', Validators.required],
+        studyDate: ['', Validators.required],
+        typeStudy: ['', Validators.required]
+      });
+
+
+    }
 
   ngOnInit(): void {
     
@@ -52,39 +61,29 @@ export class DocumentationComponent implements OnInit {
     }
   }
 
- /* uploadFile($event: any){
-    const file = $event.target.files[0];
-
-    const imageRef = ref(this.storage, `documentation/${file.name}`);
-
-    uploadBytes(imageRef, file).then(x =>{
-      console.log(x);
-    }).catch(error => console.log(error));
-
-  }*/
-
   uploadFile(): void {
 
     if (this.selectedFile) {
       const formData = new FormData();
-
-      formData.append('description', this.formDocumentation.get('description')?.value);
+      
       formData.append('fileBase64', this.fileBase64);
-      formData.append('fileExt', this.formDocumentation.get('fileExt')?.value);
-      formData.append('fileName', this.formDocumentation.get('fileName')?.value);
-      formData.append('idFile', this.formDocumentation.get('idFile')?.value);
-      formData.append('idUser', this.formDocumentation.get('idUser')?.value);
+      formData.append('fileExt', this.getFileExtension(this.selectedFile.name));
+      formData.append('description', this.formDocumentation.get('description')?.value);
+      formData.append('fileName', this.selectedFile.name);
+      formData.append('idUser', JSON.stringify(this.localStorageService.getUserByLogin()?.idUser));
       formData.append('studyDate', this.formDocumentation.get('studyDate')?.value);
   
-      // Crear el objeto 'typeStudy' y convertirlo a JSON
-      const typeStudy = {
-        description: this.formDocumentation.get('typeStudy.description')?.value,
-        idTypeStudy: this.formDocumentation.get('typeStudy.idTypeStudy')?.value
-      };
-      formData.append('typeStudy', JSON.stringify(typeStudy));
+      formData.append('typeStudy', this.formDocumentation.get('typeStudy')?.value);
 
-      console.log(formData);
+      /*console.log(this.fileBase64);
+      console.log(this.getFileExtension(this.selectedFile.name));
+      console.log(this.formDocumentation.get('description')?.value);
+      console.log(this.selectedFile.name);
+      console.log(JSON.stringify(this.localStorageService.getUserByLogin()?.idUser));
+      console.log(this.formDocumentation.get('studyDate')?.value);
+      console.log(JSON.stringify(this.formDocumentation.get('typeStudy')?.value));*/
 
+      
       this.documentationService.uploadFile(formData).subscribe(
         (response) => {
           console.log('Datos enviados con éxito', response);
@@ -94,12 +93,14 @@ export class DocumentationComponent implements OnInit {
         });
      }
   }
+
   
   convertFileToBase64(file: File) {
     const reader = new FileReader();
 
     reader.onloadend = () => {
       this.fileBase64 = reader.result as string;
+      console.log('Archivo convertido a base64:', this.fileBase64);
     };
 
     reader.readAsDataURL(file);
@@ -108,6 +109,10 @@ export class DocumentationComponent implements OnInit {
   getFileExtension(filename: string): string {
     return filename.split('.').pop() || '';
   }
+
+
+
+
 
 
   //DELETE Y DOWNLOAD NO CONFIGURADOS

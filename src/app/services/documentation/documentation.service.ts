@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 
 export class DocumentationService {
 
-  usersUrl: string = environment.apiUrlLocal + '/user';
+  usersUrl: string = environment.apiUrlLocal + '/file';
 
   constructor(
     private http: HttpClient,
