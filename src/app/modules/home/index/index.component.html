@@ -94,6 +94,21 @@
         <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
           <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
             <h5
+              class="p-[20px] text-white bg-[#DA047A] rounded-t-[20px] font-semibold text-[20px]"
+            >
+              Historial de ciclos
+            </h5>
+            <div class="p-[20px] flex flex-col gap-[15px]">
+              <ng-container *ngIf="cycles.length === 0">
+                <h5>Todavía no existen datos cargados.</h5>
+              </ng-container>
+              <ng-container *ngIf="cycles.length > 0">
+                <app-cicle-historial [cycles]="cycles"></app-cicle-historial>
+              </ng-container>
+            </div>
+          </div>
+          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
+            <h5
               class="p-[20px] text-white rounded-t-[20px] bg-[#DA047A] font-semibold text-[20px]"
             >
               Recomendaciones
@@ -111,21 +126,7 @@
               </h5>
             </div>
           </div>
-          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-            <h5
-              class="p-[20px] text-white bg-[#DA047A] rounded-t-[20px] font-semibold text-[20px]"
-            >
-              Historial de ciclos
-            </h5>
-            <div class="p-[20px] flex flex-col gap-[15px]">
-              <ng-container *ngIf="cycles.length === 0">
-                <h5>Todavía no existen datos cargados.</h5>
-              </ng-container>
-              <ng-container *ngIf="cycles.length > 0">
-                <app-cicle-historial [cycles]="cycles"></app-cicle-historial>
-              </ng-container>
-            </div>
-          </div>
+
         </div>
       </div>
     </div>
