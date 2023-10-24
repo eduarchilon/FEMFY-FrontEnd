@@ -24,6 +24,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
 import { selectCyclePhaseState } from 'src/app/redux/selectors/cycle.selctor';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-header-usuario',
@@ -38,6 +39,7 @@ export class HeaderUsuarioComponent implements OnInit {
   @ViewChild('drawer') drawer!: ElementRef;
   @ViewChild('backdrop') backdrop!: ElementRef;
   @ViewChild('navBar') navBar!: ElementRef;
+  @ViewChild('myTooltip') myTooltip!: MatTooltip;
 
   constructor(
     private router: Router,
@@ -145,5 +147,13 @@ export class HeaderUsuarioComponent implements OnInit {
     this.router.navigate(['/']).then(() => {
       location.reload();
     });
+  }
+
+  displayTooltip() {
+    this.myTooltip.disabled = false;
+    this.myTooltip.show();
+    setTimeout(() => {
+      this.myTooltip.disabled = true;
+    }, 1000);
   }
 }

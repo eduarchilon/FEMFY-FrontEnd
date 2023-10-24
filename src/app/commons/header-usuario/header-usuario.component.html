@@ -34,7 +34,7 @@
       >
       <ng-container *ngIf="isLogging">
         <ng-container *ngIf="icon">
-          <button matTooltip="{{ icon?.desc }}" class="flex items-center">
+          <button #myTooltip="matTooltip" (click)="myTooltip.show()" matTooltip="{{ icon?.desc }}" class="flex items-center">
             <mat-icon class="m-2 mt-4" [svgIcon]="icon?.name"></mat-icon>
           </button>
         </ng-container>
