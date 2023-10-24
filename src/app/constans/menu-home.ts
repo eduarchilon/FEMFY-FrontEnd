@@ -2,7 +2,7 @@ import { Menu } from '../models/menu-model';
 
 export const MENU_NO_LOGUEADO: Menu[] = [
   {
-    label: 'Home',
+    label: 'Inicio',
     path: '',
   },
   {
@@ -17,7 +17,7 @@ export const MENU_NO_LOGUEADO: Menu[] = [
 
 export const MENU_LOGUEADO: Menu[] = [
   {
-    label: 'Home',
+    label: 'Inicio',
     path: '',
   },
   {
