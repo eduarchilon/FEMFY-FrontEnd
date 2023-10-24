@@ -13,19 +13,19 @@
         femfy
       </h1>
     </div>
-    <button
+    <!-- <button
       *ngIf="isSurveyInit === false"
       class="lg:hidden text-xl"
       (click)="menuToggle()"
     >
       <mat-icon class="text-[2rem]">menu</mat-icon>
-    </button>
+    </button> -->
     <div
       *ngIf="isSurveyInit === false"
-      class="hidden lg:flex space-x-4 text-[20px]"
+      class="flex space-x-4 text-[20px]"
     >
       <a
-        class="p-3"
+        class="p-3 max-lg:hidden"
         *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
         routerLinkActive="text-white font-semibold bg-[#DA057A] rounded-full"
         [routerLinkActiveOptions]="{ exact: true }"
@@ -34,7 +34,7 @@
       >
       <ng-container *ngIf="isLogging">
         <ng-container *ngIf="icon">
-          <button matTooltip="{{ icon?.desc }}">
+          <button matTooltip="{{ icon?.desc }}" class="flex items-center">
             <mat-icon class="m-2 mt-4" [svgIcon]="icon?.name"></mat-icon>
           </button>
         </ng-container>
@@ -73,13 +73,13 @@
   </nav>
 </div>
 
-<div
+<!-- <div
   #backdrop
   (click)="backdropView()"
   class="hidden fixed top-0 left-0 h-screen w-full bg-black opacity-50 z-10"
-></div>
+></div> -->
 
-<div
+<!-- <div
   #drawer
   class="bg-white fixed top-0 left-0 h-screen w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
 >
@@ -114,4 +114,4 @@
   >
     Cerrar sesión
   </button>
-</div>
+</div> -->
