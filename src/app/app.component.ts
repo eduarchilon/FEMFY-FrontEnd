@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { TokenSwPush } from './models/token-push.model';
 import { SwPush } from '@angular/service-worker';
 import { NotificationService } from './services/notification/notification.service';
 import { LoaderService } from './services/loader/loader.service';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { constants } from './constans/constants';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
 
   constructor(
     private swPush: SwPush,
+    private router: Router,
     private notificationService: NotificationService,
     private localStorageService: LocalStorageService
   ) {}
@@ -41,4 +43,5 @@ export class AppComponent {
       })
       .catch((err) => err);
   }
+
 }

@@ -43,7 +43,7 @@ export class EventsNotificationComponent implements OnInit {
         ) {
           this.sendNotification(event?.title, event?.description);
         }
-      }, 60000);
+      }, 30000);
     });
   }
 

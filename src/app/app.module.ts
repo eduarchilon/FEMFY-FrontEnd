@@ -21,8 +21,6 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appStore } from './redux/store/app.store';
-import { ForumComponent } from './modules/forum/forum.component';
-import { TopicComponent } from './modules/forum/topic/topic.component';
 import { ForumModule } from './modules/forum/forum.module';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ProfileModule } from './modules/profile/profile.module';
@@ -32,6 +30,8 @@ import { RouterModule } from '@angular/router';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
+import { MatIconService } from './services/mat-icon/mat-icon.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +52,8 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     HttpClientModule,
     MatDialogModule,
     RouterModule,
+    FormsModule,
+    ReactiveFormsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -63,9 +65,16 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
   ],
-  providers: [LoaderService, { provide: MAT_DATE_LOCALE, useValue: 'es-ES' }],
-
+  providers: [
+    LoaderService,
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+    MatIconService,
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(private customMatIcon: MatIconService) {
+    this.customMatIcon.registerMatIcons();
+  }
+}

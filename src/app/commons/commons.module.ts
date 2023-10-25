@@ -14,6 +14,8 @@ import { StoreModule } from '@ngrx/store';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoaderComponent } from './loader/loader.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { LoaderComponent } from './loader/loader.component';
     FooterUsuarioComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +34,7 @@ import { LoaderComponent } from './loader/loader.component';
     MatProgressSpinnerModule,
     StoreModule,
     MatButtonModule,
+    MatTooltipModule,
     MatMenuModule,
   ],
   exports: [
@@ -38,6 +42,7 @@ import { LoaderComponent } from './loader/loader.component';
     FooterUsuarioComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   providers: [AuthService, LocalStorageService],
 })

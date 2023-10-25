@@ -1,4 +1,4 @@
-<div class="w-[100%] p-5">
+<div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
   <div class="flex justify-end px-5">
     <button (click)="closeDialog()" mat-icon-button>
       <mat-icon>close</mat-icon>
@@ -6,7 +6,9 @@
   </div>
   <mat-dialog-content>
     <div class="pb-5">
-      <h3 class="text-4xl font-semibold mb-5">Crear nuevo evento</h3>
+      <h3 class="text-4xl font-semibold mb-5 max-sm:text-2xl">
+        Crear nuevo evento
+      </h3>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
       <h5 class="py-5">Fecha: {{ data?.daySelected | date : "dd MMM" }}</h5>
       <form
@@ -39,10 +41,10 @@
         ></textarea>
         <div>
           <button
-            class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px]"
+            class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px] max-sm:w-[100%]"
             type="submit"
           >
-            Crear
+            Crear registro
           </button>
         </div>
       </form>
@@ -60,17 +62,14 @@
               <mat-expansion-panel-header>
                 <mat-panel-title>{{ item.hour }}</mat-panel-title>
                 <mat-panel-description>
-                  {{ item.title }}
+                  <span class="max-sm:text-[12px]">{{ item.title }}</span>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <div class="flex justify-between">
-                <p>{{ item.description }}</p>
-                <p
-                  class="text-red-600 cursor-pointer"
-                  (click)="deleteEvent(item)"
-                >
-                  Borrar
-                </p>
+              <div class="flex justify-between flex-col break-words">
+                <p class="max-sm:text-[12px]">{{ item.description }}</p>
+                <button mat-mini-fab color="warn" class="self-end">
+                  <mat-icon (click)="deleteEvent(item)"> delete </mat-icon>
+                </button>
               </div>
             </mat-expansion-panel>
           </ng-container>
