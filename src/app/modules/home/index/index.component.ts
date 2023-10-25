@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
@@ -14,6 +14,7 @@ import { constants } from 'src/app/constans/constants';
 import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.component';
 import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-index',
@@ -37,6 +38,8 @@ export class IndexComponent implements OnInit {
   initRegisterId: number = this.localStorageService.getLocalStorage(
     constants.ID_REGISTER
   );
+
+  @ViewChild('editRecomendation') editRecomendation!: MatTooltip;
 
   user!: any; //cambiar objeto
 
@@ -112,5 +115,13 @@ export class IndexComponent implements OnInit {
         cycleChart,
       },
     });
+  }
+
+  displayTooltip() {
+    this.editRecomendation.disabled = false;
+    this.editRecomendation.show();
+    setTimeout(() => {
+      this.editRecomendation.disabled = true;
+    }, 1000);
   }
 }
