@@ -12,6 +12,7 @@ import { SurveyComponent } from './modules/survey/survey.component';
 import { ProfileComponent } from './modules/profile/profile.component';
 import { IndexComponent } from './modules/home/index/index.component';
 import { ConversationComponent } from './modules/forum/conversation/conversation.component';
+import { HistorialQuestionsComponent } from './modules/historial/components/historial-questions/historial-questions.component';
 
 
 const routes: Routes = [
@@ -46,6 +47,10 @@ const routes: Routes = [
   {
     path: 'documentation',
     component: DocumentationComponent,
+  },
+  {
+    path: 'historial',
+    component: HistorialQuestionsComponent,
   }
 ];
 

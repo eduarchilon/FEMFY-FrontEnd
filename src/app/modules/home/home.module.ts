@@ -25,6 +25,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { EditCycleComponent } from './components/edit-cycle/edit-cycle.component';
 import { DeleteCycleComponent } from './components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from './components/finish-cycle/finish-cycle.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { FinishCycleComponent } from './components/finish-cycle/finish-cycle.com
     MatExpansionModule,
     ReactiveFormsModule,
     MatMenuModule,
+    MatTooltipModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [

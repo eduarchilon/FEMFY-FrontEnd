@@ -32,6 +32,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { HistorialModule } from './modules/historial/historial.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -64,6 +65,7 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    HistorialModule,
   ],
   providers: [
     LoaderService,
