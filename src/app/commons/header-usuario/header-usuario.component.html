@@ -13,16 +13,9 @@
         femfy
       </h1>
     </div>
-    <!-- <button
-      *ngIf="isSurveyInit === false"
-      class="lg:hidden text-xl"
-      (click)="menuToggle()"
-    >
-      <mat-icon class="text-[2rem]">menu</mat-icon>
-    </button> -->
     <div
       *ngIf="isSurveyInit === false"
-      class="flex space-x-4 text-[20px]"
+      class="flex space-x-4 text-[20px] items-center"
     >
       <a
         class="p-3 max-lg:hidden"
@@ -34,7 +27,12 @@
       >
       <ng-container *ngIf="isLogging">
         <ng-container *ngIf="icon">
-          <button #myTooltip="matTooltip" (click)="myTooltip.show()" matTooltip="{{ icon?.desc }}" class="flex items-center">
+          <button
+            #myTooltip="matTooltip"
+            (click)="myTooltip.show()"
+            matTooltip="{{ icon?.desc }}"
+            class="block"
+          >
             <mat-icon class="m-2 mt-4" [svgIcon]="icon?.name"></mat-icon>
           </button>
         </ng-container>
@@ -72,46 +70,3 @@
     </div>
   </nav>
 </div>
-
-<!-- <div
-  #backdrop
-  (click)="backdropView()"
-  class="hidden fixed top-0 left-0 h-screen w-full bg-black opacity-50 z-10"
-></div> -->
-
-<!-- <div
-  #drawer
-  class="bg-white fixed top-0 left-0 h-screen w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
->
-  <button class="absolute top-2 right-2 text-xl" (click)="closeDrawerButton()">
-    <mat-icon class="text-[1rem] active:text-[1.5rem]">close</mat-icon>
-  </button>
-
-  <img
-    src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
-    class="rounded-full border-4 border-[#DA047A] w-[50px] h-[50px] m-auto max-lg:hidden"
-  />
-  <ul class="space-y-4 my-8 px-2">
-    <ng-container
-      *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
-    >
-      <li>
-        <a
-          class="text-[20px] font-semibold active:text-[22px]"
-          (click)="handleRouter(menu.path)"
-          routerLink="{{ menu.path }}"
-          routerLinkActive="text-[#FF97A5]"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >{{ menu.label }}</a
-        >
-      </li>
-      <mat-divider></mat-divider>
-    </ng-container>
-  </ul>
-  <button
-    class="text-white font-semibold bg-[#DA057A] rounded-full w-full p-3 max-lg:hidden"
-    (click)="logoutUser()"
-  >
-    Cerrar sesión
-  </button>
-</div> -->
