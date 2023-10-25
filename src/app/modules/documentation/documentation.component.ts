@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth/auth.service';
+import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { DocumentationService } from 'src/app/services/documentation/documentation.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Storage, ref, uploadBytes } from '@angular/fire/storage';
@@ -12,6 +11,8 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 })
 
 export class DocumentationComponent implements OnInit {
+
+  @ViewChild('fileLabel', { static: true }) fileLabel!: ElementRef;
 
   formDocumentation: FormGroup = new FormGroup({
     description: new FormControl('', Validators.required),
@@ -27,10 +28,10 @@ export class DocumentationComponent implements OnInit {
   fileBase64: string = '';
 
   constructor(
-    private authService: AuthService,
     private documentationService: DocumentationService,
     private localStorageService: LocalStorageService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private storage: Storage,
     ) { 
 
       this.formDocumentation = this.fb.group({
@@ -57,11 +58,30 @@ export class DocumentationComponent implements OnInit {
 
       console.log(files[0]);
 
-      this.convertFileToBase64(this.selectedFile);
+    this.fileLabel.nativeElement.textContent = this.selectedFile.name;
     }
   }
 
-  uploadFile(): void {
+
+  uploadFile(){
+
+    if (this.selectedFile) {
+    const file = this.selectedFile;
+    
+    const imgRef = ref(this.storage, `${this.localStorageService.getUserByLogin()?.idUser}/${file.name}`);
+
+    this.fileLabel.nativeElement.textContent = file.name;
+
+    uploadBytes(imgRef, file).then((snapshot) => {
+      console.log('Archivo subido con éxito.', snapshot);
+    })
+    .catch((error) => {
+      console.error('Error al subir el archivo:', error);
+    });
+  }
+}
+
+ /* uploadFile(): void {
 
     if (this.selectedFile) {
       const formData = new FormData();
@@ -75,13 +95,13 @@ export class DocumentationComponent implements OnInit {
   
       formData.append('typeStudy', this.formDocumentation.get('typeStudy')?.value);
 
-      /*console.log(this.fileBase64);
+      console.log(this.fileBase64);
       console.log(this.getFileExtension(this.selectedFile.name));
       console.log(this.formDocumentation.get('description')?.value);
       console.log(this.selectedFile.name);
       console.log(JSON.stringify(this.localStorageService.getUserByLogin()?.idUser));
       console.log(this.formDocumentation.get('studyDate')?.value);
-      console.log(JSON.stringify(this.formDocumentation.get('typeStudy')?.value));*/
+      console.log(JSON.stringify(this.formDocumentation.get('typeStudy')?.value));
 
       
       this.documentationService.uploadFile(formData).subscribe(
@@ -92,7 +112,7 @@ export class DocumentationComponent implements OnInit {
           console.error('Error al enviar datos', error);
         });
      }
-  }
+  } */
 
   
   convertFileToBase64(file: File) {
@@ -109,10 +129,6 @@ export class DocumentationComponent implements OnInit {
   getFileExtension(filename: string): string {
     return filename.split('.').pop() || '';
   }
-
-
-
-
 
 
   //DELETE Y DOWNLOAD NO CONFIGURADOS

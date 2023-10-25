@@ -47,8 +47,11 @@
                 <label for="file" class="cursor-pointer text ">
                     Cargue desde aquí
                 </label>
-                <input type="file" id="file" name="documentation" formControlName="fileBase64" class="hidden" (change)="fileSelected($event)"/>
+                <input type="file" id="file" name="documentation" class="hidden" (change)="fileSelected($event)"/>
                 </span>
+
+                
+                <span class="block text-gray-900 mt-2 py-[10px] px-[20px] w-[50%] rounded-[20px]" id="file_name_label" #fileLabel>Ningún archivo seleccionado</span>
 
             </div>
         </div>
