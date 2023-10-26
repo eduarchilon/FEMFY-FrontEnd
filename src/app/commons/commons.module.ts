@@ -16,6 +16,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { LoaderComponent } from './loader/loader.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChatbotComponent } from './chatbot/chatbot.component';
+import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     ChatbotComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +45,7 @@ import { ChatbotComponent } from './chatbot/chatbot.component';
     ChatbotComponent,
     SpinnerComponent,
     LoaderComponent,
+    MobileMenuComponent,
   ],
   providers: [AuthService, LocalStorageService],
 })
