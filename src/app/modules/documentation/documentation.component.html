@@ -11,15 +11,7 @@
                 <label for="typeStudy" class="block text-white text-xl mb-2">Tipo de estudio</label>
                 <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
                     <option value="0" selected>Selecciona un tipo de estudio</option>
-                    <option value="1">Colposcopia</option>
-                    <option value="2">Papanicolaou</option>
-                    <option value="3">Citología</option>
-                    <option value="4">Ecografía vaginal</option>
-                    <option value="5">Histeroscopía</option>
-                    <option value="6">Mamografía</option>
-                    <option value="7">Ecografía mamaria</option>
-                    <option value="8">Densitometría ósea</option>
-                    <option value="9">Analítica de sangre</option>
+                    <option *ngFor="let study of typeStudies" [value]="study.name">{{ study.name }}</option>
                 </select>
             </div>
 
@@ -68,49 +60,15 @@
                         <tr>
                             <th scope="col" class="px-6 py-4 rounded-tl-[20px]">Título</th>
                             <th scope="col" class="px-6 py-4">Nota del profesional</th>
-                            <th scope="col" class="px-6 py-4">Documento</th>
                             <th scope="col" class="px-6 py-4">Fecha del estudio</th>
                             <th class="py-4 rounded-tr-[20px]"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="border-b dark:border-neutral-500">
-                            <td class="px-6 py-4">Papanicolaou</td>
-                            <td class="px-6 py-4">Sin anomalías</td>
-                            <td class="px-6 py-4">pap.pdf</td>
-                            <td class="px-6 py-4">01/10/2023</td>
-                            <td class="px-6 py-4">
-                                <button class="me-3">
-                                    <i class="fa fa-download w-[30px]" aria-hidden="true"></i>
-                                    Descargar
-                                </button>
-                                <button>
-                                    <i class="fa fa-trash w-[30px]" style="color: red;" aria-hidden="true"></i>
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="border-b dark:border-neutral-500">
-                            <td class="px-6 py-4">Ecografía mamaria</td>
-                            <td class="px-6 py-4">Se observa nodulo de 5mm</td>
-                            <td class="px-6 py-4">ecomamaria.pdf</td>
-                            <td class="px-6 py-4">17/09/2023</td>
-                            <td class="px-6 py-4">
-                                <button class="me-3">
-                                    <i class="fa fa-download w-[30px]" aria-hidden="true"></i>
-                                    Descargar
-                                </button>
-                                <button>
-                                    <i class="fa fa-trash w-[30px]" style="color: red;" aria-hidden="true"></i>
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                        <tr class="border-b dark:border-neutral-500">
-                            <td class="px-6 py-4">Ecografía transvaginal</td>
-                            <td class="px-6 py-4">Sin animalías</td>
-                            <td class="px-6 py-4">ecotrans.pdf</td>
-                            <td class="px-6 py-4">23/08/2023</td>
+                        <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
+                           <!-- <td class="px-6 py-4">{{ study.typeStudy }}</td>
+                            <td class="px-6 py-4">{{ study.description }}</td>
+                            <td class="px-6 py-4">{{ study.studyDate }}</td> -->
                             <td class="px-6 py-4">
                                 <button class="me-3">
                                     <i class="fa fa-download w-[30px]" aria-hidden="true"></i>

@@ -1,7 +1,7 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { DocumentationService } from 'src/app/services/documentation/documentation.service';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Storage, ref, uploadBytes } from '@angular/fire/storage';
+import { Storage, ref, uploadBytes, listAll, getDownloadURL, getMetadata } from '@angular/fire/storage';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
@@ -10,7 +10,20 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
   styleUrls: ['./documentation.component.scss']
 })
 
+
 export class DocumentationComponent implements OnInit {
+
+  typeStudies = [
+    { id: 1, name: 'Colposcopia' },
+    { id: 2, name: 'Papanicolaou' },
+    { id: 3, name: 'Citología' },
+    { id: 4, name: 'Ecografía vaginal' },
+    { id: 5, name: 'Histeroscopía' },
+    { id: 6, name: 'Mamografía' },
+    { id: 7, name: 'Ecografía mamaria' },
+    { id: 8, name: 'Densitometría ósea' },
+    { id: 9, name: 'Analítica de sangre' }
+  ];
 
   @ViewChild('fileLabel', { static: true }) fileLabel!: ElementRef;
 
@@ -48,7 +61,7 @@ export class DocumentationComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    
+    this.getFiles();
   }
 
   fileSelected(event: any) {
@@ -72,12 +85,22 @@ export class DocumentationComponent implements OnInit {
 
     this.fileLabel.nativeElement.textContent = file.name;
 
-    uploadBytes(imgRef, file).then((snapshot) => {
+
+    const metadata = {
+        description: this.formDocumentation.get('description')?.value,
+        studyDate: this.formDocumentation.get('studyDate')?.value,
+        typeStudy: this.formDocumentation.get('typeStudy')?.value,
+    };
+
+
+    uploadBytes(imgRef, file, { customMetadata: metadata }).then((snapshot) => {
       console.log('Archivo subido con éxito.', snapshot);
     })
     .catch((error) => {
       console.error('Error al subir el archivo:', error);
     });
+
+    this.formDocumentation.reset();
   }
 }
 
@@ -130,8 +153,29 @@ export class DocumentationComponent implements OnInit {
     return filename.split('.').pop() || '';
   }
 
-
   //DELETE Y DOWNLOAD NO CONFIGURADOS
+
+  studies: string[] = [];
+
+  getFiles() {
+
+    const idUser = JSON.stringify(this.localStorageService.getUserByLogin()?.idUser);
+    const fileRef = ref(this.storage, idUser);
+
+    listAll(fileRef).then(async idUser => {
+      this.studies = [];
+
+      for(let files of idUser.items){
+        const url = await getDownloadURL(files);
+        this.studies.push(url);
+      }
+
+    }).catch(error => console.log(error));
+
+  }
+
+//filter por metadata
+
 
   deleteFile(fileId: string): void {
     this.documentationService.deleteFile(fileId).subscribe(
