@@ -29,6 +29,7 @@ import { LoaderService } from './services/loader/loader.service';
 import { RouterModule } from '@angular/router';
 import { MatIconService } from './services/mat-icon/mat-icon.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
@@ -55,6 +56,7 @@ import { HistorialModule } from './modules/historial/historial.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
