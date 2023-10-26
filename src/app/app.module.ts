@@ -34,6 +34,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { HistorialModule } from './modules/historial/historial.module';
+import { LoginGuardian } from './utils/login-guardian.guardian';
 
 @NgModule({
   declarations: [AppComponent],
@@ -73,6 +74,7 @@ import { HistorialModule } from './modules/historial/historial.module';
     LoaderService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     MatIconService,
+    LoginGuardian,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
