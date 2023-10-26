@@ -15,11 +15,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { LoaderComponent } from './loader/loader.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { ChatbotComponent } from './chatbot/chatbot.component';
 
 @NgModule({
   declarations: [
     HeaderUsuarioComponent,
     FooterUsuarioComponent,
+    ChatbotComponent,
     SpinnerComponent,
     LoaderComponent,
   ],
@@ -38,6 +40,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
   exports: [
     HeaderUsuarioComponent,
     FooterUsuarioComponent,
+    ChatbotComponent,
     SpinnerComponent,
     LoaderComponent,
   ],
