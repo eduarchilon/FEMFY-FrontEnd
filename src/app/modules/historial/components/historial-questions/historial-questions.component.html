@@ -1,380 +1,255 @@
 <div class="bg-[#FEA8B1] px-[3vw]">
-  <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
-    <div
-      class="text-white items-stretch mt-10 gap-10 h-fit max-lg:items-center"
-    >
-      <div class="w-[100%]">
-        <mat-chip-listbox aria-label="Fish selection">
-          <mat-chip-option
-            (click)="toggleDivCancerMama()"
-            color="accent"
-            selected
-            >Cáncer de mama</mat-chip-option
-          >
-          <mat-chip-option (click)="toggleDivCancerOvario()" color="accent"
-            >Cáncer de ovario</mat-chip-option
-          >
-          <mat-chip-option (click)="toggleDivEndiometriosis()" color="accent"
-            >Endometriosis</mat-chip-option
-          >
-          <mat-chip-option (click)="toggleDivMioma()" color="accent"
-            >Miomas uterinos</mat-chip-option
-          >
-          <mat-chip-option (click)="toggleDivPoliquistico()" color="accent"
-            >Síndrome de ovario poliquístico</mat-chip-option
-          >
-          <mat-chip-option (click)="toggleDivMenopausia()" color="accent"
-            >Menopausia temprana</mat-chip-option
-          >
-        </mat-chip-listbox>
-      </div>
-      <div
-        class="pb-[300px] w-[100%]pt-10 mt-20"
-        *ngIf="mostrarDivCancerMama"
-      >
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      En tu familia, ¿alguien ha recibido un diagnóstico de
-                      cáncer de mama?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      En caso de que tengas un familiar, ¿Conocés detalles sobre
-                      el tratamiento que recibió y los resultados obtenidos?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Han tenido que someterse a cirugías relacionadas con esta
-                      enfermedad?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+    <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
+        <div class="text-white items-stretch mt-10 gap-10 h-fit max-lg:items-center">
+            <div class="w-[100%]">
+                <mat-chip-listbox aria-label="Fish selection">
+                    <mat-chip-option (click)="toggleDivCancerMama()" color="accent" selected>Cáncer de
+                        mama</mat-chip-option>
+                    <mat-chip-option (click)="toggleDivCancerOvario()" color="accent">Cáncer de ovario</mat-chip-option>
+                    <mat-chip-option (click)="toggleDivEndiometriosis()" color="accent">Endometriosis</mat-chip-option>
+                    <mat-chip-option (click)="toggleDivMioma()" color="accent">Miomas uterinos</mat-chip-option>
+                    <mat-chip-option (click)="toggleDivPoliquistico()" color="accent">Síndrome de ovario
+                        poliquístico</mat-chip-option>
+                    <mat-chip-option (click)="toggleDivMenopausia()" color="accent">Menopausia
+                        temprana</mat-chip-option>
+                </mat-chip-listbox>
             </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="pb-[300px] w-[100%]pt-10 mt-20 px-5"
-        *ngIf="mostrarDivCancerOvario"
-      >
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      En tu familia, ¿Existe un historial de cáncer de ovario en
-                      tu familia?
-                    </p>
-
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      En caso de que tengas un familiar, ¿Conoces detalles sobre
-                      el tipo de cáncer de ovario y la experiencia de
-                      tratamiento?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivCancerMama">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            En tu familia, ¿alguien ha recibido un diagnóstico de
+                                            cáncer de mama?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            En caso de que tengas un familiar, ¿Conocés detalles sobre
+                                            el tratamiento que recibió y los resultados obtenidos?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Han tenido que someterse a cirugías relacionadas con esta
+                                            enfermedad?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div
-        class="pb-[300px] w-[100%]pt-10 mt-20 px-5"
-        *ngIf="mostrarDivEndiometrosis"
-      >
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      En tu familia, ¿Alguna de las mujeres en tu familia ha
-                      sido diagnosticada con endometriosis?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Tenés información sobre la experiencia de tratamiento de
-                      la endometriosis en tu familia?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Han tenido que someterse a cirugías relacionadas con esta
-                      enfermedad?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </div>
-        </div>
-      </div>
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivCancerOvario">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            En tu familia, ¿Existe un historial de cáncer de ovario en
+                                            tu familia?
+                                        </p>
 
-      <div
-        class="pb-[300px] w-[100%]pt-10 mt-20 px-5"
-        *ngIf="mostrarDivPoliquistico"
-      >
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Alguna de tus parientes cercanas ha sido diagnosticada
-                      con el síndrome de ovario poliquístico?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Afectó su salud reproductiva?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            En caso de que tengas un familiar, ¿Conoces detalles sobre
+                                            el tipo de cáncer de ovario y la experiencia de
+                                            tratamiento?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div
-        class="pb-[300px] w-[100%]pt-10 mt-20 px-5"
-        *ngIf="mostrarDivMenopausia"
-      >
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Tienes algún conocido en tu familia que haya
-                      experimentado la menopausia a una edad temprana?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivEndiometrosis">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            En tu familia, ¿Alguna de las mujeres en tu familia ha
+                                            sido diagnosticada con endometriosis?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Tenés información sobre la experiencia de tratamiento de
+                                            la endometriosis en tu familia?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Han tenido que someterse a cirugías relacionadas con esta
+                                            enfermedad?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      <div class="pb-[300px] w-[100%]pt-10 mt-20 px-5" *ngIf="mostrarDivMioma">
-        <div class="container mx-auto">
-          <div class="lg:gap-10">
-            <div class="text-center mb-5 md:mb-0">
-              <mat-card class="my-5">
-                <mat-card-content>
-                  <div class="flex items-center">
-                    <p
-                      class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]"
-                    >
-                      ¿Tienes conocimiento de si algún miembro de tu familia ha
-                      tenido miomas uterinos?
-                    </p>
-                    <mat-radio-group
-                      class="flex flex-col w-48 m-auto mb-5"
-                      aria-label="Select an option"
-                    >
-                      <mat-radio-button class="text-center" value="1"
-                        >Si</mat-radio-button
-                      >
-                      <mat-radio-button class="text-center" value="2"
-                        >No</mat-radio-button
-                      >
-                    </mat-radio-group>
-                  </div>
-                </mat-card-content>
-              </mat-card>
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivPoliquistico">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Alguna de tus parientes cercanas ha sido diagnosticada
+                                            con el síndrome de ovario poliquístico?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Afectó su salud reproductiva?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivMenopausia">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Tienes algún conocido en tu familia que haya
+                                            experimentado la menopausia a una edad temprana?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivMioma">
+                <div class="container mx-auto">
+                    <div class="lg:gap-10">
+                        <div class="text-center mb-5 md:mb-0">
+                            <mat-card class="my-5">
+                                <mat-card-content>
+                                    <div class="flex items-center">
+                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
+                                            ¿Tienes conocimiento de si algún miembro de tu familia ha
+                                            tenido miomas uterinos?
+                                        </p>
+                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
+                                            aria-label="Select an option">
+                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </mat-card-content>
+                            </mat-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <!--
