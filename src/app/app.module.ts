@@ -32,6 +32,12 @@ import { environment } from '../environments/environment';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { MatIconService } from './services/mat-icon/mat-icon.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideStorage, getStorage } from '@angular/fire/storage';
+import { HistorialModule } from './modules/historial/historial.module';
+import { LoginGuardian } from './utils/login-guardian.guardian';
 
 @NgModule({
   declarations: [AppComponent],
@@ -54,6 +60,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -64,11 +71,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
+    HistorialModule,
   ],
   providers: [
     LoaderService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
     MatIconService,
+    LoginGuardian,
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],

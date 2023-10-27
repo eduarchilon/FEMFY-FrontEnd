@@ -1,29 +1,17 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  EventEmitter,
-  Inject,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { UserResponse } from 'src/app/models/user.model';
-import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
 import { AppState } from 'src/app/redux/store/app.store';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
-import { data } from 'src/app/constans/pie-chart-data';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+declare var createGoogleEvent: any;
 
 @Component({
   selector: 'app-event-day-drawer',
@@ -89,7 +77,6 @@ export class EventDayDrawerComponent implements OnInit {
               this.data?.daySelected?.date()
             ) {
               this.eventDaySelected.push(item);
-              console.log(this.eventDaySelected);
             }
           });
         });
@@ -105,7 +92,24 @@ export class EventDayDrawerComponent implements OnInit {
   }
 
   registerEevent(): void {
-    this.closeDialog();
+    const emailUser = this.localStorageService.getUserByLogin()?.email;
+    const date = this.data?.daySelected;
+    const time = this.formRegisterEvent?.value?.hour?.split(':');
+    let hour = 0;
+    let minutes = 0;
+    if (time.length === 2) {
+      hour = parseInt(time[0], 10);
+      minutes = parseInt(time[1], 10);
+      date.set({ hour: hour, minute: minutes });
+    }
+    const realDate = new Date(date);
+    const startTime = date.toISOString()?.slice(0, 18) + '-00:00';
+    const endTime = this.getEndTime(realDate);
+    const eventDetails = {
+      email: emailUser,
+      startTime: startTime,
+      endTime: endTime,
+    };
     this.loaderService.showLoader();
     this.calendarService
       .setEvent({
@@ -120,6 +124,7 @@ export class EventDayDrawerComponent implements OnInit {
           this.loaderService.showLoader();
           if (response) {
             this.loaderService.hideLoader();
+            this.closeDialog();
             this.router.navigate(['/calendario']).then(() => {
               location.reload();
             });
@@ -129,6 +134,7 @@ export class EventDayDrawerComponent implements OnInit {
         },
         error: (error) => error,
       });
+    // createGoogleEvent(eventDetails);
   }
 
   deleteEvent(event: any): void {
@@ -145,5 +151,11 @@ export class EventDayDrawerComponent implements OnInit {
       },
     });
     this.changeDetectorRef.detectChanges();
+  }
+
+  getEndTime(appointmentTime: Date | any) {
+    appointmentTime.setHours(appointmentTime.getHours() + 1);
+    const endTime = appointmentTime.toISOString().slice(0, 18) + '-00:00';
+    return endTime;
   }
 }
