@@ -7,10 +7,9 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 
-
 export class DocumentationService {
 
-  usersUrl: string = environment.apiUrlLocal + '/user';
+  usersUrl: string = environment.apiUrlLocal + '/file';
 
   constructor(
     private http: HttpClient,
@@ -25,10 +24,6 @@ export class DocumentationService {
       return this.http.delete(`${this.usersUrl}/deleteFile/${fileId}`);
     }
   
-    updateFile(fileId: string, fileData: FormData): Observable<any> {
-      return this.http.put(`${this.usersUrl}/updateFile/${fileId}`, fileData);
-    }
-
     downloadFile(fileId: string): Observable<any> {
       return this.http.get(`${this.usersUrl}/downloadFile/${fileId}`, { responseType: 'blob' });
     }
