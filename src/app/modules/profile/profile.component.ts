@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { UserResponse } from 'src/app/models/user.model';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 

@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map, of } from 'rxjs';
 import { Cycle } from 'src/app/models/cicle.model';
-import { setCycle } from 'src/app/redux/actions/cycle.action';
-import { AppState } from 'src/app/redux/store/app.store';
+import { setCycle } from 'src/app/services/redux/actions/cycle.action';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

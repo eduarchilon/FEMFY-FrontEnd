@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { UserResponse } from 'src/app/models/user.model';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';

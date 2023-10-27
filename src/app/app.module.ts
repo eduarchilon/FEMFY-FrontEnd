@@ -20,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { appStore } from './redux/store/app.store';
+import { appStore } from './services/redux/store/app.store';
 import { ForumModule } from './modules/forum/forum.module';
 import { SurveyModule } from './modules/survey/survey.module';
 import { ProfileModule } from './modules/profile/profile.module';
@@ -35,6 +35,8 @@ import { environment } from '../environments/environment';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { HistorialModule } from './modules/historial/historial.module';
 import { LoginGuardian } from './utils/login-guardian.guardian';
+import { EffectsModule } from '@ngrx/effects';
+import { CycleEffects } from './services/redux/effects/cycle.effect';
 
 @NgModule({
   declarations: [AppComponent],
@@ -69,6 +71,7 @@ import { LoginGuardian } from './utils/login-guardian.guardian';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     HistorialModule,
+    EffectsModule.forRoot([CycleEffects]),
   ],
   providers: [
     LoaderService,
