@@ -183,19 +183,19 @@ export class DocumentationComponent implements OnInit {
 
 
 
-/*  deleteFile(fullPath: string): void {
+ deleteFile(fullPath: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
-      const storageRef = firebase.storage().ref();
-      const fileRef = storageRef.child(fullPath);
+      /*const storageRef = firebase.storage().ref();
+      //const fileRef = storageRef.child(fullPath);
 
       fileRef.delete()
-        .then(() => {
+       .then(() => {
           console.log('Archivo eliminado correctamente');
           // Puedes realizar otras acciones aquí
         })
-        .catch((error) => {
-          console.error('Error al eliminar el archivo:', error);
-        });
+        .catch(() => {
+          console.error('Error al eliminar el archivo:');
+        });*/
     }
-  }*/
+  }
 }
