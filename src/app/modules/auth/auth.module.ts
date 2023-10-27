@@ -19,6 +19,7 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { LoginGuardian } from 'src/app/utils/login-guardian.guardian';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -28,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
     ReactiveFormsModule,
     MatProgressSpinnerModule,
     CommonsModule,
-    FormsModule, 
+    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -41,6 +42,7 @@ import { MatButtonModule } from '@angular/material/button';
     CicleService,
     LoaderService,
     NotificationService,
+    LoginGuardian,
   ],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -67,8 +67,13 @@
               </mat-expansion-panel-header>
               <div class="flex justify-between flex-col break-words">
                 <p class="max-sm:text-[12px]">{{ item.description }}</p>
-                <button mat-mini-fab color="warn" class="self-end">
-                  <mat-icon (click)="deleteEvent(item)"> delete </mat-icon>
+                <button
+                  (click)="deleteEvent(item)"
+                  mat-mini-fab
+                  color="warn"
+                  class="self-end"
+                >
+                  <mat-icon> delete </mat-icon>
                 </button>
               </div>
             </mat-expansion-panel>

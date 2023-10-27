@@ -1,132 +1,141 @@
-<div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] px-[5vw]">
-  <div
-    class="text-white flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
-  >
+<div class="bg-[#FEA8B1] px-[3vw]">
+  <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
     <div
-      class="max-lg:w-[100%] flex flex-col gap-[30px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
+      class="text-white flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
     >
-      <ng-container *ngIf="cycles.length > 0">
-        <div class="flex justify-end w-[100%]">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="editActualCycle(cycleChart)">
-              <mat-icon color="primary">edit_road</mat-icon>
-              <span>Editar días de sangrado</span>
+      <div
+        class="max-lg:w-[100%] flex flex-col gap-[30px] items-center bg-[#FACAEC] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
+      >
+        <ng-container *ngIf="cycles.length > 0">
+          <div class="flex justify-end w-[100%]">
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
             </button>
-            <div class="w-[100%] px-2">
-              <mat-divider></mat-divider>
-            </div>
-            <button mat-menu-item (click)="deleteActualCycle(cycleChart)">
-              <mat-icon color="warn">delete</mat-icon>
-              <span>Eliminar ciclo</span>
-            </button>
-          </mat-menu>
-        </div>
-      </ng-container>
-      <div class="flex flex-col">
-        <span class="text-white text-center">Hoy es </span>
-        <span class="text-white text-center font-bold text-[30px]">
-          {{ fechaFormateada }}</span
-        >
-      </div>
-      <ng-container *ngIf="cycles.length > 0">
-        <div class="flex justify-between w-[100%] items-center">
-          <div class="flex gap-2 items-center">
-            <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
-            Día de ciclo
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editActualCycle(cycleChart)">
+                <mat-icon color="primary">edit_road</mat-icon>
+                <span>Editar días de sangrado</span>
+              </button>
+              <div class="w-[100%] px-2">
+                <mat-divider></mat-divider>
+              </div>
+              <button mat-menu-item (click)="deleteActualCycle(cycleChart)">
+                <mat-icon color="warn">delete</mat-icon>
+                <span>Eliminar ciclo</span>
+              </button>
+            </mat-menu>
           </div>
-          <div class="flex gap-2 items-center">
-            <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
-            Día de ovulación
-          </div>
-        </div>
-        <div class="flex justify-between w-[100%] items-center">
-          <div class="flex gap-2 items-center">
-            <div class="w-[40px] h-[20px] bg-[#000000] rounded-lg"></div>
-            Fin del ciclo
-          </div>
-        </div>
-      </ng-container>
-      <div class="flex flex-col items-center gap-[10px]">
-        <div class="rounded-full bg-white mb-5">
-          <ng-container *ngIf="cycles.length > 0">
-            <app-pie-chart
-              [cyclesWithEndNull]="cyclesWithEndNull"
-              [cycles]="cycles"
-              [myRegisterQuestion]="myRegisterQuestion"
-              [cyclesWithOutEndNull]="cyclesWithOutEndNull"
-            ></app-pie-chart>
-          </ng-container>
-          <ng-container *ngIf="cycles.length === 0">
-            <div
-              class="bg-black flex justify-center items-center rounded-full py-20"
-            >
-              <h5 class="text-white text-center max-w-[200px]">
-                No hay datos de ciclo registrado
-              </h5>
-            </div>
-          </ng-container>
+        </ng-container>
+        <div class="flex flex-col text-[#AF6FE8]">
+          <span class="text-center">Hoy es </span>
+          <span class="text-center font-bold text-[30px]">
+            {{ fechaFormateada }}</span
+          >
         </div>
         <ng-container *ngIf="cycles.length > 0">
-          <button
-            class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-            (click)="finishActualCicle(cycleChart)"
-          >
-            Finalizar ciclo actual
-          </button>
+          <div class="flex justify-between w-[100%] items-center">
+            <div class="flex gap-2 items-center">
+              <div class="w-[40px] h-[20px] bg-[red] rounded-lg"></div>
+              Día de ciclo
+            </div>
+            <div class="flex gap-2 items-center">
+              <div class="w-[40px] h-[20px] bg-[green] rounded-lg"></div>
+              Día de ovulación
+            </div>
+          </div>
+          <div class="flex justify-between w-[100%] items-center">
+            <div class="flex gap-2 items-center">
+              <div class="w-[40px] h-[20px] bg-[#000000] rounded-lg"></div>
+              Fin del ciclo
+            </div>
+          </div>
         </ng-container>
-        <ng-container>
-          <button
-            class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-            (click)="openCicleRegister()"
-          >
-            Registrar nuevo ciclo
-          </button>
-        </ng-container>
+        <div class="flex flex-col items-center gap-[10px]">
+          <div class="rounded-full bg-white mb-5">
+            <ng-container *ngIf="cycles.length > 0">
+              <app-pie-chart
+                [cyclesWithEndNull]="cyclesWithEndNull"
+                [cycles]="cycles"
+                [myRegisterQuestion]="myRegisterQuestion"
+                [cyclesWithOutEndNull]="cyclesWithOutEndNull"
+              ></app-pie-chart>
+            </ng-container>
+            <ng-container *ngIf="cycles.length === 0">
+              <div
+                class="bg-black flex justify-center items-center rounded-full py-20"
+              >
+                <h5 class="text-white text-center max-w-[200px]">
+                  No hay datos de ciclo registrado
+                </h5>
+              </div>
+            </ng-container>
+          </div>
+          <ng-container *ngIf="cycles.length > 0">
+            <button
+              class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
+              (click)="finishActualCicle(cycleChart)"
+            >
+              Finalizar ciclo actual
+            </button>
+          </ng-container>
+          <ng-container>
+            <button
+              class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
+              (click)="openCicleRegister()"
+            >
+              Registrar nuevo ciclo
+            </button>
+          </ng-container>
+        </div>
       </div>
-    </div>
-    <div
-      class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
-    >
-      <div class="flex gap-10 w-[100%] text-black max-lg:flex-col h-[100%]">
-        <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
-          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-            <h5
-              class="p-[20px] text-white bg-[#DA047A] rounded-t-[20px] font-semibold text-[20px]"
-            >
-              Historial de ciclos
-            </h5>
-            <div class="p-[20px] flex flex-col gap-[15px]">
-              <ng-container *ngIf="cycles.length === 0">
-                <h5>Todavía no existen datos cargados.</h5>
-              </ng-container>
-              <ng-container *ngIf="cycles.length > 0">
-                <app-cicle-historial [cycles]="cycles"></app-cicle-historial>
-              </ng-container>
+      <div
+        class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
+      >
+        <div class="flex gap-10 w-[100%] text-black max-lg:flex-col h-[100%]">
+          <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
+            <div class="bg-[#FACAEC]  rounded-[20px] w-[50%] max-lg:w-[100%]">
+              <h5
+                class="border-b-[4px] border-[#AF6FE8] p-[20px] text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]"
+              >
+                Historial de ciclos
+              </h5>
+              <div class="p-[20px] flex flex-col gap-[15px]">
+                <ng-container *ngIf="cycles.length === 0">
+                  <h5>Todavía no existen datos cargados.</h5>
+                </ng-container>
+                <ng-container *ngIf="cycles.length > 0">
+                  <app-cicle-historial [cycles]="cycles"></app-cicle-historial>
+                </ng-container>
+              </div>
+            </div>
+            <div class="bg-[#FACAEC] rounded-[20px] w-[50%] max-lg:w-[100%]">
+              <h5
+                class="border-b-[4px] border-[#AF6FE8] p-[20px] flex items-center justify-between text-[#AF6FE8]  rounded-t-[20px] font-semibold text-[20px]"
+              >
+                Recomendaciones
+                <span
+                  routerLink="historial"
+                  #editRecomendation="matTooltip"
+                  (click)="editRecomendation.show()"
+                  matTooltip="Editá tus recomendaciones"
+                  class="material-icons cursor-pointer"
+                  >edit</span
+                >
+              </h5>
+              <div class="p-[20px] list-disc">
+                <h5>
+                  <li>Recordá tomar el anticonceptivo del día de hoy.</li>
+                </h5>
+
+                <h5 class="mt-5">
+                  <li>
+                    Te recomendamos gestionar tus próximos turnos para PAP y
+                    COLPO ya que vencen en 30 días.
+                  </li>
+                </h5>
+              </div>
             </div>
           </div>
-          <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-            <h5
-              class="p-[20px] text-white rounded-t-[20px] bg-[#DA047A] font-semibold text-[20px]"
-            >
-              Recomendaciones
-            </h5>
-            <div class="p-[20px] list-disc">
-              <h5>
-                <li>Recordá tomar el anticonceptivo del día de hoy.</li>
-              </h5>
-
-              <h5 class="mt-5">
-                <li>
-                  Te recomendamos gestionar tus próximos turnos para PAP y COLPO
-                  ya que vencen en 30 días.
-                </li>
-              </h5>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>
