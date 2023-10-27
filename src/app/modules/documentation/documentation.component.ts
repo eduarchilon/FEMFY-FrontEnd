@@ -94,6 +94,7 @@ export class DocumentationComponent implements OnInit {
 
 
     uploadBytes(imgRef, file, { customMetadata: metadata }).then((snapshot) => {
+      
       console.log('Archivo subido con éxito.', snapshot);
     })
     .catch((error) => {
@@ -155,52 +156,48 @@ export class DocumentationComponent implements OnInit {
 
   //DELETE Y DOWNLOAD NO CONFIGURADOS
 
-  studies: string[] = [];
+  studies: any[] = [];
 
-  getFiles() {
+  getFiles(): void {
 
     const idUser = JSON.stringify(this.localStorageService.getUserByLogin()?.idUser);
     const fileRef = ref(this.storage, idUser);
 
-    listAll(fileRef).then(async idUser => {
+    listAll(fileRef).then(async (idUser : any) => {
       this.studies = [];
 
-      for(let files of idUser.items){
+      for(let files of idUser?.items){
+        const meta = (await getMetadata(files)).customMetadata;
         const url = await getDownloadURL(files);
-        this.studies.push(url);
+        
+        this.studies.push({ url: url, files: files, customMetadata: meta });     
       }
 
-    }).catch(error => console.log(error));
+     /* this.studies = this.studies?.filter(
+        (data: any) => data?.customMetadata?.typeStudy === 'uno'
+      );*/
+      console.log(this.studies);
+    }).catch((error: any) => {
+      console.log(error);
+    });
 
   }
 
-//filter por metadata
 
 
-  deleteFile(fileId: string): void {
-    this.documentationService.deleteFile(fileId).subscribe(
-      (response) => {
-        console.log('Archivo eliminado con éxito', response);
-      },
-      (error) => {
-        console.error('Error al eliminar archivo', error);
-      });
-  }
+/*  deleteFile(fullPath: string): void {
+    if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
+      const storageRef = firebase.storage().ref();
+      const fileRef = storageRef.child(fullPath);
 
-  downloadFile(fileId: string): void {
-    this.documentationService.downloadFile(fileId).subscribe(
-      (data) => {
-        const blob = new Blob([data], { type: 'application/octet-stream' });
-        const url = window.URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = this.formDocumentation.get('fileName')?.value; // Establece el nombre de archivo para la descarga
-        a.click();
-        window.URL.revokeObjectURL(url);
-      },
-      (error) => {
-        console.error('Error al descargar archivo', error);
-      });
-  }
-
+      fileRef.delete()
+        .then(() => {
+          console.log('Archivo eliminado correctamente');
+          // Puedes realizar otras acciones aquí
+        })
+        .catch((error) => {
+          console.error('Error al eliminar el archivo:', error);
+        });
+    }
+  }*/
 }

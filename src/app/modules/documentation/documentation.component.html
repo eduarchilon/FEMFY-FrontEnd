@@ -42,9 +42,9 @@
                 <input type="file" id="file" name="documentation" class="hidden" (change)="fileSelected($event)"/>
                 </span>
 
-                
-                <span class="block text-gray-900 mt-2 py-[10px] px-[20px] w-[50%] rounded-[20px]" id="file_name_label" #fileLabel>Ningún archivo seleccionado</span>
-
+                <div class="mt-20">
+                <span class="text-gray-900 py-[10px] px-[20px] w-[50%] rounded-[20px] text-center" id="file_name_label" #fileLabel>Ningún archivo seleccionado</span>
+                </div>
             </div>
         </div>
     </div>
@@ -66,17 +66,24 @@
                     </thead>
                     <tbody>
                         <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
-                           <!-- <td class="px-6 py-4">{{ study.typeStudy }}</td>
-                            <td class="px-6 py-4">{{ study.description }}</td>
-                            <td class="px-6 py-4">{{ study.studyDate }}</td> -->
+                           <td class="px-6 py-4">{{ study.customMetadata.typeStudy }}</td>
+                            <td class="px-6 py-4">{{ study.customMetadata.description }}</td>
+                            <td class="px-6 py-4">{{ study.customMetadata.studyDate }}</td>
                             <td class="px-6 py-4">
                                 <button class="me-3">
+                                    <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
                                     <i class="fa fa-download w-[30px]" aria-hidden="true"></i>
                                     Descargar
+                                    </a>
                                 </button>
-                                <button>
-                                    <i class="fa fa-trash w-[30px]" style="color: red;" aria-hidden="true"></i>
+                               <!-- <button class="me-3" (click)="deleteFile(study.files)">-->
+                                <button class="me-3">
+                                <i class="fa fa-trash w-[30px]" style="color: red;" aria-hidden="true"></i>
                                     Eliminar
+                                </button>
+                                <button class="me-3">
+                                    <i class="fa fa-share w-[30px]" style="color: red;" aria-hidden="true"></i>
+                                    Compartir
                                 </button>
                             </td>
                         </tr>
