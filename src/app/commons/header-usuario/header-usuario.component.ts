@@ -25,6 +25,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
 import { selectCyclePhaseState } from 'src/app/services/redux/selectors/cycle.selctor';
 import { MatTooltip } from '@angular/material/tooltip';
+import { SharedProfileService } from 'src/app/services/profilePicture/profilePicture.service';
 
 @Component({
   selector: 'app-header-usuario',
@@ -45,7 +46,8 @@ export class HeaderUsuarioComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private sharedProfileService: SharedProfileService
   ) {}
 
   userResponse!: UserResponse;
@@ -156,4 +158,10 @@ export class HeaderUsuarioComponent implements OnInit {
       this.myTooltip.disabled = true;
     }, 1000);
   }
+
+
+  getProfileImage(): string {
+    return this.sharedProfileService.getUserProfileImage();
+  }
+  
 }

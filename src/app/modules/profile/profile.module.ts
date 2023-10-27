@@ -17,7 +17,7 @@ import { StoreModule } from '@ngrx/store';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    StoreModule
+    StoreModule,
   ],
   providers:[AuthService, LocalStorageService]
 })
