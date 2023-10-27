@@ -154,8 +154,6 @@ export class DocumentationComponent implements OnInit {
     return filename.split('.').pop() || '';
   }
 
-  //DELETE Y DOWNLOAD NO CONFIGURADOS
-
   studies: any[] = [];
 
   getFiles(): void {
