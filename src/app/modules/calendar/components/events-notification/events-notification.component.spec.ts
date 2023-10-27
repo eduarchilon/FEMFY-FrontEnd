@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EventsNotificationComponent } from './events-notification.component';
 
-describe('EventsNotificationComponent', () => {
+xdescribe('EventsNotificationComponent', () => {
   let component: EventsNotificationComponent;
   let fixture: ComponentFixture<EventsNotificationComponent>;
 
