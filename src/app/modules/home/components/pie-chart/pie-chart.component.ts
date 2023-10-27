@@ -8,9 +8,9 @@ import {
   DataPieChartChildren,
 } from 'src/app/models/data-pie-chart';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { setDayOfOvulation } from 'src/app/redux/actions/calendar.action';
-import { setCycleState } from 'src/app/redux/actions/cycle.action';
-import { AppState } from 'src/app/redux/store/app.store';
+import { setDayOfOvulation } from 'src/app/services/redux/actions/calendar.action';
+import { setCycleState } from 'src/app/services/redux/actions/cycle.action';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 

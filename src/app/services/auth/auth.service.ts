@@ -6,8 +6,8 @@ import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { constants } from 'src/app/constans/constants';
 import { Store } from '@ngrx/store';
-import { setUserLogin } from 'src/app/redux/actions/login.action';
-import { AppState } from 'src/app/redux/store/app.store';
+import { setUserLogin } from 'src/app/services/redux/actions/login.action';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { Router } from '@angular/router';
 
 @Injectable({

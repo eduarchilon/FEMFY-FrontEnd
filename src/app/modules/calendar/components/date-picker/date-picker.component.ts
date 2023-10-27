@@ -10,7 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
@@ -21,7 +21,7 @@ import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Cycle } from 'src/app/models/cicle.model';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { selectNumberOfOvulation } from 'src/app/redux/selectors/calendar.selector';
+import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calendar.selector';
 
 @Component({
   selector: 'app-date-picker',

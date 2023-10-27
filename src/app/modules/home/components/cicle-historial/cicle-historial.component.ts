@@ -3,8 +3,8 @@ import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Store } from '@ngrx/store';
 import { Cycle, CycleHistorial } from 'src/app/models/cicle.model';
-import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
-import { AppState } from 'src/app/redux/store/app.store';
+import { selectUserLogin } from 'src/app/services/redux/selectors/login.selector';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { calculateCycleDurantionWithDates } from 'src/app/utils/average-period.utils';
 

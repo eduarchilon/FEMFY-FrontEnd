@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, map, of } from 'rxjs';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

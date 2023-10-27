@@ -18,12 +18,12 @@ import {
 } from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
 import { UserResponse } from 'src/app/models/user.model';
-import { selectUserLogin } from 'src/app/redux/selectors/login.selector';
-import { AppState } from 'src/app/redux/store/app.store';
+import { selectUserLogin } from 'src/app/services/redux/selectors/login.selector';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
-import { selectCyclePhaseState } from 'src/app/redux/selectors/cycle.selctor';
+import { selectCyclePhaseState } from 'src/app/services/redux/selectors/cycle.selctor';
 import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({

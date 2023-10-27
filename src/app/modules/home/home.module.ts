@@ -13,7 +13,7 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { StoreModule } from '@ngrx/store';
-import { initialLoginState } from 'src/app/redux/reducers/login.reducer';
+import { initialLoginState } from 'src/app/services/redux/reducers/login.reducer';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
 import { MatExpansionModule } from '@angular/material/expansion';

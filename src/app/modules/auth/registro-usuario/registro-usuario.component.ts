@@ -7,7 +7,7 @@ import { UserResponse } from 'src/app/models/user.model';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';

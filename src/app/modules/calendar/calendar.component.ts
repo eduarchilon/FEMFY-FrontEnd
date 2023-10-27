@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { constants } from 'src/app/constans/constants';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { AppState } from 'src/app/redux/store/app.store';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { Store } from '@ngrx/store';
-import { selectNumberOfOvulation } from 'src/app/redux/selectors/calendar.selector';
+import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calendar.selector';
 
 @Component({
   selector: 'app-calendar',
