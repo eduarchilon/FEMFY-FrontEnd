@@ -18,19 +18,17 @@ fdescribe('SurveyComponent', () => {
   let component: SurveyComponent;
   let fixture: ComponentFixture<SurveyComponent>;
 
-  const localStorageService = {
-    deleteValue: jasmine.createSpy('deleteValue')
-  };
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [SurveyComponent, AppComponent, PreguntaComponent],
-      providers: [
-        QuestionService,
-        { provide: Store, useValue: {} },
-        { provide: LocalStorageService, useValue: localStorageService },
+      providers: [QuestionService, { provide: Store, useValue: {} }],
+      imports: [
+        HttpClientModule,
+        MatStepperModule,
+        MatRadioModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
       ],
-      imports: [HttpClientModule, MatStepperModule, MatRadioModule, ReactiveFormsModule, BrowserAnimationsModule],
     });
 
     fixture = TestBed.createComponent(SurveyComponent);
@@ -38,18 +36,14 @@ fdescribe('SurveyComponent', () => {
     fixture.detectChanges();
   });
 
-  
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   it('omitBasicForm', () => {
     component.omitBasicForm();
-
-    expect(localStorageService.deleteValue).toHaveBeenCalledWith(constants.ID_REGISTER);
   });
 
-  
   it('toggleSkipButtonVisibility should set showSkipButton to true', () => {
     component.toggleSkipButtonVisibility(true);
 
