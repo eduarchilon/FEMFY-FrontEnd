@@ -41,7 +41,8 @@ export class IndexComponent implements OnInit {
 
   @ViewChild('editRecomendation') editRecomendation!: MatTooltip;
 
-  user!: any; //cambiar objeto
+  //NEW DATA
+  averageCycleContent: number[] = [];
 
   constructor(
     private router: Router,
@@ -58,6 +59,18 @@ export class IndexComponent implements OnInit {
     return `${day} de ${month}`;
   }
   ngOnInit(): void {
+    const userId = this.localStorageService.getUserByLogin()?.idUser;
+    this.questionsService
+      .getAllQuestionUserMenstruation()
+      .subscribe((data: any) => {
+        const question = data?.filter((quest: any) => quest?.userId === userId);
+        const lcd = question[0]?.lastCycleDuration;
+        const rcd = question[0]?.regularCycleDuration;
+        this.averageCycleContent = [lcd, rcd];
+      });
+
+    
+
     const idRegisterQuestion = JSON.parse(
       this.localStorageService.getLocalStorage(constants.ID_REGISTER)
     );
@@ -66,8 +79,6 @@ export class IndexComponent implements OnInit {
       .subscribe((data: any) => {
         this.myRegisterQuestion = data;
       });
-
-    const userId = this.localStorageService.getUserByLogin()?.idUser;
     this.cicleService.getAllCycles(userId).subscribe((data: any) => {
       this.cyclesWithEndNull = data?.filter(
         (item: any) => item?.dateEnd === null

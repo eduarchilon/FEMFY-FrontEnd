@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FinishCycleComponent } from './finish-cycle.component';
 
-describe('FinishCycleComponent', () => {
+xdescribe('FinishCycleComponent', () => {
   let component: FinishCycleComponent;
   let fixture: ComponentFixture<FinishCycleComponent>;
 

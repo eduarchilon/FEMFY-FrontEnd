@@ -25,7 +25,7 @@ export class HomeComponent implements OnInit {
   userResponse!: UserResponse;
 
   ngOnInit(): void {
-    this.store.dispatch(loadCycles());
+    // this.store.dispatch(loadCycles());
     this.userResponse = this.localStorageService.getUserByLogin();
     this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
   }
