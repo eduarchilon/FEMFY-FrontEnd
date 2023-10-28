@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { Storage, ref, uploadBytes, listAll, getDownloadURL } from '@angular/fire/storage';
 import { SharedProfileService } from 'src/app/services/profilePicture/profilePicture.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-profile',
@@ -33,6 +34,7 @@ export class ProfileComponent implements OnInit {
     private http: HttpClient,
     private storage: Storage,
     private sharedProfileService: SharedProfileService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -90,6 +92,9 @@ export class ProfileComponent implements OnInit {
         uploadBytes(imgRef, file).then((snapshot) => {
           
           console.log('Archivo subido con éxito.', snapshot);
+          this.snackBar.open("Foto subida correctamente", "cerrar", {
+            duration: 3000, // Duración en milisegundos
+          });
         })
         .catch((error) => {
           console.error('Error al subir el archivo:', error);
@@ -123,6 +128,6 @@ export class ProfileComponent implements OnInit {
     });
 
   }
-
+  
   
 }
