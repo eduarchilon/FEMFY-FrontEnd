@@ -41,7 +41,6 @@ export class RegistroUsuarioComponent implements OnInit {
     private router: Router,
     private questionsService: QuestionService,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>,
     private cicleService: CicleService,
     private loaderService: LoaderService,
     private notificationService: NotificationService
