@@ -20,6 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { LoginGuardian } from 'src/app/utils/login-guardian.guardian';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { QuestionService } from 'src/app/services/question/question.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -43,6 +45,8 @@ import { LoginGuardian } from 'src/app/utils/login-guardian.guardian';
     LoaderService,
     NotificationService,
     LoginGuardian,
+    LocalStorageService,
+    QuestionService,
   ],
 })
 export class AuthModule {}
