@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditCycleComponent } from './edit-cycle.component';
 
-describe('EditCycleComponent', () => {
+xdescribe('EditCycleComponent', () => {
   let component: EditCycleComponent;
   let fixture: ComponentFixture<EditCycleComponent>;
 

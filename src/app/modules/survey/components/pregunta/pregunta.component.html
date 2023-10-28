@@ -27,11 +27,11 @@
           class="text-gray-500 rounded-full p-3 mb-5"
           formControlName="lastTime"
         />
-        <div>
+        <div class="flex">
           <button
             mat-button
             matStepperPrevious
-            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3 flex-1"
           >
             Volver
           </button>
@@ -40,7 +40,7 @@
             matStepperNext
             [disabled]="!formOneRegister.valid"
             type="submit"
-            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5"
+            class="!text-white !rounded-full !bg-[#AF6FE8] !p-5 flex-1"
           >
             Siguiente
           </button>
