@@ -1,0 +1,17 @@
+<div class="p-4 py-8">
+    <div class="text-center font-bold text-2xl m-5 text-gray-800">Nuevo posteo</div>
+    <form [formGroup]="formPost" (ngSubmit)="registerPost()">
+        <div class="mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl">
+            <input class="bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
+                placeholder="Título" formControlName="title" type="text">
+            <textarea class="bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
+                placeholder="Escribe tu mensaje" formControlName="content"></textarea>
+
+            <!-- Buttons -->
+            <div class="buttons flex justify-end mt-4">
+                <button type="submit"
+                    class="bg-[#AF6FE8] p-1 px-4 font-semibold text-gray-200 rounded-[20px]">Crear</button>
+            </div>
+        </div>
+    </form>
+</div>
