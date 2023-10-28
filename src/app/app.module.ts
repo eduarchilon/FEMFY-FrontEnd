@@ -37,6 +37,7 @@ import { HistorialModule } from './modules/historial/historial.module';
 import { LoginGuardian } from './utils/login-guardian.guardian';
 import { EffectsModule } from '@ngrx/effects';
 import { CycleEffects } from './services/redux/effects/cycle.effect';
+import { SubscriptionModule } from './modules/subscription/subscription.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -59,6 +60,7 @@ import { CycleEffects } from './services/redux/effects/cycle.effect';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    SubscriptionModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
