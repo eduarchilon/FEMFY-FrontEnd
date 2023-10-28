@@ -25,8 +25,8 @@ export class SurveyComponent {
   ];
 
   omitBasicForm(): void {
-    this.router.navigate(['']);
-    // this.localStorageService.deleteValue(constants.ID_REGISTER);
+    console.log('Calling omitBasicForm');
+    this.localStorageService.deleteValue(constants.ID_REGISTER);
   }
 
   showSkipButton = false;
