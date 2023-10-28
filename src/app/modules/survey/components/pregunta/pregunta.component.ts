@@ -7,16 +7,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { UserResponse } from 'src/app/models/user.model';
-import { selectUserLogin } from 'src/app/services/redux/selectors/login.selector';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
-import { selectIdQuestionMenstruationFeature } from '../../../../services/redux/selectors/question.selector';
-import { constants } from 'src/app/constans/constants';
 import { SurveyComponent } from '../../survey.component';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
-import { FisrtCycle } from 'src/app/models/cicle.model';
 
 @Component({
   selector: 'app-pregunta',
@@ -24,10 +19,8 @@ import { FisrtCycle } from 'src/app/models/cicle.model';
   styleUrls: ['./pregunta.component.scss'],
 })
 export class PreguntaComponent implements OnInit {
-  @Input() preguntas: string[] = [];
+
   indicePreguntaActual: number = 0;
-  userResponse!: UserResponse;
-  idRegister!: number;
 
   formOneRegister: FormGroup = new FormGroup({
     lastTime: new FormControl('', Validators.required),
@@ -49,58 +42,31 @@ export class PreguntaComponent implements OnInit {
     bleedingDuration: new FormControl('', Validators.required),
   });
 
-  firstCycleEnd: any = {
-    initCycle: '',
-    cycleDuration: '',
-    regularCycle: '',
-    dayOfBleding: '',
-  };
+  // firstCycleEnd: any = {
+  //   initCycle: '',
+  //   cycleDuration: '',
+  //   regularCycle: '',
+  //   dayOfBleding: '',
+  // };
 
   constructor(
     private _formBuilder: FormBuilder,
     private router: Router,
     private questionsService: QuestionService,
     private store: Store<AppState>,
-    private localStorageService: LocalStorageService,
-    private surveyComponent: SurveyComponent,
-    private cycleServie: CicleService
+    private localStorageService: LocalStorageService
   ) {}
-  ngOnInit(): void {
-   /* this.store
-      .select(selectIdQuestionMenstruationFeature)
-      .subscribe((data: any) => {
-        this.idRegister = data?.idQuestion;
-      });
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.userResponse = data?.user;
-      if (!this.userResponse) {
-        this.userResponse = this.localStorageService.getUserByLogin();
-      }
-    });*/
-  }
+  ngOnInit(): void {}
 
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        id: this.localStorageService.getUserByLogin()?.idQuestion,
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
         next: (response: any) => {
-          const lastTime = new Date(this.formOneRegister?.value?.lastTime);
-          this.cycleServie
-            .editCycle({
-              dateBeging: lastTime.setDate(lastTime.getDate()),
-              id: this.localStorageService.parseLocalStorage(
-                constants.ID_FIRST_CYCLE
-              ),
-              idUser: this.localStorageService.getUserByLogin()?.idUser,
-              status: '',
-            })
-            .subscribe((res) => res);
-          this.firstCycleEnd['initCycle'] = new Date(
-            this.formOneRegister?.value?.lastTime
-          );
+          return response;
         },
         error: (error) => error,
       });
@@ -109,21 +75,19 @@ export class PreguntaComponent implements OnInit {
   submitFormTwoRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        id: this.localStorageService.getUserByLogin()?.idQuestion,
         lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
       })
       .subscribe({
-        next: (response: any) => {},
+        next: (response: any) => response,
         error: (error) => error,
       });
-    this.firstCycleEnd['cycleDuration'] =
-      this.formTwoRegister?.value?.lastCycleDuration;
   }
 
   submitFormThreeRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        id: this.localStorageService.getUserByLogin()?.idQuestion,
         regularCycleDuration:
           this.formThreeRegister?.value?.regularCycleDuration,
       })
@@ -131,14 +95,12 @@ export class PreguntaComponent implements OnInit {
         next: (response: any) => response,
         error: (error) => error,
       });
-    this.firstCycleEnd['regularCycle'] =
-      this.formThreeRegister?.value?.regularCycleDuration;
   }
 
   submitFormFourRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        id: this.localStorageService.getUserByLogin()?.idQuestion,
         regular: this.formFourRegister?.value.regular === '1' ? true : false,
       })
       .subscribe({
@@ -148,31 +110,13 @@ export class PreguntaComponent implements OnInit {
   }
 
   submitFormFiveRegister(): void {
-    //TODO: eliminar register id y cycleid del local storage
-    this.firstCycleEnd['dayOfBleding'] =
-      this.formFiveRegister?.value?.bleedingDuration;
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.parseLocalStorage(constants.ID_REGISTER),
+        id: this.localStorageService.getUserByLogin()?.idQuestion,
         bleedingDuration: this.formFiveRegister?.value?.bleedingDuration,
       })
       .subscribe({
-        next: (response: any) => {
-          this.cycleServie
-            .editCycle({
-              id: this.localStorageService.parseLocalStorage(
-                constants.ID_FIRST_CYCLE
-              ),
-              dateBeging: this.calculateBegingCycle(
-                this.firstCycleEnd?.initCycle,
-                this.formFiveRegister?.value?.bleedingDuration
-              ),
-              daysOfBleeding: this.formFiveRegister?.value?.bleedingDuration,
-              idUser: this.localStorageService.getUserByLogin()?.idUser,
-              status: '',
-            })
-            .subscribe((res) => res);
-        },
+        next: (response: any) => response,
         error: (error) => error,
       });
     this.router.navigate(['/']).then(() => {
@@ -184,21 +128,21 @@ export class PreguntaComponent implements OnInit {
     this.router.navigate(['']);
   }
 
-  calculateEndCycle(data: FisrtCycle): Date | undefined {
-    const averageCycle = (data?.cycleDuration + data?.regularCycle) / 2;
-    let result: Date = new Date(data?.initCycle);
-    result?.setDate(
-      result?.getDate() + Math.round(averageCycle) - data?.dayOfBleding
-    );
-    return result;
-  }
+  // calculateEndCycle(data: FisrtCycle): Date | undefined {
+  //   const averageCycle = (data?.cycleDuration + data?.regularCycle) / 2;
+  //   let result: Date = new Date(data?.initCycle);
+  //   result?.setDate(
+  //     result?.getDate() + Math.round(averageCycle) - data?.dayOfBleding
+  //   );
+  //   return result;
+  // }
 
-  calculateBegingCycle(
-    initCycle: Date | any,
-    dayOfBleding: number
-  ): Date | undefined {
-    let result: Date = new Date(initCycle);
-    result?.setDate(result?.getDate() + dayOfBleding);
-    return result;
-  }
+  // calculateBegingCycle(
+  //   initCycle: Date | any,
+  //   dayOfBleding: number
+  // ): Date | undefined {
+  //   let result: Date = new Date(initCycle);
+  //   result?.setDate(result?.getDate() + dayOfBleding);
+  //   return result;
+  // }
 }

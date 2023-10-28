@@ -113,26 +113,6 @@ export class RegistroUsuarioComponent implements OnInit {
                                 idQuestion: idQuestion,
                               })
                             );
-                            //SETEO CICLO
-                            this.cicleService
-                              .registerCycle({
-                                idUser:
-                                  this.localStorageService.getUserByLogin()
-                                    ?.idUser,
-                                dateBeging: new Date(), //por defecto
-                                daysOfBleeding: 0,
-                                status: 'init',
-                              })
-                              .subscribe((cycle: Cycle | any) => {
-                                const idCycle = cycle?.id;
-                                this.localStorageService.setKeyValueLocalStorage(
-                                  constants.USER,
-                                  JSON.stringify({
-                                    ...this.localStorageService.getUserByLogin(),
-                                    idCycle: idCycle,
-                                  })
-                                );
-                              });
                           }
                         );
                     },

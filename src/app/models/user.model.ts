@@ -15,7 +15,7 @@ export interface UserResponse {
   isSuscripto?: boolean;
   idUser?: number;
   idCycle?: number;
-  questionId?: number;
+  idQuestion?: number;
 }
 
 export interface UserRequest extends UserResponse {

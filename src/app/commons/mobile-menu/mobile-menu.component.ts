@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
   MAT_MOBILE_LOGUEADO,
@@ -26,6 +26,8 @@ export class MobileMenuComponent implements OnInit {
   userResponse!: UserResponse;
   isLogging: boolean = false;
 
+  isSurveyInit = false;
+
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService,
@@ -40,6 +42,16 @@ export class MobileMenuComponent implements OnInit {
         this.userResponse = this.localStorageService.getUserByLogin();
       }
       this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
+    });
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        if (this.router.url === '/cuestionario') {
+          this.isSurveyInit = true;
+        } else {
+          this.isSurveyInit = false;
+        }
+      }
     });
   }
 

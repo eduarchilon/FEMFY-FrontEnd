@@ -8,15 +8,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./landing.component.scss'],
 })
 export class LandingComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) {}
-
-  get isLogging(): boolean {
-    return this.authService.isLoggin;
-  }
+  constructor(private router: Router) {}
 
   ngOnInit(): void {}
-
-  handleLoggingUser(): void {
-    this.authService.loggingUser();
-  }
 }

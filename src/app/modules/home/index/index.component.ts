@@ -22,8 +22,9 @@ import { MatTooltip } from '@angular/material/tooltip';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-  public fechaActual: Date = new Date();
-  public fechaFormateada: string = this.formatDate(this.fechaActual);
+  fechaActual: Date = new Date();
+  fechaFormateada: string = this.formatDate(this.fechaActual);
+
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
@@ -53,23 +54,19 @@ export class IndexComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
-  private formatDate(date: Date): string {
-    const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' });
-    return `${day} de ${month}`;
-  }
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
+    //NEW CYCLE
+
     this.questionsService
       .getAllQuestionUserMenstruation()
       .subscribe((data: any) => {
         const question = data?.filter((quest: any) => quest?.userId === userId);
-        const lcd = question[0]?.lastCycleDuration;
-        const rcd = question[0]?.regularCycleDuration;
+        const lcd = question[0]?.lastCycleDuration || 28;
+        const rcd = question[0]?.regularCycleDuration || 28;
         this.averageCycleContent = [lcd, rcd];
+        console.log(this.averageCycleContent);
       });
-
-    
 
     const idRegisterQuestion = JSON.parse(
       this.localStorageService.getLocalStorage(constants.ID_REGISTER)
@@ -134,5 +131,11 @@ export class IndexComponent implements OnInit {
     setTimeout(() => {
       this.editRecomendation.disabled = true;
     }, 1000);
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
   }
 }
