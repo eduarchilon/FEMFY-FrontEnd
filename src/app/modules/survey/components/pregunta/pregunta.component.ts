@@ -66,7 +66,7 @@ export class PreguntaComponent implements OnInit {
     private cycleServie: CicleService
   ) {}
   ngOnInit(): void {
-    this.store
+   /* this.store
       .select(selectIdQuestionMenstruationFeature)
       .subscribe((data: any) => {
         this.idRegister = data?.idQuestion;
@@ -76,7 +76,7 @@ export class PreguntaComponent implements OnInit {
       if (!this.userResponse) {
         this.userResponse = this.localStorageService.getUserByLogin();
       }
-    });
+    });*/
   }
 
   submitFormOneRegister(): void {
