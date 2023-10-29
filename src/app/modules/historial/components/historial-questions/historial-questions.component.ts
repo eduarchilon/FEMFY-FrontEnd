@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ThemePalette } from '@angular/material/core';
 import { NgFor } from '@angular/common';
@@ -13,20 +13,31 @@ export interface ChipColor {
   styleUrls: ['./historial-questions.component.scss'],
 })
 export class HistorialQuestionsComponent {
-  panelOpenState = false;
+  panelOpenStateProper = false;
   mostrarDivCancerMama = true;
   mostrarDivCancerOvario = false;
   mostrarDivEndiometrosis = false;
   mostrarDivMioma = false;
   mostrarDivPoliquistico = false;
-  mostrarDiv6 = false;
   mostrarDivMenopausia = false;
-
-  availableColors: ChipColor[] = [
-    { name: 'none', color: undefined },
-    { name: 'Primary', color: 'accent' },
-    { name: 'Accent', color: 'accent' },
-    { name: 'Warn', color: 'accent' },
+ 
+  @Input() preguntasCancerMama: string[] = [
+    'En tu familia, ¿alguien ha recibido un diagnóstico de cáncer de mama?',
+  ];
+  @Input() preguntasCancerOvario: string[] = [
+    'En tu familia, ¿Existe un historial de cáncer de ovario en tu familia?',
+  ]
+  @Input() preguntasEndometriosis: string[] = [
+    'En tu familia, ¿Alguna de las mujeres en tu familia ha sido diagnosticada con endometriosis?',
+  ]
+  @Input() preguntasOvarioPoliquistico: string[] = [
+    '¿Alguna de tus parientes cercanas ha sido diagnosticada con el síndrome de ovario poliquístico?',
+  ]
+  @Input() preguntasMenopausiaTemprana: string[] = [
+    '¿Tienes algún conocido en tu familia que haya experimentado la menopausia a una edad temprana?',
+  ]
+  @Input() preguntasMioma: string[] = [
+    '¿Tienes conocimiento de si algún miembro de tu familia ha tenido miomas uterinos?',
   ];
 
   toggleDivCancerMama() {

@@ -22,8 +22,8 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            En tu familia, ¿alguien ha recibido un diagnóstico de
-                                            cáncer de mama?
+                                            <app-historial-questions
+                                                [preguntasCancerMama]="preguntasCancerMama"></app-historial-questions>
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
@@ -33,7 +33,7 @@
                                     </div>
                                 </mat-card-content>
                             </mat-card>
-                            <mat-card class="my-5">
+                            <!-- <mat-card class="my-5">
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
@@ -62,7 +62,7 @@
                                         </mat-radio-group>
                                     </div>
                                 </mat-card-content>
-                            </mat-card>
+                            </mat-card>-->
                         </div>
                     </div>
                 </div>
@@ -76,10 +76,9 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            En tu familia, ¿Existe un historial de cáncer de ovario en
-                                            tu familia?
+                                            <app-historial-questions
+                                                [preguntasCancerOvario]="preguntasCancerOvario"></app-historial-questions>
                                         </p>
-
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
                                             <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
@@ -88,7 +87,7 @@
                                     </div>
                                 </mat-card-content>
                             </mat-card>
-                            <mat-card class="my-5">
+                            <!-- <mat-card class="my-5">
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
@@ -103,7 +102,7 @@
                                         </mat-radio-group>
                                     </div>
                                 </mat-card-content>
-                            </mat-card>
+                            </mat-card>-->
                         </div>
                     </div>
                 </div>
@@ -117,8 +116,8 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            En tu familia, ¿Alguna de las mujeres en tu familia ha
-                                            sido diagnosticada con endometriosis?
+                                            <app-historial-questions
+                                                [preguntasEndometriosis]="preguntasEndometriosis"></app-historial-questions>
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
@@ -128,7 +127,7 @@
                                     </div>
                                 </mat-card-content>
                             </mat-card>
-                            <mat-card class="my-5">
+                            <!--<mat-card class="my-5">
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
@@ -157,7 +156,7 @@
                                         </mat-radio-group>
                                     </div>
                                 </mat-card-content>
-                            </mat-card>
+                            </mat-card>-->
                         </div>
                     </div>
                 </div>
@@ -171,8 +170,8 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Alguna de tus parientes cercanas ha sido diagnosticada
-                                            con el síndrome de ovario poliquístico?
+                                            <app-historial-questions
+                                                [preguntasOvarioPoliquistico]="preguntasOvarioPoliquistico"></app-historial-questions>
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
@@ -182,7 +181,7 @@
                                     </div>
                                 </mat-card-content>
                             </mat-card>
-                            <mat-card class="my-5">
+                            <!-- <mat-card class="my-5">
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
@@ -195,7 +194,7 @@
                                         </mat-radio-group>
                                     </div>
                                 </mat-card-content>
-                            </mat-card>
+                            </mat-card>-->
                         </div>
                     </div>
                 </div>
@@ -209,8 +208,8 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Tienes algún conocido en tu familia que haya
-                                            experimentado la menopausia a una edad temprana?
+                                            <app-historial-questions
+                                                [preguntasMenopausiaTemprana]="preguntasMenopausiaTemprana"></app-historial-questions>
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
@@ -233,8 +232,8 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Tienes conocimiento de si algún miembro de tu familia ha
-                                            tenido miomas uterinos?
+                                            <app-historial-questions
+                                                [preguntasMioma]="preguntasMioma"></app-historial-questions>
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
