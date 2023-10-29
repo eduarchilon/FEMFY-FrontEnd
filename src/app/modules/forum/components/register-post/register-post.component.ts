@@ -4,6 +4,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { PostService } from 'src/app/services/post/post.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class RegisterPostComponent {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private localStorageService: LocalStorageService,
     private postService: PostService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router,
   ) {
     this.formPost = this.fb.group({
       title: new FormControl('', Validators.required),
@@ -39,7 +41,11 @@ export class RegisterPostComponent {
     })
       .subscribe({
         next: (response: any) => {
-          console.log(response)
+          if (response) {
+            this.router.navigate(['/foro/' + this.idTopic]).then(() => {
+              location.reload();
+            });
+          }
         },
         error: (error) => error,
       });
