@@ -17,6 +17,7 @@ import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.co
 import { MatTooltip } from '@angular/material/tooltip';
 import { UserResponse } from 'src/app/models/user.model';
 import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-index',
@@ -47,7 +48,8 @@ export class IndexComponent implements OnInit {
     public dialog: MatDialog,
     private questionsService: QuestionService,
     private cicleService: CicleService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private loaderService: LoaderService
   ) {}
 
   //NEW DATA
@@ -70,14 +72,20 @@ export class IndexComponent implements OnInit {
 
     this.cicleService
       .getAllCycles(this.userAuth?.idUser)
-      .subscribe((data: any) => {
-        this.cyclesWithEndNull = data?.filter(
-          (item: any) => item?.dateEnd === null
-        );
-        this.cyclesWithOutEndNull = data?.filter(
-          (item: any) => item?.dateEnd !== null
-        );
-        this.cycles = data; //TODO
+      .subscribe((dataCycle: any) => {
+        this.loaderService.showLoader();
+        if (dataCycle) {
+          this.cyclesWithEndNull = dataCycle?.filter(
+            (item: any) => item?.dateEnd === null
+          );
+          this.cyclesWithOutEndNull = dataCycle?.filter(
+            (item: any) => item?.dateEnd !== null
+          );
+          this.cycles = dataCycle; //TODO
+          this.loaderService.hideLoader();
+        }
+        this.loaderService.hideLoader();
+        // this.loaderService.showLoader();
       });
   }
 

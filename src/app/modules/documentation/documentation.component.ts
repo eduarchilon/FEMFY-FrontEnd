@@ -1,18 +1,28 @@
 import { Component, ElementRef, ViewChild, OnInit } from '@angular/core';
 import { DocumentationService } from 'src/app/services/documentation/documentation.service';
-import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Storage, ref, uploadBytes, listAll, getDownloadURL, getMetadata } from '@angular/fire/storage';
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  Storage,
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+  getMetadata,
+} from '@angular/fire/storage';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-documentation',
   templateUrl: './documentation.component.html',
-  styleUrls: ['./documentation.component.scss']
+  styleUrls: ['./documentation.component.scss'],
 })
-
-
 export class DocumentationComponent implements OnInit {
-
   typeStudies = [
     { id: 1, name: 'Colposcopia' },
     { id: 2, name: 'Papanicolaou' },
@@ -22,7 +32,7 @@ export class DocumentationComponent implements OnInit {
     { id: 6, name: 'Mamografía' },
     { id: 7, name: 'Ecografía mamaria' },
     { id: 8, name: 'Densitometría ósea' },
-    { id: 9, name: 'Analítica de sangre' }
+    { id: 9, name: 'Analítica de sangre' },
   ];
 
   @ViewChild('fileLabel', { static: true }) fileLabel!: ElementRef;
@@ -32,33 +42,31 @@ export class DocumentationComponent implements OnInit {
     fileName: new FormControl('', Validators.required),
     idUser: new FormControl('', Validators.required),
     studyDate: new FormControl('', Validators.required),
-    typeStudy: new FormControl('', Validators.required)
-
+    typeStudy: new FormControl('', Validators.required),
   });
 
   selectedFile: File | null = null;
 
   fileBase64: string = '';
+  loader: boolean = false;
 
   constructor(
     private documentationService: DocumentationService,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder,
     private storage: Storage,
-    ) { 
-
-      this.formDocumentation = this.fb.group({
-        description: ['', Validators.required],
-        fileBase64: [''], // Este campo lo llenarás cuando se cargue un archivo
-        fileExt: [''], // Este campo lo llenarás cuando se cargue un archivo
-        fileName: ['', Validators.required],
-        idUser: ['', Validators.required],
-        studyDate: ['', Validators.required],
-        typeStudy: ['', Validators.required]
-      });
-
-
-    }
+    private loaderService: LoaderService
+  ) {
+    this.formDocumentation = this.fb.group({
+      description: ['', Validators.required],
+      fileBase64: [''], // Este campo lo llenarás cuando se cargue un archivo
+      fileExt: [''], // Este campo lo llenarás cuando se cargue un archivo
+      fileName: ['', Validators.required],
+      idUser: ['', Validators.required],
+      studyDate: ['', Validators.required],
+      typeStudy: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.getFiles();
@@ -71,41 +79,46 @@ export class DocumentationComponent implements OnInit {
 
       console.log(files[0]);
 
-    this.fileLabel.nativeElement.textContent = this.selectedFile.name;
+      this.fileLabel.nativeElement.textContent = this.selectedFile.name;
     }
   }
 
-
-  uploadFile(){
-
+  uploadFile() {
+    this.loaderService.showLoader();
     if (this.selectedFile) {
-    const file = this.selectedFile;
-    
-    const imgRef = ref(this.storage, `${this.localStorageService.getUserByLogin()?.idUser}/${file.name}`);
+      const file = this.selectedFile;
 
-    this.fileLabel.nativeElement.textContent = file.name;
+      const imgRef = ref(
+        this.storage,
+        `${this.localStorageService.getUserByLogin()?.idUser}/${file.name}`
+      );
 
+      this.fileLabel.nativeElement.textContent = file.name;
 
-    const metadata = {
+      const metadata = {
         description: this.formDocumentation.get('description')?.value,
         studyDate: this.formDocumentation.get('studyDate')?.value,
         typeStudy: this.formDocumentation.get('typeStudy')?.value,
-    };
-
-
-    uploadBytes(imgRef, file, { customMetadata: metadata }).then((snapshot) => {
-      
-      console.log('Archivo subido con éxito.', snapshot);
-    })
-    .catch((error) => {
-      console.error('Error al subir el archivo:', error);
-    });
-
+      };
+      uploadBytes(imgRef, file, { customMetadata: metadata })
+        .then((snapshot) => {
+          console.log('Archivo subido con éxito.', snapshot);
+          this.loaderService.showLoader();
+          this.getFiles();
+          this.loaderService.hideLoader();
+        })
+        .catch((error) => {
+          console.error('Error al subir el archivo:', error);
+        });
+      this.loaderService.hideLoader();
+      this.formDocumentation.reset();
+    }
+    this.loaderService.hideLoader();
     this.formDocumentation.reset();
+    this.getFiles();
   }
-}
 
- /* uploadFile(): void {
+  /* uploadFile(): void {
 
     if (this.selectedFile) {
       const formData = new FormData();
@@ -138,7 +151,6 @@ export class DocumentationComponent implements OnInit {
      }
   } */
 
-  
   convertFileToBase64(file: File) {
     const reader = new FileReader();
 
@@ -157,33 +169,34 @@ export class DocumentationComponent implements OnInit {
   studies: any[] = [];
 
   getFiles(): void {
-
-    const idUser = JSON.stringify(this.localStorageService.getUserByLogin()?.idUser);
+    this.loader = true;
+    const idUser = JSON.stringify(
+      this.localStorageService.getUserByLogin()?.idUser
+    );
     const fileRef = ref(this.storage, idUser);
 
-    listAll(fileRef).then(async (idUser : any) => {
-      this.studies = [];
+    listAll(fileRef)
+      .then(async (idUser: any) => {
+        this.studies = [];
 
-      for(let files of idUser?.items){
-        const meta = (await getMetadata(files)).customMetadata;
-        const url = await getDownloadURL(files);
-        
-        this.studies.push({ url: url, files: files, customMetadata: meta });     
-      }
+        for (let files of idUser?.items) {
+          const meta = (await getMetadata(files)).customMetadata;
+          const url = await getDownloadURL(files);
+          this.studies.push({ url: url, files: files, customMetadata: meta });
+        }
+        this.loader = false;
 
-     /* this.studies = this.studies?.filter(
+        /* this.studies = this.studies?.filter(
         (data: any) => data?.customMetadata?.typeStudy === 'uno'
       );*/
-      console.log(this.studies);
-    }).catch((error: any) => {
-      console.log(error);
-    });
-
+        console.log(this.studies);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   }
 
-
-
- deleteFile(fullPath: string): void {
+  deleteFile(fullPath: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
       /*const storageRef = firebase.storage().ref();
       //const fileRef = storageRef.child(fullPath);

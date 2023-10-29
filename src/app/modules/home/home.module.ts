@@ -30,6 +30,7 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatInputModule,
     NgIf,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [

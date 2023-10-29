@@ -43,6 +43,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventsNotificationComponent } from './components/events-notification/events-notification.component';
 import { QuestionService } from 'src/app/services/question/question.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -68,6 +69,7 @@ registerLocaleData(localeEs, 'es-ES');
     MatButtonModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatSnackBarModule,
   ],
   exports: [],
   providers: [
