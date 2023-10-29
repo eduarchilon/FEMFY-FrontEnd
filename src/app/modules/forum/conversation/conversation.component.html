@@ -1,72 +1,75 @@
-<div class="pt-10 mt-20 px-10">
-    <div class="container mx-auto">
-        <h2 class="text-5xl text-white font-bold mb-5">¡Ayuda! ¿Posible embarazo?</h2> <!--{{ conversation.title }}-->
-        <span class="text-[20px] text-black text-medium">Última respuesta: 9 de junio de 2020 a las 3:19
-        </span>
-    </div>
-
-    <div class="flex">
-        <div class="flex flex-col m-5">
-            <img src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
-                class=" rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px]  max-lg:hidden" />
-        </div>
-        <div class="flex flex-col m-5">
-            <p class="text-[15px] text-black underline text-medium">Ana123 <!--{{ conversation.author }}-->
-            </p>
-            <span class="text-[15px] text-black text-medium">7/6/20 a las 8:35
+<div class="bg-[#FEA8B1] bg-cover px-[3vw]">
+    <div class="w-[100%] pt-24 py-[100px] max-w-[1280px] m-auto">
+        <div class="container mx-auto">
+            <h2 class="text-5xl text-white font-bold mb-5">¡Ayuda! ¿Posible embarazo?</h2>
+            <!--{{ conversation.title }}-->
+            <span class="text-[20px] text-black text-medium">Última respuesta: 9 de junio de 2020 a las 3:19
             </span>
         </div>
-    </div>
 
-    <div
-        class="bg-white rounded-b-[20px] px-[45px] p-5 overflow-x-auto max-lg:w-[100%] py-[35px] rounded-[20px] w-[90%] items-center">
-        <!--{{ conversation.content }}-->
-        <p>Hola, tengo 23 años, soy una persona obesa y siempre he tenido problemas con mi regla, he durado hasta un año
-            sin
-            que llegue mi periodo, ahora llevo 5 meses desde la última vez que menstrue. Hace poco empecé a hacer
-            ejercicio
-            y a comer bien, baje 12kg pero aún sigo siendo obesa, el caso es que hace unas dos semanas tuve un sangrado
-            muy
-            ligero, unas manchas rositas pero no sangrado en sí, al día siguiente lo mismo, pequeñas manchitas café y
-            después de eso absolutamente nada. Le comenté a mi hermana y me habló del sangrado de implantación y que por
-            lo
-            regular la dieta que estoy haciendo ayuda mucho a quedar embarazada. Tengo entendido que si soy obesa no
-            puedo
-            tener hijos, peso actualmente 115kg. Podrían darme opiniones sobre esto?</p>
-    </div>
-    <div class="container mx-auto py-5">
-        <h3 class="text-5xl text-white font-bold mb-5">Comentarios</h3>
-    </div>
-    <div class="rounded-b-[20px] p-5 overflow-x-auto max-lg:w-[100%] rounded-[20px] w-[90%] items-center">
-        <p class="text-xl text-[#FF97A5] mb-3"><!--Por: {{ conversation.author }}--></p>
-        <span class="text-white">Juana</span>
-
-        <p>Podrias hacerte una prueba de embarazo y así descartar cualquier duda hermosa, es mejor que lo sepas y estar
-            segura.</p>
-
-    </div>
-    <div class="flex justify-end mt-3 p-5">
-        <button (click)="toggleTextarea()" *ngIf="mostrarBoton1" class="flex">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                class="bi bi-plus m-auto " viewBox="0 0 16 16">
-                <path
-                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-            </svg>Añadir comentario</button>
-    </div>
-    <!--<ng-container *ngIf="!">-->
-    <div class="gx tn ue pt-5">
-        <div>
-            <textarea (input)="onTextareaInput($event)"
-            [value]="contenidoTextarea"
-            *ngIf="mostrarTextarea" id="comment" class="p-5 w-[70%]" placeholder="Add your comment..."></textarea>
+        <div class="flex">
+            <div class="flex flex-col m-5">
+                <img src="https://img.freepik.com/free-photo/tender-woman-having-brow-color-added-her-eyebrows_231208-3536.jpg?w=740&t=st=1696609354~exp=1696609954~hmac=baaa69b1838e8d1cbc325815ded6adca4a0a6a422cb0a1bc641f52ebbaf7e139"
+                    class=" rounded-full border border-4 border-[#DA047A] w-[50px] h-[50px]  max-lg:hidden" />
+            </div>
+            <div class="flex flex-col m-5">
+                <p class="text-[15px] text-black underline text-medium">Ana123 <!--{{ conversation.author }}-->
+                </p>
+                <span class="text-[15px] text-black text-medium">7/6/20 a las 8:35
+                </span>
+            </div>
         </div>
-        <a (click)="mostrarSoloBoton1()" *ngIf="mostrarBoton2"
-            class="cursor-pointer bg-[#AF6FE8] text-[25px] rounded-[20px] text-[white] px-[90px] m-10">
-            Enviar
-        </a>
-        <a (click)="mostrarBoton3Click()" *ngIf="mostrarBoton2"
-        class="cursor-pointer bg-red-500 text-[25px] rounded-[20px] text-[white] px-[90px] m-10">
-        Cancelar
-    </a>
+
+        <div
+            class="bg-white rounded-b-[20px] px-[45px] p-5 overflow-x-auto max-lg:w-[100%] py-[35px] rounded-[20px] items-center">
+            <!--{{ conversation.content }}-->
+            <p>Hola, tengo 23 años, soy una persona obesa y siempre he tenido problemas con mi regla, he durado hasta un
+                año
+                sin
+                que llegue mi periodo, ahora llevo 5 meses desde la última vez que menstrue. Hace poco empecé a hacer
+                ejercicio
+                y a comer bien, baje 12kg pero aún sigo siendo obesa, el caso es que hace unas dos semanas tuve un
+                sangrado
+                muy
+                ligero, unas manchas rositas pero no sangrado en sí, al día siguiente lo mismo, pequeñas manchitas café
+                y
+                después de eso absolutamente nada. Le comenté a mi hermana y me habló del sangrado de implantación y que
+                por
+                lo
+                regular la dieta que estoy haciendo ayuda mucho a quedar embarazada. Tengo entendido que si soy obesa no
+                puedo
+                tener hijos, peso actualmente 115kg. Podrían darme opiniones sobre esto?</p>
+        </div>
+        <div class="container mx-auto py-5">
+            <h3 class="text-5xl text-white font-bold mb-5">Comentarios</h3>
+        </div>
+        <div class="rounded-b-[20px] p-5 overflow-x-auto max-lg:w-[100%] rounded-[20px] w-[90%] items-center">
+            <p class="text-xl text-[#FF97A5] mb-3"><!--Por: {{ conversation.author }}--></p>
+            <span class="text-white">Juana</span>
+
+            <p>Podrias hacerte una prueba de embarazo y así descartar cualquier duda hermosa, es mejor que lo sepas y
+                estar
+                segura.</p>
+
+        </div>
+        <div class="flex justify-end mt-3">
+            <button (click)="toggleTextarea()" *ngIf="mostrarBoton1" 
+            class="bg-[#AF6FE8] text-xl font-bold text-white py-2 px-3 rounded-[20px]">Añadir comentario</button>
+        </div>
+        <!--<ng-container *ngIf="!">-->
+        <div class="gx tn ue pt-5">
+            <div>
+                <textarea (input)="onTextareaInput($event)" [value]="contenidoTextarea" *ngIf="mostrarTextarea"
+                    id="comment" class="p-5 w-[70%]" placeholder="Add your comment..."></textarea>
+            </div>
+            <a (click)="mostrarSoloBoton1()" *ngIf="mostrarBoton2"
+                class="cursor-pointer bg-[#AF6FE8] text-[25px] rounded-[20px] text-[white] px-[90px] m-10">
+                Enviar
+            </a>
+            <a (click)="mostrarBoton3Click()" *ngIf="mostrarBoton2"
+                class="cursor-pointer bg-red-500 text-[25px] rounded-[20px] text-[white] px-[90px] m-10">
+                Cancelar
+            </a>
+        </div>
     </div>
 </div>

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { TopicService } from 'src/app/services/topic/topic.service';
 
 @Component({
   selector: 'app-forum',
@@ -15,16 +16,15 @@ export class ForumComponent {
     private http: HttpClient,
     private spinnerService: SpinnerService,
     private router: Router,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private topicService: TopicService
   ) {}
 
   spinnerConsumer: string = 'ForumComponent';
-
-  apiUrl: string = 'https://651f0a5044a3a8aa47695bd0.mockapi.io/api/topic';
   topics: any[] = [];
 
   ngOnInit() {
-    this.getTopics().subscribe({
+    this.topicService.getAllTopics().subscribe({
       next: (response: any) => {
         this.loaderService.showLoader();
         if (response) {
@@ -37,13 +37,11 @@ export class ForumComponent {
     });
   }
 
-  getTopics(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl).pipe(
-      map((response) => {
-        return response;
-      })
-    );
-  }
+  /*getTopics() {
+    this.topicService.getAllTopics().subscribe((data: any) => {
+        this.topics = data;
+    });
+  }*/
 
   getImageUrl(imgPath: string): string {
     return `./assets/images/${imgPath}`;

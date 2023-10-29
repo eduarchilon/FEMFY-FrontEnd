@@ -51,6 +51,11 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
+    path: 'post/:id',
+    component: ConversationComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
     path: 'documentation',
     component: DocumentationComponent,
     canActivate: [LoginGuardian],
