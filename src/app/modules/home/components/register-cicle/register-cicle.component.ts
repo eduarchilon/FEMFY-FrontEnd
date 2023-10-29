@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { setCycle } from 'src/app/services/redux/actions/cycle.action';
@@ -9,6 +9,9 @@ import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
+import { constants } from 'src/app/constans/constants';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register-cicle',
@@ -33,13 +36,14 @@ export class RegisterCicleComponent implements OnInit {
     private store: Store<AppState>,
     private spinnerService: SpinnerService,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private loaderService: LoaderService,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.idUser = data?.idUser;
-    });
+    console.log(this.data);
   }
 
   closeDialog(): void {
@@ -48,6 +52,9 @@ export class RegisterCicleComponent implements OnInit {
   }
 
   registerCycle(): void {
+    if (this.data?.id) {
+      this.cicleService.deleteCycle(this.data?.id).subscribe((res: any) => res);
+    }
     this.cicleService
       .registerCycle({
         dateBeging: new Date(this.formCycle?.value?.dateBeging),
@@ -56,16 +63,31 @@ export class RegisterCicleComponent implements OnInit {
       })
       .subscribe({
         next: (response: any) => {
-          // this.closeDialog();
+          this.loaderService.showLoader();
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER,
+            JSON.stringify({
+              ...this.localStorageService.getUserByLogin(),
+              idCycle: response?.id,
+            })
+          );
+          this.closeDialog();
+          this.loaderService.showLoader();
           if (response) {
             this.router.navigate(['/']).then(() => {
               location.reload();
+              // this.openSnackBar('Registro creado', 'OK');
             });
+            this.loaderService.showLoader();
             return response;
           }
+          this.loaderService.hideLoader();
         },
         error: (error) => error,
       });
   }
 
+  openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action);
+  }
 }

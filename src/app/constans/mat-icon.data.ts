@@ -41,7 +41,7 @@ export const CYCLE_STATE: any = {
   menstrualDay: {
     name: 'menstrualDay',
     path: './assets/svg/blood.svg',
-    desc: 'Estas en tus días de menstruacipon',
+    desc: 'Estas en tus días de menstruación',
   },
   folicularDay: {
     name: 'folicularDay',

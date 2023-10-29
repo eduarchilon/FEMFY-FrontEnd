@@ -47,6 +47,7 @@ export class RegistroUsuarioComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
   signupUser(): void {
     this.userNameFinded = '';
     this.emailFinded = '';
@@ -58,17 +59,12 @@ export class RegistroUsuarioComponent implements OnInit {
       const password = this.formRegister.get('password')?.value;
       const passwordRepeat = this.formRegister.get('passwordRepeat')?.value;
       if (password !== passwordRepeat) {
-        // Las contraseñas no coinciden, muestra un mensaje de error y detén el registro
-        console.log('Las contraseñas no coinciden');
         return;
       }
-
       // Validar fecha de nacimiento mayor que el día de hoy
       const birthdate = new Date(this.formRegister.get('birthdate')?.value);
       const today = new Date();
       if (birthdate > today) {
-        // La fecha de nacimiento es mayor que hoy, muestra un mensaje de error y detén el registro
-        console.log('La fecha de nacimiento no puede ser mayor que hoy');
         return;
       }
 
@@ -82,29 +78,25 @@ export class RegistroUsuarioComponent implements OnInit {
         .subscribe({
           next: (response: Observable<any> | any) => {
             this.loaderService.showLoader();
-            if (response === this.formRegister?.value?.userName) {
-              this.userNameFinded = response;
-              this.loaderService.hideLoader();
-            }
-            if (response === this.formRegister?.value?.email) {
-              this.emailFinded = response;
-              this.loaderService.hideLoader();
-            }
             response?.subscribe({
-              next: (res: UserResponse | any) => {
-                this.authService.login(res?.userName, res?.password).subscribe({
-                  next: (userLogin: UserResponse | any) => {
-                    this.loaderService.showLoader();
-                    if (userLogin) {
-                      this.loaderService.hideLoader();
-                      this.notificationService
-                        .enviarNotificacion(
-                          '¡Bienvenida a Femfy!',
-                          'Gracias por registrarte 😊'
-                        )
-                        .subscribe({
-                          next: (res: any) => res,
-                        });
+              next: (userResponse: UserResponse | any) => {
+                this.authService
+                  .login(userResponse?.userName, userResponse?.password)
+                  .subscribe({
+                    next: (userLogin: UserResponse | any) => {
+                      this.loaderService.showLoader();
+                      //NOTIFICACION PUSH
+                      if (userLogin) {
+                        this.loaderService.hideLoader();
+                        this.notificationService
+                          .enviarNotificacion(
+                            '¡Bienvenida a Femfy!',
+                            'Gracias por registrarte 😊'
+                          )
+                          .subscribe({
+                            next: (res: any) => res,
+                          });
+                      }
                       this.router.navigate(['cuestionario']);
                       this.questionsService
                         .createUserMenstruationQuestion({
@@ -113,32 +105,20 @@ export class RegistroUsuarioComponent implements OnInit {
                         })
                         .subscribe(
                           (question: QuestionUserMenstruation | any) => {
+                            const idQuestion = question?.id;
                             this.localStorageService.setKeyValueLocalStorage(
-                              constants.ID_REGISTER,
-                              question?.id
+                              constants.USER,
+                              JSON.stringify({
+                                ...this.localStorageService.getUserByLogin(),
+                                idQuestion: idQuestion,
+                              })
                             );
                           }
                         );
-                      this.cicleService
-                        .registerCycle({
-                          idUser:
-                            this.localStorageService.getUserByLogin()?.idUser,
-                          dateBeging: new Date(), //por defecto
-                          daysOfBleeding: 0,
-                          status: '',
-                        })
-                        .subscribe((cycle: Cycle | any) => {
-                          this.localStorageService.setKeyValueLocalStorage(
-                            constants.ID_FIRST_CYCLE,
-                            cycle?.id
-                          );
-                        });
-                    }
-                  },
-                });
+                    },
+                  });
               },
             });
-            this.loaderService.hideLoader();
           },
           error: (error) => error,
         });

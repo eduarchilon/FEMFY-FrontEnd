@@ -39,20 +39,4 @@ fdescribe('SurveyComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-
-  it('omitBasicForm', () => {
-    component.omitBasicForm();
-  });
-
-  it('toggleSkipButtonVisibility should set showSkipButton to true', () => {
-    component.toggleSkipButtonVisibility(true);
-
-    expect(component.showSkipButton).toBeTrue();
-  });
-
-  it('toggleSkipButtonVisibility should set showSkipButton to false', () => {
-    component.toggleSkipButtonVisibility(false);
-
-    expect(component.showSkipButton).toBeFalse();
-  });
 });

@@ -1,32 +1,40 @@
 <div class="m-auto">
   <mat-stepper #stepper>
     <mat-step>
-      <p class="text-2xl text-black !my-5">
+      <p
+        class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
+      >
         ¿Ya tuviste tu primera menstruación?
       </p>
-      <mat-radio-group
-        class="flex flex-col w-48 m-auto mb-5"
-        aria-label="Select an option"
-      >
-        <mat-radio-button class="text-center" value="1" (click)="stepper.next()"
-          >Si</mat-radio-button
+      <div class="flex justify-center">
+        <mat-radio-group
+          class="flex flex-col mb-5 gap-3"
+          aria-label="Select an option"
         >
-        <mat-radio-button class="text-center" value="2" (click)="redirection()"
-          >No</mat-radio-button
-        >
-      </mat-radio-group>
+          <mat-radio-button value="1" (click)="stepper.next()"
+            ><span class="max-sm:text-sm">Si</span></mat-radio-button
+          >
+          <mat-radio-button value="2" (click)="redirection()"
+            ><span class="max-sm:text-sm">No</span></mat-radio-button
+          >
+        </mat-radio-group>
+      </div>
     </mat-step>
     <mat-step>
       <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
-        <p class="text-2xl text-black !my-5">
+        <p
+          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
+        >
           ¿Qué día fue tu última menstruación?
         </p>
-        <input
-          matInput
-          type="date"
-          class="text-gray-500 rounded-full p-3 mb-5"
-          formControlName="lastTime"
-        />
+        <div class="flex justify-center">
+          <input
+            matInput
+            type="date"
+            class="text-gray-500 rounded-full p-3 mb-5"
+            formControlName="lastTime"
+          />
+        </div>
         <div class="flex">
           <button
             mat-button
@@ -49,15 +57,19 @@
     </mat-step>
     <mat-step>
       <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
-        <p class="text-2xl text-black !my-5">
+        <p
+          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
+        >
           ¿Qué duración tuvo aproximadamente ese último ciclo?
         </p>
-        <input
-          type="number"
-          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="lastCycleDuration"
-        />
-        <span class="text-gray-500">Días</span>
+        <div class="flex justify-center items-center">
+          <input
+            type="number"
+            class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+            formControlName="lastCycleDuration"
+          />
+          <span class="text-gray-500">Días</span>
+        </div>
         <div>
           <button
             mat-button
@@ -83,15 +95,25 @@
         [formGroup]="formFourRegister"
         (ngSubmit)="submitFormFourRegister()"
       >
-        <p class="text-2xl text-black !my-5">¿Sos regular?</p>
-        <mat-radio-group
-          class="flex flex-col w-48 m-auto mb-5"
-          aria-label="Select an option"
-          formControlName="regular"
+        <p
+          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
         >
-          <mat-radio-button value="1">Si</mat-radio-button>
-          <mat-radio-button value="2">No</mat-radio-button>
-        </mat-radio-group>
+          ¿Sos regular?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group
+            class="flex flex-col mb-5 gap-3"
+            aria-label="Select an option"
+            formControlName="regular"
+          >
+            <mat-radio-button value="1"
+              ><span class="max-sm:text-sm">Si</span></mat-radio-button
+            >
+            <mat-radio-button value="2"
+              ><span class="max-sm:text-sm">No</span></mat-radio-button
+            >
+          </mat-radio-group>
+        </div>
         <div>
           <button
             mat-button
@@ -117,15 +139,19 @@
         [formGroup]="formThreeRegister"
         (ngSubmit)="submitFormThreeRegister()"
       >
-        <p class="text-2xl text-black !my-5">
+        <p
+          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
+        >
           ¿Qué duración tienen regularmente tu ciclos?
         </p>
-        <input
-          type="number"
-          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="regularCycleDuration"
-        />
-        <span class="text-gray-500">Días</span>
+        <div class="flex justify-center items-center">
+          <input
+            type="number"
+            class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+            formControlName="regularCycleDuration"
+          />
+          <span class="text-gray-500">Días</span>
+        </div>
         <div>
           <button
             mat-button
@@ -151,13 +177,19 @@
         [formGroup]="formFiveRegister"
         (ngSubmit)="submitFormFiveRegister()"
       >
-        <p class="text-2xl text-black !my-5">¿Qué duración tuvo el sangrado?</p>
-        <input
-          type="number"
-          class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
-          formControlName="bleedingDuration"
-        />
-        <span class="text-gray-500">Días</span>
+        <p
+          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
+        >
+          ¿Qué duración tuvo el sangrado?
+        </p>
+        <div class="flex justify-center items-center">
+          <input
+            type="number"
+            class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
+            formControlName="bleedingDuration"
+          />
+          <span class="text-gray-500">Días</span>
+        </div>
         <div class="my-5">
           <button
             mat-button

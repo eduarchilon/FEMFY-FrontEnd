@@ -12,9 +12,16 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { QuestionMenopausicaComponent } from './components/question-menopausica/question-menopausica.component';
+import { QuestionOtroComponent } from './components/question-otro/question-otro.component';
 
 @NgModule({
-  declarations: [SurveyComponent, PreguntaComponent],
+  declarations: [
+    SurveyComponent,
+    PreguntaComponent,
+    QuestionMenopausicaComponent,
+    QuestionOtroComponent,
+  ],
   imports: [
     CommonModule,
     BrowserModule,

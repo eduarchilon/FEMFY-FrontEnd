@@ -1,5 +1,5 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,7 +17,7 @@ import { initialLoginState } from 'src/app/services/redux/reducers/login.reducer
 import { MatDialogModule } from '@angular/material/dialog';
 import { RegisterCicleComponent } from './components/register-cicle/register-cicle.component';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { CicleHistorialComponent } from './components/cicle-historial/cicle-historial.component';
 import { QuestionService } from 'src/app/services/question/question.service';
@@ -26,6 +26,10 @@ import { EditCycleComponent } from './components/edit-cycle/edit-cycle.component
 import { DeleteCycleComponent } from './components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from './components/finish-cycle/finish-cycle.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -53,6 +57,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ReactiveFormsModule,
     MatMenuModule,
     MatTooltipModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgIf,
+    MatSnackBarModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [
@@ -60,6 +69,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     LocalStorageService,
     CicleService,
     QuestionService,
+    LoaderService,
     { provide: LOCALE_ID, useValue: 'es-ES' },
   ],
 })

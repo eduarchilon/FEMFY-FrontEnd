@@ -159,9 +159,7 @@ export class HeaderUsuarioComponent implements OnInit {
     }, 1000);
   }
 
-
   getProfileImage(): string {
     return this.sharedProfileService.getUserProfileImage();
   }
-  
 }

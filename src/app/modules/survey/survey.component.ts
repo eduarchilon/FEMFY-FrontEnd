@@ -12,26 +12,31 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
   styleUrls: ['survey.component.scss'],
 })
 export class SurveyComponent {
+  showSkipButton = false;
+
+  questionType!: number;
+
   constructor(
     private router: Router,
     private localStorageService: LocalStorageService
   ) {}
 
-  preguntas: string[] = [
-    'Pregunta 1. ¿Ya tuviste tu primera menstruación?',
-    'Pregunta 2. ¿Qué día fue tu última menstruación?',
-    'Pregunta 3. ¿Que duración tuvo tu último período?',
-    'Pregunta 4. ¿Sos Regular o Irregluar?',
-  ];
-
-  omitBasicForm(): void {
-    console.log('Calling omitBasicForm');
-    this.localStorageService.deleteValue(constants.ID_REGISTER);
-  }
-
-  showSkipButton = false;
-
-  toggleSkipButtonVisibility(show: boolean) {
-    this.showSkipButton = show;
+  selectQuestionByTypeUser(value: string | number): void {
+    switch (value) {
+      case '1':
+        this.questionType = 1;
+        console.log(this.questionType);
+        break;
+      case '2':
+        this.questionType = 2;
+        console.log(this.questionType);
+        break;
+      case '3':
+        this.questionType = 3;
+        console.log(this.questionType);
+        break;
+      default:
+        break;
+    }
   }
 }

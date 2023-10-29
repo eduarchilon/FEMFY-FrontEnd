@@ -1,25 +1,42 @@
 <div class="bg-[#FEA8B1] px-[3vw]">
   <div class="pb-[300px] pt-10 mt-20 px-5 max-w-[1280px] m-auto">
     <div class="container mx-auto">
-      <div class="lg:flex lg:gap-10">
+      <div class="lg:flex lg:gap-10 items-center">
         <div class="lg:w-1/3 text-center mb-5 md:mb-0">
           <div
             class="mb-5 rounded-full border-8 border-[#DA047A] w-[337px] h-[337px] mx-auto"
           >
-            <img
-              [src]="picture[0]?.url"
-              class="w-[100%] h-[100%] object-cover rounded-full"
-            />
+            <ng-container *ngIf="!picture[0]?.url">
+              <img
+                src="./assets/images/account.png"
+                alt="account"
+                class="w-[100%] h-[100%] object-cover rounded-full"
+              />
+            </ng-container>
+            <ng-container *ngIf="picture[0]?.url">
+              <img
+                [src]="picture[0]?.url"
+                class="w-[100%] h-[100%] object-cover rounded-full"
+              />
+            </ng-container>
           </div>
-          <span class="text-5xl text-white font-bold block mb-10">{{ userResponse.userName }}</span>
+          <span class="text-5xl text-white font-bold block mb-10">{{
+            userResponse.userName
+          }}</span>
 
           <span class="text-xl text-white underline underline-offset-4">
-            <label for="file" class="cursor-pointer text ">
+            <label for="file" class="cursor-pointer text">
               Cambiar foto de perfil
             </label>
-            <input type="file" id="file" name="profile" class="hidden" mat-stroked-button (change)="uploadProfilePicture($event)"/>
-            </span>
-
+            <input
+              type="file"
+              id="file"
+              name="profile"
+              class="hidden"
+              mat-stroked-button
+              (change)="uploadProfilePicture($event)"
+            />
+          </span>
         </div>
         <div class="lg:w-2/3">
           <ng-container *ngIf="editProfile; else readOnlyProfile">
@@ -80,10 +97,7 @@
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
                   <div>
                     <label for="note" class="block text-xl mb-2">Email</label>
-                    <input
-                      type="text"
-                      class="rounded-full border w-full p-4"
-                    />
+                    <input type="text" class="rounded-full border w-full p-4" />
                   </div>
                   <div>
                     <label for="note" class="block text-xl mb-2"
@@ -101,7 +115,8 @@
               <div class="text-end mb-5">
                 <button
                   class="bg-[#DA047A] text-white font-semibold rounded-[20px] p-3"
-                  type="submit">
+                  type="submit"
+                >
                   Guardar cambios
                 </button>
               </div>
@@ -114,7 +129,8 @@
               <h2 class="text-4xl text-white font-bold">Perfil</h2>
               <button
                 class="bg-[#DA047A] text-white font-semibold rounded-[20px] p-3"
-                (click)="enableEditMode()">
+                (click)="enableEditMode()"
+              >
                 Modificar
               </button>
             </div>
@@ -134,13 +150,17 @@
                   <p>{{ userResponse.lastName || "Sin apellido" }}</p>
                 </div>
                 <div>
-                  <label for="note" class="block text-xl mb-2">Fecha de nacimiento</label>
+                  <label for="note" class="block text-xl mb-2"
+                    >Fecha de nacimiento</label
+                  >
                   <p>{{ userResponse.birthdate | date : "dd/MM/yyyy" }}</p>
                 </div>
               </div>
             </div>
             <div class="bg-[#FACAEC] rounded-[20px] mb-5">
-              <h3 class="text-2xl text-white bg-[#A35EDF] rounded-t-[20px] font-bold px-5 py-3">
+              <h3
+                class="text-2xl text-white bg-[#A35EDF] rounded-t-[20px] font-bold px-5 py-3"
+              >
                 Contacto
               </h3>
               <div class="grid lg:grid-cols-2 gap-4 p-5">
