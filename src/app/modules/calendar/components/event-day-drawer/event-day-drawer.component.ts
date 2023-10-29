@@ -11,6 +11,8 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { GOOGLE_CALENDAR_ICON } from 'src/app/constans/mat-icon.data';
 declare var createGoogleEvent: any;
 
 @Component({
@@ -34,6 +36,8 @@ export class EventDayDrawerComponent implements OnInit {
 
   spinnerConsumer: string = 'EventDayDrawerComponent';
 
+  iconCalendar: any = GOOGLE_CALENDAR_ICON;
+
   constructor(
     private dialogRef: MatDialogRef<EventDayDrawerComponent>,
     private calendarService: CalendarService,
@@ -43,7 +47,8 @@ export class EventDayDrawerComponent implements OnInit {
     private loaderService: LoaderService,
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    @Inject(MAT_DIALOG_DATA) public data: any //fecha
+    @Inject(MAT_DIALOG_DATA) public data: any, //fecha,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -92,24 +97,6 @@ export class EventDayDrawerComponent implements OnInit {
   }
 
   registerEevent(): void {
-    const emailUser = this.localStorageService.getUserByLogin()?.email;
-    const date = this.data?.daySelected;
-    const time = this.formRegisterEvent?.value?.hour?.split(':');
-    let hour = 0;
-    let minutes = 0;
-    if (time.length === 2) {
-      hour = parseInt(time[0], 10);
-      minutes = parseInt(time[1], 10);
-      date.set({ hour: hour, minute: minutes });
-    }
-    const realDate = new Date(date);
-    const startTime = date.toISOString()?.slice(0, 18) + '-00:00';
-    const endTime = this.getEndTime(realDate);
-    const eventDetails = {
-      email: emailUser,
-      startTime: startTime,
-      endTime: endTime,
-    };
     this.loaderService.showLoader();
     this.calendarService
       .setEvent({
@@ -134,7 +121,6 @@ export class EventDayDrawerComponent implements OnInit {
         },
         error: (error) => error,
       });
-    // createGoogleEvent(eventDetails);
   }
 
   deleteEvent(event: any): void {
@@ -157,5 +143,45 @@ export class EventDayDrawerComponent implements OnInit {
     appointmentTime.setHours(appointmentTime.getHours() + 1);
     const endTime = appointmentTime.toISOString().slice(0, 18) + '-00:00';
     return endTime;
+  }
+
+  vinculateGoogleClendar(event: any): void {
+    const emailUser = this.localStorageService.getUserByLogin()?.email;
+    const date = this.data?.daySelected;
+    const time = this.formRegisterEvent?.value?.hour?.split(':');
+    let hour = 0;
+    let minutes = 0;
+    if (time.length === 2) {
+      hour = parseInt(time[0], 10);
+      minutes = parseInt(time[1], 10);
+      date.set({ hour: hour, minute: minutes });
+    }
+    const realDate = new Date(date);
+    const startTime = date.toISOString()?.slice(0, 18) + '-00:00';
+    const endTime = this.getEndTime(realDate);
+    const eventDetails = {
+      email: emailUser,
+      startTime: startTime,
+      endTime: endTime,
+      summary: event?.title,
+      location: 'Buenos Aires, Argentina',
+      description: event?.description,
+    };
+    createGoogleEvent(eventDetails)
+      .then((success: any) => {
+        if (success) {
+          this.openSnackBar('Evento vinvulado a Google Calendar', 'Cerrar');
+        }
+      })
+      .catch((error: any) => {
+        console.error('Ocurrió un error al crear el evento:', error);
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }

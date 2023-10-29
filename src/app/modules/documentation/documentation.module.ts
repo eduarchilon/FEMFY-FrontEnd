@@ -6,20 +6,19 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { HttpClientJsonpModule } from '@angular/common/http';
+import { LoaderService } from 'src/app/services/loader/loader.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [
-    DocumentationComponent
-  ],
+  declarations: [DocumentationComponent],
   imports: [
     BrowserModule,
     CommonModule,
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
+    MatProgressSpinnerModule,
   ],
-  providers:[
-    LocalStorageService,
-  ]
+  providers: [LocalStorageService, LoaderService],
 })
-export class DocumentationModule { }
+export class DocumentationModule {}

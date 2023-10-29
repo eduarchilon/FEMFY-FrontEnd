@@ -27,17 +27,24 @@ function gisLoaded() {
   gisInited = true;
 }
 function createGoogleEvent(eventDetails) {
-  tokenClient.callback = async (resp) => {
-    if (resp.error !== undefined) {
-      throw resp;
+  return new Promise((resolve, reject) => {
+    tokenClient.callback = async (resp) => {
+      if (resp.error !== undefined) {
+        reject(resp.error);
+      }
+      try {
+        await scheduleEvent(eventDetails);
+        resolve(true);
+      } catch (error) {
+        reject(error);
+      }
+    };
+    if (gapi.client.getToken() === null) {
+      tokenClient.requestAccessToken({ prompt: "consent" });
+    } else {
+      tokenClient.requestAccessToken({ prompt: "" });
     }
-    await scheduleEvent(eventDetails);
-  };
-  if (gapi.client.getToken() === null) {
-    tokenClient.requestAccessToken({ prompt: "consent" });
-  } else {
-    tokenClient.requestAccessToken({ prompt: "" });
-  }
+  });
 }
 
 function getResponse() {
@@ -46,9 +53,9 @@ function getResponse() {
 
 function scheduleEvent(eventDetails) {
   const event = {
-    summary: "Google I/O 2015",
-    location: "800 Howard St., San Francisco, CA 94103",
-    description: "A chance to hear more about Google's developer products.",
+    summary: eventDetails.summary,
+    location: eventDetails.location,
+    description: eventDetails.description,
     start: {
       dateTime: eventDetails.startTime,
       timeZone: "America/Los_Angeles",

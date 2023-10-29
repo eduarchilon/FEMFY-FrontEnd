@@ -21,14 +21,20 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="editActualCycle(cyclesWithEndNull[0])">
+                <button
+                  mat-menu-item
+                  (click)="editActualCycle(cyclesWithEndNull[0])"
+                >
                   <mat-icon color="primary">edit_road</mat-icon>
                   <span>Editar días de sangrado</span>
                 </button>
                 <div class="w-[100%] px-2">
                   <mat-divider></mat-divider>
                 </div>
-                <button mat-menu-item (click)="deleteActualCycle(cyclesWithEndNull[0])">
+                <button
+                  mat-menu-item
+                  (click)="deleteActualCycle(cyclesWithEndNull[0])"
+                >
                   <mat-icon color="warn">delete</mat-icon>
                   <span>Eliminar ciclo</span>
                 </button>
