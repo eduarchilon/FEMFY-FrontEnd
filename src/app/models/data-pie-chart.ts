@@ -5,8 +5,10 @@ export interface DataPieChart {
   color: string;
   fase?: string;
   isOvulation?: boolean;
+  desc?: string | '';
 }
 
 export interface DataPieChartChildren extends DataPieChart {
   width: number;
+  desc?: string | '';
 }

@@ -57,6 +57,10 @@ export class CicleService {
   }
 
   deleteCycle(idCycle: any): Observable<any> {
-    return this.http.delete(`${this.usersUrl}/delete/${idCycle}`);
+    return this.http.delete(`${this.usersUrl}/delete/${idCycle}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
   }
 }

@@ -13,6 +13,7 @@ import { setCycleState } from 'src/app/services/redux/actions/cycle.action';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-pie-chart',
@@ -23,7 +24,9 @@ export class PieChartComponent implements OnInit {
   @Input() cycles: Cycle[] = [];
   @Input() cyclesWithEndNull: Cycle[] = [];
   @Input() cyclesWithOutEndNull: Cycle[] = [];
-  @Input() myRegisterQuestion!: QuestionUserMenstruation;
+  @Input() averageQuestionCycleContent: number[] = [];
+
+  @Input() myRegisterQuestion: QuestionUserMenstruation = {}; //BOARR
 
   //Data
   averageCycle!: number;
@@ -41,12 +44,31 @@ export class PieChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // console.log(this.cycles);
+    // console.log(this.cyclesWithEndNull);
+    // console.log(this.cyclesWithOutEndNull);
+
+    this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
+      const diferenciaEnDias = moment(cycle?.dateEnd).diff(
+        moment(cycle?.dateBeging),
+        'days'
+      );
+      this.averageQuestionCycleContent.push(diferenciaEnDias);
+    });
+
     let chat12: AgPolarSeriesOptions = {};
     let chat13: AgPolarSeriesOptions = {};
     if (this.cycles) {
       this.cycleChart = this.cyclesWithEndNull[0];
-      chat12 = this.setPieChartContentData(this.cycleChart);
-      chat13 = this.setPieContainerData(chat12, this.cycleChart);
+      chat12 = this.setPieChartContentData(
+        this.averageQuestionCycleContent,
+        this.cycleChart
+      );
+      chat13 = this.setPieContainerData(
+        chat12,
+        this.cycleChart,
+        this.averageQuestionCycleContent
+      );
       this.options = {
         width: this.getWindowSize(),
         height: this.getWindowSize(),
@@ -69,10 +91,13 @@ export class PieChartComponent implements OnInit {
     this.sizeChart = window.innerWidth;
   }
 
-  setPieChartContentData(cycleChart: Cycle): AgPolarSeriesOptions {
-    const daysCycleComplete = this.setDaysCycleComplete(
-      this.myRegisterQuestion,
-      this.cyclesWithOutEndNull
+  setPieChartContentData(
+    averageQuestionCycleContent: number[],
+    cycleChart: Cycle
+  ): AgPolarSeriesOptions {
+    //PROMEDIO DE DURACION DE CICLOS
+    const daysCycleComplete = this.setAverageCycles(
+      averageQuestionCycleContent
     );
 
     let data: DataPieChart[] = [
@@ -101,9 +126,10 @@ export class PieChartComponent implements OnInit {
       },
       {
         id: 4,
-        dayCount: Number(
-          daysCycleComplete - cycleChart?.daysOfBleeding - 3 - 5
-        ),
+        dayCount:
+          Number(
+            Math.round(daysCycleComplete) - cycleChart?.daysOfBleeding - 3 - 5
+          ) + 2,
         label: 'Días Infértiles',
         color: '#bfdbfe',
         fase: 'luteaDay',
@@ -154,12 +180,10 @@ export class PieChartComponent implements OnInit {
   setPieContainerData(
     optionSeries: AgPolarSeriesOptions | any,
     cycleChart: Cycle,
-    initDay?: any
+    averageQuestionCycleContent?: number[]
   ): AgPolarSeriesOptions {
-    const daysCycleComplete = this.setDaysCycleComplete(
-      this.myRegisterQuestion,
-      this.cyclesWithOutEndNull
-    );
+    const daysAverageCycle = this.setAverageCycles(averageQuestionCycleContent);
+    this.setDaysCycleComplete(daysAverageCycle);
     const newDataArray: DataPieChartChildren[] = [];
     optionSeries?.data?.forEach((item: any) => {
       for (let i = 1; i <= item.dayCount; i++) {
@@ -184,11 +208,15 @@ export class PieChartComponent implements OnInit {
         item.width = (newDataArray.length / sumaTotal) * 100;
         if (item.id === diff) {
           item.color = 'red';
-        } else if (item.id === daysCycleComplete - 1) {
+          item.desc = 'Está aquí';
+        } else if (item.id === Math.round(daysAverageCycle)) {
           item.color = 'black';
-        } else if (item.id === Math.round(daysCycleComplete / 2)) {
+          item.desc = 'Fin del ciclo';
+        } else if (item.id === Math.round(daysAverageCycle / 2)) {
           item.color = 'green';
+          item.desc = 'Ovulación';
         }
+
         return item;
       }
     );
@@ -197,7 +225,7 @@ export class PieChartComponent implements OnInit {
       this.store.dispatch(
         setCycleState({
           cycleState: {
-            ovulationNumber: Math.round(daysCycleComplete / 2),
+            ovulationNumber: Math.round(daysAverageCycle / 2),
             statePhase: newDataArray[diff - 1],
           },
         })
@@ -226,16 +254,9 @@ export class PieChartComponent implements OnInit {
       strokes: ['white'],
       tooltip: {
         renderer: ({ datum, color, sectorLabelKey }) => {
-          if (datum.color === 'red') {
-            datum['desc'] = 'Está aquí';
-          } else if (datum.color === 'green') {
-            datum['desc'] = 'Ovulación';
-          } else if (datum.color === 'black') {
-            datum['desc'] = 'Fin del ciclo';
-          }
           return [
             `<div style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;">`,
-            datum['desc'] || datum['label'],
+            datum.desc || datum.label,
             `</div>`,
             `<div style="padding: 10px 8px;">`,
             `  <strong class="flex justify-between"><p>Día ${datum.id}</p><a href="https://femfy-stage.vercel.app/calendario"><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
@@ -257,41 +278,27 @@ export class PieChartComponent implements OnInit {
     };
   }
 
-  setDaysCycleComplete(
-    myRegisterQuestion?: QuestionUserMenstruation,
-    cyclesWithOutEndNull?: Cycle[] | any
-  ): number {
-    let result = 0;
-    if (cyclesWithOutEndNull.length > 0) {
-      for (const cycle of cyclesWithOutEndNull) {
-        const dateBeging: any = new Date(cycle?.dateBeging);
-        const dateEnd: any = new Date(cycle?.dateEnd);
-
-        const differencesMiliseconds = dateEnd - dateBeging;
-        const differenceDays = differencesMiliseconds / (1000 * 60 * 60 * 24);
-        result += differenceDays;
-      }
-    }
-
-    let countDays = [];
-    countDays.push(myRegisterQuestion?.lastCycleDuration);
-    countDays.push(myRegisterQuestion?.regularCycleDuration);
-    if (cyclesWithOutEndNull.length > 0) {
-      countDays.push(result / cyclesWithOutEndNull?.length);
-    }
-
-    const total = countDays?.reduce(
-      (acumulador: any, numero: any) => acumulador + numero,
-      0
-    );
+  setDaysCycleComplete(daysAverageCycle: number): void {
+    console.log(Math.round(daysAverageCycle / 2));
 
     this.store.dispatch(
       setDayOfOvulation({
-        numberOvulation: Math.round(total / countDays.length / 2),
+        numberOvulation: Math.round(daysAverageCycle / 2),
       })
     );
+  }
 
-    return Math.round(total / countDays.length);
+  setAverageCycles(averageQuestionCycleContent?: number[] | any): number {
+    const total: number | any = averageQuestionCycleContent?.reduce(
+      (total: any, num: any) => total + num,
+      0
+    );
+    averageQuestionCycleContent?.reduce(
+      (total: any, num: any) => total + num,
+      0
+    );
+    const daysCycleComplete = total / averageQuestionCycleContent?.length;
+    return daysCycleComplete;
   }
 
   //STYLE RESPONSE

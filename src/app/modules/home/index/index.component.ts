@@ -15,6 +15,8 @@ import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.componen
 import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { UserResponse } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-index',
@@ -36,14 +38,8 @@ export class IndexComponent implements OnInit {
   cycles: CycleHistorial[] = [];
   cyclesWithEndNull: CycleHistorial[] = [];
   cyclesWithOutEndNull: CycleHistorial[] = [];
-  initRegisterId: number = this.localStorageService.getLocalStorage(
-    constants.ID_REGISTER
-  );
 
   @ViewChild('editRecomendation') editRecomendation!: MatTooltip;
-
-  //NEW DATA
-  averageCycleContent: number[] = [];
 
   constructor(
     private router: Router,
@@ -54,43 +50,43 @@ export class IndexComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
+  //NEW DATA
+  averageQuestionCycleContent: number[] = [];
+  userAuth!: UserResponse;
+
   ngOnInit(): void {
-    const userId = this.localStorageService.getUserByLogin()?.idUser;
-    //NEW CYCLE
+    this.userAuth = this.localStorageService.getUserByLogin();
 
     this.questionsService
       .getAllQuestionUserMenstruation()
       .subscribe((data: any) => {
-        const question = data?.filter((quest: any) => quest?.userId === userId);
+        const question = data?.filter(
+          (quest: any) => quest?.userId === this.userAuth?.idUser
+        );
         const lcd = question[0]?.lastCycleDuration || 28;
         const rcd = question[0]?.regularCycleDuration || 28;
-        this.averageCycleContent = [lcd, rcd];
-        console.log(this.averageCycleContent);
+        this.averageQuestionCycleContent = [lcd, rcd]; //TODO
       });
 
-    const idRegisterQuestion = JSON.parse(
-      this.localStorageService.getLocalStorage(constants.ID_REGISTER)
-    );
-    this.questionsService
-      .getAllQuestionUserMenstruationById(idRegisterQuestion)
+    this.cicleService
+      .getAllCycles(this.userAuth?.idUser)
       .subscribe((data: any) => {
-        this.myRegisterQuestion = data;
+        this.cyclesWithEndNull = data?.filter(
+          (item: any) => item?.dateEnd === null
+        );
+        this.cyclesWithOutEndNull = data?.filter(
+          (item: any) => item?.dateEnd !== null
+        );
+        this.cycles = data; //TODO
       });
-    this.cicleService.getAllCycles(userId).subscribe((data: any) => {
-      this.cyclesWithEndNull = data?.filter(
-        (item: any) => item?.dateEnd === null
-      );
-      this.cyclesWithOutEndNull = data?.filter(
-        (item: any) => item?.dateEnd !== null
-      );
-      this.cycles = data;
-      this.cycleChart = this.cycles[this.cycles?.length - 1];
-    });
   }
 
-  openCicleRegister(): void {
+  openCicleRegister(cycle: Cycle | any): void {
     const dialogRef = this.dialog.open(RegisterCicleComponent, {
       panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        ...cycle,
+      },
     });
   }
 
