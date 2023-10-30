@@ -111,6 +111,12 @@ export class RegistroUsuarioComponent implements OnInit {
                             idHistorial: history.id
                           }))
                       })
+                      /*this.questionMenopauseService
+                        .createUserMenopauseQuestion({
+                          ...emptyQuestionMenopausResponse(),
+                          userId: this.userResponse.idUser,
+                        })
+                        .subscribe((res: any) => res);*/
                       this.router.navigate(['cuestionario']);
                       this.questionsService
                         .createUserMenstruationQuestion({
