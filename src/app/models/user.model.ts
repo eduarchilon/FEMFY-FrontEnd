@@ -16,6 +16,9 @@ export interface UserResponse {
   idUser?: number;
   idCycle?: number;
   idQuestion?: number;
+  typeUserID?: number;
+
+  idMenopause?:number
 }
 
 export interface UserRequest extends UserResponse {

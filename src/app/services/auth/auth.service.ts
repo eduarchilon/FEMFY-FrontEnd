@@ -82,7 +82,7 @@ export class AuthService {
           // El usuario no existe, realizar el registro
           return this.http
             .post<UserRequest>(`${this.usersUrl}/createUser`, {
-              typeUserID: 1,
+              typeUserID: 3,
               ...userRequest,
             })
             .pipe(map((response: any) => response));
@@ -98,5 +98,23 @@ export class AuthService {
 
   logoutUser(): void {
     this.localStorageService.deleteValue(constants.USER);
+  }
+
+  updateUser(user: UserResponse): Observable<any> {
+    return this.http.put<any>(`${this.usersUrl}/updateUser`, user).pipe(
+      map((user: any) => {
+        // if (user) {
+        //   this.localStorageService.setKeyValueLocalStorage(
+        //     constants.USER,
+        //     JSON.stringify({
+        //       ...this.localStorageService.getUserByLogin(),
+        //       typeUserID: user?.typeUserID,
+        //     })
+        //   );
+        //   return user;
+        // }
+        return user;
+      })
+    );
   }
 }
