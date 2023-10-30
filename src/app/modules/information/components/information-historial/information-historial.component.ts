@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuestionsUserFamilyHistory } from 'src/app/models/historial.model';
 import { UserResponse } from 'src/app/models/user.model';
 import { HistorialService } from 'src/app/services/historial/historial.service';
@@ -17,8 +18,9 @@ export class InformationHistorialComponent implements OnInit {
   constructor(
     private historyService: HistorialService,
     private localStorageService: LocalStorageService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private _snackBar: MatSnackBar
+  ) { }
 
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
@@ -76,63 +78,88 @@ export class InformationHistorialComponent implements OnInit {
     uterineFibroids: new FormControl(''),
   });
 
-  submitOne(): void {
+  submitBreastCancer(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
         breastCancer:
           this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
   }
 
-  submitTwo(): void {
+  submitOvarianCancer(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        breastCancer:
-          this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
+        ovarianCancer:
+          this.formPreguntasCancerOvario.value.ovarianCancer === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
   }
 
-  submitThre(): void {
+  submitEndometriosis(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        breastCancer:
-          this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
+        endometriosis:
+          this.formPreguntasEndometriosis.value.endometriosis === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
   }
 
-  submitFour(): void {
+  submitSop(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        breastCancer:
-          this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
+        sop:
+          this.formPreguntasOvarioPoliquistico.value.sop === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
   }
 
-  submitFive(): void {
+  submitEarlyMenopause(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        breastCancer:
-          this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
+        earlyMenopause:
+          this.formPreguntasMenopausiaTemprana.value.earlyMenopause === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
   }
 
-  submitSic(): void {
+  submitUterineFibroids(): void {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        breastCancer:
-          this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
+        uterineFibroids:
+          this.formPreguntasMioma.value.uterineFibroids === false ? 0 : 1,
       })
-      .subscribe((res) => res);
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X')
+        return res;
+      });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
   }
 }
