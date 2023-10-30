@@ -5,6 +5,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MercadoPagoComponent } from './mercado-pago/mercado-pago.component';
+declare var createPayment: any;
 
 @Component({
   selector: 'app-subscription',

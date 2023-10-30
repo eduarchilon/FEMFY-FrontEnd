@@ -52,16 +52,41 @@
                       <option value="12">Anual</option>
                     </select>
                   </div>
-                  <!-- Otros campos del plan, como repetitions, billing_day, etc. -->
-                  <div class="mb-4">
+                  <!-- Otros campos del plan, como repetitions, billing_day, etc.
+                  <div class="mb-4" id="wallet_container">
                     <button
                       id="button-checkout"
                       type="submit"
                       class="bg-[#AF6FE8] text-white font-bold py-2 px-4 rounded-full w-full" (click)="openMercadoPagoDialog()"
                     >
-                        Activar Suscripción
-                    </button>
-                  </div>
+                      Activar Suscripción
+                    </button> -->
+
+                    <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644" name="MP-payButton" class='bg-[#AF6FE8] text-white font-bold py-2 px-4 rounded-full w-full'>Activar Suscripción</a>
+                        <script type="text/javascript">
+                          (function() {
+                              function $MPC_load() {
+                                window.$MPC_loaded !== true && (function() {
+                                var s = document.createElement("script");
+                                s.type = "text/javascript";
+                                s.async = true;
+                                s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                                var x = document.getElementsByTagName('script')[0];
+                                x.parentNode.insertBefore(s, x);
+                                window.$MPC_loaded = true;
+                              })();
+                          }
+                          window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+                          })();
+                          
+                                function $MPC_message(event) {
+                                  // onclose modal ->CALLBACK FUNCTION
+                                // !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
+                                }
+                                window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null; 
+                                
+                        </script>
+
                 </form>
 
                 
