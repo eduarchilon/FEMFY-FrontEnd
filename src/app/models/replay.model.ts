@@ -1,11 +1,8 @@
-export interface Post {
-    id?: number;
-    title?: string;
+export interface Replay {
     content?: string;
     createdDate?: Date | string;
     userId?: number;
-    topicId?: number;
+    postId?: number;
     username?: string;
-    replies?: number;
   }
   

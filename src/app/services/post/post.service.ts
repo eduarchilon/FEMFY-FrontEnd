@@ -12,6 +12,14 @@ export class PostService {
   apiUrl: string = environment.apiUrlLocal + '/forumPosts';
 
   constructor(private http: HttpClient) { }
+  
+  getPostById(idPost: number): Observable<any> {
+    return this.http.get<any[]>(`${this.apiUrl}/${idPost}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 
   registerPost(post: Post): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/createForumPost`, post).pipe(
