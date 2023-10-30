@@ -20,8 +20,6 @@ import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Cycle } from 'src/app/models/cicle.model';
-import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calendar.selector';
 
 @Component({
   selector: 'app-date-picker',

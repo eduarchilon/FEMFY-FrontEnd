@@ -1,40 +1,32 @@
 import {
   ChangeDetectorRef,
   Component,
-  Input,
   OnInit,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { DateRange, MatCalendar } from '@angular/material/datepicker';
+import { MatCalendar } from '@angular/material/datepicker';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { CalendarService } from 'src/app/services/calendar/calendar.service';
-import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { AppState } from 'src/app/services/redux/store/app.store';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventDayDrawerComponent } from '../event-day-drawer/event-day-drawer.component';
 
 @Component({
   selector: 'app-date-picker-mock',
   templateUrl: './date-picker-mock.component.html',
   styleUrls: ['./date-picker-mock.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerMockComponent implements OnInit {
   daysSelected: moment.Moment[] = [];
   isOpen: boolean = true;
-  @ViewChild('calendar') calendar!: MatCalendar<Date>;
-  sampleRange!: DateRange<moment.Moment>;
-
-  initPeriod: moment.Moment | null = null;
-  endPeriod: moment.Moment | null = null;
-  initCycle: moment.Moment | null = null;
-  endCycle: moment.Moment | null | any = null;
-  dayOvulation: moment.Moment | null = null;
+  @ViewChild('calendar') datePicker!: MatCalendar<Date>;
 
   eventsNotification: EventCalendar[] = [];
 
@@ -44,22 +36,13 @@ export class DatePickerMockComponent implements OnInit {
     private calendarService: CalendarService,
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
-    private spinnerService: SpinnerService,
-    private cicleService: CicleService,
     private cdr: ChangeDetectorRef,
     private loaderService: LoaderService
-  ) {
-    this.refreshDR();
-  }
-
-  refreshDR() {
-    return this.sampleRange;
-  }
+  ) {}
 
   ngOnInit(): void {
     const userId = this.localStorageService.getUserByLogin()?.idUser;
 
-    //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
       .getEventsCalendar(userId)
       .subscribe((eventsCalendar: any[]) => {
@@ -70,36 +53,24 @@ export class DatePickerMockComponent implements OnInit {
             this.daysSelected.push(moment(event?.date))
           );
         this.daysSelected.push(
-          moment(this.localStorageService.getUserByLogin()?.birthdate) //ejemplo agregando el cumple no es evento
-        ); //TODO: habra fecha seteada del ciclo
+          moment(this.localStorageService.getUserByLogin()?.birthdate)
+        );
       });
     this.cdr.detectChanges();
   }
 
   isSelected = (event: any) => {
-    const index = this.daysSelected?.findIndex((date: any) =>
-      date?.isSame(this.initPeriod)
-    );
-    //elimino la lista de eventos del inicio del ciclo para diferenciarlo
-    if (index !== -1) {
-      this.daysSelected?.splice(index, 1);
-    }
     const date = event as moment.Moment;
-
-    return (
-      (this.daysSelected?.find((x) => x.isSame(date, 'day'))
-        ? 'selected'
-        : '') ||
-      (moment(this.endPeriod)?.isSame(date) ? 'end-period' : '') ||
-      (moment(this.dayOvulation)?.isSame(date) ? 'day-ovulation' : '')
-    );
+    return this.daysSelected?.find((x) => x.isSame(date, 'days'))
+      ? 'selected-day'
+      : '';
   };
 
-  select(event?: any, calendar?: any): void {
+  select(event?: any, datePicker?: any): void {
     const eventFinded = this.daysSelected?.find((date: any) =>
       date?.isSame(event)
     );
-    calendar?.updateTodaysDate();
+    datePicker?.updateTodaysDate();
   }
 
   openDialog(daySelected: any) {
@@ -120,18 +91,5 @@ export class DatePickerMockComponent implements OnInit {
 
   selectDate(event: any) {
     this.openDialog(event);
-  }
-
-  setAverageCycles(averageQuestionCycleContent?: number[] | any): number {
-    const total: number | any = averageQuestionCycleContent?.reduce(
-      (total: any, num: any) => total + num,
-      0
-    );
-    averageQuestionCycleContent?.reduce(
-      (total: any, num: any) => total + num,
-      0
-    );
-    const daysCycleComplete = total / averageQuestionCycleContent?.length;
-    return daysCycleComplete;
   }
 }

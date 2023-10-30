@@ -4,8 +4,8 @@
 >
   <div (click)="$event.stopPropagation()">
     <mat-calendar
-      #calendar
-      (selectedChange)="select($event, calendar); selectDate($event)"
+      #datePicker
+      (selectedChange)="select($event, datePicker); selectDate($event)"
       [dateClass]="isSelected"
     ></mat-calendar>
   </div>
