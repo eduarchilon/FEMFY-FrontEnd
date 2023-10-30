@@ -11,6 +11,8 @@ import {FormsModule} from '@angular/forms';
 import {MatCardModule} from '@angular/material/card';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatButtonModule } from '@angular/material/button';
+import { HistorialService } from 'src/app/services/historial/historial.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatRadioModule,
     MatButtonModule,
-  ]
+  ],
+  providers: [HistorialService, LocalStorageService],
 })
 export class HistorialModule { }
