@@ -14,6 +14,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { HistorialService } from 'src/app/services/historial/historial.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatIconModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    MatSnackBarModule,
   ],
   providers: [HistorialService, LocalStorageService],
 })
