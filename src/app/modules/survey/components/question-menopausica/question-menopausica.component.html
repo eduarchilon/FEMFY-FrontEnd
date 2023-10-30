@@ -13,10 +13,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'aumentoDePeso')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'aumentoDePeso')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -53,10 +57,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'changesInLibido')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'changesInLibido')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -94,10 +102,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'changesInMenstrualCycle')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'changesInMenstrualCycle')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -135,10 +147,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'changesInSkinAndHair')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'changesInSkinAndHair')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -176,10 +192,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'lossOfBoneDensity')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'lossOfBoneDensity')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -217,10 +237,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'moodChanges')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="0"
+              (change)="updateQuestionMenopause('0', 'moodChanges')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -258,10 +282,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'sleepingDifficulties')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="2"
+              (change)="updateQuestionMenopause('2', 'sleepingDifficulties')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -299,10 +327,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'suffocation')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="2"
+              (change)="updateQuestionMenopause('2', 'suffocation')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>
@@ -339,10 +371,14 @@
             class="flex flex-col mb-5 gap-3"
             aria-label="Select an option"
           >
-            <mat-radio-button value="1"
+            <mat-radio-button
+              value="1"
+              (change)="updateQuestionMenopause('1', 'vaginalDryness')"
               ><span class="max-sm:text-sm">Si</span></mat-radio-button
             >
-            <mat-radio-button value="2"
+            <mat-radio-button
+              value="2"
+              (change)="updateQuestionMenopause('0', 'vaginalDryness')"
               ><span class="max-sm:text-sm">No</span></mat-radio-button
             >
           </mat-radio-group>

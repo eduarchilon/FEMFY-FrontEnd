@@ -170,7 +170,7 @@ export class EventDayDrawerComponent implements OnInit {
     createGoogleEvent(eventDetails)
       .then((success: any) => {
         if (success) {
-          this.openSnackBar('Evento vinvulado a Google Calendar', 'Cerrar');
+          this.openSnackBar('Evento vinculado a Google Calendar', 'Cerrar');
         }
       })
       .catch((error: any) => {

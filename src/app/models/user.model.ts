@@ -16,6 +16,8 @@ export interface UserResponse {
   idUser?: number;
   idCycle?: number;
   idQuestion?: number;
+  typeUserID?: number;
+  idMenopause?:number
   idHistorial?: number;
 }
 

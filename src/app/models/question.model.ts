@@ -13,10 +13,28 @@ export interface QuestionBasic {
   answer: any;
 }
 
-export const emptyQuestionMenstruationResponse = (): QuestionUserMenstruation => ({
-  lastTime: "",
-  lastCycleDuration: 0,
-  regular: false,
-  regularCycleDuration:0,
-  bleedingDuration:0,
+export interface QuestionUserMenopause {
+  aumentoDePeso?: boolean;
+  changesInLibido?: boolean;
+  changesInMenstrualCycle?: boolean;
+  changesInSkinAndHair?: boolean;
+  id?: number;
+  lossOfBoneDensity?: boolean;
+  moodChanges?: boolean;
+  sleepingDifficulties?: boolean;
+  suffocation?: boolean;
+  userId?: number;
+  vaginalDryness?: boolean;
+}
+
+export const emptyQuestionMenopausResponse = (): QuestionUserMenopause => ({
+  aumentoDePeso: false,
+  changesInLibido: false,
+  changesInMenstrualCycle: false,
+  changesInSkinAndHair: false,
+  lossOfBoneDensity: false,
+  moodChanges: false,
+  sleepingDifficulties: false,
+  suffocation: false,
+  vaginalDryness: false,
 });
