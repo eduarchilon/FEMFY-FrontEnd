@@ -48,8 +48,8 @@ export const MENU_PROFILE: Menu[] = [
     iconColor: 'accent',
   },
   {
-    label: 'Historial familiar',
-    path: 'suscripcion',
+    label: 'Información personal',
+    path: 'information',
     icon: 'library_books',
     iconColor: 'secondary',
   },
