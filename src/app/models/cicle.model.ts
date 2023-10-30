@@ -3,11 +3,20 @@ import { DataPieChartChildren } from './data-pie-chart';
 export interface Cycle {
   dateBeging?: Date | any | string;
   dateEnd?: Date | any | string;
-  id?: number;
+  id?: number | null;
   idUser?: number;
   status?: string;
   daysOfBleeding?: number | any;
 }
+
+export const emptyCycle = (): Cycle => ({
+  dateBeging: new Date(1992, 10, 10),
+  dateEnd: '',
+  id: null,
+  idUser: 199992,
+  status: '',
+  daysOfBleeding: 0,
+});
 
 export interface CycleHistorial extends Cycle {
   lastTime?: Date | any;

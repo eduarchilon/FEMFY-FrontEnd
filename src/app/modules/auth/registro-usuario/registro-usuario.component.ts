@@ -79,7 +79,7 @@ export class RegistroUsuarioComponent implements OnInit {
           email: this.formRegister?.value?.email,
         })
         .subscribe({
-          next: (response: Observable<any> | any) => {
+          next: (response: Observable<any>) => {
             this.loaderService.showLoader();
             response?.subscribe({
               next: (userResponse: UserResponse | any) => {
