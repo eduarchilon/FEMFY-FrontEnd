@@ -14,7 +14,7 @@
                         temprana</mat-chip-option>
                 </mat-chip-listbox>
             </div>
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivCancerMama">
+            <div class="pb-[300px] w-[100%]pt-10 mt-20">
                 <div class="container mx-auto">
                     <div class="lg:gap-10">
                         <div class="text-center mb-5 md:mb-0">
@@ -22,13 +22,14 @@
                                 <mat-card-content>
                                     <div class="flex items-center">
                                         <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasCancerMama]="preguntasCancerMama"></app-historial-questions>
+                                            {{question}}
                                         </p>
                                         <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
                                             aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
+                                            <mat-radio-button (change)="submitHistorial('1', questionValue)"
+                                                class="text-center" value="1">Si</mat-radio-button>
+                                            <mat-radio-button (change)="submitHistorial('2', questionValue)"
+                                                class="text-center" value="2">No</mat-radio-button>
                                         </mat-radio-group>
                                     </div>
                                 </mat-card-content>
@@ -67,205 +68,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivCancerOvario">
-                <div class="container mx-auto">
-                    <div class="lg:gap-10">
-                        <div class="text-center mb-5 md:mb-0">
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasCancerOvario]="preguntasCancerOvario"></app-historial-questions>
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                            <!-- <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            En caso de que tengas un familiar, ¿Conoces detalles sobre
-                                            el tipo de cáncer de ovario y la experiencia de
-                                            tratamiento?
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivEndiometrosis">
-                <div class="container mx-auto">
-                    <div class="lg:gap-10">
-                        <div class="text-center mb-5 md:mb-0">
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasEndometriosis]="preguntasEndometriosis"></app-historial-questions>
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                            <!--<mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Tenés información sobre la experiencia de tratamiento de
-                                            la endometriosis en tu familia?
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Han tenido que someterse a cirugías relacionadas con esta
-                                            enfermedad?
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivPoliquistico">
-                <div class="container mx-auto">
-                    <div class="lg:gap-10">
-                        <div class="text-center mb-5 md:mb-0">
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasOvarioPoliquistico]="preguntasOvarioPoliquistico"></app-historial-questions>
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                            <!-- <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            ¿Afectó su salud reproductiva?
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivMenopausia">
-                <div class="container mx-auto">
-                    <div class="lg:gap-10">
-                        <div class="text-center mb-5 md:mb-0">
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasMenopausiaTemprana]="preguntasMenopausiaTemprana"></app-historial-questions>
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="pb-[300px] w-[100%]pt-10 mt-20" *ngIf="mostrarDivMioma">
-                <div class="container mx-auto">
-                    <div class="lg:gap-10">
-                        <div class="text-center mb-5 md:mb-0">
-                            <mat-card class="my-5">
-                                <mat-card-content>
-                                    <div class="flex items-center">
-                                        <p class="text-[15px] text-black text-left mb-0 me-3 max-w-[700px]">
-                                            <app-historial-questions
-                                                [preguntasMioma]="preguntasMioma"></app-historial-questions>
-                                        </p>
-                                        <mat-radio-group class="flex flex-col w-48 m-auto mb-5"
-                                            aria-label="Select an option">
-                                            <mat-radio-button class="text-center" value="1">Si</mat-radio-button>
-                                            <mat-radio-button class="text-center" value="2">No</mat-radio-button>
-                                        </mat-radio-group>
-                                    </div>
-                                </mat-card-content>
-                            </mat-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
-
-<!--
-
-                        <mat-accordion>
-                            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                                <mat-expansion-panel-header>
-                                    <mat-panel-title>
-                                        Cáncer de mama
-                                    </mat-panel-title>
-                                    <mat-panel-description>
-
-                                    </mat-panel-description>
-                                </mat-expansion-panel-header>
-                               
-                            </mat-expansion-panel>
-
-                        </mat-accordion>
-
--->

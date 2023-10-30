@@ -22,6 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { LoginGuardian } from 'src/app/utils/login-guardian.guardian';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
+import { HistorialService } from 'src/app/services/historial/historial.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -47,6 +48,7 @@ import { QuestionService } from 'src/app/services/question/question.service';
     LoginGuardian,
     LocalStorageService,
     QuestionService,
+    HistorialService,
   ],
 })
 export class AuthModule {}
