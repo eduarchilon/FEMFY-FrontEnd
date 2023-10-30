@@ -6,10 +6,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { HttpClientJsonpModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    SubscriptionComponent
+    SubscriptionComponent,
   ],
   imports: [
     BrowserModule,
@@ -17,6 +20,9 @@ import { HttpClientJsonpModule } from '@angular/common/http';
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientJsonpModule,
+    FormsModule,
+    MatExpansionModule,
+    MatDialogModule
   ],
   providers:[
     LocalStorageService,

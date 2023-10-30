@@ -1,1 +1,100 @@
-<p>subscription works!</p>
+<div class="bg-[#FEA8B1] px-[3vw]">
+  <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
+    <h2 class="text-5xl text-white font-bold mb-10">Suscripción</h2>
+    <div class="md:flex justify-between">
+      <div class="md:w-2/5 bg-white/50 rounded-[20px] p-10 mb-10 md:mb-0">
+        <div>
+          <h2 class="text-4xl font-bold text-white mb-5">Suscribite!</h2>
+          <div class="mb-3 mt-10">
+                <button class="text-white font-bold rounded-full bg-[#AF6FE8] me-3 w-full p-3" (click)="toggleForm()">Crea el plan a tu medida.</button>
+              </div>
+
+              <div *ngIf="showForm" class="bg-white/50 rounded-[20px] p-10">
+                <h2 class="font-bold">Crear un Plan de Suscripción</h2>
+                <form (submit)="crearPlan()" [formGroup]="subscriptionForm" class="p-4 rounded shadow-md">
+                  <div class="mb-4">
+                    <label for="title" class="block text-gray-700 text-sm font-bold mb-2" >Tipo:</label>
+                    <input
+                      type="text"
+                      value="Suscripción Premium"
+                      placeholder="Suscripción Premium"
+                      name="title"
+                      formControlName="title"
+                      readonly
+                      class="w-full border-2 border-gray-300 p-2 rounded-full font-bold"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <div class="mb-4">
+                      <label for="unit_price" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+                      <input
+                        type="number"
+                        name="unit_price"
+                        formControlName="unit_price"
+                        [placeholder]="getDefaultPlaceholder()"
+                        [readonly]="true"
+                        class="w-full border-2 border-gray-300 p-2 rounded-full font-bold"
+                      />
+                    </div>
+                  </div>
+                  <div class="mb-4">
+                    <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Frecuencia:</label>
+                    <select
+                      name="quantity"
+                      formControlName="quantity"
+                      (change)="updateDefaultValue()"
+                      required
+                      class="w-full border-2 border-gray-300 p-2 rounded-full"
+                    >
+                      <option value="1">Mensual</option>
+                      <option value="3">Trimestral</option>
+                      <option value="6">Semestral</option>
+                      <option value="12">Anual</option>
+                    </select>
+                  </div>
+                  <!-- Otros campos del plan, como repetitions, billing_day, etc. -->
+                  <div class="mb-4">
+                    <button
+                      id="button-checkout"
+                      type="submit"
+                      class="bg-[#AF6FE8] text-white font-bold py-2 px-4 rounded-full w-full" (click)="openMercadoPagoDialog()"
+                    >
+                        Activar Suscripción
+                    </button>
+                  </div>
+                </form>
+
+                
+                </div>
+              </div>          
+
+            <div>
+              <h2 class="text-4xl font-bold text-white mb-5 mt-10">Tu suscripción está activa.</h2>
+              <div class="mb-3 mt-10">
+                <button class="text-white font-bold rounded-full bg-[#DA057A] me-3 w-full p-3">Cancelar Suscripción</button>
+              </div>
+            </div>
+
+
+            <h2 class="text-4xl font-bold text-white mb-5 mt-20">También podés ayudarnos para que la app siga creciendo!</h2>
+            <div class="flex mb-3 mt-10">
+              <button class="text-white font-bold rounded-full bg-[#AF6FE8] me-3 w-full p-3">Donaciones</button>
+            </div>
+          </div>
+          
+          <div class="md:w-2/5 bg-white/50 rounded-[20px] p-10">
+            <div class="text-center border border-white border-dashed border-4 p-10 py-24">
+              <h2 class="text-4xl font-bold text-white mb-5">Conocé nuestros beneficios</h2>
+              <div class="mb-3 mt-20">
+                <ul class="list-disc pl-5">
+                  <li>Acceso ilimitado a contenido premium.</li>
+                  <li>Actualizaciones exclusivas y anticipadas.</li>
+                  <li>Soporte prioritario 24/7.</li>
+                  <li>Descuentos especiales en productos y eventos.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

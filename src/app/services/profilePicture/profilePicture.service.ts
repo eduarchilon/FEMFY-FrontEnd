@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root', // Esto asegura que el servicio sea un servicio global
+  providedIn: 'root', 
 })
 export class SharedProfileService {
   private userProfileImage: string = '';

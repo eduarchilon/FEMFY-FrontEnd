@@ -15,7 +15,7 @@ export class ProfileService {
   }
 
   updateUser(fileData: FormData): Observable<any> {
-    return this.http.put(`${this.usersUrl}/updateUser`, fileData);
+    return this.http.post(`${this.usersUrl}/updateUser`, fileData);
   }
 
 

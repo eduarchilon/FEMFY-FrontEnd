@@ -23,6 +23,7 @@ import { FisrtCycle } from 'src/app/models/cicle.model';
   templateUrl: './pregunta.component.html',
   styleUrls: ['./pregunta.component.scss'],
 })
+
 export class PreguntaComponent implements OnInit {
   @Input() preguntas: string[] = [];
   indicePreguntaActual: number = 0;

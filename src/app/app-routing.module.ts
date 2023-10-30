@@ -14,6 +14,7 @@ import { IndexComponent } from './modules/home/index/index.component';
 import { ConversationComponent } from './modules/forum/conversation/conversation.component';
 import { HistorialQuestionsComponent } from './modules/historial/components/historial-questions/historial-questions.component';
 import { LoginGuardian } from './utils/login-guardian.guardian';
+import { SubscriptionComponent } from './modules/subscription/subscription.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,11 @@ const routes: Routes = [
   {
     path: 'documentation',
     component: DocumentationComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'subscription',
+    component: SubscriptionComponent,
     canActivate: [LoginGuardian],
   },
   {

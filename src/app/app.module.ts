@@ -38,9 +38,10 @@ import { LoginGuardian } from './utils/login-guardian.guardian';
 import { EffectsModule } from '@ngrx/effects';
 import { CycleEffects } from './services/redux/effects/cycle.effect';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
+import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercado-pago.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MercadoPagoComponent],
   imports: [
     CommonModule,
     BrowserModule,
