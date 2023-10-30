@@ -37,6 +37,7 @@ import { HistorialModule } from './modules/historial/historial.module';
 import { LoginGuardian } from './utils/login-guardian.guardian';
 import { EffectsModule } from '@ngrx/effects';
 import { CycleEffects } from './services/redux/effects/cycle.effect';
+import { InformationModule } from './modules/information/information.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -72,6 +73,7 @@ import { CycleEffects } from './services/redux/effects/cycle.effect';
     provideStorage(() => getStorage()),
     HistorialModule,
     EffectsModule.forRoot([CycleEffects]),
+    InformationModule,
   ],
   providers: [
     LoaderService,

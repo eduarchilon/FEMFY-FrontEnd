@@ -24,18 +24,13 @@ export class HistorialService {
   _userFinded = new BehaviorSubject<any>(null);
   user!: any; // cambiar a usuario
 
-  constructor(
-    private http: HttpClient,
-    private store: Store<AppState>,
-  ) {}
+  constructor(private http: HttpClient, private store: Store<AppState>) {}
 
   getUserId(): string {
     return sessionStorage['userId'];
   }
 
-  createQuestion(
-    event: QuestionsUserFamilyHistory
-  ): Observable<any> {
+  createQuestion(event: QuestionsUserFamilyHistory): Observable<any> {
     // console.log(event);
     return this.http.post<any>(`${this.usersUrl}/createQuestion`, event).pipe(
       map((response) => {
@@ -62,9 +57,15 @@ export class HistorialService {
     );
   }
 
-  getAllQuestionUserHistoryById(
-    idRegister: number | any
-  ): Observable<any> {
+  getAllQuestionUserHistoryById(idRegister: number | any): Observable<any> {
+    return this.http.get<any[]>(`${this.usersUrl}/${idRegister}`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
+  getQuestionUserHistoryByIdHistory(idRegister: number | any): Observable<any> {
     return this.http.get<any[]>(`${this.usersUrl}/${idRegister}`).pipe(
       map((response) => {
         return response;

@@ -1,12 +1,12 @@
 export interface QuestionsUserFamilyHistory {
-  breastCancer?: boolean,
-  earlyMenopause?: boolean,
-  endometriosis?: boolean,
-  id?: number,
-  ovarianCancer?: boolean,
-  sop?: boolean,
-  userId?: number,
-  uterineFibroids?: boolean
+  breastCancer?: number | null | undefined;
+  earlyMenopause?: number | null | undefined;
+  endometriosis?: number | null | undefined;
+  id?: number | null | undefined;
+  ovarianCancer?: number | null | undefined;
+  sop?: number | null | undefined;
+  userId?: number | null | undefined;
+  uterineFibroids?: number | null | undefined;
 }
 
 export interface QuestionBasic {
@@ -15,10 +15,10 @@ export interface QuestionBasic {
 }
 
 export const emptyQuestionHistoryResponse = (): QuestionsUserFamilyHistory => ({
-  breastCancer: false,
-  earlyMenopause: false,
-  endometriosis: false,
-  ovarianCancer: false,
-  sop: false,
-  uterineFibroids: false
+  breastCancer: 0,
+  earlyMenopause: 0,
+  endometriosis: 0,
+  ovarianCancer: 0,
+  sop: 0,
+  uterineFibroids: 0,
 });
