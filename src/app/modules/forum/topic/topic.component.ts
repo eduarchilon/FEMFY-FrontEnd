@@ -7,6 +7,7 @@ import { PostService } from 'src/app/services/post/post.service';
 import { TopicService } from 'src/app/services/topic/topic.service';
 import { RegisterPostComponent } from '../components/register-post/register-post.component';
 import { UserService } from 'src/app/services/user/user.service';
+import { ReplayService } from 'src/app/services/replay/replay.service';
 
 @Component({
   selector: 'app-topic',
@@ -15,7 +16,6 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class TopicComponent {
   posts: any[] = [];
-  users: any[] = [];
 
   topic!: Topic;
   idTopic!: number;
@@ -24,6 +24,7 @@ export class TopicComponent {
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private topicService: TopicService,
+    private replayService: ReplayService,
     private postService: PostService,
     private userService: UserService) { }
 
@@ -43,7 +44,6 @@ export class TopicComponent {
     return `/post/${postId}`;
   }
 
-
   getTopicById() {
     this.topicService.getTopicById(this.idTopic).subscribe((data: any) => {
       this.topic = data;
@@ -57,6 +57,10 @@ export class TopicComponent {
       this.posts.forEach(post => {
         this.userService.getUserById(post.userId).subscribe((data: any) => {
           post.username = data.userName;
+        });
+
+        this.replayService.getAllRepliesByPost(post.id).subscribe((data: any) => {
+          post.replies = data.length;
         });
       });
     });

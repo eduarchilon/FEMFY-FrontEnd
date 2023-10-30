@@ -11,6 +11,7 @@ import { RegisterPostComponent } from './components/register-post/register-post.
 import { PostService } from 'src/app/services/post/post.service';
 import { TopicService } from 'src/app/services/topic/topic.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditorModule } from '@tinymce/tinymce-angular';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule, 
     BrowserModule, 
+    EditorModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
