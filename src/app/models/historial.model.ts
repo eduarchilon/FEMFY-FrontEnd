@@ -15,10 +15,10 @@ export interface QuestionBasic {
 }
 
 export const emptyQuestionHistoryResponse = (): QuestionsUserFamilyHistory => ({
-  "breastCancer": false,
-  "earlyMenopause": false,
-  "endometriosis": false,
-  "ovarianCancer": false,
-  "sop": false,
-  "uterineFibroids": false
+  breastCancer: false,
+  earlyMenopause: false,
+  endometriosis: false,
+  ovarianCancer: false,
+  sop: false,
+  uterineFibroids: false
 });

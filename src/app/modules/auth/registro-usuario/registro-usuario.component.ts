@@ -15,6 +15,8 @@ import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { Cycle } from 'src/app/models/cicle.model';
+import { HistorialService } from 'src/app/services/historial/historial.service';
+import { emptyQuestionHistoryResponse } from 'src/app/models/historial.model';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -43,10 +45,11 @@ export class RegistroUsuarioComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private cicleService: CicleService,
     private loaderService: LoaderService,
-    private notificationService: NotificationService
-  ) {}
+    private notificationService: NotificationService,
+    private historialService: HistorialService
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   signupUser(): void {
     this.userNameFinded = '';
@@ -97,6 +100,23 @@ export class RegistroUsuarioComponent implements OnInit {
                             next: (res: any) => res,
                           });
                       }
+                      this.historialService.createQuestion({
+                        ...emptyQuestionHistoryResponse(), userId:
+                          this.localStorageService.getUserByLogin()?.idUser
+                      }).subscribe((history: any) => {
+                        this.localStorageService.setKeyValueLocalStorage(
+                          constants.USER,
+                          JSON.stringify({
+                            ...this.localStorageService.getUserByLogin(),
+                            idHistorial: history.id
+                          }))
+                      })
+                      /*this.questionMenopauseService
+                        .createUserMenopauseQuestion({
+                          ...emptyQuestionMenopausResponse(),
+                          userId: this.userResponse.idUser,
+                        })
+                        .subscribe((res: any) => res);*/
                       this.router.navigate(['cuestionario']);
                       this.questionsService
                         .createUserMenstruationQuestion({

@@ -17,8 +17,8 @@ export interface UserResponse {
   idCycle?: number;
   idQuestion?: number;
   typeUserID?: number;
-
   idMenopause?:number
+  idHistorial?: number;
 }
 
 export interface UserRequest extends UserResponse {
