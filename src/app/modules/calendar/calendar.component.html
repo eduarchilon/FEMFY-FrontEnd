@@ -11,6 +11,9 @@
             [cyclesWithOutEndNull]="cyclesWithOutEndNull"
           ></app-date-picker>
         </ng-container>
+        <ng-container *ngIf="!cycle">
+          <app-date-picker-mock></app-date-picker-mock>
+        </ng-container>
       </div>
     </div>
     <div class="w-[50%] max-lg:w-[100%] flex flex-col gap-10 max-lg:gap-16">
