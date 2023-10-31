@@ -3,16 +3,16 @@
     class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto"
   >
     <h2 class="text-5xl text-white font-bold mb-10 max-md:text-3xl">
-      Documentación
+      Estudios
     </h2>
     <form action="" [formGroup]="formDocumentation" (ngSubmit)="uploadFile()">
       <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-[10%]">
-        <div class="bg-white/50 rounded-[20px] p-10 mb-10 md:mb-0 flex-1">
-          <h2 class="text-4xl font-bold text-white mb-5 max-md:text-xl">
+        <div class="bg-[#FACAEC] rounded-[20px] p-10 mb-10 md:mb-0 flex-1">
+          <h2 class="text-4xl font-bold mb-5 max-md:text-xl text-[#AF6FE8] border-b-[4px] border-[#AF6FE8] py-4 rounded-tl-[20px]">
             Cargar nuevo estudio
           </h2>
           <div class="mb-3">
-            <label for="typeStudy" class="block text-white text-xl mb-2"
+            <label for="typeStudy" class="block text-xl mb-2"
               >Tipo de estudio</label
             >
             <select
@@ -28,7 +28,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="description" class="block text-white text-xl mb-2"
+            <label for="description" class="block text-xl mb-2"
               >Descripción o nota</label
             >
             <input
@@ -40,7 +40,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="description" class="block text-white text-xl mb-2"
+            <label for="description" class="block text-xl mb-2"
               >Fecha del estudio</label
             >
             <input
@@ -65,16 +65,16 @@
             </button>
           </div>
         </div>
-        <div class="bg-white/50 rounded-[20px] p-10 flex-1">
+        <div class="bg-[#FACAEC] rounded-[20px] p-10 flex-1 max-lg:p-5">
           <div
-            class="text-center border border-white border-dashed border-4 p-10 py-24 max-lg:py-0"
+            class="text-center border border-white border-dashed border-4 p-10 py-24 max-lg:py-0 max-lg:p-5"
           >
             <span
-              class="block text-xl text-white font-bold text-center justify-center mb-5"
+              class="block text-xl font-bold text-center justify-center mb-5"
               >Arrastre sus estudios</span
             >
             <span
-              class="block text-xl text-white font-bold text-center justify-center mb-5"
+              class="block text-xl font-bold text-center justify-center mb-5"
               >O</span
             >
 
@@ -95,10 +95,10 @@
 
             <div class="mt-20">
               <span
-                class="text-gray-900 py-[10px] px-[20px] w-[50%] rounded-[20px] text-center"
+                class="font-bold y-[10px] px-[20px] w-[50%] rounded-[20px] text-center"
                 id="file_name_label"
                 #fileLabel
-                >Ningún archivo seleccionado</span
+                >Ningún archivo seleccionado.</span
               >
             </div>
           </div>
@@ -123,25 +123,27 @@
     </ng-container>
 
     <ng-container *ngIf="studies.length > 0 && loader === false">
-      <div class="my-10">
+      <div class="my-10 ">
         <h2 class="text-4xl text-white font-bold mb-10">
           Mis estudios cargados
         </h2>
         <div
-          class="overflow-x-auto max-lg:w-[100%] bg-[#fff] px-[32px] py-[35px] rounded-[20px] w-[100%]"
+          class="overflow-x-auto max-lg:w-[100%] bg-[#FACAEC] pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2"
         >
           <div class="flex flex-col justify-start text-left">
             <table class="table-auto table-fixed">
-              <thead
-                class="bg-[#AF6FE8] text-white border-b font-medium dark:border-neutral-900"
-              >
+              <thead class="text-white dark:border-neutral-900 text-[20px] max-lg:text-[15px]">
                 <tr>
-                  <th scope="col" class="px-6 py-4 rounded-tl-[20px]">
+                  <th scope="col" class="pl-10 pr-6 pl- py-4 rounded-tl-[20px] text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
                     Título
                   </th>
-                  <th scope="col" class="px-6 py-4">Nota del profesional</th>
-                  <th scope="col" class="px-6 py-4">Fecha del estudio</th>
-                  <th class="py-4 rounded-tr-[20px]"></th>
+                  <th scope="col" class="px-6 py-4 text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
+                    Nota del profesional
+                  </th>
+                  <th scope="col" class="px-6 py-4 text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
+                    Fecha del estudio
+                  </th>
+                  <th class="py-4 rounded-tr-[20px] border-b-[4px] border-[#AF6FE8]"></th>
                 </tr>
               </thead>
               <tbody>
@@ -149,16 +151,16 @@
                   class="border-b dark:border-neutral-500"
                   *ngFor="let study of studies"
                 >
-                  <td class="px-6 py-4">
+                  <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#AF6FE8]">
                     {{ study.customMetadata.typeStudy }}
                   </td>
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
                     {{ study.customMetadata.description }}
                   </td>
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
                     {{ study.customMetadata.studyDate }}
                   </td>
-                  <td class="px-6 py-4">
+                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
                     <button class="me-3">
                       <a
                         [href]="study.url"

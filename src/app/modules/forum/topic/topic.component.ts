@@ -58,10 +58,6 @@ export class TopicComponent {
         this.userService.getUserById(post.userId).subscribe((data: any) => {
           post.username = data.userName;
         });
-
-        this.replayService.getAllRepliesByPost(post.id).subscribe((data: any) => {
-          post.replies = data.length;
-        });
       });
     });
   }
