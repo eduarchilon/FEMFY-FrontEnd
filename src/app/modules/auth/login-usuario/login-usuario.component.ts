@@ -8,6 +8,7 @@ import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { UserLogin } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { HistorialService } from 'src/app/services/historial/historial.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
@@ -35,7 +36,8 @@ export class LoginUsuarioComponent implements OnInit {
     private cycleService: CicleService,
     private questionService: QuestionService,
     private loaderService: LoaderService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private historial: HistorialService
   ) {}
 
   ngOnInit(): void {}
@@ -80,7 +82,9 @@ export class LoginUsuarioComponent implements OnInit {
                 );
               });
             this.loaderService.hideLoader();
-            this.router.navigate(['/']);
+            this.router.navigate(['/']).then(() => {
+              location.reload();
+            });
           } else {
             this.loaderService.hideLoader();
             this.isUserNotFinded = true;

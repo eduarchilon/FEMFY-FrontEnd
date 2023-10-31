@@ -186,6 +186,8 @@ export class PieChartComponent implements OnInit {
     const daysAverageCycle = this.setAverageCycles(averageQuestionCycleContent);
     this.setDaysCycleComplete(daysAverageCycle);
     const newDataArray: DataPieChartChildren[] = [];
+    console.log(optionSeries);
+    
     optionSeries?.data?.forEach((item: any) => {
       for (let i = 1; i <= item.dayCount; i++) {
         newDataArray.push({
@@ -217,6 +219,7 @@ export class PieChartComponent implements OnInit {
           item.color = 'green';
           item.desc = 'Ovulación';
         }
+        item.date
 
         return item;
       }
@@ -252,6 +255,13 @@ export class PieChartComponent implements OnInit {
       },
       fills: dataChildrenSeries.map((item: any) => item.color),
       strokeWidth: 2,
+      calloutLabelKey: undefined,
+      calloutLabel: {
+        minAngle: 0,
+      },
+      calloutLine: {
+        strokeWidth: 1,
+      },
       strokes: ['white'],
       tooltip: {
         renderer: ({ datum, color, sectorLabelKey }) => {
