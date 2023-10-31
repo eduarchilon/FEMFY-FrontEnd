@@ -24,6 +24,7 @@ export class CicleHistorialComponent implements OnInit {
 
   cycleHistorial: Cycle[] = [];
   actualDurationCycle!: Date;
+  //fechaFormateada: string = this.formatDate(this.actualDurationCycle);
 
   constructor(
     private store: Store<AppState>,
@@ -42,5 +43,11 @@ export class CicleHistorialComponent implements OnInit {
       new Date(dateBeging),
       new Date(dateEnd)
     );
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
   }
 }

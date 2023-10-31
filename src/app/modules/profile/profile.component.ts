@@ -37,6 +37,9 @@ export class ProfileComponent implements OnInit {
 
   profileForm!: FormGroup;
 
+  options = ['Menstruante', 'No menstruante', 'Menopáusica'];
+  selectedOption: string = 'Menstruante';
+
   constructor(
     private router: Router,
     private fb: FormBuilder,
@@ -46,7 +49,8 @@ export class ProfileComponent implements OnInit {
     private storage: Storage,
     private sharedProfileService: SharedProfileService,
     private snackBar: MatSnackBar,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private _snackBar: MatSnackBar,
   ) {}
 
   ngOnInit(): void {
