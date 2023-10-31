@@ -1,6 +1,6 @@
 <div
   #navBar
-  class="py-4 max-sm:py-2 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[3vw] w-[100vw] z-10"
+  class="py-4 max-sm:py-2 text-dark fixed top-0 lg:z-50 bg-white px-[3vw] w-[100vw] z-10"
 >
   <nav class="flex justify-between items-center max-w-[1280px] m-auto">
     <!--<a routerLink="" class="text-xl font-bold"></a>-->
@@ -20,7 +20,7 @@
       <a
         class="p-3 max-lg:hidden"
         *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
-        routerLinkActive="text-white font-semibold bg-[#DA057A] rounded-full"
+        routerLinkActive="text-white font-semibold bg-[#7c2385] rounded-full"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLink="{{ menu.path }}"
         >{{ menu.label }}</a

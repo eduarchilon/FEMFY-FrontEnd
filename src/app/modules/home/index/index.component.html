@@ -1,12 +1,13 @@
-<div class="bg-[#FEA8B1] px-[3vw]">
-  <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
-    <div
-      class="flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]">
-      <div class="max-lg:w-[70%] flex flex-col gap-[30px] bg-[#FACAEC]  pb-[35px] rounded-[20px] shadow-xl">
+<div class=" bg-[#f2d4fa] pt-24 pb-[100px]">
+  <div class="w-[100%] max-w-[1280px] m-auto p-5 md:p-0">
+    <div class="flex mt-10 gap-10 max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]">
 
-        <h5
-          class="border-b-[4px] border-[#AF6FE8] p-[20px] flex items-center justify-between text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]">
-          Ciclo actual
+      <!-- Card ciclo menstrual -->
+      <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
+        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+          <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+            Ciclo actual
+          </h5>
           <ng-container *ngIf="cycles.length > 0">
             <div class="flex justify-end w-fit">
               <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -27,110 +28,99 @@
               </mat-menu>
             </div>
           </ng-container>
-        </h5>
-
-
-        <div class="flex px-[32px] items-center justify-center w-[100%]">
-          <div class="flex flex-col  items-center text-[#AF6FE8]">
-            <span class="text-center">Hoy es </span>
-            <span class="text-center font-bold text-[30px]">
-              {{ fechaFormateada }}</span>
-          </div>
-
         </div>
+
+        <div class="text-[#de84ee] my-5">
+          <span class="block text-center">Hoy es</span>
+          <span class="block text-center font-bold text-[30px]">
+            {{ fechaFormateada }}
+          </span>
+        </div>
+
+        <div class="flex justify-center rounded-full bg-white mb-5">
+          <ng-container *ngIf="(averageQuestionCycleContent && cycles.length) ||
+                cyclesWithOutEndNull.length || cyclesWithEndNull.length ">
+            <app-pie-chart [cyclesWithEndNull]="cyclesWithEndNull" [cycles]="cycles"
+              [averageQuestionCycleContent]="averageQuestionCycleContent"
+              [cyclesWithOutEndNull]="cyclesWithOutEndNull"></app-pie-chart>
+          </ng-container>
+          <ng-container *ngIf="cycles.length === 0">
+            <div class="bg-pink-900 flex justify-center items-center rounded-full py-20">
+              <h5 class="text-center max-w-[200px]">
+                No hay datos de ciclo registrado
+              </h5>
+            </div>
+          </ng-container>
+        </div>
+
         <ng-container *ngIf="cycles.length > 0">
-          <div class="flex justify-between w-[100%] px-[10px] items-center">
-            <div class="flex gap-2 items-center">
-              <div class="w-[20px] h-[20px] bg-[red] rounded-lg"></div>
-              Día de ciclo
+          <div class="bg-[#f9eafd] border-[#7c2385] border-2 shadow-sm p-3 mb-5 mx-10 rounded-[20px]">
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[red] rounded-lg"></i>
+              <p class="ml-3">Día de ciclo</p>
             </div>
-            <div class="flex gap-2 items-center">
-              <div class="w-[20px] h-[20px] bg-[green] rounded-lg"></div>
-              Día de ovulación
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[green] rounded-lg"></i>
+              <p class="ml-3">Día de ovulación</p>
             </div>
-            <div class="flex gap-2 items-center">
-              <div class="w-[20px] h-[20px] bg-[#000000] rounded-lg"></div>
-              Fin del ciclo
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[#000000] rounded-lg"></i>
+              <p class="ml-3">Fin del ciclo</p>
             </div>
           </div>
         </ng-container>
-        <div class="flex px-[32px] flex-col items-center gap-[10px]">
-          <div class="rounded-full bg-white mb-5">
-            <ng-container
-              *ngIf="
-                (averageQuestionCycleContent && cycles.length) ||
-                cyclesWithOutEndNull.length ||
-                cyclesWithEndNull.length
-              ">
-              <app-pie-chart [cyclesWithEndNull]="cyclesWithEndNull" [cycles]="cycles"
-                [averageQuestionCycleContent]="averageQuestionCycleContent"
-                [cyclesWithOutEndNull]="cyclesWithOutEndNull"></app-pie-chart>
-            </ng-container>
-            <ng-container *ngIf="cycles.length === 0">
-              <div class="bg-pink-900 flex justify-center items-center rounded-full py-20">
-                <h5 class="text-center max-w-[200px]">
-                  No hay datos de ciclo registrado
-                </h5>
-              </div>
-            </ng-container>
-          </div>
-          <ng-container>
-            <button class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-              (click)="openCicleRegister(cyclesWithEndNull[0])">
-              Registrar nuevo ciclo
-            </button>
+
+        <div class="text-center">
+          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3"
+            (click)="openCicleRegister(cyclesWithEndNull[0])">
+            Registrar ciclo
+          </button>
+          <button *ngIf="cycles.length > 0"
+            class="bg-[#7c2385]  text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            (click)="finishActualCicle(cyclesWithEndNull[0])">
+            Finalizar ciclo
+          </button>
+        </div>
+      </div>
+
+      <!-- Card historial ciclos -->
+      <div class="flex-1 w-full justify-between bg-white rounded-[20px]">
+        <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">
+          Historial de ciclos
+        </h5>
+        <div class="p-[20px] flex text-black flex-col gap-[15px]">
+          <ng-container *ngIf="cycles.length === 0">
+            <h5>Todavía no existen datos cargados.</h5>
           </ng-container>
           <ng-container *ngIf="cycles.length > 0">
-            <button class="bg-[red] py-[10px] px-[20px] rounded-[20px]"
-              (click)="finishActualCicle(cyclesWithEndNull[0])">
-              Finalizar ciclo actual
-            </button>
+            <app-cicle-historial class="text-black" [cycles]="cycles"></app-cicle-historial>
           </ng-container>
         </div>
       </div>
-      <div class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]">
-        <div class="flex gap-10 w-[100%] text-black max-lg:flex-col h-[100%]">
-          <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
-            <div class="bg-[#FACAEC] rounded-[20px] w-[50%] max-lg:w-[100%]">
-              <h5
-                class="border-b-[4px] py-[29px] px-[20px] border-[#AF6FE8] text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]">
-                Historial de ciclos
-              </h5>
-              <div class="p-[20px] flex text-black flex-col gap-[15px]">
-                <ng-container *ngIf="cycles.length === 0">
-                  <h5>Todavía no existen datos cargados.</h5>
-                </ng-container>
-                <ng-container *ngIf="cycles.length > 0">
-                  <app-cicle-historial class="text-black" [cycles]="cycles"></app-cicle-historial>
-                </ng-container>
-              </div>
-            </div>
-            <div class="bg-[#FACAEC] rounded-[20px] w-[50%] max-lg:w-[100%]">
-              <h5
-                class="border-b-[4px] border-[#AF6FE8] p-[20px] flex items-center justify-between text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]">
-                Recomendaciones
 
-                <div class="flex justify-end w-fit">
-                  <button mat-icon-button [matMenuTriggerFor]="menu">
-                    <mat-icon>more_vert</mat-icon>
-                  </button>
-                  <mat-menu #menu="matMenu">
-                    <button routerLink="information" mat-menu-item (click)="editRecomendation.show()">
-                      <mat-icon color="primary">edit_road</mat-icon>
-                      <span>Editá tus recomendaciones</span>
-                    </button>
-                  </mat-menu>
-                </div>
-                <!--<span routerLink="historial" #editRecomendation="matTooltip" (click)="editRecomendation.show()"
-                  matTooltip="Editá tus recomendaciones" class="material-icons cursor-pointer">edit</span>-->
-              </h5>
-              <div class="p-[10px] list-disc">
-                <app-recomendations></app-recomendations>
-              </div>
-            </div>
+      <!-- Card recomendaciones -->
+      <div class="flex-1 w-full bg-white rounded-[20px]">
+        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+          <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">Recomendaciones</h5>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button routerLink="information" mat-menu-item (click)="editRecomendation.show()">
+                <mat-icon color="primary">edit_road</mat-icon>
+                <span>Editá tus recomendaciones</span>
+              </button>
+            </mat-menu>
           </div>
+          <!--<span routerLink="historial" #editRecomendation="matTooltip" (click)="editRecomendation.show()"
+                  matTooltip="Editá tus recomendaciones" class="material-icons cursor-pointer">edit</span>-->
+        </div>
+        <div class="p-[10px] list-disc">
+          <app-recomendations></app-recomendations>
         </div>
       </div>
+
     </div>
   </div>
 </div>
