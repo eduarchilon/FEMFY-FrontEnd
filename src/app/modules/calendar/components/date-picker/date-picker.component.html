@@ -8,8 +8,8 @@
       (selectedChange)="select($event, calendar); selectDate($event)"
       [dateClass]="isSelected"
       [selected]="sampleRange"
-      [comparisonStart]="sampleRange.start"
-      [comparisonStart]="sampleRange.end"
+      [comparisonStart]="sampleRange?.start"
+      [comparisonStart]="sampleRange?.end"
     ></mat-calendar>
   </div>
 </mat-card>

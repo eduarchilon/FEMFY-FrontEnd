@@ -53,7 +53,7 @@ export class IndexComponent implements OnInit {
   ) {}
 
   //NEW DATA
-  averageQuestionCycleContent: number[] = [];
+  averageQuestionCycleContent: number[] = [28, 28];
   userAuth!: UserResponse;
 
   ngOnInit(): void {
@@ -62,12 +62,17 @@ export class IndexComponent implements OnInit {
     this.questionsService
       .getAllQuestionUserMenstruation()
       .subscribe((data: any) => {
-        const question = data?.filter(
-          (quest: any) => quest?.userId === this.userAuth?.idUser
-        );
-        const lcd = question[0]?.lastCycleDuration || 28;
-        const rcd = question[0]?.regularCycleDuration || 28;
-        this.averageQuestionCycleContent = [lcd, rcd]; //TODO
+        this.loaderService.showLoader();
+        if (data) {
+          const question = data?.filter(
+            (quest: any) => quest?.userId === this.userAuth?.idUser
+          );
+          let lcd = question[0]?.lastCycleDuration;
+          let rcd = question[0]?.regularCycleDuration;
+          this.averageQuestionCycleContent = [lcd, rcd]; //TODO
+          this.loaderService.hideLoader();
+        }
+        this.loaderService.hideLoader();
       });
 
     this.cicleService
