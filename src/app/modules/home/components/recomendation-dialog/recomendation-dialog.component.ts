@@ -15,7 +15,11 @@ export class RecomendationDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any //fecha,
   ) {}
 
+  recomendation: any;
+
   ngOnInit(): void {
+    this.recomendation = this.data?.recommendation
     console.log(this.data?.recommendation);
   }
+  
 }

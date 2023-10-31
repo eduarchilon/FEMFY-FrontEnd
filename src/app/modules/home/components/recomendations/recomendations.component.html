@@ -1,15 +1,11 @@
 <div class="max-h-[500px] !overflow-x-hidden" #scrollingContent>
-  <ng-container
-    *ngFor="let item of recommendations?.recommendationsByFamilyHistory"
-  >
-    <div
-      class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
-      (click)="viewRecomendation(item)"
-    >
+  <ng-container *ngFor="let item of recommendations?.recommendationsByFamilyHistory">
+    <div class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
+      (click)="viewRecomendation(item)">
       <p class="flex-1 font-semibold text-[13px]">
         {{ item.description | cutText }}
       </p>
-      <mat-icon class="text-[20px]">arrow_forward_ios</mat-icon>
+      <mat-icon class="text-[20px] text-femfy-800">arrow_forward_ios</mat-icon>
     </div>
     <mat-divider></mat-divider>
   </ng-container>
