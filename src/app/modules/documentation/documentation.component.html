@@ -1,25 +1,18 @@
-<div class="bg-[#FEA8B1] px-[3vw]">
-  <div
-    class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto"
-  >
+<div class="bg-[#f2d4fa] px-[3vw]">
+  <div class="w-[100%] bg-cover bg-[#f2d4fa] pt-24 py-[100px] max-w-[1280px] m-auto">
     <h2 class="text-5xl text-white font-bold mb-10 max-md:text-3xl">
       Estudios
     </h2>
     <form action="" [formGroup]="formDocumentation" (ngSubmit)="uploadFile()">
       <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-[10%]">
-        <div class="bg-[#FACAEC] rounded-[20px] p-10 mb-10 md:mb-0 flex-1">
-          <h2 class="text-4xl font-bold mb-5 max-md:text-xl text-[#AF6FE8] border-b-[4px] border-[#AF6FE8] py-4 rounded-tl-[20px]">
+        <div class="bg-white rounded-[20px] p-10 mb-10 md:mb-0 flex-1">
+          <h2
+            class="text-2xl font-bold mb-5 max-md:text-xl text-[#7c2385] border-b-[4px] border-[#7c2385] py-4 rounded-tl-[20px]">
             Cargar nuevo estudio
           </h2>
           <div class="mb-3">
-            <label for="typeStudy" class="block text-xl mb-2"
-              >Tipo de estudio</label
-            >
-            <select
-              id="typeStudy"
-              formControlName="typeStudy"
-              class="rounded-full border w-full p-4"
-            >
+            <label for="typeStudy" class="block text-xl mb-2">Tipo de estudio</label>
+            <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
               <option value="0" selected>Selecciona un tipo de estudio</option>
               <option *ngFor="let study of typeStudies" [value]="study.name">
                 {{ study.name }}
@@ -28,78 +21,42 @@
           </div>
 
           <div class="mb-3">
-            <label for="description" class="block text-xl mb-2"
-              >Descripción o nota</label
-            >
-            <input
-              type="text"
-              class="rounded-full border w-full p-4"
-              formControlName="description"
-              placeholder="Descripción o nota del estudio"
-            />
+            <label for="description" class="block text-xl mb-2">Descripción o nota</label>
+            <input type="text" class="rounded-full border w-full p-4" formControlName="description"
+              placeholder="Descripción o nota del estudio" />
           </div>
 
           <div class="mb-3">
-            <label for="description" class="block text-xl mb-2"
-              >Fecha del estudio</label
-            >
-            <input
-              type="date"
-              class="rounded-full border w-full p-4"
-              formControlName="studyDate"
-              placeholder="Fecha del estudio"
-            />
+            <label for="description" class="block text-xl mb-2">Fecha del estudio</label>
+            <input type="date" class="rounded-full border w-full p-4 text-gray-400" formControlName="studyDate"
+              placeholder="Fecha del estudio" />
           </div>
 
           <div class="flex mt-5 max-sm:flex-col max-md:gap-4">
-            <button
-              class="text-white font-bold rounded-full bg-green-500 me-3 w-full p-3"
-              type="submit"
-            >
+            <button class="text-white font-bold rounded-full bg-[#de84ee] me-3 w-full p-3" type="submit">
               Guardar estudio
             </button>
-            <button
-              class="text-white font-bold rounded-full bg-red-500 w-full p-3"
-            >
+            <button class="text-white font-bold rounded-full bg-[#7c2385] w-full p-3">
               Cancelar
             </button>
           </div>
         </div>
-        <div class="bg-[#FACAEC] rounded-[20px] p-10 flex-1 max-lg:p-5">
-          <div
-            class="text-center border border-white border-dashed border-4 p-10 py-24 max-lg:py-0 max-lg:p-5"
-          >
-            <span
-              class="block text-xl font-bold text-center justify-center mb-5"
-              >Arrastre sus estudios</span
-            >
-            <span
-              class="block text-xl font-bold text-center justify-center mb-5"
-              >O</span
-            >
+        <div class="bg-white rounded-[20px] p-10 flex-1 max-lg:p-5">
+          <div class="text-center border-[#7c2385] border-dashed border-4 p-10 py-24 max-lg:py-0 max-lg:p-5">
+            <span class="block text-xl font-bold text-center justify-center mb-5">Arrastre sus estudios</span>
+            <span class="block text-xl font-bold text-center justify-center mb-5">O</span>
 
             <span
-              class="bg-[#AF6FE8] text-xl font-bold text-center text-white py-[10px] px-[20px] w-[50%] rounded-[20px]"
-            >
+              class="bg-[#de84ee] text-xl font-bold text-center text-white py-[10px] px-[20px] w-[50%] rounded-[20px]">
               <label for="file" class="cursor-pointer max-sm:text-sm">
                 Cargue desde aquí
               </label>
-              <input
-                type="file"
-                id="file"
-                name="documentation"
-                class="hidden"
-                (change)="fileSelected($event)"
-              />
+              <input type="file" id="file" name="documentation" class="hidden" (change)="fileSelected($event)" />
             </span>
 
             <div class="mt-20">
-              <span
-                class="font-bold y-[10px] px-[20px] w-[50%] rounded-[20px] text-center"
-                id="file_name_label"
-                #fileLabel
-                >Ningún archivo seleccionado.</span
-              >
+              <span class="font-bold y-[10px] px-[20px] w-[50%] rounded-[20px] text-center" id="file_name_label"
+                #fileLabel>Ningún archivo seleccionado.</span>
             </div>
           </div>
         </div>
@@ -108,7 +65,7 @@
 
     <ng-container *ngIf="studies.length < 1 && loader === false">
       <div class="my-10">
-        <div class="bg-[#AF6FE8] py-20 rounded-[20px]">
+        <div class="bg-white py-20 rounded-[20px]">
           <h3 class="text-center font-semibold text-xl text-white">
             No hay estudios cargados por el momento
           </h3>
@@ -127,68 +84,49 @@
         <h2 class="text-4xl text-white font-bold mb-10">
           Mis estudios cargados
         </h2>
-        <div
-          class="overflow-x-auto max-lg:w-[100%] bg-[#FACAEC] pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2"
-        >
+        <div class="overflow-x-auto max-lg:w-[100%] bg-white pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2">
           <div class="flex flex-col justify-start text-left">
-            <table class="table-auto table-fixed">
+            <table class="table-fixed">
               <thead class="text-white dark:border-neutral-900 text-[20px] max-lg:text-[15px]">
                 <tr>
-                  <th scope="col" class="pl-10 pr-6 pl- py-4 rounded-tl-[20px] text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
+                  <th scope="col"
+                    class="pl-10 pr-6 pl- py-4 rounded-tl-[20px] text-[#7c2385] border-b-[4px] border-[#7c2385]">
                     Título
                   </th>
-                  <th scope="col" class="px-6 py-4 text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
+                  <th scope="col" class="px-6 py-4 text-[#7c2385] border-b-[4px] border-[#7c2385]">
                     Nota del profesional
                   </th>
-                  <th scope="col" class="px-6 py-4 text-[#AF6FE8] border-b-[4px] border-[#AF6FE8]">
+                  <th scope="col" class="px-6 py-4 text-[#7c2385] border-b-[4px] border-[#7c2385]">
                     Fecha del estudio
                   </th>
-                  <th class="py-4 rounded-tr-[20px] border-b-[4px] border-[#AF6FE8]"></th>
+                  <th class="py-4 rounded-tr-[20px] border-b-[4px] border-[#7c2385]"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  class="border-b dark:border-neutral-500"
-                  *ngFor="let study of studies"
-                >
-                  <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#AF6FE8]">
+                <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
+                  <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#7c2385]">
                     {{ study.customMetadata.typeStudy }}
                   </td>
-                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
+                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385]">
                     {{ study.customMetadata.description }}
                   </td>
-                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
+                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385]">
                     {{ study.customMetadata.studyDate }}
                   </td>
-                  <td class="px-6 py-4 border-b-[4px] border-[#AF6FE8]">
+                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385]">
                     <button class="me-3">
-                      <a
-                        [href]="study.url"
-                        download="{{ study.files.name }}"
-                        target="_blank"
-                      >
-                        <i
-                          class="fa fa-download w-[30px]"
-                          aria-hidden="true"
-                        ></i>
+                      <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
+                        <i class="fa fa-download w-[30px]" aria-hidden="true"></i>
                         Descargar
                       </a>
                     </button>
                     <!-- <button class="me-3" (click)="deleteFile(study.files)">-->
                     <button class="me-3">
-                      <i
-                        class="fa fa-trash w-[30px]"
-                        style="color: red"
-                        aria-hidden="true"
-                      ></i>
+                      <i class="fa fa-trash w-[30px]" style="color: red" aria-hidden="true"></i>
                       Eliminar
                     </button>
                     <button class="me-3">
-                      <i
-                        class="fa fa-share w-[30px]"
-                        style="color: red"
-                        aria-hidden="true"
-                      ></i>
+                      <i class="fa fa-share w-[30px]" style="color: red" aria-hidden="true"></i>
                       Compartir
                     </button>
                   </td>
