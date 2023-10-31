@@ -44,9 +44,10 @@ export class PieChartComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // console.log(this.cycles);
-    // console.log(this.cyclesWithEndNull);
-    // console.log(this.cyclesWithOutEndNull);
+    console.log(this.cycles);
+    console.log(this.cyclesWithEndNull);
+    console.log(this.cyclesWithOutEndNull);
+    console.log(this.averageQuestionCycleContent);
 
     this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
       const diferenciaEnDias = moment(cycle?.dateEnd).diff(
@@ -279,13 +280,15 @@ export class PieChartComponent implements OnInit {
   }
 
   setDaysCycleComplete(daysAverageCycle: number): void {
-    console.log(Math.round(daysAverageCycle / 2));
+    if (daysAverageCycle) {
+      console.log(Math.round(daysAverageCycle / 2));
 
-    this.store.dispatch(
-      setDayOfOvulation({
-        numberOvulation: Math.round(daysAverageCycle / 2),
-      })
-    );
+      this.store.dispatch(
+        setDayOfOvulation({
+          numberOvulation: Math.round(daysAverageCycle / 2),
+        })
+      );
+    }
   }
 
   setAverageCycles(averageQuestionCycleContent?: number[] | any): number {

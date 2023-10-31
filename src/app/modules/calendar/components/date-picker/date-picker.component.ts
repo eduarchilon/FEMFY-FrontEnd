@@ -77,21 +77,23 @@ export class DatePickerComponent implements OnInit {
     this.cicleService
       .getCycle(userId, this.cycle?.dateBeging)
       .subscribe((res: any) => {
-        this.initCycle = moment(res?.dateBeging);
-        const initCycleOvulation = moment(res?.dateBeging);
-        const result = Math.round(
-          this.setAverageCycles(this.averageQuestionCycleContent)
-        );
-        const resultOvulation = result / 2;
-        this.endCycle = this.initCycle?.add(result, 'days');
-        this.dayOvulation = initCycleOvulation?.add(resultOvulation, 'days');
+        if (res) {
+          this.initCycle = moment(res?.dateBeging);
+          const initCycleOvulation = moment(res?.dateBeging);
+          const result = Math.round(
+            this.setAverageCycles(this.averageQuestionCycleContent)
+          );
+          const resultOvulation = result / 2;
+          this.endCycle = this.initCycle?.add(result, 'days');
+          this.dayOvulation = initCycleOvulation?.add(resultOvulation, 'days');
 
-        this.initPeriod = moment(res?.dateBeging);
-        this.endPeriod = moment(res?.dateBeging).add(
-          this.cycle?.daysOfBleeding - 1,
-          'days'
-        );
-        this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
+          this.initPeriod = moment(res?.dateBeging);
+          this.endPeriod = moment(res?.dateBeging).add(
+            this.cycle?.daysOfBleeding - 1,
+            'days'
+          );
+          this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
+        }
       });
 
     //TODO: cambiar api para que se pueda buscar por idUser

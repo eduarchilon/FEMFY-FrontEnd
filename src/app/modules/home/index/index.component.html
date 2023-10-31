@@ -56,8 +56,9 @@
         </ng-container>
         <div class="flex px-[32px] flex-col items-center gap-[10px]">
           <div class="rounded-full bg-white mb-5">
-            <ng-container *ngIf="
-                (averageQuestionCycleContent.length && cycles.length) ||
+            <ng-container
+              *ngIf="
+                (averageQuestionCycleContent && cycles.length) ||
                 cyclesWithOutEndNull.length ||
                 cyclesWithEndNull.length
               ">
