@@ -41,3 +41,17 @@ mat-stepper {
 ::ng-deep .mat-stepper-horizontal-line {
   border: unset !important;
 }
+
+.custom-radio-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-radio-button:hover {
+  background-color: #d9bdf5;
+}
+
+::ng-deep .mat-mdc-radio-button .mdc-radio {
+  display: none;
+}
