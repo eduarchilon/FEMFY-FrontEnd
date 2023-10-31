@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  userId!: number | any;
   respuesta!: TokenSwPush;
   VAPID_PUBLIC_KEY =
     'BCpfOVBWK3YLN5aJ-t5iZkPaPJO5nKIupLV9MSQ6vTArc0cTqOicE3RJAPicSH3hqXlVJFZ8iLlxJJs1STtb4Ik';
@@ -20,11 +21,11 @@ export class AppComponent {
   constructor(
     private swPush: SwPush,
     private router: Router,
-    private notificationService: NotificationService,
     private localStorageService: LocalStorageService
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.localStorageService.getUserByLogin()?.idUser;
     this.subscribeToNotifications();
   }
 
@@ -43,5 +44,4 @@ export class AppComponent {
       })
       .catch((err) => err);
   }
-
 }

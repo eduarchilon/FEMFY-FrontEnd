@@ -20,8 +20,6 @@ import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Cycle } from 'src/app/models/cicle.model';
-import { QuestionUserMenstruation } from 'src/app/models/question.model';
-import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calendar.selector';
 
 @Component({
   selector: 'app-date-picker',
@@ -36,12 +34,13 @@ export class DatePickerComponent implements OnInit {
   sampleRange!: DateRange<moment.Moment>;
 
   @Input() cycle: Cycle | any | null = null;
-  @Input() myRegisterQuestion!: QuestionUserMenstruation;
+  @Input() averageQuestionCycleContent: number[] = [];
+  @Input() cyclesWithOutEndNull: Cycle[] = [];
 
+  initPeriod: moment.Moment | null = null;
+  endPeriod: moment.Moment | null = null;
   initCycle: moment.Moment | null = null;
-  endCycle: moment.Moment | null = null;
-  initBleeding: moment.Moment | null = null;
-  finishBleeding: moment.Moment | null = null;
+  endCycle: moment.Moment | null | any = null;
   dayOvulation: moment.Moment | null = null;
 
   eventsNotification: EventCalendar[] = [];
@@ -65,29 +64,36 @@ export class DatePickerComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
+      const diferenciaEnDias = moment(cycle?.dateEnd).diff(
+        moment(cycle?.dateBeging),
+        'days'
+      );
+      this.averageQuestionCycleContent.push(diferenciaEnDias);
+    });
+
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //Register Cycle
     this.cicleService
-      .getCycle(userId, this.cycle?.dateBeging) //TODO: ojo con la fecha no es igual al valor que tiene java
+      .getCycle(userId, this.cycle?.dateBeging)
       .subscribe((res: any) => {
         this.initCycle = moment(res?.dateBeging);
-        this.store.select(selectNumberOfOvulation).subscribe((data: any) => {
-          this.dayOvulation = moment(res?.dateBeging).add(
-            data?.numberOvulation,
-            'days'
-          );
-          this.endCycle = moment(res?.dateBeging).add(
-            this.cycle?.daysOfBleeding - 1,
-            'days'
-          );
-          // this.endCycle?.add(this.cycle.dayOfBleding, 'days');
-          const predictionNextPeriod = this.endCycle?.diff(
-            moment(new Date()),
-            'days'
-          );
-        });
-        this.sampleRange = new DateRange(this.initCycle, this.endCycle);
+        const initCycleOvulation = moment(res?.dateBeging);
+        const result = Math.round(
+          this.setAverageCycles(this.averageQuestionCycleContent)
+        );
+        const resultOvulation = result / 2;
+        this.endCycle = this.initCycle?.add(result, 'days');
+        this.dayOvulation = initCycleOvulation?.add(resultOvulation, 'days');
+
+        this.initPeriod = moment(res?.dateBeging);
+        this.endPeriod = moment(res?.dateBeging).add(
+          this.cycle?.daysOfBleeding - 1,
+          'days'
+        );
+        this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
       });
+
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
       .getEventsCalendar(userId)
@@ -107,7 +113,7 @@ export class DatePickerComponent implements OnInit {
 
   isSelected = (event: any) => {
     const index = this.daysSelected?.findIndex((date: any) =>
-      date?.isSame(this.initCycle)
+      date?.isSame(this.initPeriod)
     );
     //elimino la lista de eventos del inicio del ciclo para diferenciarlo
     if (index !== -1) {
@@ -116,9 +122,10 @@ export class DatePickerComponent implements OnInit {
     const date = event as moment.Moment;
 
     return (
-      (this.daysSelected?.find((x) => x.isSame(date)) ? 'selected' : '') ||
-      (moment(this.initCycle)?.isSame(date) ? 'init-cycle' : '') ||
-      (moment(this.endCycle)?.isSame(date) ? 'end-cycle' : '') ||
+      (this.daysSelected?.find((x) => x.isSame(date, 'day'))
+        ? 'selected'
+        : '') ||
+      (moment(this.endPeriod)?.isSame(date) ? 'end-period' : '') ||
       (moment(this.dayOvulation)?.isSame(date) ? 'day-ovulation' : '')
     );
   };
@@ -148,5 +155,18 @@ export class DatePickerComponent implements OnInit {
 
   selectDate(event: any) {
     this.openDialog(event);
+  }
+
+  setAverageCycles(averageQuestionCycleContent?: number[] | any): number {
+    const total: number | any = averageQuestionCycleContent?.reduce(
+      (total: any, num: any) => total + num,
+      0
+    );
+    averageQuestionCycleContent?.reduce(
+      (total: any, num: any) => total + num,
+      0
+    );
+    const daysCycleComplete = total / averageQuestionCycleContent?.length;
+    return daysCycleComplete;
   }
 }

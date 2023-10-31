@@ -15,6 +15,7 @@ import { ConversationComponent } from './modules/forum/conversation/conversation
 import { HistorialQuestionsComponent } from './modules/historial/components/historial-questions/historial-questions.component';
 import { LoginGuardian } from './utils/login-guardian.guardian';
 import { SubscriptionComponent } from './modules/subscription/subscription.component';
+import { InformationComponent } from './modules/information/information.component';
 
 const routes: Routes = [
   {
@@ -52,11 +53,17 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
+    path: 'post/:id',
+    component: ConversationComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
     path: 'documentation',
     component: DocumentationComponent,
     canActivate: [LoginGuardian],
   },
   {
+
     path: 'subscription',
     component: SubscriptionComponent,
     canActivate: [LoginGuardian],
@@ -64,6 +71,11 @@ const routes: Routes = [
   {
     path: 'historial',
     component: HistorialQuestionsComponent,
+    canActivate: [LoginGuardian],
+  },
+  {
+    path: 'information',
+    component: InformationComponent,
     canActivate: [LoginGuardian],
   },
 ];

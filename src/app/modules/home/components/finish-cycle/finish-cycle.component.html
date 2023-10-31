@@ -10,12 +10,19 @@
       <label class="block mb-2"
         >*Puede finalizar el ciclo hoy o elegir la fecha donde finalizó</label
       >
-      <input type="date" class="border-b-2" #endDate />
+      <input type="date" class="border-b-2" #endDate (change)="resetForm()" />
+      <div class="py-4">
+        <mat-error>
+          {{ validationDate }}
+        </mat-error>
+      </div>
     </div>
     <div class="flex justify-between gap-4">
       <button
+        mat-button
+        [disabled]="endDate.value === ''"
         (click)="saveFinishCycle(cycleChart, endDate.value)"
-        class="flex-1 bg-[#ff3434] text-white py-[10px] px-[20px] rounded-[20px]"
+        class="!flex-1 !bg-[#ff3434] !text-white !py-[10px] !px-[20px] !rounded-[20px]"
       >
         Guardar
       </button>

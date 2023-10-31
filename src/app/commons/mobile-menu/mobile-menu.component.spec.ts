@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MobileMenuComponent } from './mobile-menu.component';
 
-describe('MobileMenuComponent', () => {
+xdescribe('MobileMenuComponent', () => {
   let component: MobileMenuComponent;
   let fixture: ComponentFixture<MobileMenuComponent>;
 

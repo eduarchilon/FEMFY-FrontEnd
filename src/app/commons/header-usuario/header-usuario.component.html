@@ -1,6 +1,6 @@
 <div
   #navBar
-  class="py-4 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[3vw] w-[100vw] z-10"
+  class="py-4 max-sm:py-2 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[3vw] w-[100vw] z-10"
 >
   <nav class="flex justify-between items-center max-w-[1280px] m-auto">
     <!--<a routerLink="" class="text-xl font-bold"></a>-->
@@ -33,17 +33,26 @@
             matTooltip="{{ icon?.desc }}"
             class="block"
           >
-            <mat-icon class="m-2 mt-4" [svgIcon]="icon?.name"></mat-icon>
+            <mat-icon class="m-2 mt-4 animate-bounce" [svgIcon]="icon?.name"></mat-icon>
           </button>
         </ng-container>
         <button
           class="flex items-center"
           [matMenuTriggerFor]="menuProfileButton"
         >
-          <img
-          [src]="getProfileImage()"
-          class="w-[50px] h-[50px] object-cover rounded-full border-4"
-          />
+          <ng-container *ngIf="!getProfileImage()">
+            <img
+              src="./assets/images/account.png"
+              alt="account"
+              class="w-[50px] h-[50px] object-cover rounded-full border-4"
+            />
+          </ng-container>
+          <ng-container *ngIf="getProfileImage()">
+            <img
+              [src]="getProfileImage()"
+              class="w-[50px] h-[50px] object-cover rounded-full border-4"
+            />
+          </ng-container>
           <mat-icon class="text-[#DA047A]">arrow_drop_down</mat-icon>
         </button>
         <mat-menu #menuProfileButton="matMenu">

@@ -1,12 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject, map, of, switchMap } from 'rxjs';
+import { BehaviorSubject, Observable, map } from 'rxjs';
 import { UserRequest, UserResponse } from 'src/app/models/user.model';
 import { environment } from 'src/environments/environment';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import { constants } from 'src/app/constans/constants';
 import { Store } from '@ngrx/store';
-import { setUserLogin } from 'src/app/services/redux/actions/login.action';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { Router } from '@angular/router';
 
@@ -51,7 +50,6 @@ export class AuthService {
           (user) => user?.userName === userName && user?.password === password
         );
         if (user) {
-          this.store.dispatch(setUserLogin({ user: user }));
           this.localStorageService.setKeyValueLocalStorage(
             constants.USER,
             JSON.stringify(user)
@@ -84,7 +82,7 @@ export class AuthService {
           // El usuario no existe, realizar el registro
           return this.http
             .post<UserRequest>(`${this.usersUrl}/createUser`, {
-              typeUserID: 1,
+              typeUserID: 3,
               ...userRequest,
             })
             .pipe(map((response: any) => response));
@@ -100,12 +98,23 @@ export class AuthService {
 
   logoutUser(): void {
     this.localStorageService.deleteValue(constants.USER);
-    this.store.dispatch(setUserLogin({ user: null }));
   }
 
-  // testLocalHostServer(): void {
-  //   this.http
-  //     .get<any[]>('http://localhost:8090/api/v1/user/getUsers')
-  //     .subscribe((data) => console.log('Funcionando', data));
-  // }
+  updateUser(user: UserResponse): Observable<any> {
+    return this.http.put<any>(`${this.usersUrl}/updateUser`, user).pipe(
+      map((user: any) => {
+        // if (user) {
+        //   this.localStorageService.setKeyValueLocalStorage(
+        //     constants.USER,
+        //     JSON.stringify({
+        //       ...this.localStorageService.getUserByLogin(),
+        //       typeUserID: user?.typeUserID,
+        //     })
+        //   );
+        //   return user;
+        // }
+        return user;
+      })
+    );
+  }
 }

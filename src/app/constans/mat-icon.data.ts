@@ -11,6 +11,7 @@ export const MAT_ICONS: MatIconCustom[] = [
   { name: 'menstrualDay', path: './assets/svg/blood.svg' },
   { name: 'folicularDay', path: './assets/svg/folicular.svg' },
   { name: 'luteaDay', path: './assets/svg/lutea.svg' },
+  { name: 'googleCalendar', path: './assets/svg/google-calendar-icon.svg' },
 ];
 
 export const CUSTOM_ICONS: any = {
@@ -41,7 +42,7 @@ export const CYCLE_STATE: any = {
   menstrualDay: {
     name: 'menstrualDay',
     path: './assets/svg/blood.svg',
-    desc: 'Estas en tus días de menstruacipon',
+    desc: 'Estas en tus días de menstruación',
   },
   folicularDay: {
     name: 'folicularDay',
@@ -53,6 +54,12 @@ export const CYCLE_STATE: any = {
     path: './assets/svg/blood.svg',
     desc: 'Estas en la fase lútea',
   },
+};
+
+export const GOOGLE_CALENDAR_ICON = {
+  name: 'googleCalendar',
+  path: './assets/svg/google-calendar-icon.svg',
+  desc: 'Vincular a Google Calendar',
 };
 
 // //FOOTER

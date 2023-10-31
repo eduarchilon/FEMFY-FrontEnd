@@ -1,36 +1,46 @@
 <div class="bg-[#FEA8B1] px-[3vw]">
-  <div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto">
+  <div
+    class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px] max-w-[1280px] m-auto"
+  >
     <div
-      class="text-white flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
+      class="text-white flex items-stretch mt-10 gap-10 h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]"
     >
       <div
         class="max-lg:w-[100%] flex flex-col gap-[30px] items-center bg-[#FACAEC] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center shadow-xl"
       >
-        <ng-container *ngIf="cycles.length > 0">
-          <div class="flex justify-end w-[100%]">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="editActualCycle(cycleChart)">
-                <mat-icon color="primary">edit_road</mat-icon>
-                <span>Editar días de sangrado</span>
-              </button>
-              <div class="w-[100%] px-2">
-                <mat-divider></mat-divider>
-              </div>
-              <button mat-menu-item (click)="deleteActualCycle(cycleChart)">
-                <mat-icon color="warn">delete</mat-icon>
-                <span>Eliminar ciclo</span>
-              </button>
-            </mat-menu>
+        <div class="flex items-center justify-between w-[100%]">
+          <div class="flex flex-col text-[#AF6FE8]">
+            <span class="text-center">Hoy es </span>
+            <span class="text-center font-bold text-[30px]">
+              {{ fechaFormateada }}</span
+            >
           </div>
-        </ng-container>
-        <div class="flex flex-col text-[#AF6FE8]">
-          <span class="text-center">Hoy es </span>
-          <span class="text-center font-bold text-[30px]">
-            {{ fechaFormateada }}</span
-          >
+          <ng-container *ngIf="cycles.length > 0">
+            <div class="flex justify-end w-fit">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="editActualCycle(cyclesWithEndNull[0])"
+                >
+                  <mat-icon color="primary">edit_road</mat-icon>
+                  <span>Editar días de sangrado</span>
+                </button>
+                <div class="w-[100%] px-2">
+                  <mat-divider></mat-divider>
+                </div>
+                <button
+                  mat-menu-item
+                  (click)="deleteActualCycle(cyclesWithEndNull[0])"
+                >
+                  <mat-icon color="warn">delete</mat-icon>
+                  <span>Eliminar ciclo</span>
+                </button>
+              </mat-menu>
+            </div>
+          </ng-container>
         </div>
         <ng-container *ngIf="cycles.length > 0">
           <div class="flex justify-between w-[100%] items-center">
@@ -52,17 +62,23 @@
         </ng-container>
         <div class="flex flex-col items-center gap-[10px]">
           <div class="rounded-full bg-white mb-5">
-            <ng-container *ngIf="cycles.length > 0">
+            <ng-container
+              *ngIf="
+                (averageQuestionCycleContent.length && cycles.length) ||
+                cyclesWithOutEndNull.length ||
+                cyclesWithEndNull.length
+              "
+            >
               <app-pie-chart
                 [cyclesWithEndNull]="cyclesWithEndNull"
                 [cycles]="cycles"
-                [myRegisterQuestion]="myRegisterQuestion"
+                [averageQuestionCycleContent]="averageQuestionCycleContent"
                 [cyclesWithOutEndNull]="cyclesWithOutEndNull"
               ></app-pie-chart>
             </ng-container>
             <ng-container *ngIf="cycles.length === 0">
               <div
-                class="bg-black flex justify-center items-center rounded-full py-20"
+                class="bg-pink-900 flex justify-center items-center rounded-full py-20"
               >
                 <h5 class="text-white text-center max-w-[200px]">
                   No hay datos de ciclo registrado
@@ -73,7 +89,7 @@
           <ng-container *ngIf="cycles.length > 0">
             <button
               class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-              (click)="finishActualCicle(cycleChart)"
+              (click)="finishActualCicle(cyclesWithEndNull[0])"
             >
               Finalizar ciclo actual
             </button>
@@ -81,7 +97,7 @@
           <ng-container>
             <button
               class="bg-[#AF6FE8] py-[10px] px-[20px] rounded-[20px]"
-              (click)="openCicleRegister()"
+              (click)="openCicleRegister(cyclesWithEndNull[0])"
             >
               Registrar nuevo ciclo
             </button>
@@ -93,7 +109,7 @@
       >
         <div class="flex gap-10 w-[100%] text-black max-lg:flex-col h-[100%]">
           <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
-            <div class="bg-[#FACAEC]  rounded-[20px] w-[50%] max-lg:w-[100%]">
+            <div class="bg-[#FACAEC] rounded-[20px] w-[50%] max-lg:w-[100%]">
               <h5
                 class="border-b-[4px] border-[#AF6FE8] p-[20px] text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]"
               >
@@ -110,7 +126,7 @@
             </div>
             <div class="bg-[#FACAEC] rounded-[20px] w-[50%] max-lg:w-[100%]">
               <h5
-                class="border-b-[4px] border-[#AF6FE8] p-[20px] flex items-center justify-between text-[#AF6FE8]  rounded-t-[20px] font-semibold text-[20px]"
+                class="border-b-[4px] border-[#AF6FE8] p-[20px] flex items-center justify-between text-[#AF6FE8] rounded-t-[20px] font-semibold text-[20px]"
               >
                 Recomendaciones
                 <span

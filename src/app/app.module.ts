@@ -39,6 +39,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CycleEffects } from './services/redux/effects/cycle.effect';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
 import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercado-pago.component';
+import { InformationModule } from './modules/information/information.module';
+
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -75,6 +77,7 @@ import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercad
     provideStorage(() => getStorage()),
     HistorialModule,
     EffectsModule.forRoot([CycleEffects]),
+    InformationModule,
   ],
   providers: [
     LoaderService,

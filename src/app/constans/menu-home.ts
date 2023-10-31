@@ -47,6 +47,12 @@ export const MENU_PROFILE: Menu[] = [
     icon: 'subscriptions',
     iconColor: 'accent',
   },
+  {
+    label: 'Información personal',
+    path: 'information',
+    icon: 'library_books',
+    iconColor: 'secondary',
+  },
 ];
 
 export const MAT_MOBILE_NO_LOGGUEADO: Menu[] = [

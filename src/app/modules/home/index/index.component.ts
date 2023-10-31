@@ -15,6 +15,9 @@ import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.componen
 import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
 import { MatTooltip } from '@angular/material/tooltip';
+import { UserResponse } from 'src/app/models/user.model';
+import { Subscription } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-index',
@@ -22,8 +25,9 @@ import { MatTooltip } from '@angular/material/tooltip';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-  public fechaActual: Date = new Date();
-  public fechaFormateada: string = this.formatDate(this.fechaActual);
+  fechaActual: Date = new Date();
+  fechaFormateada: string = this.formatDate(this.fechaActual);
+
   color: ThemePalette = 'primary';
   mode: ProgressBarMode = 'determinate';
   value = 50;
@@ -35,13 +39,8 @@ export class IndexComponent implements OnInit {
   cycles: CycleHistorial[] = [];
   cyclesWithEndNull: CycleHistorial[] = [];
   cyclesWithOutEndNull: CycleHistorial[] = [];
-  initRegisterId: number = this.localStorageService.getLocalStorage(
-    constants.ID_REGISTER
-  );
 
   @ViewChild('editRecomendation') editRecomendation!: MatTooltip;
-
-  user!: any; //cambiar objeto
 
   constructor(
     private router: Router,
@@ -49,40 +48,53 @@ export class IndexComponent implements OnInit {
     public dialog: MatDialog,
     private questionsService: QuestionService,
     private cicleService: CicleService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private loaderService: LoaderService
   ) {}
 
-  private formatDate(date: Date): string {
-    const day = date.getDate();
-    const month = date.toLocaleString('default', { month: 'long' });
-    return `${day} de ${month}`;
-  }
+  //NEW DATA
+  averageQuestionCycleContent: number[] = [];
+  userAuth!: UserResponse;
+
   ngOnInit(): void {
-    const idRegisterQuestion = JSON.parse(
-      this.localStorageService.getLocalStorage(constants.ID_REGISTER)
-    );
+    this.userAuth = this.localStorageService.getUserByLogin();
+
     this.questionsService
-      .getAllQuestionUserMenstruationById(idRegisterQuestion)
+      .getAllQuestionUserMenstruation()
       .subscribe((data: any) => {
-        this.myRegisterQuestion = data;
+        const question = data?.filter(
+          (quest: any) => quest?.userId === this.userAuth?.idUser
+        );
+        const lcd = question[0]?.lastCycleDuration || 28;
+        const rcd = question[0]?.regularCycleDuration || 28;
+        this.averageQuestionCycleContent = [lcd, rcd]; //TODO
       });
 
-    const userId = this.localStorageService.getUserByLogin()?.idUser;
-    this.cicleService.getAllCycles(userId).subscribe((data: any) => {
-      this.cyclesWithEndNull = data?.filter(
-        (item: any) => item?.dateEnd === null
-      );
-      this.cyclesWithOutEndNull = data?.filter(
-        (item: any) => item?.dateEnd !== null
-      );
-      this.cycles = data;
-      this.cycleChart = this.cycles[this.cycles?.length - 1];
-    });
+    this.cicleService
+      .getAllCycles(this.userAuth?.idUser)
+      .subscribe((dataCycle: any) => {
+        this.loaderService.showLoader();
+        if (dataCycle) {
+          this.cyclesWithEndNull = dataCycle?.filter(
+            (item: any) => item?.dateEnd === null
+          );
+          this.cyclesWithOutEndNull = dataCycle?.filter(
+            (item: any) => item?.dateEnd !== null
+          );
+          this.cycles = dataCycle; //TODO
+          this.loaderService.hideLoader();
+        }
+        this.loaderService.hideLoader();
+        // this.loaderService.showLoader();
+      });
   }
 
-  openCicleRegister(): void {
+  openCicleRegister(cycle: Cycle | any): void {
     const dialogRef = this.dialog.open(RegisterCicleComponent, {
       panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+      data: {
+        ...cycle,
+      },
     });
   }
 
@@ -123,5 +135,11 @@ export class IndexComponent implements OnInit {
     setTimeout(() => {
       this.editRecomendation.disabled = true;
     }, 1000);
+  }
+
+  private formatDate(date: Date): string {
+    const day = date.getDate();
+    const month = date.toLocaleString('default', { month: 'long' });
+    return `${day} de ${month}`;
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 import { Cycle } from 'src/app/models/cicle.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 
@@ -11,6 +12,8 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
 })
 export class FinishCycleComponent implements OnInit {
   cycleChart!: Cycle;
+
+  validationDate!: string;
 
   constructor(
     private dialogRef: MatDialogRef<FinishCycleComponent>,
@@ -27,17 +30,33 @@ export class FinishCycleComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  saveFinishCycle(cycleChart: Cycle, endDate: any): void {
-    this.cicleService
-      .editCycle({
-        ...cycleChart,
-        dateEnd: endDate ? endDate : new Date().toISOString(),
-      })
-      .subscribe({
-        next: (res: any) => res,
+  saveFinishCycle(cycleChart: Cycle, endDate: Date | any | string): void {
+    this.validationDate = '';
+    const end = moment(endDate);
+    const beging = moment(new Date(cycleChart?.dateBeging));
+    const realEnd = beging.clone().add(20, 'days');
+    const today = moment(new Date());
+    if (end.isBefore(beging)) {
+      this.validationDate =
+        'No se puede elegir una fecha antes del inicio del ciclo';
+    } else if (end.isSameOrAfter(realEnd)) {
+      this.cicleService
+        .editCycle({
+          ...cycleChart,
+          dateEnd: endDate ? endDate : new Date().toISOString(),
+        })
+        .subscribe({
+          next: (res: any) => res,
+        });
+      this.router.navigate(['/']).then(() => {
+        location.reload();
       });
-    this.router.navigate(['/']).then(() => {
-      location.reload();
-    });
+    } else {
+      this.validationDate = 'Por el momento no se puede finalizar el ciclo';
+    }
+  }
+
+  resetForm(): void {
+    this.validationDate = '';
   }
 }

@@ -67,14 +67,14 @@
               </mat-expansion-panel-header>
               <div class="flex justify-between flex-col break-words">
                 <p class="max-sm:text-[12px]">{{ item.description }}</p>
-                <button
-                  (click)="deleteEvent(item)"
-                  mat-mini-fab
-                  color="warn"
-                  class="self-end"
-                >
-                  <mat-icon> delete </mat-icon>
-                </button>
+                <div class="flex gap-3 self-end">
+                  <button (click)="vinculateGoogleClendar(item)" mat-mini-fab class="!bg-white">
+                    <mat-icon [svgIcon]="iconCalendar?.name"></mat-icon>
+                  </button>
+                  <button (click)="deleteEvent(item)" mat-mini-fab color="warn">
+                    <mat-icon> delete </mat-icon>
+                  </button>
+                </div>
               </div>
             </mat-expansion-panel>
           </ng-container>

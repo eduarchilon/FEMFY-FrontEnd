@@ -14,6 +14,11 @@ export interface UserResponse {
   userName?: string;
   isSuscripto?: boolean;
   idUser?: number;
+  idCycle?: number;
+  idQuestion?: number;
+  typeUserID?: number;
+  idMenopause?:number
+  idHistorial?: number;
 }
 
 export interface UserRequest extends UserResponse {

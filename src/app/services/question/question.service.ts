@@ -5,14 +5,20 @@ import { Observable, map, of } from 'rxjs';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { environment } from 'src/environments/environment';
+import { LocalStorageService } from '../local-storage/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class QuestionService {
   usersUrl: string = environment.apiUrlLocal + '/questionsUserMenstruation';
+  userId: number | any = this.localStorageService.getUserByLogin()?.idUser;
 
-  constructor(private http: HttpClient, private store: Store<AppState>) {}
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+    private localStorageService: LocalStorageService
+  ) {}
 
   createUserMenstruationQuestion(
     event: QuestionUserMenstruation
