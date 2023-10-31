@@ -31,13 +31,6 @@ export class ForumComponent {
         this.loaderService.showLoader();
         if (response) {
           this.topics = response;
-
-          this.topics.forEach(topic => {
-            this.postService.getAllPostsByTopic(topic.id).subscribe((data: any) => {
-              topic.forumPosts = data.length;
-            });
-          });
-
           this.loaderService.hideLoader();
         } else {
           this.loaderService.hideLoader();

@@ -20,7 +20,7 @@
                             </div>
                             <p>{{ post.content }}</p>
                             <div class="flex justify-between mt-3">
-                                <span class="text-[#FF97A5]">{{ post.replies }} comentarios</span>
+                                <span class="text-[#FF97A5]">{{ post.replies.length }} comentarios</span>
                                 <a class="flex" [href]="getRedirectToPost(post.id)">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-plus m-auto" viewBox="0 0 16 16">

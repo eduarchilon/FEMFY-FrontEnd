@@ -53,6 +53,21 @@ mat-dialog-content {
   font-family: 'Raleway', sans-serif !important;
 }
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 7em;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 * {
   -webkit-tap-highlight-color: transparent; /* Para Chrome y Safari */
   tap-highlight-color: rgba(0, 0, 0, 0); /* Para otros navegadores */

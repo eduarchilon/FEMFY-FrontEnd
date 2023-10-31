@@ -1,4 +1,4 @@
-<div
+<div *ngIf="isSurveyInit === false"
   #navBar
   class="py-4 max-sm:py-2 text-white fixed top-0 lg:z-50 bg-[#FEA8B1] px-[3vw] w-[100vw] z-10"
 >
@@ -14,7 +14,6 @@
       </h1>
     </div>
     <div
-      *ngIf="isSurveyInit === false"
       class="flex space-x-4 text-[20px] items-center"
     >
       <a
