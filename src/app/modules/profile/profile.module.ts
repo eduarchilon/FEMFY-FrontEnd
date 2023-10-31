@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms'
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { StoreModule } from '@ngrx/store';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [ProfileComponent],
@@ -20,6 +21,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     ReactiveFormsModule,
     StoreModule,
     MatSnackBarModule,
+    MatChipsModule,
   ],
   providers:[AuthService, LocalStorageService]
 })
