@@ -125,3 +125,11 @@ footer {
   color: #ffffff !important;
   fill: #ffffff !important;
 }
+
+input {
+  background-color: #fcf5fe;
+}
+
+input:hover, input:active {
+  border: 2px solid #7c2385!important;
+}
