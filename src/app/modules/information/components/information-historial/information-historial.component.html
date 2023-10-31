@@ -4,7 +4,7 @@
     <span>En tu familia, ¿alguien ha recibido un diagnóstico de cáncer de
       mama?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasCancerMamar" (ngSubmit)="submitBreastCancer()">
-      <mat-slide-toggle formControlName="breastCancer">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="breastCancer">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>
@@ -14,7 +14,7 @@
     <span>En tu familia, ¿Existe un historial de cáncer de ovario en tu
       familia?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasCancerOvario" (ngSubmit)="submitOvarianCancer()">
-      <mat-slide-toggle formControlName="ovarianCancer">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="ovarianCancer">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>
@@ -24,7 +24,7 @@
     <span>En tu familia, ¿Alguna de las mujeres en tu familia ha sido diagnosticada
       con endometriosis?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasEndometriosis" (ngSubmit)="submitEndometriosis()">
-      <mat-slide-toggle formControlName="endometriosis">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="endometriosis">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>
@@ -34,7 +34,7 @@
     <span>¿Alguna de tus parientes cercanas ha sido diagnosticada con el síndrome
       de ovario poliquístico?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasOvarioPoliquistico" (ngSubmit)="submitSop()">
-      <mat-slide-toggle formControlName="sop">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="sop">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>
@@ -45,7 +45,7 @@
       a una edad temprana?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasMenopausiaTemprana"
       (ngSubmit)="submitEarlyMenopause()">
-      <mat-slide-toggle formControlName="earlyMenopause">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="earlyMenopause">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>
@@ -55,7 +55,7 @@
     <span>¿Tienes conocimiento de si algún miembro de tu familia ha tenido miomas
       uterinos?</span>
     <form class="flex gap-3 items-center" [formGroup]="formPreguntasMioma" (ngSubmit)="submitUterineFibroids()">
-      <mat-slide-toggle formControlName="uterineFibroids">Sí</mat-slide-toggle><button mat-icon-button
+      <mat-slide-toggle color="accent" formControlName="uterineFibroids">Sí</mat-slide-toggle><button mat-icon-button
         type="submit"><mat-icon>save</mat-icon></button>
     </form>
   </div>

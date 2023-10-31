@@ -1,12 +1,12 @@
 <div class="bg-[#f2d4fa] bg-cover px-[3vw]">
     <div class="w-[100%] pb-[270px] pt-[100px] max-w-[1280px] m-auto">
 
-        <h2 class="text-5xl text-[#DA047A] font-bold mb-5">{{ post.title }}</h2>
+        <h2 class="text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
         <span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>
 
         <div class="bg-white w-full my-5 p-5 rounded-[20px]">
             <div class="mb-3">
-                <p class="text-xl text-[#FF97A5]">{{ post.username }}</p>
+                <p class="text-xl font-semibold text-[#7c2385]">{{ post.username }}</p>
                 <span class="text-gray-500">{{ post.createdDate | date: 'dd/MM/yy HH:mm' }}</span>
             </div>
             <p>{{ post.content }}</p>
@@ -17,7 +17,7 @@
         <div *ngFor="let reply of replies">
             <div class="bg-white mb-5 p-5 w-full rounded-[20px]">
                 <div class="mb-3">
-                    <p class="text-xl text-[#FF97A5]">{{ reply.username }}</p>
+                    <p class="text-xl text-[#7c2385]">{{ reply.username }}</p>
                     <span class="text-gray-500">{{ reply.createdDate | date: 'dd/MM/yy HH:mm' }}</span>
                 </div>
                 <p [innerHTML]="sanitizeHtml(reply.content)"></p>
@@ -26,7 +26,7 @@
 
         <div *ngIf="!showFormComment" class="flex justify-end mt-3">
             <button (click)="openFormComment()"
-                class="bg-[#AF6FE8] text-xl font-bold text-white py-2 px-3 rounded-[20px]">Añadir comentario</button>
+                class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3">Añadir comentario</button>
         </div>
 
         <ng-container *ngIf="showFormComment">
@@ -40,9 +40,9 @@
                 </editor>
                 <div class="text-end mt-5">
                     <button type="submit"
-                        class="bg-[#AF6FE8] text-xl font-bold rounded-[20px] py-2 px-3 me-3 text-white">Enviar</button>
+                        class="bg-[#de84ee] text-xl font-bold rounded-[20px] py-2 px-3 me-3 text-white">Enviar</button>
                     <button (click)="closeFormComment()"
-                        class="bg-red-500 text-xl font-bold rounded-[20px] py-2 px-3 text-white">Cancelar</button>
+                        class="bg-[#7c2385] text-xl font-bold rounded-[20px] py-2 px-3 text-white">Cancelar</button>
                 </div>
             </form>
         </ng-container>
