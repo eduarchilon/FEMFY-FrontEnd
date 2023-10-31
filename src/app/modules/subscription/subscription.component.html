@@ -11,7 +11,7 @@
 
               <div *ngIf="showForm" class="bg-white/50 rounded-[20px] p-10">
                 <h2 class="font-bold">Crear un Plan de Suscripción</h2>
-                <form (submit)="crearPlan()" [formGroup]="subscriptionForm" class="p-4 rounded shadow-md">
+                <form [formGroup]="subscriptionForm" class="p-4 rounded shadow-md">
                   <div class="mb-4">
                     <label for="title" class="block text-gray-700 text-sm font-bold mb-2" >Tipo:</label>
                     <input
@@ -79,13 +79,21 @@
                           window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
                           })();
                           
+                               /* // to receive event with message when closing modal from congrants back to site
                                 function $MPC_message(event) {
                                   // onclose modal ->CALLBACK FUNCTION
                                 // !!!!!!!!FUNCTION_CALLBACK HERE Received message: {event.data} preapproval_id !!!!!!!!
                                 }
-                                window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null; 
-                                
-                        </script>
+                                window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null; */
+
+
+                                function $MPC_message(event) {
+                                    const data = event.data; 
+                                    updateProfile(data);
+                                  }
+
+                                  window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;                      
+                        </script>                     
 
                 </form>
 
@@ -111,11 +119,19 @@
             <div class="text-center border border-white border-dashed border-4 p-10 py-24">
               <h2 class="text-4xl font-bold text-white mb-5">Conocé nuestros beneficios</h2>
               <div class="mb-3 mt-20">
-                <ul class="list-disc pl-5">
-                  <li>Acceso ilimitado a contenido premium.</li>
-                  <li>Actualizaciones exclusivas y anticipadas.</li>
-                  <li>Soporte prioritario 24/7.</li>
-                  <li>Descuentos especiales en productos y eventos.</li>
+                <ul class="list-disc pl-5 space-y-2 mb-20">
+                  <li class="font-bold text-[#AF6FE8] text-left">
+                    Acceso ilimitado 24/7 con nuestro chatbot.
+                    <i class="fa fa-comments" aria-hidden="true"></i>
+                  </li>
+                  <li class="font-bold text-[#AF6FE8] text-left">
+                    Carga y distribución de estudios con profesionales.
+                    <i class="fa fa-file" aria-hidden="true"></i>
+                  </li>
+                  <li class="font-bold text-[#AF6FE8] text-left">
+                    Soporte técnico preferencial.
+                    <i class="fa fa-wrench" aria-hidden="true"></i>
+                  </li>
                 </ul>
               </div>
             </div>

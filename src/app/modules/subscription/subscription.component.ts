@@ -4,6 +4,8 @@ import { SubcriptionService } from 'src/app/services/subscription/subscription.s
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient } from '@angular/common/http';
 import { MercadoPagoComponent } from './mercado-pago/mercado-pago.component';
 declare var createPayment: any;
 
@@ -26,6 +28,8 @@ export class SubscriptionComponent {
     private formBuilder: FormBuilder,
     private localStorageService: LocalStorageService,
     public dialog: MatDialog,
+    private snackBar: MatSnackBar,
+    private http: HttpClient,
 ) {
     this.subscriptionForm = this.formBuilder.group({
         title: ['Suscripción Premium'],
@@ -35,41 +39,40 @@ export class SubscriptionComponent {
 }
 
     ngOnInit(): void {
-    }
-
-
-    openMercadoPagoDialog(): void {
-      const dialogRef = this.dialog.open(MercadoPagoComponent, {
-        width: '400px', // Ajusta el ancho según tus necesidades
-        data: { /* Puedes pasar datos al formulario si es necesario */ }
-      });
-  
-      dialogRef.afterClosed().subscribe(result => {
-        // Maneja el resultado del formulario si es necesario
-        console.log('El formulario se cerró con el resultado:', result);
+      this.subscriptionForm = this.formBuilder.group({
+        idUser: [this.localStorageService.getUserByLogin()?.idUser],
+        isSuscriptor: false,
       });
     }
-
-    plan: any = {
-      reason: '',
-      value: null,
-      frequency: 1, // Mensual por defecto, puedes cambiarlo
-      // Otros campos del plan
-    };
     
-    crearPlan() {
-      // Llama al servicio para crear el plan de suscripción
-      this.subscriptionService.createSubscription(this.plan)
-        .subscribe(
-          (response) => {
-            // Manejar la respuesta exitosa, por ejemplo, mostrar un mensaje al usuario
-            console.log('Plan creado exitosamente', response);
+
+    apiUrl: string = 'http://localhost:8090/api/v1/user/updateUser';
+
+    updateProfile(preapprovalId: string) {
+      if (this.subscriptionForm.valid) {
+        const updatedUserData = this.subscriptionForm.value;
+      
+        const userData = {
+          isSuscriptor: true,
+          preapprovalId: preapprovalId,
+        };
+  
+        console.log(userData);
+  
+        // Utiliza una solicitud PUT para actualizar el perfil
+        this.http.put(`${this.apiUrl}`, updatedUserData).subscribe({
+          next: (data: any) => {
+            this.snackBar.open('Datos actualizados con éxito.', 'cerrar', {
+              duration: 5000, // Duración en milisegundos
+            });
           },
-          (error) => {
-            // Manejar errores, por ejemplo, mostrar un mensaje de error al usuario
-            console.error('Error al crear el plan', error);
-          }
-        );
+          error: (error: any) => {
+            this.snackBar.open('Error al actualizar los datos.', 'cerrar', {
+              duration: 5000, // Duración en milisegundos
+            });
+          },
+        });
+      }
     }
 
 
