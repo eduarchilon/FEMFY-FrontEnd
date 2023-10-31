@@ -70,7 +70,7 @@ export class ProfileComponent implements OnInit {
     this.editProfile = false;
   }
 
-  apiUrl: string = 'http://localhost:8090/api/v1/user/updateUser';
+  apiUrl: string = 'https://femfy-api.up.railway.app/api/v1/user/updateUser';
   usersUrl: string = environment.apiUrlLocal + '/user';
 
   /*updateProfile() {

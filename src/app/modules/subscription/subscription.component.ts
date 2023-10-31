@@ -46,7 +46,7 @@ export class SubscriptionComponent {
     }
     
 
-    apiUrl: string = 'http://localhost:8090/api/v1/user/updateUser';
+    apiUrl: string = 'https://femfy-api.up.railway.app/api/v1/user/updateUser';
 
     updateProfile(preapprovalId: string) {
       if (this.subscriptionForm.valid) {
