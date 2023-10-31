@@ -31,6 +31,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RecomendationsComponent } from './components/recomendations/recomendations.component';
+import { RecomendationService } from 'src/app/services/recomendation/recomendation.service';
+import { CutTextPipe } from 'src/app/utils/pipes/cut-text/cut-text.pipe';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     EditCycleComponent,
     DeleteCycleComponent,
     FinishCycleComponent,
+    RecomendationsComponent,
+    CutTextPipe,
   ],
   imports: [
     CommonModule,
@@ -64,6 +70,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     NgIf,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatSidenavModule,
   ],
   exports: [HomeComponent, IndexComponent],
   providers: [
@@ -73,6 +80,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     QuestionService,
     LoaderService,
     { provide: LOCALE_ID, useValue: 'es-ES' },
+    RecomendationService,
   ],
 })
 export class HomeModule {}
