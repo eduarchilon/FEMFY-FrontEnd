@@ -55,6 +55,9 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
+
+    console.log(this.localStorageService.getUserByLogin());
+
     this.profileForm = this.fb.group({
       firstName: [this.userResponse.firstName],
       lastName: [this.userResponse.lastName],
@@ -76,18 +79,6 @@ export class ProfileComponent implements OnInit {
 
   apiUrl: string = 'https://femfy-api.up.railway.app/api/v1/user/updateUser';
   usersUrl: string = environment.apiUrlLocal + '/user';
-
-  /*updateProfile() {
-    const updatedUserData = this.profileForm.value;
-    const idUser = this.userResponse.idUser;
-
-    this.http.post(this.apiUrl, {
-      ...updatedUserData,
-      idUser: idUser
-    }).subscribe(
-      (data: any) => console.log(data)
-    )
-  }*/
 
   updateProfile() {
     if (this.profileForm.valid) {
