@@ -55,22 +55,22 @@ export class MobileMenuComponent implements OnInit {
     });
   }
 
-  @HostListener('window:scroll', ['$event'])
-  onScroll(event: Event): void {
-    const st = window.pageYOffset || document.documentElement.scrollTop;
-    if (st > this.lastScrollTop) {
-      this.scrolledUp = false;
-    } else {
-      this.scrolledUp = true;
-    }
-    this.lastScrollTop = st;
-    const documentHeight = document.documentElement.scrollHeight;
-    const windowHeight = window.innerHeight;
-    const currentPosition = st + windowHeight;
-    if (currentPosition >= documentHeight) {
-      this.scrolledUp = true;
-    }
-  }
+  // @HostListener('window:scroll', ['$event'])
+  // onScroll(event: Event): void {
+  //   const st = window.pageYOffset || document.documentElement.scrollTop;
+  //   if (st > this.lastScrollTop) {
+  //     this.scrolledUp = false;
+  //   } else {
+  //     this.scrolledUp = true;
+  //   }
+  //   this.lastScrollTop = st;
+  //   const documentHeight = document.documentElement.scrollHeight;
+  //   const windowHeight = window.innerHeight;
+  //   const currentPosition = st + windowHeight;
+  //   if (currentPosition >= documentHeight) {
+  //     this.scrolledUp = true;
+  //   }
+  // }
 
   isActiveRoute(route: string): boolean {
     return this.router.url === `/${route}`;

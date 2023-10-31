@@ -11,4 +11,6 @@ export interface DataPieChart {
 export interface DataPieChartChildren extends DataPieChart {
   width: number;
   desc?: string | '';
+  date?: Date | any;
+  
 }
