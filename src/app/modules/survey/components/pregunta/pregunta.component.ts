@@ -18,6 +18,7 @@ import { CicleService } from 'src/app/services/cicle/cicle.service';
   templateUrl: './pregunta.component.html',
   styleUrls: ['./pregunta.component.scss'],
 })
+
 export class PreguntaComponent implements OnInit {
 
   indicePreguntaActual: number = 0;

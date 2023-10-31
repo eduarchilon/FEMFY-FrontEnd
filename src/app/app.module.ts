@@ -37,10 +37,13 @@ import { HistorialModule } from './modules/historial/historial.module';
 import { LoginGuardian } from './utils/login-guardian.guardian';
 import { EffectsModule } from '@ngrx/effects';
 import { CycleEffects } from './services/redux/effects/cycle.effect';
+import { SubscriptionModule } from './modules/subscription/subscription.module';
+import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercado-pago.component';
 import { InformationModule } from './modules/information/information.module';
 
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MercadoPagoComponent],
   imports: [
     CommonModule,
     BrowserModule,
@@ -60,6 +63,7 @@ import { InformationModule } from './modules/information/information.module';
     RouterModule,
     FormsModule,
     ReactiveFormsModule,
+    SubscriptionModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),

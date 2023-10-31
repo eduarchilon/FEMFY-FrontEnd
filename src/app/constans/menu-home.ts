@@ -43,7 +43,7 @@ export const MENU_PROFILE: Menu[] = [
   },
   {
     label: 'Suscripción',
-    path: 'suscripcion',
+    path: 'subscription',
     icon: 'subscriptions',
     iconColor: 'accent',
   },
