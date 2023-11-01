@@ -1,8 +1,8 @@
 <div class="bg-[#f2d4fa] bg-cover px-[3vw]">
-    <div class="w-[100%] pb-[270px] pt-[100px] max-w-[1280px] m-auto">
+    <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
 
         <h2 class="text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
-        <span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>
+        <!--<span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>-->
 
         <div class="bg-white w-full my-5 p-5 rounded-[20px]">
             <div class="mb-3">
@@ -26,7 +26,7 @@
 
         <div *ngIf="!showFormComment" class="flex justify-end mt-3">
             <button (click)="openFormComment()"
-                class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3">Añadir comentario</button>
+                class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Añadir comentario</button>
         </div>
 
         <ng-container *ngIf="showFormComment">

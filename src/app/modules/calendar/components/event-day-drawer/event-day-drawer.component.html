@@ -1,71 +1,45 @@
 <div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
-  <div class="flex justify-end px-5">
-    <div class="flex justify-between w-[100%] items-center">
-      <ng-container *ngIf="data?.itemChart" >
-        <p>Estás en la etapa de : {{ data?.itemChart?.label }}</p>
-      </ng-container>
-      <button (click)="closeDialog()" mat-icon-button>
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+
+  <div class="flex px-6 justify-between items-center">
+    <h3 class="text-3xl text-femfy-800 font-bold max-md:text-3xl">
+      {{ data?.daySelected | date : "dd 'de' LLLL" }}
+    </h3>
+    <button (click)="closeDialog()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
   </div>
+
   <mat-dialog-content>
     <div class="pb-5">
       <h3 class="text-4xl font-semibold mb-5 max-sm:text-2xl">
         Crear nuevo evento
       </h3>
+      <ng-container *ngIf="data?.itemChart">
+        <p>Estás en la etapa de : {{ data?.itemChart?.label }}</p>
+      </ng-container>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
-      <h5 class="py-5">
-        Fecha: {{ data?.daySelected | date : "dd 'de' LLLL" }}
-      </h5>
-      <form
-        action=""
-        class="flex flex-col gap-4"
-        [formGroup]="formRegisterEvent"
-        (ngSubmit)="registerEevent()"
-      >
+      <form action="" class="flex flex-col gap-4" [formGroup]="formRegisterEvent" (ngSubmit)="registerEevent()">
         <div class="flex gap-5">
-          <input
-            type="time"
-            placeholder=""
-            #hourDate
-            (input)="setHourToShow(hourDate.value)"
-            formControlName="hour"
-            class="border-b-2 text-lg mb-3"
-          />
-          <p>Hora seleccionada: {{ hourSelected }}</p>
+          <input type="time" placeholder="" #hourDate (input)="setHourToShow(hourDate.value)" formControlName="hour"
+            class="rounded-full outline-none p-3" />
+          <input type="text" placeholder="Título" formControlName="title" class="w-full rounded-full outline-none p-3" />
         </div>
-        <input
-          type="text"
-          placeholder="Título"
-          formControlName="title"
-          class="border-b-2 text-lg mb-3 p-3"
-        />
-        <textarea
-          rows="4"
-          class="bg-gray-100 text-lg text-dark !w-full p-3 rounded-[20px]"
-          formControlName="description"
-        ></textarea>
-        <div>
-          <button
-            class="bg-[#AF6FE8] text-white py-[10px] px-[20px] rounded-[20px] max-sm:w-[100%]"
-            type="submit"
-          >
+        <textarea rows="4" class="bg-gray-100 text-lg text-dark !w-full p-3 rounded-[20px]"
+          formControlName="description"></textarea>
+        <div class="text-end">
+          <button class="bg-femfy-400 text-white py-[10px] px-[20px] rounded-[20px] max-sm:w-[100%]" type="submit">
             Crear registro
           </button>
         </div>
       </form>
     </div>
-    <mat-divider></mat-divider>
     <div>
       <ng-container *ngIf="eventDaySelected.length > 0">
-        <h3 class="py-3 text-2xl font-semibold">Mis eventos</h3>
+        <mat-divider></mat-divider>
+        <h3 class="py-3 text-2xl text-femfy-600 font-semibold">Mis eventos</h3>
         <div class="flex flex-col gap-1">
           <ng-container *ngFor="let item of eventDaySelected">
-            <mat-expansion-panel
-              (opened)="panelOpenState = true"
-              (closed)="panelOpenState = false"
-            >
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
               <mat-expansion-panel-header>
                 <mat-panel-title>{{ item.hour }}</mat-panel-title>
                 <mat-panel-description>
@@ -75,11 +49,7 @@
               <div class="flex justify-between flex-col break-words">
                 <p class="max-sm:text-[12px]">{{ item.description }}</p>
                 <div class="flex gap-3 self-end">
-                  <button
-                    (click)="vinculateGoogleClendar(item)"
-                    mat-mini-fab
-                    class="!bg-white"
-                  >
+                  <button (click)="vinculateGoogleClendar(item)" mat-mini-fab class="!bg-white">
                     <mat-icon [svgIcon]="iconCalendar?.name"></mat-icon>
                   </button>
                   <button (click)="deleteEvent(item)" mat-mini-fab color="warn">
