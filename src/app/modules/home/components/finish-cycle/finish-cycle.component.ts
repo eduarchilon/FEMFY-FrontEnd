@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { Cycle } from 'src/app/models/cicle.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
   selector: 'app-finish-cycle',
@@ -19,7 +20,8 @@ export class FinishCycleComponent implements OnInit {
     private dialogRef: MatDialogRef<FinishCycleComponent>,
     private cicleService: CicleService,
     private router: Router,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -54,6 +56,14 @@ export class FinishCycleComponent implements OnInit {
                 idUser: cycleChart?.idUser,
               })
               .subscribe((res: any) => {
+                this.notificationService
+                  .enviarNotificacion(
+                    '¡Ciclo finalizado con exito!',
+                    'Muchas gracias por contar con femfy . 😊'
+                  )
+                  .subscribe({
+                    next: (res: any) => res,
+                  });
                 if (res) {
                   this.router.navigate(['/']).then(() => {
                     location.reload();

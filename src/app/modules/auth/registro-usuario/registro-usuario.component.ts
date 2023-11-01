@@ -96,14 +96,7 @@ export class RegistroUsuarioComponent implements OnInit {
                       //NOTIFICACION PUSH
                       if (userLogin) {
                         this.loaderService.hideLoader();
-                        this.notificationService
-                          .enviarNotificacion(
-                            '¡Bienvenida a Femfy!',
-                            'Gracias por registrarte 😊'
-                          )
-                          .subscribe({
-                            next: (res: any) => res,
-                          });
+                        
                       }
                       this.historialService
                         .createQuestion({
