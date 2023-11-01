@@ -232,12 +232,15 @@ export class PieChartComponent implements OnInit, AfterViewInit {
       return acumulador + elemento.dayCount;
     }, 0);
 
-    const diff = moment(new Date()).add(1, "days").diff(this.cycleChart?.dateBeging, 'days');
+    const diff = moment(new Date())
+      .add(1, 'days')
+      .diff(this.cycleChart?.dateBeging, 'days');
 
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
         item.date = moment(cycleChart[0]?.dateBeging)
-          .add(item.id -1 , 'days')
+          .add(item.id - 1, 'days')
+          ?.locale('es')
           .format('L');
         // console.log(item.id === diff);
         // console.log(item.id);
@@ -245,7 +248,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
 
         item.width = (newDataArray.length / sumaTotal) * 100;
         item.desc = '';
-        if (item.id === diff -1) {
+        if (item.id === diff) {
           item.color = 'red';
           item.desc = 'Hoy';
         } else if (item.id === Math.round(daysAverageCycle)) {
