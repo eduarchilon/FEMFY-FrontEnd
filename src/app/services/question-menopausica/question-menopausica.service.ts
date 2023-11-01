@@ -43,4 +43,12 @@ export class QuestionMenopausicaService {
       })
     );
   }
+
+  getQuestionMenopausica(): Observable<any> {
+    return this.http.get<any>(`${this.usersUrl}/getAllQuestions`).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
 }

@@ -276,7 +276,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
         color: 'black',
         fontWeight: 'bold',
         fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: 12,
+        fontSize: 10,
       },
       fills: dataChildrenSeries.map((item: any) => item.color),
       strokeWidth: 2,

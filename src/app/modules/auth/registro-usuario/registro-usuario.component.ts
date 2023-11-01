@@ -11,12 +11,16 @@ import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { QuestionUserMenstruation } from 'src/app/models/question.model';
+import {
+  QuestionUserMenopause,
+  QuestionUserMenstruation,
+} from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { Cycle } from 'src/app/models/cicle.model';
 import { HistorialService } from 'src/app/services/historial/historial.service';
 import { emptyQuestionHistoryResponse } from 'src/app/models/historial.model';
+import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -46,10 +50,11 @@ export class RegistroUsuarioComponent implements OnInit {
     private cicleService: CicleService,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private historialService: HistorialService
-  ) { }
+    private historialService: HistorialService,
+    private questionMenopause: QuestionMenopausicaService
+  ) {}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   signupUser(): void {
     this.userNameFinded = '';
@@ -100,17 +105,21 @@ export class RegistroUsuarioComponent implements OnInit {
                             next: (res: any) => res,
                           });
                       }
-                      this.historialService.createQuestion({
-                        ...emptyQuestionHistoryResponse(), userId:
-                          this.localStorageService.getUserByLogin()?.idUser
-                      }).subscribe((history: any) => {
-                        this.localStorageService.setKeyValueLocalStorage(
-                          constants.USER,
-                          JSON.stringify({
-                            ...this.localStorageService.getUserByLogin(),
-                            idHistorial: history.id
-                          }))
-                      })
+                      this.historialService
+                        .createQuestion({
+                          ...emptyQuestionHistoryResponse(),
+                          userId:
+                            this.localStorageService.getUserByLogin()?.idUser,
+                        })
+                        .subscribe((history: any) => {
+                          this.localStorageService.setKeyValueLocalStorage(
+                            constants.USER,
+                            JSON.stringify({
+                              ...this.localStorageService.getUserByLogin(),
+                              idHistorial: history.id,
+                            })
+                          );
+                        });
                       /*this.questionMenopauseService
                         .createUserMenopauseQuestion({
                           ...emptyQuestionMenopausResponse(),
@@ -118,6 +127,8 @@ export class RegistroUsuarioComponent implements OnInit {
                         })
                         .subscribe((res: any) => res);*/
                       this.router.navigate(['cuestionario']);
+
+                      //le creo una tabla de menstruante
                       this.questionsService
                         .createUserMenstruationQuestion({
                           userId:
@@ -135,6 +146,23 @@ export class RegistroUsuarioComponent implements OnInit {
                             );
                           }
                         );
+
+                      //MENOPAUSICA
+                      this.questionMenopause
+                        .createUserMenopauseQuestion({
+                          userId:
+                            this.localStorageService.getUserByLogin()?.idUser,
+                        })
+                        .subscribe((quesMeno: QuestionUserMenopause | any) => {
+                          const idQuesMeno = quesMeno?.id;
+                          this.localStorageService.setKeyValueLocalStorage(
+                            constants.USER,
+                            JSON.stringify({
+                              ...this.localStorageService.getUserByLogin(),
+                              idMenopause: idQuesMeno,
+                            })
+                          );
+                        });
                     },
                   });
               },

@@ -14,7 +14,10 @@ export class InformationComponent implements OnInit {
     private localStorageService: LocalStorageService
   ) {}
 
+  typeUser!: number | any;
+
   ngOnInit(): void {
+    this.typeUser = this.localStorageService.getUserByLogin()?.typeUserID;
     if (this.localStorageService.getUserByLogin()?.idHistorial === undefined) {
       this.historial.getAllQuestionUserHistory().subscribe((history: any[]) => {
         const historyUser = history?.filter(
