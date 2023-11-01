@@ -53,7 +53,6 @@ export class TopicComponent {
   getConversationsByTopic() {
     this.postService.getAllPostsByTopic(this.idTopic).subscribe((data: any) => {
       this.posts = data;
-
       this.posts.forEach(post => {
         this.userService.getUserById(post.userId).subscribe((data: any) => {
           post.username = data.userName;

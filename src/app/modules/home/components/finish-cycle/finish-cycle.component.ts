@@ -46,11 +46,22 @@ export class FinishCycleComponent implements OnInit {
           dateEnd: endDate ? endDate : new Date().toISOString(),
         })
         .subscribe({
-          next: (res: any) => res,
+          next: (res: any) => {
+            this.cicleService
+              .registerCycle({
+                dateBeging: new Date(),
+                daysOfBleeding: cycleChart?.daysOfBleeding,
+                idUser: cycleChart?.idUser,
+              })
+              .subscribe((res: any) => {
+                if (res) {
+                  this.router.navigate(['/']).then(() => {
+                    location.reload();
+                  });
+                }
+              });
+          },
         });
-      this.router.navigate(['/']).then(() => {
-        location.reload();
-      });
     } else {
       this.validationDate = 'Por el momento no se puede finalizar el ciclo';
     }

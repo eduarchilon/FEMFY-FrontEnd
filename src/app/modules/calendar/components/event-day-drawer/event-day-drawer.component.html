@@ -1,8 +1,13 @@
 <div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
   <div class="flex justify-end px-5">
-    <button (click)="closeDialog()" mat-icon-button>
-      <mat-icon>close</mat-icon>
-    </button>
+    <div class="flex justify-between w-[100%] items-center">
+      <ng-container *ngIf="data?.itemChart" >
+        <p>Estás en la etapa de : {{ data?.itemChart?.label }}</p>
+      </ng-container>
+      <button (click)="closeDialog()" mat-icon-button>
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
   </div>
   <mat-dialog-content>
     <div class="pb-5">
@@ -10,7 +15,9 @@
         Crear nuevo evento
       </h3>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
-      <h5 class="py-5">Fecha: {{ data?.daySelected | date : "dd 'de' LLLL"  }}</h5>
+      <h5 class="py-5">
+        Fecha: {{ data?.daySelected | date : "dd 'de' LLLL" }}
+      </h5>
       <form
         action=""
         class="flex flex-col gap-4"
@@ -68,7 +75,11 @@
               <div class="flex justify-between flex-col break-words">
                 <p class="max-sm:text-[12px]">{{ item.description }}</p>
                 <div class="flex gap-3 self-end">
-                  <button (click)="vinculateGoogleClendar(item)" mat-mini-fab class="!bg-white">
+                  <button
+                    (click)="vinculateGoogleClendar(item)"
+                    mat-mini-fab
+                    class="!bg-white"
+                  >
                     <mat-icon [svgIcon]="iconCalendar?.name"></mat-icon>
                   </button>
                   <button (click)="deleteEvent(item)" mat-mini-fab color="warn">

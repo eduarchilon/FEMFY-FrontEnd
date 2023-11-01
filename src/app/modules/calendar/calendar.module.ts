@@ -73,7 +73,7 @@ registerLocaleData(localeEs, 'es-ES');
     MatFormFieldModule,
     MatSnackBarModule,
   ],
-  exports: [],
+  exports: [EventDayDrawerComponent],
   providers: [
     AuthService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },

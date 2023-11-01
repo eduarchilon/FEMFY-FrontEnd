@@ -1,4 +1,13 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { AgPolarChartOptions, AgPolarSeriesOptions } from 'ag-charts-community';
@@ -14,13 +23,16 @@ import { AppState } from 'src/app/services/redux/store/app.store';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import * as moment from 'moment';
+import { MatDialog } from '@angular/material/dialog';
+import { EventDayDrawerComponent } from 'src/app/modules/calendar/components/event-day-drawer/event-day-drawer.component';
+import { MatCalendar } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss'],
 })
-export class PieChartComponent implements OnInit {
+export class PieChartComponent implements OnInit, AfterViewInit {
   @Input() cycles: Cycle[] = [];
   @Input() cyclesWithEndNull: Cycle[] = [];
   @Input() cyclesWithOutEndNull: Cycle[] = [];
@@ -40,14 +52,17 @@ export class PieChartComponent implements OnInit {
     private store: Store<AppState>,
     private cicleService: CicleService,
     private localStorageService: LocalStorageService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
+    private renderer: Renderer2,
+    private el: ElementRef
   ) {}
 
   ngOnInit(): void {
-    console.log(this.cycles);
-    console.log(this.cyclesWithEndNull);
-    console.log(this.cyclesWithOutEndNull);
-    console.log(this.averageQuestionCycleContent);
+    // console.log(this.cycles);
+    // console.log(this.cyclesWithEndNull);
+    // console.log(this.cyclesWithOutEndNull);
+    // console.log(this.averageQuestionCycleContent);
 
     this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
       const diferenciaEnDias = moment(cycle?.dateEnd).diff(
@@ -67,7 +82,7 @@ export class PieChartComponent implements OnInit {
       );
       chat13 = this.setPieContainerData(
         chat12,
-        this.cycleChart,
+        this.cyclesWithEndNull,
         this.averageQuestionCycleContent
       );
       this.options = {
@@ -164,7 +179,7 @@ export class PieChartComponent implements OnInit {
       },
       fills: data.map((item: any) => item.color),
       strokeWidth: 2,
-      strokes: ['white'],
+      strokes: ['purple'],
       tooltip: {
         enabled: false,
       },
@@ -180,14 +195,16 @@ export class PieChartComponent implements OnInit {
 
   setPieContainerData(
     optionSeries: AgPolarSeriesOptions | any,
-    cycleChart: Cycle,
+    cycleChart: any,
     averageQuestionCycleContent?: number[]
   ): AgPolarSeriesOptions {
+    console.log(cycleChart[0]);
+    console.log(moment(cycleChart[0]?.dateBeging));
     const daysAverageCycle = this.setAverageCycles(averageQuestionCycleContent);
     this.setDaysCycleComplete(daysAverageCycle);
     const newDataArray: DataPieChartChildren[] = [];
-    console.log(optionSeries);
-    
+    // console.log(optionSeries);
+
     optionSeries?.data?.forEach((item: any) => {
       for (let i = 1; i <= item.dayCount; i++) {
         newDataArray.push({
@@ -208,10 +225,14 @@ export class PieChartComponent implements OnInit {
       new Date().getDate() - new Date(this.cycleChart?.dateBeging)?.getDate();
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
+        item.date = moment(cycleChart[0]?.dateBeging)
+          .add(item.id - 1, 'day')
+          .format('L');
         item.width = (newDataArray.length / sumaTotal) * 100;
+        item.desc = '';
         if (item.id === diff) {
           item.color = 'red';
-          item.desc = 'Está aquí';
+          item.desc = 'Hoy';
         } else if (item.id === Math.round(daysAverageCycle)) {
           item.color = 'black';
           item.desc = 'Fin del ciclo';
@@ -219,7 +240,7 @@ export class PieChartComponent implements OnInit {
           item.color = 'green';
           item.desc = 'Ovulación';
         }
-        item.date
+        item.date;
 
         return item;
       }
@@ -242,7 +263,7 @@ export class PieChartComponent implements OnInit {
       innerRadiusRatio: 0.8,
       listeners: {
         nodeClick: (event: any) => {
-          // this.router.navigate(['calendario']); //pie de numeros
+          this.openDialogCalendarEvent(moment(event?.datum), event?.datum);
         },
       },
       sectorLabelKey: 'id',
@@ -255,22 +276,25 @@ export class PieChartComponent implements OnInit {
       },
       fills: dataChildrenSeries.map((item: any) => item.color),
       strokeWidth: 2,
-      calloutLabelKey: undefined,
+      calloutLabelKey: this.defineCalloutLabelKey(dataChildrenSeries),
       calloutLabel: {
         minAngle: 0,
       },
       calloutLine: {
         strokeWidth: 1,
       },
-      strokes: ['white'],
+      strokes: ['#6a6a6a'],
       tooltip: {
         renderer: ({ datum, color, sectorLabelKey }) => {
+          const handleTooltipClick = (datum: any) => {
+            this.information(datum);
+          };
           return [
-            `<div style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;">`,
+            `<div onclick="handleTooltipClick(${datum.id})" style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;cursor: pointer;">`,
             datum.desc || datum.label,
             `</div>`,
             `<div style="padding: 10px 8px;">`,
-            `  <strong class="flex justify-between"><p>Día ${datum.id}</p><a href="https://femfy-stage.vercel.app/calendario"><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
+            `  <strong class="flex justify-between gap-5"><p>${datum.date}</p><a><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
             `</div>`,
           ].join('\n');
         },
@@ -287,6 +311,49 @@ export class PieChartComponent implements OnInit {
         },
       },
     };
+  }
+
+  defineCalloutLabelKey(data: any) {
+    return data?.some((item: any) => item?.desc) ? 'desc' : undefined;
+  }
+
+  information(datum: any): void {
+    console.log(datum);
+  }
+
+  ngAfterViewInit(): void {}
+
+  dialogIsOpen: boolean = false;
+  // @ViewChild('tooltipCalendar') tooltipCalendar!: MatCalendar<Date>;
+
+  openDialogCalendarEvent(daySelected: any, itemChart: any): void {
+    if (!this.dialogIsOpen) {
+      const element = this.el.nativeElement;
+      this.renderer.listen(element, 'dblclick', (event: MouseEvent) => {
+        if (!this.dialogIsOpen) {
+          this.dialogIsOpen = true;
+          this.dialog
+            .open(EventDayDrawerComponent, {
+              panelClass: [
+                '!max-w-[95vw]',
+                'max-lg:!w-[80%]',
+                'max-md:!w-[100vw]',
+                'max-xl:!w-[50%]',
+                '!w-[50%]',
+                '!rounded-[20px]',
+              ],
+              data: {
+                daySelected,
+                itemChart,
+              },
+            })
+            .afterClosed()
+            .subscribe(() => {
+              this.dialogIsOpen = false;
+            });
+        }
+      });
+    }
   }
 
   setDaysCycleComplete(daysAverageCycle: number): void {
