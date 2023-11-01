@@ -5,40 +5,41 @@
     </h2>
     <form action="" [formGroup]="formDocumentation" (ngSubmit)="uploadFile()">
       <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-[10%]">
-        <div class="bg-white rounded-[20px] p-10 mb-10 md:mb-0 flex-1">
-          <h2
-            class="text-2xl font-bold mb-5 max-md:text-xl text-[#7c2385] border-b-[4px] border-[#7c2385] pb-4 rounded-tl-[20px]">
+        <div class="bg-white rounded-[20px] flex-1">
+          <h2 class="text-2xl font-bold max-md:text-xl text-[#7c2385] border-b-[4px] border-[#7c2385] p-[20px]">
             Cargar nuevo estudio
           </h2>
-          <div class="mb-3">
-            <label for="typeStudy" class="block text-xl mb-2">Tipo de estudio</label>
-            <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
-              <option value="0" selected>Selecciona un tipo de estudio</option>
-              <option *ngFor="let study of typeStudies" [value]="study.name">
-                {{ study.name }}
-              </option>
-            </select>
-          </div>
+          <div class="p-10 mb-10 md:mb-0">
+            <div class="mb-3">
+              <label for="typeStudy" class="block font-medium text-xl mb-2">Tipo de estudio</label>
+              <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
+                <option value="0" selected>Selecciona un tipo de estudio</option>
+                <option *ngFor="let study of typeStudies" [value]="study.name">
+                  {{ study.name }}
+                </option>
+              </select>
+            </div>
 
-          <div class="mb-3">
-            <label for="description" class="block text-xl mb-2">Descripción o nota</label>
-            <input type="text" class="rounded-full border w-full p-4" formControlName="description"
-              placeholder="Descripción o nota del estudio" />
-          </div>
+            <div class="mb-3">
+              <label for="description" class="block font-medium text-xl mb-2">Descripción o nota</label>
+              <input type="text" class="rounded-full border w-full p-4" formControlName="description"
+                placeholder="Descripción o nota del estudio" />
+            </div>
 
-          <div class="mb-3">
-            <label for="description" class="block text-xl mb-2">Fecha del estudio</label>
-            <input type="date" class="rounded-full border w-full p-4 text-gray-400" formControlName="studyDate"
-              placeholder="Fecha del estudio" />
-          </div>
+            <div class="mb-3">
+              <label for="description" class="block font-medium text-xl mb-2">Fecha del estudio</label>
+              <input type="date" class="rounded-full border w-full p-4 text-gray-400" formControlName="studyDate"
+                placeholder="Fecha del estudio" />
+            </div>
 
-          <div class="flex mt-5 max-sm:flex-col max-md:gap-4">
-            <button class="text-white font-bold rounded-full bg-[#de84ee] me-3 w-full p-3" type="submit">
-              Guardar estudio
-            </button>
-            <button class="text-white font-bold rounded-full bg-[#7c2385] w-full p-3">
-              Cancelar
-            </button>
+            <div class="flex mt-5 max-sm:flex-col max-md:gap-4">
+              <button class="text-white font-bold rounded-full bg-[#de84ee] me-3 w-full p-3" type="submit">
+                Guardar estudio
+              </button>
+              <button class="text-white font-bold rounded-full bg-[#7c2385] w-full p-3">
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
         <div class="bg-white rounded-[20px] p-10 flex-1 max-lg:p-5">
