@@ -45,11 +45,8 @@
               [cyclesWithOutEndNull]="cyclesWithOutEndNull"></app-pie-chart>
           </ng-container>
           <ng-container *ngIf="cycles.length === 0">
-            <div class="bg-pink-900 flex justify-center items-center rounded-full py-20">
-              <h5 class="text-center max-w-[200px]">
-                No hay datos de ciclo registrado
-              </h5>
-            </div>
+            <img class="w-[200px] h-[200px] rounded-full"
+             src="https://img.freepik.com/free-vector/pregnancy-test-concept-illustration_114360-3471.jpg?t=st=1698796129~exp=1698796729~hmac=3e83eb3e21b9da8986fb1db93f425ad2e0a17c57e99d1d5d476d0ab673efa1f5">
           </ng-container>
         </div>
 
@@ -71,8 +68,9 @@
         </ng-container>
 
         <div class="text-center">
-          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3"
-            (click)="openCicleRegister(cyclesWithEndNull[0])">
+          <p *ngIf="cycles.length === 0" class="mt-5 text-xl text-center font-medium mb-5 px-[20px]">Registra tu ciclo y nosotros nos ocupamos del resto</p>
+          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            [class.me-3]="cycles.length > 0" (click)="openCicleRegister(cyclesWithEndNull[0])">
             Registrar ciclo
           </button>
           <button *ngIf="cycles.length > 0"
@@ -90,7 +88,8 @@
         </h5>
         <div class="p-[20px] flex text-black flex-col gap-[15px]">
           <ng-container *ngIf="cycles.length === 0">
-            <h5>Todavía no existen datos cargados.</h5>
+            <img src="https://img.freepik.com/free-vector/add-notes-concept-illustration_114360-3416.jpg?t=st=1698795300~exp=1698795900~hmac=bdbeb1b79f62750fb8d81a3441e898bde4831db81a79f8892ed2c091c3f85c44">
+            <p class="mt-5 text-xl text-center font-medium">Todavía no existen datos cargados.</p>
           </ng-container>
           <ng-container *ngIf="cycles.length > 0">
             <app-cicle-historial class="text-black" [cycles]="cycles"></app-cicle-historial>

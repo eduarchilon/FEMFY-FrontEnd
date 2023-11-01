@@ -1,13 +1,13 @@
-<div class="min-h-screen max-h-auto px-8 pt-[20px] md:pt-[100px] bg-gradient-to-b from-[#c193ed] to-[#f3ebfc]">
+<div class="min-h-screen max-h-auto px-8 pt-[20px] md:pt-[100px] bg-gradient-to-b from-femfy-400 to-femfy-100">
   <div class="m-auto max-w-[1000px]">
 
     <div class="mb-[20px] p-5">
-      <h1 class="text-4xl text-[#6a3297] text-center font-bold max-md:text-xl m-auto p-5">
+      <h1 class="text-4xl text-femfy-800 text-center font-bold max-md:text-xl m-auto p-5">
         Ayudanos a personalizar tu experiencia respondiendo algunas preguntas rápidas.
       </h1>
     </div>
 
-    <div class="bg-[#c193ed] py-10 rounded-[20px] shadow-2xl max-w-[750px] m-auto">
+    <div class="bg-femfy-500 py-10 rounded-[20px] shadow-2xl max-w-[750px] m-auto">
       <div [ngSwitch]="questionType">
         <div *ngSwitchCase="1"><app-pregunta></app-pregunta></div>
         <div *ngSwitchCase="2">
