@@ -237,7 +237,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
         item.date = moment(cycleChart[0]?.dateBeging)
-          .add(item.id, 'days')
+          .add(item.id -1 , 'days')
           .format('L');
         // console.log(item.id === diff);
         // console.log(item.id);

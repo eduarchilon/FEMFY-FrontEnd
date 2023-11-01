@@ -104,7 +104,10 @@ export class DatePickerComponent implements OnInit, OnChanges {
             'days'
           );
 
-          this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
+          this.sampleRange = new DateRange(
+            this.initPeriod,
+            this.endPeriod.add(-1, 'days')
+          );
           console.log(this.sampleRange);
           console.log(this.endPeriod);
           console.log(this.initPeriod);
@@ -155,7 +158,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
       (this.daysSelected?.find((x) => x.isSame(date, 'day'))
         ? 'selected'
         : '') ||
-      (moment(this.endPeriod)?.isSame(date) ? 'end-period' : '') ||
+      //   ||
+      // (moment(this.endPeriod)?.isSame(date) ? 'end-period' : '')
       (moment(this.dayOvulation)?.isSame(date) ? 'day-ovulation' : '')
     );
   };
