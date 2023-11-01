@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import { DataPieChartChildren } from './data-pie-chart';
 
 export interface Cycle {
@@ -34,10 +35,12 @@ export interface FisrtCycle {
 }
 
 export interface PredictionCycle {
-  numberOvulation: number; //dia en donde se seteara la ovulacion
-  countNextPeriod: number; //dias faltantes para el proximo periodo
-  countRestOvuation: number; //dias faltantes para la ovulacion
-  countRestFertile: number;
+  numberOvulation?: number | any; //dia en donde se seteara la ovulacion
+  countNextPeriod?: number; //dias faltantes para el proximo periodo
+  countRestOvuation?: number; //dias faltantes para la ovulacion
+  countRestFertile?: number;
+  dateNextPeriod?: moment.Moment | Date | any | string;
+  period?: moment.Moment | Date | any | string;
 }
 
 export interface CyclePhaseState {
