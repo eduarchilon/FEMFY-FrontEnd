@@ -27,7 +27,7 @@ export class DocumentationComponent implements OnInit {
     { id: 1, name: 'Colposcopia' },
     { id: 2, name: 'Papanicolaou' },
     { id: 3, name: 'Citología' },
-    { id: 4, name: 'Ecografía vaginal' },
+    { id: 4, name: 'Ecografía transvaginal' },
     { id: 5, name: 'Histeroscopía' },
     { id: 6, name: 'Mamografía' },
     { id: 7, name: 'Ecografía mamaria' },
