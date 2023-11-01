@@ -1,3 +1,5 @@
+import * as moment from 'moment';
+
 export interface DataPieChart {
   id: number;
   dayCount: number;
@@ -11,6 +13,5 @@ export interface DataPieChart {
 export interface DataPieChartChildren extends DataPieChart {
   width: number;
   desc?: string | '';
-  date?: Date | any;
-  
+  date?: moment.Moment | any | string;
 }
