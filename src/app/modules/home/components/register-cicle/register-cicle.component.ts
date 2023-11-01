@@ -12,6 +12,7 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
   selector: 'app-register-cicle',
@@ -39,7 +40,8 @@ export class RegisterCicleComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private loaderService: LoaderService,
     @Inject(MAT_DIALOG_DATA) public data: any,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +74,14 @@ export class RegisterCicleComponent implements OnInit {
             })
           );
           this.closeDialog();
+          this.notificationService
+            .enviarNotificacion(
+              'Ha registrado un nuevo ciclo',
+              'Este nuevo ciclo reemplazará al que estaba seteado porque no ha finalizado. 😊'
+            )
+            .subscribe({
+              next: (res: any) => res,
+            });
           this.loaderService.showLoader();
           if (response) {
             this.router.navigate(['/']).then(() => {

@@ -35,6 +35,7 @@ import { RecomendationsComponent } from './components/recomendations/recomendati
 import { RecomendationService } from 'src/app/services/recomendation/recomendation.service';
 import { CutTextPipe } from 'src/app/utils/pipes/cut-text/cut-text.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     LoaderService,
     { provide: LOCALE_ID, useValue: 'es-ES' },
     RecomendationService,
+    NotificationService
   ],
 })
 export class HomeModule {}

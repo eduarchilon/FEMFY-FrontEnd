@@ -26,6 +26,7 @@ import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDayDrawerComponent } from 'src/app/modules/calendar/components/event-day-drawer/event-day-drawer.component';
 import { MatCalendar } from '@angular/material/datepicker';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
   selector: 'app-pie-chart',
@@ -48,6 +49,15 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   sizeChart: number = 0;
   cycleChart!: Cycle;
 
+  // this.notificationService
+  //                         .enviarNotificacion(
+  //                           '¡Bienvenida a Femfy!',
+  //                           'Gracias por registrarte 😊'
+  //                         )
+  //                         .subscribe({
+  //                           next: (res: any) => res,
+  //                         });
+
   constructor(
     private store: Store<AppState>,
     private cicleService: CicleService,
@@ -55,7 +65,8 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     private router: Router,
     public dialog: MatDialog,
     private renderer: Renderer2,
-    private el: ElementRef
+    private el: ElementRef,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -250,6 +261,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
         }
         item.date;
 
+        this.setNotificactionCycle(item);
         return item;
       }
     );
@@ -430,5 +442,20 @@ export class PieChartComponent implements OnInit, AfterViewInit {
       width: this.sizeChart,
       height: this.sizeChart,
     };
+  }
+
+  setNotificactionCycle(item: any) {
+    if (moment(new Date(item.date)).date() === moment(new Date()).date()) {
+      console.log(item.desc !== '' ? item?.label : item?.label);
+
+      this.notificationService
+        .enviarNotificacion(
+          'Información de ciclo',
+          'Su nueva etapa es: ' + item.label
+        )
+        .subscribe({
+          next: (res: any) => res,
+        });
+    }
   }
 }
