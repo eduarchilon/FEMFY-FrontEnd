@@ -6,7 +6,7 @@ export interface RecommendationsByFamilyHistory {
   typeDisease?: string | any;
 }
 
-export interface RecommendationsByDocuemts
+export interface RecommendationsByDocuments
   extends RecommendationsByFamilyHistory {}
 
 export interface RecommendationsByTypeUser
@@ -14,6 +14,6 @@ export interface RecommendationsByTypeUser
 
 export interface Recomendations {
   recommendationsByFamilyHistory?: RecommendationsByFamilyHistory[];
-  recommendationsByDocuemts?: RecommendationsByDocuemts[];
+  recommendationsByDocuments?: RecommendationsByDocuments[];
   recommendationsByTypeUser?: RecommendationsByTypeUser[];
 }

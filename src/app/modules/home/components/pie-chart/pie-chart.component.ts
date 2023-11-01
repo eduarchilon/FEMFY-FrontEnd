@@ -167,7 +167,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
         color: 'black',
         fontWeight: '600',
         fontStyle: 'normal',
-        fontSize: 14,
+        fontSize: 12,
         fontFamily: '"Raleway", system-ui, sans-serif',
         positionOffset: 16,
         formatter: ({ sectorLabelValue }: any) => {
@@ -234,11 +234,15 @@ export class PieChartComponent implements OnInit, AfterViewInit {
           item.color = 'red';
           item.desc = 'Hoy';
         } else if (item.id === Math.round(daysAverageCycle)) {
-          item.color = 'black';
+          item.color = 'yellow';
           item.desc = 'Fin del ciclo';
         } else if (item.id === Math.round(daysAverageCycle / 2)) {
           item.color = 'green';
           item.desc = 'Ovulación';
+        }
+        if (item.id === Math.round(daysAverageCycle / 2) && item.id === diff) {
+          item.color = 'red';
+          item.desc = 'Hoy / Ovulación';
         }
         item.date;
 
@@ -269,19 +273,20 @@ export class PieChartComponent implements OnInit, AfterViewInit {
       sectorLabelKey: 'id',
       angleKey: 'width',
       sectorLabel: {
-        color: 'white',
+        color: 'black',
         fontWeight: 'bold',
         fontFamily: 'Helvetica, Arial, sans-serif',
-        fontSize: 15,
+        fontSize: 12,
       },
       fills: dataChildrenSeries.map((item: any) => item.color),
       strokeWidth: 2,
       calloutLabelKey: this.defineCalloutLabelKey(dataChildrenSeries),
       calloutLabel: {
         minAngle: 0,
+        fontWeight: 'bolder',
       },
       calloutLine: {
-        strokeWidth: 1,
+        strokeWidth: 2,
       },
       strokes: ['#6a6a6a'],
       tooltip: {
@@ -386,17 +391,17 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   getWindowSize(): number {
     let value = 400;
     if (window.innerWidth < 380) {
-      value = 300;
+      value = 320;
     } else if (window.innerWidth < 500) {
-      value = 340;
+      value = 370;
     } else if (window.innerWidth < 1024) {
       value = 390;
     } else if (window.innerWidth < 1100) {
       value = 270;
     } else if (window.innerWidth < 1200) {
-      value = 290;
+      value = 350;
     } else {
-      value = 320;
+      value = 370;
     }
     return value;
   }
@@ -404,17 +409,17 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   @HostListener('window:resize', ['$event'])
   onResizeWidth(event: any): void {
     if (window.innerWidth < 380) {
-      this.sizeChart = 300;
+      this.sizeChart = 320;
     } else if (window.innerWidth < 500) {
-      this.sizeChart = 340;
+      this.sizeChart = 370;
     } else if (window.innerWidth < 1024) {
       this.sizeChart = 390;
     } else if (window.innerWidth < 1100) {
       this.sizeChart = 270;
     } else if (window.innerWidth < 1200) {
-      this.sizeChart = 290;
+      this.sizeChart = 370;
     } else {
-      this.sizeChart = 320;
+      this.sizeChart = 370;
     }
     this.options = {
       ...this.options,
