@@ -1,79 +1,38 @@
 <div class="px-[3vw]">
-  <div
-    class="w-[100%] bg-cover pt-150 flex items-center py-[150px] max-w-[1280px] m-auto"
-  >
-    <div
-      class="w-[50%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0"
-    >
+  <div class="w-[100%] bg-cover pt-150 flex items-center py-[150px] max-w-[1280px] m-auto">
+    <div class="w-[50%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0">
       <div
-        class="bg-white max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[50px] pb-[80px]"
-      >
+        class="bg-white max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[50px] pb-[80px]">
         <img class="w-[100px]" src="./assets/images/isotipo.svg" />
         <h2 class="text-[32px] text-femfy-800 font-bold text-center pb-[15px] pt-[2px]">
           ¡Bienvenida!
         </h2>
-        <div
-          class="py-5 text-[red] font-semibold text-center"
-          *ngIf="userNameFinded || emailFinded"
-        >
+        <div class="py-5 text-[red] font-semibold text-center" *ngIf="userNameFinded || emailFinded">
           <p *ngIf="userNameFinded" class="pb-2">
             El nombre de usuario ya existe.
           </p>
         </div>
-        <form
-          class="flex flex-col gap-[14px] w-[100%]"
-          [formGroup]="formRegister"
-          (ngSubmit)="signupUser()"
-        >
-          <input
-            formControlName="userName"
-            class="rounded-full outline-none p-3"
-            type="text"
-            placeholder="Nombre de usuario"
-          />
-          <input
-            class="rounded-full outline-none p-3"
-            type="email"
-            placeholder="Email"
-            formControlName="email"
-          />
-          <input
-            class="rounded-full outline-none p-3"
-            type="password"
-            placeholder="Contraseña"
-            formControlName="password"
-          />
-          <input
-            class="rounded-full outline-none p-3"
-            type="password"
-            placeholder="Repetir contraseña"
-            formControlName="passwordRepeat"
-          />
+        <form class="flex flex-col gap-[14px] w-[100%]" [formGroup]="formRegister" (ngSubmit)="signupUser()">
+          <input formControlName="userName" class="rounded-full outline-none p-3" type="text"
+            placeholder="Nombre de usuario" />
+          <input class="rounded-full outline-none p-3" type="email" placeholder="Email" formControlName="email" />
+          <input class="rounded-full outline-none p-3" type="password" placeholder="Contraseña"
+            formControlName="password" />
+          <input class="rounded-full outline-none p-3" type="password" placeholder="Repetir contraseña"
+            formControlName="passwordRepeat" />
           <label class="text-femfy-600 font-medium">Fecha de nacimiento</label>
-          <input
-            class="rounded-full outline-none p-3"
-            type="date"
-            formControlName="birthdate"
-          />
-          <button
-            class="bg-femfy-400 !rounded-[20px] py-[10px]"
-            [disabled]="!formRegister.valid"
-            type="submit"
-          >
+          <input class="rounded-full outline-none p-3  text-gray-400" type="date" formControlName="birthdate" />
+          <button class="bg-femfy-400 !rounded-[20px] py-[10px]" [disabled]="!formRegister.valid" type="submit">
             Registrarse
           </button>
         </form>
-        <a routerLink="/login-usuario" class="text-white text-femfy-600 underline pt-2"
-          >Ingresar</a
-        >
+        <a routerLink="/login-usuario" class="text-femfy-600 underline pt-2">Ingresar</a>
       </div>
     </div>
 
     <div class="w-[50%] flex items-center flex-col max-lg:hidden">
       <img class="w-[230px]" src="./assets/images/isotipo.svg" />
-      <h1
-        class="text-[50px] text-femfy-800 max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center"
-      >
+      <h1 class="text-[50px] text-femfy-800 max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center">
         Tu salud ginecológica en un solo lugar.
       </h1>
     </div>
