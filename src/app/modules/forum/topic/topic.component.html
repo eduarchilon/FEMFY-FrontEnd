@@ -1,7 +1,7 @@
 <div class="bg-[#f2d4fa] bg-cover px-[3vw]">
     <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
         <div class="flex justify-between mb-5">
-            <h2 class="text-5xl text-femfy-800 font-bold">{{ topic.title }}</h2>
+            <h2 class="text-5xl text-femfy-800 font-bold">{{ topic?.title }}</h2>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
                 class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px]">Crear una
                 charla</button>
@@ -22,7 +22,7 @@
                             <p>{{ post.content }}</p>
                             <div class="flex justify-between mt-3">
                                 <span class="text-[#7c2385]">{{ post.replies.length }} comentarios</span>
-                                <a class="flex" [href]="getRedirectToPost(post.id)">
+                                <a class="flex" routerLink="/post/{{ post.id }}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                         class="bi bi-plus m-auto" viewBox="0 0 16 16">
                                         <path
