@@ -2,7 +2,9 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -19,7 +21,8 @@ import { EventDayDrawerComponent } from '../event-day-drawer/event-day-drawer.co
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { DateRange, MatCalendar } from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import { Cycle } from 'src/app/models/cicle.model';
+import { Cycle, PredictionCycle } from 'src/app/models/cicle.model';
+import { loadedPredictionNextCycle } from 'src/app/services/redux/actions/cycle.action';
 
 @Component({
   selector: 'app-date-picker',
@@ -27,10 +30,10 @@ import { Cycle } from 'src/app/models/cicle.model';
   styleUrls: ['./date-picker.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent implements OnInit, OnChanges {
   daysSelected: moment.Moment[] = [];
   isOpen: boolean = true;
-  @ViewChild('calendar') calendar!: MatCalendar<Date>;
+  // @ViewChild('calendar') calendar!: MatCalendar<Date>;
   sampleRange!: DateRange<moment.Moment>;
 
   @Input() cycle: Cycle | any | null = null;
@@ -57,6 +60,10 @@ export class DatePickerComponent implements OnInit {
     private loaderService: LoaderService
   ) {
     this.refreshDR();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.cdr.detectChanges();
   }
 
   refreshDR() {
@@ -89,10 +96,20 @@ export class DatePickerComponent implements OnInit {
 
           this.initPeriod = moment(res?.dateBeging);
           this.endPeriod = moment(res?.dateBeging).add(
-            this.cycle?.daysOfBleeding - 1,
+            this.cycle?.daysOfBleeding,
             'days'
           );
+
           this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
+          const predictionCycle: PredictionCycle = {
+            dateNextPeriod: moment(this.endCycle).add(1, 'day'),
+            numberOvulation: resultOvulation,
+            period: this.initPeriod,
+          };
+
+          this.store.dispatch(
+            loadedPredictionNextCycle({ prediction: { ...predictionCycle } })
+          );
         }
       });
 

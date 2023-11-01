@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Cycle, CyclePhaseState } from '../../../models/cicle.model';
+import { Cycle, CyclePhaseState, PredictionCycle } from '../../../models/cicle.model';
 
 export const setCycle = createAction(
   '[Cycle] st the user cycle to get',
@@ -16,4 +16,9 @@ export const loadCycles = createAction('[Cycle] get cycle of user');
 export const loadedCycles = createAction(
   '[Cycle] get cycle of user success',
   props<{ cycleState: Cycle[] | any }>()
+);
+
+export const loadedPredictionNextCycle = createAction(
+  '[Prediction] get the next period',
+  props<{ prediction: PredictionCycle | any }>()
 );
