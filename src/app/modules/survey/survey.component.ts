@@ -56,13 +56,6 @@ export class SurveyComponent implements OnInit {
             },
             error: (err: any) => err,
           });
-
-        this.questionMenopauseService
-          .createUserMenopauseQuestion({
-            ...emptyQuestionMenopausResponse(),
-            userId: this.userResponse.idUser,
-          })
-          .subscribe((res: any) => res);
         break;
       case '3':
         this.questionType = 3;

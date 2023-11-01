@@ -1,5 +1,5 @@
 <div class="max-h-[500px] !overflow-x-hidden" #scrollingContent>
-  <ng-container *ngIf="recommendations?.recommendationsByFamilyHistory">
+  <ng-container *ngIf="isNull === true">
     <ng-container
       *ngFor="let item of recommendations?.recommendationsByFamilyHistory"
     >
@@ -17,7 +17,7 @@
       <mat-divider></mat-divider>
     </ng-container>
   </ng-container>
-  <ng-container *ngIf="recommendations?.recommendationsByDocuments">
+  <ng-container *ngIf="isNull === true">
     <ng-container
       *ngFor="let item of recommendations?.recommendationsByDocuments"
     >
@@ -36,7 +36,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="recommendations?.recommendationsByTypeUser">
+  <ng-container *ngIf="isNull === true">
     <ng-container
       *ngFor="let item of recommendations?.recommendationsByTypeUser"
     >
@@ -55,7 +55,7 @@
     </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="!recommendations">
+  <ng-container *ngIf="isNull === false">
     <img
       src="https://img.freepik.com/free-vector/notify-concept-illustration_114360-4297.jpg?w=826&t=st=1698795300~exp=1698795900~hmac=62434a9ec1c5cf88b0be7fe70be5067389f2399cd9a7c78d72e46751398623b0"
     />

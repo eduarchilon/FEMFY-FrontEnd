@@ -23,6 +23,7 @@ import { LoginGuardian } from 'src/app/utils/login-guardian.guardian';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { HistorialService } from 'src/app/services/historial/historial.service';
+import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -49,6 +50,7 @@ import { HistorialService } from 'src/app/services/historial/historial.service';
     LocalStorageService,
     QuestionService,
     HistorialService,
+    QuestionMenopausicaService,
   ],
 })
 export class AuthModule {}

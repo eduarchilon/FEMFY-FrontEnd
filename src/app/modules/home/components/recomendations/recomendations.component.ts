@@ -25,6 +25,8 @@ export class RecomendationsComponent implements OnInit, AfterViewInit {
 
   userAuth!: UserResponse;
 
+  isNull: boolean = false;
+
   recommendations!: Recomendations;
 
   constructor(
@@ -39,7 +41,16 @@ export class RecomendationsComponent implements OnInit, AfterViewInit {
       .getRecommendationsByIdUsing(this.userAuth?.idUser)
       .subscribe((res: Recomendations | any) => {
         this.recommendations = res;
-        console.log(this.recommendations);
+        if (res?.recommendationsByFamilyHistory?.length > 0) {
+          this.isNull = true;
+        } else if (res?.recommendationsByDocuments?.length > 0) {
+          this.isNull = true;
+        } else if (res?.recommendationsByTypeUser?.length > 0) {
+          this.isNull = true;
+        } else {
+          this.isNull = false;
+        }
+        console.log(this.isNull);
       });
   }
 

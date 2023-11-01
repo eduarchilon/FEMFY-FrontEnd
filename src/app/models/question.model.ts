@@ -14,27 +14,27 @@ export interface QuestionBasic {
 }
 
 export interface QuestionUserMenopause {
-  aumentoDePeso?: boolean;
-  changesInLibido?: boolean;
-  changesInMenstrualCycle?: boolean;
-  changesInSkinAndHair?: boolean;
+  aumentoDePeso?: number;
+  changesInLibido?: number;
+  changesInMenstrualCycle?: number;
+  changesInSkinAndHair?: number;
   id?: number;
-  lossOfBoneDensity?: boolean;
-  moodChanges?: boolean;
-  sleepingDifficulties?: boolean;
-  suffocation?: boolean;
+  lossOfBoneDensity?: number;
+  moodChanges?: number;
+  sleepingDifficulties?: number;
+  suffocation?: number;
   userId?: number;
-  vaginalDryness?: boolean;
+  vaginalDryness?: number;
 }
 
 export const emptyQuestionMenopausResponse = (): QuestionUserMenopause => ({
-  aumentoDePeso: false,
-  changesInLibido: false,
-  changesInMenstrualCycle: false,
-  changesInSkinAndHair: false,
-  lossOfBoneDensity: false,
-  moodChanges: false,
-  sleepingDifficulties: false,
-  suffocation: false,
-  vaginalDryness: false,
+  aumentoDePeso: 0,
+  changesInLibido: 0,
+  changesInMenstrualCycle: 0,
+  changesInSkinAndHair: 0,
+  lossOfBoneDensity: 0,
+  moodChanges: 0,
+  sleepingDifficulties: 0,
+  suffocation: 0,
+  vaginalDryness: 0,
 });

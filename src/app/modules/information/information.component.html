@@ -6,7 +6,17 @@
       Información personal
     </h2>
     <div>
-      <app-information-user></app-information-user>
+      <div [ngSwitch]="typeUser">
+        <div *ngSwitchCase="1">
+          <app-information-user></app-information-user>
+        </div>
+        <div *ngSwitchCase="2">
+          <app-information-menopause></app-information-menopause>
+        </div>
+        <div *ngSwitchCase="3">
+          <app-information-other></app-information-other>
+        </div>
+      </div>
     </div>
     <br />
     <div>
