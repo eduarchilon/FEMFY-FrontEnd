@@ -1,13 +1,12 @@
-<div class="min-h-screen max-h-auto px-8 pt-[20px] md:pt-[100px] bg-gradient-to-b from-femfy-400 to-femfy-100">
+<div class="min-h-[850px] max-h-auto px-8 pt-[20px] md:pt-[100px] bg-gradient-to-b from-femfy-400 to-femfy-100">
   <div class="m-auto max-w-[1000px]">
-
     <div class="mb-[20px] p-5">
-      <h1 class="text-4xl text-femfy-800 text-center font-bold max-md:text-xl m-auto p-5">
+      <h1 class="text-4xl !text-[#7c2385] text-center font-bold max-md:text-xl m-auto p-5">
         Ayudanos a personalizar tu experiencia respondiendo algunas preguntas rápidas.
       </h1>
     </div>
 
-    <div class="bg-femfy-500 py-10 rounded-[20px] shadow-2xl max-w-[750px] m-auto">
+    <div class="py-10 bg-white rounded-[20px] shadow-2xl max-w-[750px] m-auto">
       <div [ngSwitch]="questionType">
         <div *ngSwitchCase="1"><app-pregunta></app-pregunta></div>
         <div *ngSwitchCase="2">
@@ -17,18 +16,21 @@
         <div *ngSwitchDefault>
           <mat-stepper #stepper>
             <mat-step>
-              <p class="text-3xl text-white mb-10 text-center font-bold max-sm:text-xl">
+              <p class="text-3xl text-[#7c2385] mb-10 text-center font-bold max-sm:text-xl">
                 ¿Sos una persona que menstrúa?
               </p>
               <div class="w-full md:w-1/2 m-auto">
                 <mat-radio-group>
-                  <mat-radio-button value="1" (click)="selectQuestionByTypeUser('1')" class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
+                  <mat-radio-button value="1" (click)="selectQuestionByTypeUser('1')"
+                    class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
                     <span class="font-semibold">Si</span>
                   </mat-radio-button>
-                  <mat-radio-button value="2" (click)="selectQuestionByTypeUser('2')" class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
+                  <mat-radio-button value="2" (click)="selectQuestionByTypeUser('2')"
+                    class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
                     <span class="font-semibold">No, estoy transitando la menopausia</span>
                   </mat-radio-button>
-                  <mat-radio-button value="3" (click)="selectQuestionByTypeUser('3')" class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
+                  <mat-radio-button value="3" (click)="selectQuestionByTypeUser('3')"
+                    class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg">
                     <span class="font-semibold">No, por otro motivo</span>
                   </mat-radio-button>
                 </mat-radio-group>

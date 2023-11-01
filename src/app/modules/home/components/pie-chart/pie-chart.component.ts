@@ -198,8 +198,8 @@ export class PieChartComponent implements OnInit, AfterViewInit {
     cycleChart: any,
     averageQuestionCycleContent?: number[]
   ): AgPolarSeriesOptions {
-    console.log(cycleChart[0]);
-    console.log(moment(cycleChart[0]?.dateBeging));
+    // console.log(cycleChart[0]);
+    // console.log(moment(cycleChart[0]?.dateBeging));
     const daysAverageCycle = this.setAverageCycles(averageQuestionCycleContent);
     this.setDaysCycleComplete(daysAverageCycle);
     const newDataArray: DataPieChartChildren[] = [];
@@ -221,13 +221,17 @@ export class PieChartComponent implements OnInit, AfterViewInit {
       return acumulador + elemento.dayCount;
     }, 0);
 
-    const diff =
-      new Date().getDate() - new Date(this.cycleChart?.dateBeging)?.getDate();
+    const diff = moment(new Date()).diff(this.cycleChart?.dateBeging, 'days');
+
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
         item.date = moment(cycleChart[0]?.dateBeging)
-          .add(item.id - 1, 'day')
+          .add(item.id, 'day')
           .format('L');
+        // console.log(item.id === diff);
+        // console.log(item.id);
+        // console.log(diff);
+
         item.width = (newDataArray.length / sumaTotal) * 100;
         item.desc = '';
         if (item.id === diff) {
@@ -323,7 +327,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   }
 
   information(datum: any): void {
-    console.log(datum);
+    // console.log(datum);
   }
 
   ngAfterViewInit(): void {}
@@ -363,7 +367,7 @@ export class PieChartComponent implements OnInit, AfterViewInit {
 
   setDaysCycleComplete(daysAverageCycle: number): void {
     if (daysAverageCycle) {
-      console.log(Math.round(daysAverageCycle / 2));
+      // console.log(Math.round(daysAverageCycle / 2));
 
       this.store.dispatch(
         setDayOfOvulation({
