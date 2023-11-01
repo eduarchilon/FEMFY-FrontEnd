@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
 
@@ -10,7 +11,8 @@ import { QuestionMenopausicaService } from 'src/app/services/question-menopausic
 export class QuestionMenopausicaComponent implements OnInit {
   constructor(
     private localStorageService: LocalStorageService,
-    private questionMenopauseService: QuestionMenopausicaService
+    private questionMenopauseService: QuestionMenopausicaService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -102,5 +104,11 @@ export class QuestionMenopausicaComponent implements OnInit {
         break;
     }
     console.log(value, question);
+  }
+
+  finishQuestion(): void {
+    this.router.navigate(['/']).then(() => {
+      location.reload();
+    });
   }
 }

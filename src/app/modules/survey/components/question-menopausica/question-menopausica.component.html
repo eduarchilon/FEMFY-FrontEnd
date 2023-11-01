@@ -220,7 +220,7 @@
           <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
             Volver
           </button>
-          <button mat-button matStepperNext type="submit" routerLink="/"
+          <button mat-button matStepperNext type="submit" (click)="finishQuestion()"
             class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Finalizar
           </button>
