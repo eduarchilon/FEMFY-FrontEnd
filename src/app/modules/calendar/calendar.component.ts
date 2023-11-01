@@ -41,6 +41,7 @@ export class CalendarComponent implements OnInit {
   averageQuestionCycleContent: number[] = [];
   userAuth!: UserResponse;
 
+
   predictionLoad!: PredictionCycle;
 
   constructor(
@@ -58,23 +59,6 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
 
-    this.questionsService
-      .getAllQuestionUserMenstruation()
-      .subscribe((data: any) => {
-        const userQuestions = data?.filter(
-          (quest: any) => quest?.userId === this.userAuth?.idUser
-        );
-        if (userQuestions.length) {
-          const lastCycleDuration = userQuestions[0]?.lastCycleDuration || 28;
-          const regularCycleDuration =
-            userQuestions[0]?.regularCycleDuration || 28;
-          this.averageQuestionCycleContent = [
-            lastCycleDuration,
-            regularCycleDuration,
-          ];
-        }
-      });
-
     this.cicleService
       .getAllCycles(this.userAuth?.idUser)
       .subscribe((dataCycle: any) => {
@@ -85,6 +69,25 @@ export class CalendarComponent implements OnInit {
           this.cycle = this.cyclesWithEndNull[0];
           this.cyclesWithOutEndNull =
             dataCycle?.filter((item: any) => item?.dateEnd !== null) || [];
+        }
+      });
+
+    this.questionsService
+      .getAllQuestionUserMenstruation()
+      .subscribe((data: any) => {
+        if (data) {
+          let userQuestions = data?.filter(
+            (quest: any) => quest?.userId === this.userAuth?.idUser
+          );
+          if (userQuestions?.length) {
+            let lastCycleDuration = userQuestions[0]?.lastCycleDuration || 28;
+            let regularCycleDuration =
+              userQuestions[0]?.regularCycleDuration || 28;
+            this.averageQuestionCycleContent = [
+              lastCycleDuration,
+              regularCycleDuration,
+            ];
+          }
         }
       });
 
