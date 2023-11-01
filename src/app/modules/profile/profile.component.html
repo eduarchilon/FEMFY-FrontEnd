@@ -24,27 +24,19 @@
               (change)="uploadProfilePicture($event)" />
           </span>
 
-          <div class="mt-5">
-            <form>
-              <mat-chip-listbox class="mat-mdc-chip-set-stacked" style="max-width: 200px" aria-label="Color selection">
-                <mat-chip-option color='accent' *ngFor="let option of options; let first = first" [selected]="first"
-                  [value]="option">{{ option }}</mat-chip-option>
-              </mat-chip-listbox>
-            </form>
-          </div>
         </div>
         <div class="lg:w-2/3">
           <ng-container *ngIf="editProfile; else readOnlyProfile">
             <!-- Editable profile view -->
             <div class="flex justify-between mb-5">
-              <h2 class="text-4xl text-white font-bold">Editar perfil</h2>
+              <h2 class="text-5xl text-femfy-800 font-bold">Editar perfil</h2>
               <button class="bg-[#7c2385] text-white font-semibold rounded-[20px] p-3" (click)="disableEditMode()">
                 Cancelar
               </button>
             </div>
             <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
               <div class="bg-white rounded-[20px] mb-5">
-                <h3 class="text-2xl text-white bg-[#7c2385] rounded-t-[20px] font-bold px-5 py-3">
+                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
                   Datos personales
                 </h3>
                 <div class="grid lg:grid-cols-3 gap-4 p-5">
@@ -63,7 +55,7 @@
                 </div>
               </div>
               <div class="bg-white rounded-[20px] mb-5">
-                <h3 class="text-2xl text-white bg-[#7c2385] rounded-t-[20px] font-bold px-5 py-3">
+                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
                   Contacto
                 </h3>
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
@@ -74,6 +66,31 @@
                   <div>
                     <label for="note" class="block text-xl mb-2">Teléfono</label>
                     <input type="text" formControlName="phone" class="rounded-full border w-full p-4" />
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-[20px] mb-5">
+                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
+                  Tipo de usuario
+                </h3>
+                <div class="grid lg:grid-cols-2 gap-4 p-5">
+                  <div>
+                    <label>
+                      <input type="radio" formControlName="typeUserID" value="1" />
+                      Menstruante
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input type="radio" formControlName="typeUserID" value="2" />
+                      Etapa Menopáusica
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input type="radio" formControlName="typeUserID" value="3" />
+                      No menstruante
+                    </label>
                   </div>
                 </div>
               </div>
@@ -89,47 +106,67 @@
           <ng-template #readOnlyProfile>
             <!-- Read-only profile view -->
             <div class="flex justify-between mb-5">
-              <h2 class="text-4xl text-white font-bold">Perfil</h2>
+              <h2 class="text-5xl text-femfy-800 font-bold">Perfil</h2>
               <button class="bg-[#de84ee] text-white font-semibold rounded-[20px] p-3" (click)="enableEditMode()">
                 Modificar
               </button>
             </div>
+
             <div class="bg-white rounded-[20px] mb-5">
-              <h3 class="text-2xl text-white bg-[#7c2385] rounded-t-[20px] font-bold px-5 py-3">
+              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
                 Datos personales
               </h3>
               <div class="grid lg:grid-cols-3 gap-4 p-5">
                 <div>
-                  <label for="firstName" class="block text-xl mb-2">Nombre</label>
+                  <label for="firstName" class="block text-xl mb-2 font-bold">Nombre</label>
                   <p>{{ userResponse.firstName || "Sin nombre" }}</p>
                 </div>
                 <div>
-                  <label for="lastName" class="block text-xl mb-2">Apellido</label>
+                  <label for="lastName" class="block text-xl mb-2 font-bold">Apellido</label>
                   <p>{{ userResponse.lastName || "Sin apellido" }}</p>
                 </div>
                 <div>
-                  <label for="note" class="block text-xl mb-2">Fecha de nacimiento</label>
+                  <label for="note" class="block text-xl mb-2 font-bold">Fecha de nacimiento</label>
                   <p>{{ userResponse.birthdate | date : "dd/MM/yyyy" }}</p>
                 </div>
               </div>
             </div>
             <div class="bg-white rounded-[20px] mb-5">
-              <h3 class="text-2xl text-white bg-[#7c2385] rounded-t-[20px] font-bold px-5 py-3">
+              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
                 Contacto
               </h3>
               <div class="grid lg:grid-cols-2 gap-4 p-5">
                 <div>
-                  <label for="email" class="block text-xl mb-2">Email</label>
+                  <label for="email" class="block text-xl mb-2 font-bold">Email</label>
                   <p>{{ userResponse.email }}</p>
                 </div>
                 <div>
-                  <label for="phone" class="block text-xl mb-2">Teléfono</label>
+                  <label for="phone" class="block text-xl mb-2 font-bold">Teléfono</label>
                   <p>{{ userResponse.phone || "Sin número" }}</p>
                 </div>
               </div>
             </div>
+
             <div class="bg-white rounded-[20px] mb-5">
-              <h3 class="text-2xl text-white bg-[#7c2385] rounded-t-[20px] font-bold px-5 py-3">
+              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
+                Tipo de usuario activo
+              </h3>
+              <ng-container *ngIf="userResponse.typeUserID === 1; else notMenstruante">
+                <p class="block text-xl mb-2 font-bold p-5" >Menstruante</p>
+              </ng-container>
+            
+              <ng-template #notMenstruante>
+                <ng-container *ngIf="userResponse.typeUserID === 2; else etapaMenopausica">
+                  <p class="block text-xl mb-2 font-bold p-5">Etapa Menopausica</p>
+                </ng-container>
+                <ng-template #etapaMenopausica>
+                  <p class="block text-xl mb-2 font-bold p-5">No menstruante</p>
+                </ng-template>
+              </ng-template>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
                 Tu plan
               </h3>
               <div class="text-center px-5 py-10">

@@ -182,19 +182,38 @@ export class DocumentationComponent implements OnInit {
         for (let files of idUser?.items) {
           const meta = (await getMetadata(files)).customMetadata;
           const url = await getDownloadURL(files);
+
           this.studies.push({ url: url, files: files, customMetadata: meta });
-        }
+       }
+
+       this.studies.forEach((estudio) => {
+        estudio.customMetadata.studyDate = this.formatDate(estudio.customMetadata.studyDate);
+      });
+
         this.loader = false;
 
         /* this.studies = this.studies?.filter(
         (data: any) => data?.customMetadata?.typeStudy === 'uno'
       );*/
         console.log(this.studies);
+        console.log(this.studies[0].customMetadata.studyDate);
       })
       .catch((error: any) => {
         console.log(error);
       });
   }
+
+
+  formatDate(originalDate: any) {
+    const date = new Date(originalDate);
+
+    const dia = date.getDate().toString().padStart(2, '0');
+    const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+    const anio = date.getFullYear();
+  
+    return `${dia}-${mes}-${anio}`;
+  }
+
 
   deleteFile(fullPath: string): void {
     if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {

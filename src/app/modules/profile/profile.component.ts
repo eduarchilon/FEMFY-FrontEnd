@@ -64,6 +64,7 @@ export class ProfileComponent implements OnInit {
       birthdate: [this.userResponse.birthdate],
       phone: [this.userResponse.phone],
       email: [this.userResponse.email],
+      typeUserID: [this.userResponse.typeUserID],
       idUser: [this.localStorageService.getUserByLogin()?.idUser]
     });
     this.getProfilePicture();
@@ -86,15 +87,38 @@ export class ProfileComponent implements OnInit {
 
       const userData = {    
         ...updatedUserData,
-        typeUserID: 2,
+        typeUserID: this.localStorageService.getUserByLogin()?.typeUserID,
         userName: this.localStorageService.getUserByLogin()?.userName,
       };
+
+      
 
       console.log(userData);
 
       // Utiliza una solicitud PUT para actualizar el perfil
       this.http.put(`${this.apiUrl}`, updatedUserData).subscribe({
         next: (data: any) => {
+
+          const keys = [];
+          const values = [];
+
+          keys.push('firstName');
+          values.push(updatedUserData.firstName);
+        
+          keys.push('lastName');
+          values.push(updatedUserData.lastName);
+
+          keys.push('birthdate');
+          values.push(updatedUserData.birthdate);
+
+          keys.push('phone');
+          values.push(updatedUserData.phone);
+
+          keys.push('typeUserID');
+          values.push(updatedUserData.typeUserID);
+
+          this.localStorageService.setKeysAndValuesLocalStorage(keys, values);
+
           this.snackBar.open('Datos actualizados con éxito.', 'cerrar', {
             duration: 5000, // Duración en milisegundos
           });
