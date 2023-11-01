@@ -19,7 +19,11 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventDayDrawerComponent } from '../event-day-drawer/event-day-drawer.component';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
-import { DateRange, MatCalendar } from '@angular/material/datepicker';
+import {
+  DateRange,
+  MatCalendar,
+  MatCalendarCellClassFunction,
+} from '@angular/material/datepicker';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Cycle, PredictionCycle } from 'src/app/models/cicle.model';
 import { loadedPredictionNextCycle } from 'src/app/services/redux/actions/cycle.action';
@@ -86,11 +90,11 @@ export class DatePickerComponent implements OnInit, OnChanges {
       .subscribe((res: any) => {
         if (res) {
           this.initCycle = moment(res?.dateBeging);
-          const initCycleOvulation = moment(res?.dateBeging);
-          const result = Math.round(
+          let initCycleOvulation = moment(res?.dateBeging);
+          let result = Math.round(
             this.setAverageCycles(this.averageQuestionCycleContent)
           );
-          const resultOvulation = result / 2;
+          let resultOvulation = result / 2;
           this.endCycle = this.initCycle?.add(result, 'days');
           this.dayOvulation = initCycleOvulation?.add(resultOvulation, 'days');
 
@@ -101,6 +105,11 @@ export class DatePickerComponent implements OnInit, OnChanges {
           );
 
           this.sampleRange = new DateRange(this.initPeriod, this.endCycle);
+          console.log(this.sampleRange);
+          console.log(this.endPeriod);
+          console.log(this.initPeriod);
+          console.log(this.endCycle);
+
           const predictionCycle: PredictionCycle = {
             dateNextPeriod: moment(this.endCycle).add(1, 'day'),
             numberOvulation: resultOvulation,
@@ -110,6 +119,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
           this.store.dispatch(
             loadedPredictionNextCycle({ prediction: { ...predictionCycle } })
           );
+        } else {
+          this.cdr.detectChanges();
         }
       });
 
@@ -130,7 +141,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
     this.cdr.detectChanges();
   }
 
-  isSelected = (event: any) => {
+  isSelected: MatCalendarCellClassFunction<any> = (event, view) => {
     const index = this.daysSelected?.findIndex((date: any) =>
       date?.isSame(this.initPeriod)
     );
