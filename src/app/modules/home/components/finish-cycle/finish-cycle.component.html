@@ -2,7 +2,7 @@
   <mat-dialog-content class="text-center !m-auto">
     <h3 class="text-femfy-800 text-2xl font-bold pb-3 mb-10">Finalizar ciclo</h3>
     <div class="mb-10">
-      <label class="block text-gray-600 text-xl font-medium mb-2">Puede finalizar el ciclo hoy o elegir la fecha donde finalizó</label>
+      <p class="block text-gray-600 text-xl font-medium mb-2">Puede finalizar el ciclo hoy o elegir la fecha donde finalizó</p>
       <input type="date" class="outline-none rounded-full p-3" #endDate (change)="resetForm()" />
       <div *ngIf="validationDate" class="py-4">
         <mat-error>
