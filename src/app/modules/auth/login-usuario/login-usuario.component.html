@@ -1,15 +1,15 @@
-<div class="bg-[#FEA8B1] px-[3vw]">
+<div class="px-[3vw]">
   <div
-    class="w-[100%] bg-cover bg-[#FEA8B1] pt-50 flex items-center text-white py-[100px]  max-w-[1280px] m-auto"
+    class="w-[100%] bg-cover pt-50 flex items-center text-white py-[200px]  max-w-[1280px] m-auto"
   >
     <div
       class="w-[50%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0"
     >
       <div
-        class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[130px] pb-[150px]"
+        class="bg-white max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center py-[100px]"
       >
         <img class="w-[100px]" src="./assets/images/isotipo.svg" />
-        <h2 class="text-[32px] font-bold text-center pb-[15px] pt-[2px]">
+        <h2 class="text-[32px] text-femfy-800 font-bold text-center pb-[15px] pt-[2px]">
           ¡Bienvenida!
         </h2>
         <div
@@ -25,7 +25,7 @@
           (ngSubmit)="loginUser()"
         >
           <input
-            class="rounded-[10px] py-[10px] px-[10px] text-black"
+            class="rounded-full outline-none p-3"
             autocomplete="userName"
             type="text"
             placeholder="Usuario"
@@ -41,7 +41,7 @@
             El nombre de usuario es requerido
           </mat-error>
           <input
-            class="rounded-[10px] py-[10px] px-[10px] text-black"
+            class="rounded-full outline-none p-3"
             autocomplete="password"
             type="password"
             placeholder="Contraseña"
@@ -57,7 +57,7 @@
             La contraseña es requerida
           </mat-error>
           <button
-            class="bg-[#AF6FE8] rounded-[20px] py-[10px] disabled:cursor-not-allowed"
+            class="bg-femfy-400 rounded-[20px] py-[10px] disabled:cursor-not-allowed"
             type="submit"
             [disabled]="formLogin.invalid"
           >
@@ -75,7 +75,7 @@
     <div class="w-[50%] flex items-center flex-col max-lg:hidden">
       <img class="w-[230px]" src="./assets/images/isotipo.svg" />
       <h1
-        class="text-[50px] max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center"
+        class="text-[50px] text-femfy-800 max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center"
       >
         Siempre es un placer poder ayudarte.
       </h1>

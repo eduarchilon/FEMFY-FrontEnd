@@ -1,28 +1,26 @@
 <div class="bg-[#f2d4fa] px-[3vw]">
-  <div class="w-[100%] bg-cover bg-[#f2d4fa] pt-24 py-[100px] max-w-[1280px] m-auto">
-    <div class="container mx-auto">
-      <h2 class="text-5xl text-white font-bold mb-10 max-md:text-3xl">
-        Comunidad
-      </h2>
-      <ng-container *ngIf="topics.length < 1">
-        <div class="h-[700px]"></div>
-      </ng-container>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-10 mt-10">
-        <div *ngFor="let topic of topics">
-          <div class="w-full mx-auto shadow-2xl rounded-[20px] relative mb-10">
-            <a [href]="getRedirectUrl(topic.id)">
-              <img [src]="getImageUrl(topic.image)" class="w-full rounded-[20px]" />
-              <div class="bg-[#7c2385] rounded-full absolute bottom-[-20px] left-0 w-full">
-                <h3 class="text-xl text-white text-center font-semibold p-3">{{ topic.title }}</h3>
-              </div>
-            </a>
-          </div>
-          <span class="block text-lg text-center font-semibold">
-            <ng-container *ngIf="topic.forumPosts.length > 0; else noMessages"> {{ topic.forumPosts.length }}
-              mensajes</ng-container>
-            <ng-template #noMessages> No existen mensajes</ng-template>
-          </span>
+  <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
+    <h2 class="text-5xl text-femfy-800 font-bold mb-10">
+      Comunidad
+    </h2>
+    <ng-container *ngIf="topics.length < 1">
+      <div class="h-[700px]"></div>
+    </ng-container>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-10 mt-10">
+      <div *ngFor="let topic of topics">
+        <div class="w-full mx-auto shadow-2xl rounded-[20px] relative mb-10">
+          <a [href]="getRedirectUrl(topic.id)">
+            <img [src]="getImageUrl(topic.image)" class="w-full rounded-[20px]" />
+            <div class="bg-[#7c2385] rounded-full absolute bottom-[-20px] left-0 w-full">
+              <h3 class="text-xl text-white text-center font-semibold p-3">{{ topic.title }}</h3>
+            </div>
+          </a>
         </div>
+        <span class="block text-lg text-center font-semibold">
+          <ng-container *ngIf="topic.forumPosts.length > 0; else noMessages"> {{ topic.forumPosts.length }}
+            mensajes</ng-container>
+          <ng-template #noMessages> No existen mensajes</ng-template>
+        </span>
       </div>
     </div>
   </div>

@@ -60,6 +60,7 @@ html {
 
 body {
   margin-bottom: 7em;
+  background-color: #f2d4fa!important;
 }
 
 footer {
@@ -126,10 +127,18 @@ footer {
   fill: #ffffff !important;
 }
 
-input {
+input, textarea {
   background-color: #fcf5fe;
 }
 
-input:hover, input:active {
+input:hover, input:active, textarea:hover, textarea:active {
   border: 2px solid #7c2385!important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 20px!important;
+  -webkit-border-radius: 20px!important;
+  -moz-border-radius: 20px!important;
+  -ms-border-radius: 20px!important;
+  -o-border-radius: 20px!important;
 }
