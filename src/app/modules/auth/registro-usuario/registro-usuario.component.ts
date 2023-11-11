@@ -7,6 +7,8 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { MatDialog } from '@angular/material/dialog';
+import { SurveyComponent } from '../../survey/survey.component';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -32,7 +34,8 @@ export class RegistroUsuarioComponent implements OnInit {
     private router: Router,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private userDataCycleService: UserService
+    private userDataCycleService: UserService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {}
@@ -78,9 +81,20 @@ export class RegistroUsuarioComponent implements OnInit {
                       if (userLogin) {
                         this.userDataCycleService.setUserDataCycleInformation(
                           userLogin
-                        );
+                        ); //COMENTAR PARA PROBAR
                         this.loaderService.hideLoader();
-                        this.router.navigate(['cuestionario']);
+                        this.router.navigate(['']);
+                        this.dialog.open(SurveyComponent, {
+                          panelClass: [
+                            '!max-w-[95vw]',
+                            'max-lg:!w-[80%]',
+                            'max-md:!w-[100vw]',
+                            'max-xl:!w-[50%]',
+                            '!w-[50%]',
+                            '!rounded-[20px]',
+                          ],
+                          disableClose: true,
+                        });
                         this.notificationService
                           .enviarNotificacion(
                             '¡Bienvenida a Femfy!',

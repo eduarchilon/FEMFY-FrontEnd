@@ -25,6 +25,7 @@ import { QuestionService } from 'src/app/services/question/question.service';
 import { HistorialService } from 'src/app/services/historial/historial.service';
 import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [LoginUsuarioComponent, RegistroUsuarioComponent],
@@ -38,6 +39,7 @@ import { UserService } from 'src/app/services/user/user.service';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+    MatDialogModule,
     NgIf,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
