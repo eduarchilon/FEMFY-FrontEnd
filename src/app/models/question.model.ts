@@ -24,9 +24,28 @@ export interface QuestionUserMenopause {
 
 export interface QuestionUserOther {}
 
-export interface QuestionUserOtherHormonal {}
+export interface QuestionUserHormonal {
+  another?: number;
+  anotherDescription?: string;
+  hyperprolactinemia?: number;
+  hypothalamicDisorders?: number;
+  hypothyroidism?: number;
+  id?: number;
+  insulinResistance?: number;
+  polycysticOvarySyndrome?: number;
+  prematureOvarianFailure?: number;
+  sheehanSyndrome?: number;
+  userId?: number;
+}
 
-export interface QuestionUserOtherCongenital {}
+export interface QuestionUserCongenital {
+  another?: number;
+  anotherDescription?: string;
+  id?: number;
+  malformationsUterine?: number;
+  turnerSyndrome?: number;
+  userId?: number;
+}
 
 export interface QuestionBasic {
   question: string;
@@ -43,4 +62,23 @@ export const emptyQuestionMenopauseResponse = (): QuestionUserMenopause => ({
   sleepingDifficulties: 0,
   suffocation: 0,
   vaginalDryness: 0,
+});
+
+export const emptyQuestionHormonalResponse = (): QuestionUserHormonal => ({
+  another: 0,
+  anotherDescription: '',
+  hyperprolactinemia: 0,
+  hypothalamicDisorders: 0,
+  hypothyroidism: 0,
+  insulinResistance: 0,
+  polycysticOvarySyndrome: 0,
+  prematureOvarianFailure: 0,
+  sheehanSyndrome: 0,
+});
+
+export const emptyQuestionCongenitalResponse = (): QuestionUserCongenital => ({
+  another: 0,
+  anotherDescription: '',
+  malformationsUterine: 0,
+  turnerSyndrome: 0,
 });
