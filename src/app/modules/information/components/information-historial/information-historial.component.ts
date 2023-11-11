@@ -27,9 +27,9 @@ export class InformationHistorialComponent implements OnInit {
     this.userResponse = this.localStorageService.getUserByLogin();
     this.userDataCycle = this.localStorageService.getUserDataCycle();
     this.historyService
-      .getQuestionUserHistoryByIdHistory(this.userDataCycle?.idHistorial)
+      .getQuestionUserHistoryByIdUser(this.userResponse?.idUser)
       .subscribe((history: QuestionsUserFamilyHistory | any) => {
-        this.userHistorial = history;
+        this.userHistorial = history[0];
         this.formPreguntasCancerMamar = this.fb.group({
           breastCancer: [this.userHistorial.breastCancer],
         });

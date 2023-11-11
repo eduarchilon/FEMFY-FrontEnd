@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserResponse } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -24,7 +25,9 @@ export class SurveyComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private authService: AuthService,
-    private questionMenopauseService: QuestionMenopausicaService
+    private questionMenopauseService: QuestionMenopausicaService,
+    private dialogRef: MatDialogRef<SurveyComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any //fecha,
   ) {}
 
   ngOnInit(): void {
