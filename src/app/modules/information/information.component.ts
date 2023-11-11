@@ -18,7 +18,7 @@ export class InformationComponent implements OnInit {
 
   ngOnInit(): void {
     this.typeUser = this.localStorageService.getUserByLogin()?.typeUserID;
-    if (this.localStorageService.getUserByLogin()?.idHistorial === undefined) {
+    if (this.localStorageService.getUserDataCycle()?.idHistorial === undefined) {
       this.historial.getAllQuestionUserHistory().subscribe((history: any[]) => {
         const historyUser = history?.filter(
           (item: any) =>
@@ -27,7 +27,7 @@ export class InformationComponent implements OnInit {
         this.localStorageService.setKeyValueLocalStorage(
           constants.USER,
           JSON.stringify({
-            ...this.localStorageService.getUserByLogin(),
+            ...this.localStorageService.getUserDataCycle(),
             idHistorial: historyUser[0]?.id,
           })
         );

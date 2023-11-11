@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { constants } from 'src/app/constans/constants';
-import { UserResponse } from 'src/app/models/user.model';
+import { UserDataCycle, UserResponse } from 'src/app/models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +23,10 @@ export class LocalStorageService {
 
   getUserByLogin(): UserResponse {
     return this.parseLocalStorage(constants.USER);
+  }
+
+  getUserDataCycle(): UserDataCycle {
+    return this.parseLocalStorage(constants.USERCYCLE);
   }
 
   setKeysAndValuesLocalStorage(key: string[], value: string[]): void {

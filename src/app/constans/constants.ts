@@ -5,4 +5,5 @@ export const constants = {
   ID_QUESTION: 'questionId',
   NOTIFICATION_KEY: 'notificationKey',
   ID_FIRST_CYCLE: 'idFirstCycle',
+  USERCYCLE: 'userDataCycle',
 };
