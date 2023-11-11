@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { constants } from 'src/app/constans/constants';
-import { emptyQuestionMenopausResponse } from 'src/app/models/question.model';
 import { UserResponse } from 'src/app/models/user.model';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';

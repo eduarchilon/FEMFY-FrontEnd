@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { QuestionsUserFamilyHistory } from 'src/app/models/historial.model';
-import { UserResponse } from 'src/app/models/user.model';
+import { UserDataCycle, UserResponse } from 'src/app/models/user.model';
 import { HistorialService } from 'src/app/services/historial/historial.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
@@ -13,6 +13,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 })
 export class InformationHistorialComponent implements OnInit {
   userResponse!: UserResponse;
+  userDataCycle!: UserDataCycle;
   userHistorial: QuestionsUserFamilyHistory = {};
 
   constructor(
@@ -20,12 +21,13 @@ export class InformationHistorialComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private fb: FormBuilder,
     private _snackBar: MatSnackBar
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
+    this.userDataCycle = this.localStorageService.getUserDataCycle();
     this.historyService
-      .getQuestionUserHistoryByIdHistory(this.userResponse?.idHistorial)
+      .getQuestionUserHistoryByIdHistory(this.userDataCycle?.idHistorial)
       .subscribe((history: QuestionsUserFamilyHistory | any) => {
         this.userHistorial = history;
         this.formPreguntasCancerMamar = this.fb.group({
@@ -86,7 +88,7 @@ export class InformationHistorialComponent implements OnInit {
           this.formPreguntasCancerMamar.value.breastCancer === false ? 0 : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }
@@ -99,7 +101,7 @@ export class InformationHistorialComponent implements OnInit {
           this.formPreguntasCancerOvario.value.ovarianCancer === false ? 0 : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }
@@ -112,7 +114,7 @@ export class InformationHistorialComponent implements OnInit {
           this.formPreguntasEndometriosis.value.endometriosis === false ? 0 : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }
@@ -121,11 +123,10 @@ export class InformationHistorialComponent implements OnInit {
     this.historyService
       .updateUserHistoryQuestion({
         ...this.userHistorial,
-        sop:
-          this.formPreguntasOvarioPoliquistico.value.sop === false ? 0 : 1,
+        sop: this.formPreguntasOvarioPoliquistico.value.sop === false ? 0 : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }
@@ -135,10 +136,12 @@ export class InformationHistorialComponent implements OnInit {
       .updateUserHistoryQuestion({
         ...this.userHistorial,
         earlyMenopause:
-          this.formPreguntasMenopausiaTemprana.value.earlyMenopause === false ? 0 : 1,
+          this.formPreguntasMenopausiaTemprana.value.earlyMenopause === false
+            ? 0
+            : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }
@@ -151,7 +154,7 @@ export class InformationHistorialComponent implements OnInit {
           this.formPreguntasMioma.value.uterineFibroids === false ? 0 : 1,
       })
       .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X')
+        this.openSnackBar('Guardado con éxito', 'X');
         return res;
       });
   }

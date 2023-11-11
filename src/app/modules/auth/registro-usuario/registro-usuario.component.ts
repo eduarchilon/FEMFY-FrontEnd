@@ -2,25 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { UserResponse } from 'src/app/models/user.model';
-import { QuestionService } from 'src/app/services/question/question.service';
-import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/services/redux/store/app.store';
-import { CicleService } from 'src/app/services/cicle/cicle.service';
-import { constants } from 'src/app/constans/constants';
 import { LoaderService } from 'src/app/services/loader/loader.service';
-import {
-  QuestionUserMenopause,
-  QuestionUserMenstruation,
-} from 'src/app/models/question.model';
 import { Observable } from 'rxjs';
 import { NotificationService } from 'src/app/services/notification/notification.service';
-import { Cycle } from 'src/app/models/cicle.model';
-import { HistorialService } from 'src/app/services/historial/historial.service';
-import { emptyQuestionHistoryResponse } from 'src/app/models/historial.model';
-import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -43,15 +29,10 @@ export class RegistroUsuarioComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private spinnerService: SpinnerService,
     private router: Router,
-    private questionsService: QuestionService,
-    private localStorageService: LocalStorageService,
-    private cicleService: CicleService,
     private loaderService: LoaderService,
     private notificationService: NotificationService,
-    private historialService: HistorialService,
-    private questionMenopause: QuestionMenopausicaService
+    private userDataCycleService: UserService
   ) {}
 
   ngOnInit(): void {}
@@ -95,67 +76,21 @@ export class RegistroUsuarioComponent implements OnInit {
                       this.loaderService.showLoader();
                       //NOTIFICACION PUSH
                       if (userLogin) {
-                        this.loaderService.hideLoader();
-                        
-                      }
-                      this.historialService
-                        .createQuestion({
-                          ...emptyQuestionHistoryResponse(),
-                          userId:
-                            this.localStorageService.getUserByLogin()?.idUser,
-                        })
-                        .subscribe((history: any) => {
-                          this.localStorageService.setKeyValueLocalStorage(
-                            constants.USER,
-                            JSON.stringify({
-                              ...this.localStorageService.getUserByLogin(),
-                              idHistorial: history.id,
-                            })
-                          );
-                        });
-                      /*this.questionMenopauseService
-                        .createUserMenopauseQuestion({
-                          ...emptyQuestionMenopausResponse(),
-                          userId: this.userResponse.idUser,
-                        })
-                        .subscribe((res: any) => res);*/
-                      this.router.navigate(['cuestionario']);
-
-                      //le creo una tabla de menstruante
-                      this.questionsService
-                        .createUserMenstruationQuestion({
-                          userId:
-                            this.localStorageService.getUserByLogin()?.idUser,
-                        })
-                        .subscribe(
-                          (question: QuestionUserMenstruation | any) => {
-                            const idQuestion = question?.id;
-                            this.localStorageService.setKeyValueLocalStorage(
-                              constants.USER,
-                              JSON.stringify({
-                                ...this.localStorageService.getUserByLogin(),
-                                idQuestion: idQuestion,
-                              })
-                            );
-                          }
+                        this.userDataCycleService.setUserDataCycleInformation(
+                          userLogin
                         );
-
-                      //MENOPAUSICA
-                      this.questionMenopause
-                        .createUserMenopauseQuestion({
-                          userId:
-                            this.localStorageService.getUserByLogin()?.idUser,
-                        })
-                        .subscribe((quesMeno: QuestionUserMenopause | any) => {
-                          const idQuesMeno = quesMeno?.id;
-                          this.localStorageService.setKeyValueLocalStorage(
-                            constants.USER,
-                            JSON.stringify({
-                              ...this.localStorageService.getUserByLogin(),
-                              idMenopause: idQuesMeno,
-                            })
-                          );
-                        });
+                        this.loaderService.hideLoader();
+                        this.router.navigate(['cuestionario']);
+                        this.notificationService
+                          .enviarNotificacion(
+                            '¡Bienvenida a Femfy!',
+                            'Esperamos que puedas llevarte una linda experiencia con nostros. 😊'
+                          )
+                          .subscribe({
+                            next: (res: any) => res,
+                          });
+                      }
+                      this.loaderService.hideLoader();
                     },
                   });
               },

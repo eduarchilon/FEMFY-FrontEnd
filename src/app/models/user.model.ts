@@ -10,28 +10,28 @@ export interface UserResponse {
   firstName?: string;
   lastName?: string;
   phone?: string;
-  avatar?: string;
   userName?: string;
   isSuscripto?: boolean;
   idUser?: number;
-  idCycle?: number;
-  idQuestion?: number;
   typeUserID?: number;
-  idMenopause?:number
-  idHistorial?: number;
+  localidad?: string;
+  emotion?: string;
+  friendsPhone?: string;
+  friendsName?: string;
+  friendsEmail?: string;
+  state?: string;
 }
 
 export interface UserRequest extends UserResponse {
   password: string;
 }
 
-export const emptyUserResponse = (): UserResponse => ({
-  birthdate: '',
-  email: '',
-  firstName: '',
-  lastName: '',
-  phone: '',
-  avatar: '',
-  userName: '',
-  isSuscripto: false,
-});
+export interface UserDataCycle {
+  userId: number;
+  idHistorial?: number;
+  idMenstruation?: number;
+  idMenopause?: number;
+  idOther?: number;
+  idHormonal?: number;
+  idCongenital?: Number;
+}

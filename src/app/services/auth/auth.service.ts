@@ -103,16 +103,16 @@ export class AuthService {
   updateUser(user: UserResponse): Observable<any> {
     return this.http.put<any>(`${this.usersUrl}/updateUser`, user).pipe(
       map((user: any) => {
-        // if (user) {
-        //   this.localStorageService.setKeyValueLocalStorage(
-        //     constants.USER,
-        //     JSON.stringify({
-        //       ...this.localStorageService.getUserByLogin(),
-        //       typeUserID: user?.typeUserID,
-        //     })
-        //   );
-        //   return user;
-        // }
+        if (user) {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER,
+            JSON.stringify({
+              ...this.localStorageService.getUserByLogin(),
+              ...user,
+            })
+          );
+          return user;
+        }
         return user;
       })
     );

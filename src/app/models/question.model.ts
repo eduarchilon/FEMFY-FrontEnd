@@ -8,11 +8,6 @@ export interface QuestionUserMenstruation {
   id?: number;
 }
 
-export interface QuestionBasic {
-  question: string;
-  answer: any;
-}
-
 export interface QuestionUserMenopause {
   aumentoDePeso?: number;
   changesInLibido?: number;
@@ -27,7 +22,18 @@ export interface QuestionUserMenopause {
   vaginalDryness?: number;
 }
 
-export const emptyQuestionMenopausResponse = (): QuestionUserMenopause => ({
+export interface QuestionUserOther {}
+
+export interface QuestionUserOtherHormonal {}
+
+export interface QuestionUserOtherCongenital {}
+
+export interface QuestionBasic {
+  question: string;
+  answer: any;
+}
+
+export const emptyQuestionMenopauseResponse = (): QuestionUserMenopause => ({
   aumentoDePeso: 0,
   changesInLibido: 0,
   changesInMenstrualCycle: 0,

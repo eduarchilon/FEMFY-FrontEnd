@@ -62,7 +62,7 @@ export class PreguntaComponent implements OnInit {
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserByLogin()?.idQuestion,
+        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
@@ -76,7 +76,7 @@ export class PreguntaComponent implements OnInit {
   submitFormTwoRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserByLogin()?.idQuestion,
+        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
         lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
       })
       .subscribe({
@@ -88,7 +88,7 @@ export class PreguntaComponent implements OnInit {
   submitFormThreeRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserByLogin()?.idQuestion,
+        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
         regularCycleDuration:
           this.formThreeRegister?.value?.regularCycleDuration,
       })
@@ -101,7 +101,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFourRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserByLogin()?.idQuestion,
+        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
         regular: this.formFourRegister?.value.regular === '1' ? true : false,
       })
       .subscribe({
@@ -113,7 +113,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFiveRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserByLogin()?.idQuestion,
+        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
         bleedingDuration: this.formFiveRegister?.value?.bleedingDuration,
       })
       .subscribe({

@@ -24,7 +24,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             aumentoDePeso: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -33,7 +33,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInLibido: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -42,7 +42,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInMenstrualCycle: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -51,7 +51,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInSkinAndHair: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -60,7 +60,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             lossOfBoneDensity: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -69,7 +69,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             moodChanges: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -78,7 +78,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             sleepingDifficulties: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -87,7 +87,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             suffocation: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -96,7 +96,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             vaginalDryness: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserByLogin()?.idMenopause,
+            id: this.localStorageService.getUserDataCycle()?.idMenopause,
           })
           .subscribe((res: any) => res);
         break;

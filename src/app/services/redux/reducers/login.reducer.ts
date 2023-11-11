@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { UserResponse, emptyUserResponse } from 'src/app/models/user.model';
+import { UserResponse} from 'src/app/models/user.model';
 import { setUserLogin } from '../actions/login.action';
-import { constants } from 'src/app/constans/constants';
 
 const userResponse = localStorage.getItem('userSession');
 

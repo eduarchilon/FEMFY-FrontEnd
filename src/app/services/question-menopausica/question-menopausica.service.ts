@@ -24,13 +24,6 @@ export class QuestionMenopausicaService {
   createUserMenopauseQuestion(event: QuestionUserMenopause): Observable<any> {
     return this.http.post<any>(`${this.usersUrl}/createQuestion`, event).pipe(
       map((response) => {
-        this.localStorageService.setKeyValueLocalStorage(
-          constants.USER,
-          JSON.stringify({
-            ...this.localStorageService.getUserByLogin(),
-            idMenopause: response.id,
-          })
-        );
         return response;
       })
     );
