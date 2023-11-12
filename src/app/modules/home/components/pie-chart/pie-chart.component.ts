@@ -49,15 +49,6 @@ export class PieChartComponent implements OnInit, AfterViewInit {
   sizeChart: number = 0;
   cycleChart!: Cycle;
 
-  // this.notificationService
-  //                         .enviarNotificacion(
-  //                           '¡Bienvenida a Femfy!',
-  //                           'Gracias por registrarte 😊'
-  //                         )
-  //                         .subscribe({
-  //                           next: (res: any) => res,
-  //                         });
-
   constructor(
     private store: Store<AppState>,
     private cicleService: CicleService,
