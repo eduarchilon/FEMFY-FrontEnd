@@ -34,11 +34,9 @@ export class UserService {
   ) {}
 
   getUserById(idUser: number | any): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/${idUser}`).pipe(
-      map((response) => {
-        return response;
-      })
-    );
+    console.log(idUser);
+    
+    return this.http.get<any[]>(`${this.apiUrl}/${idUser}`);
   }
 
   setUserDataCycleInformation(user: UserResponse): void {

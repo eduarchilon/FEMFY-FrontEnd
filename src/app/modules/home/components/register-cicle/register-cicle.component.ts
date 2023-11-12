@@ -44,9 +44,7 @@ export class RegisterCicleComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {
-    console.log(this.data);
-  }
+  ngOnInit(): void {}
 
   closeDialog(): void {
     this.dialogRef.close();

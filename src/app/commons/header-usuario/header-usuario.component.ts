@@ -26,6 +26,9 @@ import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
 import { selectCyclePhaseState } from 'src/app/services/redux/selectors/cycle.selctor';
 import { MatTooltip } from '@angular/material/tooltip';
 import { SharedProfileService } from 'src/app/services/profilePicture/profilePicture.service';
+import { userDataInit } from 'src/app/services/redux/actions/user/user-data-page.action';
+import { userDataSelector } from 'src/app/services/redux/selectors/user-data.selector';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header-usuario',
@@ -55,9 +58,14 @@ export class HeaderUsuarioComponent implements OnInit {
   isLogging: boolean = false;
   isSurveyInit = false;
 
+  userDataResponse$: Observable<UserResponse> =
+    this.store.select(userDataSelector);
+
   icon!: any;
 
   ngOnInit(): void {
+    this.store.dispatch(userDataInit());
+
     this.store.select(selectCyclePhaseState).subscribe((data: any) => {
       if (
         data?.cycleState?.statePhase?.fase === 'fertileDay' &&
@@ -91,10 +99,6 @@ export class HeaderUsuarioComponent implements OnInit {
         }
       }
     });
-    // this.userStorage = this.userResponse
-    //   ? this.userResponse
-    //   : this.localStorageService.getUserByLogin();
-    // this.userStorage ? (this.isLogging = true) : (this.isLogging = false);
   }
 
   handleRouter(path: string): void {
