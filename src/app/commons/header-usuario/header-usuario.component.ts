@@ -64,31 +64,16 @@ export class HeaderUsuarioComponent implements OnInit {
   icon!: any;
 
   ngOnInit(): void {
-    this.store.dispatch(userDataInit());
-
-    this.store.select(selectCyclePhaseState).subscribe((data: any) => {
-      if (
-        data?.cycleState?.statePhase?.fase === 'fertileDay' &&
-        data?.cycleState?.statePhase?.id === data?.cycleState?.ovulationNumber
-      ) {
-        this.icon = CYCLE_STATE?.ovulationDay;
-      } else if (data?.cycleState?.statePhase?.fase === 'folicularDay') {
-        this.icon = CYCLE_STATE?.folicularDay;
-      } else if (data?.cycleState?.statePhase?.fase === 'menstrualDay') {
-        this.icon = CYCLE_STATE?.menstrualDay;
-      } else if (data?.cycleState?.statePhase?.fase === 'fertileDay') {
-        this.icon = CYCLE_STATE?.fertileDay;
-      } else if (data?.cycleState?.statePhase?.fase === 'luteaDay') {
-        this.icon = CYCLE_STATE?.luteaDay;
-      }
+    this.userDataResponse$.subscribe((user: UserResponse) => {
+      this.icon = CYCLE_STATE[`${user?.state}`];
     });
-    this.store.select(selectUserLogin).subscribe((data: any) => {
-      this.userResponse = data?.user;
-      if (!this.userResponse) {
-        this.userResponse = this.localStorageService.getUserByLogin();
-      }
-      this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
-    });
+    this.userResponse = this.localStorageService.getUserByLogin();
+    if (this.userResponse) {
+      this.isLogging = true;
+      this.store.dispatch(userDataInit());
+    } else {
+      this.isLogging = false;
+    }
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
