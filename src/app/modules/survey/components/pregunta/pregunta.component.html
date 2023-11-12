@@ -1,6 +1,6 @@
 <div class="m-auto max-w-[1000px] pb-5 mb-5 bg-white">
   <mat-stepper #stepper class="bg-white">
-    <mat-step>
+    <!-- <mat-step>
       <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
         ¿Ya tuviste tu primera menstruación?
       </p>
@@ -16,11 +16,14 @@
           </mat-radio-button>
         </mat-radio-group>
       </div>
-    </mat-step>
+    </mat-step>-->
     <mat-step>
       <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
         <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
           ¿Qué día fue tu última menstruación?
+        </p>
+        <p class="text-2xl text-black !my-5 text-center max-sm:text-base">
+          (primer día del ciclo)
         </p>
         <div class="flex justify-center">
           <input matInput type="date" class="text-gray-500 rounded-full p-3 mb-5" formControlName="lastTime" />
@@ -39,7 +42,7 @@
     <mat-step>
       <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
         <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
-          ¿Qué duración tuvo aproximadamente ese último ciclo?
+          ¿Qué duración tuvo aproximadamente tu último ciclo?
         </p>
         <div class="flex justify-center items-center">
           <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
@@ -103,7 +106,7 @@
     <mat-step>
       <form [formGroup]="formFiveRegister" (ngSubmit)="submitFormFiveRegister()">
         <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
-          ¿Qué duración tuvo el sangrado?
+          ¿Qué duración tuvo tu último sangrado?
         </p>
         <div class="flex justify-center items-center">
           <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"

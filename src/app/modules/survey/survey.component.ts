@@ -28,7 +28,7 @@ export class SurveyComponent implements OnInit {
     private questionMenopauseService: QuestionMenopausicaService,
     private dialogRef: MatDialogRef<SurveyComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any //fecha,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
@@ -72,5 +72,9 @@ export class SurveyComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
   }
 }
