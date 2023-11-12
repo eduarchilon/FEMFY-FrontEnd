@@ -2,15 +2,12 @@ import {
   Component,
   ElementRef,
   HostListener,
-  OnChanges,
   OnInit,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { constants } from 'src/app/constans/constants';
 import {
   MENU_LOGUEADO,
   MENU_NO_LOGUEADO,
@@ -18,12 +15,10 @@ import {
 } from 'src/app/constans/menu-home';
 import { Menu } from 'src/app/models/menu-model';
 import { UserResponse } from 'src/app/models/user.model';
-import { selectUserLogin } from 'src/app/services/redux/selectors/login.selector';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { CYCLE_STATE } from 'src/app/constans/mat-icon.data';
-import { selectCyclePhaseState } from 'src/app/services/redux/selectors/cycle.selctor';
 import { MatTooltip } from '@angular/material/tooltip';
 import { SharedProfileService } from 'src/app/services/profilePicture/profilePicture.service';
 import { userDataInit } from 'src/app/services/redux/actions/user/user-data-page.action';
@@ -64,13 +59,13 @@ export class HeaderUsuarioComponent implements OnInit {
   icon!: any;
 
   ngOnInit(): void {
-    this.userDataResponse$.subscribe((user: UserResponse) => {
-      this.icon = CYCLE_STATE[`${user?.state}`];
-    });
     this.userResponse = this.localStorageService.getUserByLogin();
     if (this.userResponse) {
       this.isLogging = true;
       this.store.dispatch(userDataInit());
+      this.userDataResponse$.subscribe((user: UserResponse) => {
+        this.icon = CYCLE_STATE[`${user?.state}`];
+      });
     } else {
       this.isLogging = false;
     }

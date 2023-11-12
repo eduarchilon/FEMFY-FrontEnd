@@ -33,7 +33,7 @@ export class UserDataEffects {
     this.actions$.pipe(
       ofType(userDataInit),
       exhaustMap(() =>
-        this.authService.updateUser(this.idUser).pipe(
+        this.userService.getUserById(this.idUser).pipe(
           map((userData: UserResponse | any) =>
             loadUserDataSuccess({ userData: userData })
           ),
@@ -48,13 +48,13 @@ export class UserDataEffects {
   editUserData$ = createEffect(() =>
     this.actions$.pipe(
       ofType(editUserData),
-      concatMap(() =>
-        this.authService.updateUser(this.userResponse).pipe(
-          map((userData: UserResponse | any) => editUserDataSuccess),
+      concatMap((action) =>
+        this.authService.updateUser(action.userData).pipe(
+          map(() => editUserDataSuccess),
           catchError(() =>
             of(
               editUserDataError({
-                ...this.userResponse,
+                userData: action.userData,
                 errorMsg: 'Erro al editar usuario',
               })
             )
