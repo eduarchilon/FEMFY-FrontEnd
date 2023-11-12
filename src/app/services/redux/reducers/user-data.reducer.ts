@@ -1,6 +1,10 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserResponse } from 'src/app/models/user.model';
-import { loadUserDataSuccess } from '../actions/user/user-data-api.action';
+import {
+  editUserDataError,
+  loadUserDataSuccess,
+} from '../actions/user/user-data-api.action';
+import { editUserData } from '../actions/user/user-data-page.action';
 
 export const userDataFeatureKey = 'userDataState';
 
@@ -17,5 +21,9 @@ export const userDataReducer = createReducer(
   on(loadUserDataSuccess, (state, action) => ({
     ...state,
     userData: action.userData,
+  })),
+  on(editUserData, editUserDataError, (state, action) => ({
+    ...state,
+    userData: { ...state.userData, ...action.userData },
   }))
 );
