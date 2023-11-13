@@ -62,9 +62,9 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
-    if (this.userAuth) {
-      this.store.dispatch(cycleUserInit());
-    }
+    // if (this.userAuth) {
+    //   this.store.dispatch(cycleUserInit());
+    // }
 
     this.questionsService
       .getAllQuestionUserMenstruation()
