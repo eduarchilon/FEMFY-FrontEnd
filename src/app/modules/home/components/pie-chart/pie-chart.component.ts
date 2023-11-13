@@ -373,8 +373,6 @@ export class PieChartComponent implements OnInit, AfterViewInit {
 
   setDaysCycleComplete(daysAverageCycle: number): void {
     if (daysAverageCycle) {
-      // console.log(Math.round(daysAverageCycle / 2));
-
       this.store.dispatch(
         setDayOfOvulation({
           numberOvulation: Math.round(daysAverageCycle / 2),

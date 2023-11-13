@@ -18,6 +18,9 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { UserResponse } from 'src/app/models/user.model';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/services/redux/store/app.store';
+import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
 
 @Component({
   selector: 'app-index',
@@ -49,7 +52,8 @@ export class IndexComponent implements OnInit {
     private questionsService: QuestionService,
     private cicleService: CicleService,
     private localStorageService: LocalStorageService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private store: Store<AppState>
   ) {}
 
   //NEW DATA
@@ -58,6 +62,9 @@ export class IndexComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
+    if (this.userAuth) {
+      this.store.dispatch(cycleUserInit());
+    }
 
     this.questionsService
       .getAllQuestionUserMenstruation()

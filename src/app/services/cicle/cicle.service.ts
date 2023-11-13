@@ -39,13 +39,7 @@ export class CicleService {
   }
 
   getAllCycles(idUser: number | any): Observable<any> {
-    return this.http
-      .get<any[]>(`${this.usersUrl}/getCycleHistory/${idUser}`)
-      .pipe(
-        map((response) => {
-          return response;
-        })
-      );
+    return this.http.get<any[]>(`${this.usersUrl}/getCycleHistory/${idUser}`);
   }
 
   editCycle(cicle: Cycle): Observable<any> {

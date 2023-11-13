@@ -36,11 +36,11 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
 import { HistorialModule } from './modules/historial/historial.module';
 import { LoginGuardian } from './utils/login-guardian.guardian';
 import { EffectsModule } from '@ngrx/effects';
-import { CycleEffects } from './services/redux/effects/cycle.effect';
 import { SubscriptionModule } from './modules/subscription/subscription.module';
 import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercado-pago.component';
 import { InformationModule } from './modules/information/information.module';
 import { UserDataEffects } from './services/redux/effects/user-data.effect';
+import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -76,7 +76,7 @@ import { UserDataEffects } from './services/redux/effects/user-data.effect';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     HistorialModule,
-    EffectsModule.forRoot([CycleEffects, UserDataEffects]),
+    EffectsModule.forRoot([CycleUserEffects, UserDataEffects]),
     InformationModule,
   ],
   providers: [
