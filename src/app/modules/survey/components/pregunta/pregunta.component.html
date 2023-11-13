@@ -42,7 +42,10 @@
     <mat-step>
       <form [formGroup]="formTwoRegister" (ngSubmit)="submitFormTwoRegister()">
         <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
-          ¿Qué duración tuvo aproximadamente tu último ciclo?
+          ¿Qué duración tuvo tu último ciclo?
+        </p>
+        <p class="text-2xl text-black !my-5 text-center max-sm:text-base">
+          (desde el penúltimo al último sangrado)
         </p>
         <div class="flex justify-center items-center">
           <input type="number" class="text-gray-500 text-center rounded-full w-48 p-3 mb-5 me-3"
