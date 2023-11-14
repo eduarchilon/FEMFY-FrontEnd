@@ -41,6 +41,7 @@ import { MercadoPagoComponent } from './modules/subscription/mercado-pago/mercad
 import { InformationModule } from './modules/information/information.module';
 import { UserDataEffects } from './services/redux/effects/user-data.effect';
 import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
+import { QuestionMenstruationUserEffects } from './services/redux/effects/question-menstruation-user.effect';
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -76,7 +77,11 @@ import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideStorage(() => getStorage()),
     HistorialModule,
-    EffectsModule.forRoot([CycleUserEffects, UserDataEffects]),
+    EffectsModule.forRoot([
+      CycleUserEffects,
+      UserDataEffects,
+      QuestionMenstruationUserEffects,
+    ]),
     InformationModule,
   ],
   providers: [

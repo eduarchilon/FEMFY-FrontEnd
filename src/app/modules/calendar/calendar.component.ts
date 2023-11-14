@@ -22,6 +22,9 @@ import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calend
 import { UserResponse } from 'src/app/models/user.model';
 import { selectPredictionCycle } from 'src/app/services/redux/selectors/cycle.selctor';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
+import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
+import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
 
 @Component({
   selector: 'app-calendar',
@@ -41,6 +44,7 @@ export class CalendarComponent implements OnInit {
   averageQuestionCycleContent: number[] = [];
   userAuth!: UserResponse;
 
+  cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
 
   predictionLoad!: PredictionCycle;
 
@@ -58,19 +62,20 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
+    if (this.userAuth) {
+      this.store.dispatch(cycleUserInit());
+    }
 
-    this.cicleService
-      .getAllCycles(this.userAuth?.idUser)
-      .subscribe((dataCycle: any) => {
-        if (dataCycle) {
-          this.cycles = dataCycle;
-          this.cyclesWithEndNull =
-            dataCycle?.filter((item: any) => item?.dateEnd === null) || [];
-          this.cycle = this.cyclesWithEndNull[0];
-          this.cyclesWithOutEndNull =
-            dataCycle?.filter((item: any) => item?.dateEnd !== null) || [];
-        }
-      });
+    this.cyclesUser$.subscribe((dataCycle: any) => {
+      if (dataCycle) {
+        this.cycles = dataCycle;
+        this.cyclesWithEndNull =
+          dataCycle?.filter((item: any) => item?.dateEnd === null) || [];
+        this.cycle = this.cyclesWithEndNull[0];
+        this.cyclesWithOutEndNull =
+          dataCycle?.filter((item: any) => item?.dateEnd !== null) || [];
+      }
+    });
 
     this.questionsService
       .getAllQuestionUserMenstruation()
@@ -91,19 +96,20 @@ export class CalendarComponent implements OnInit {
         }
       });
 
-    this.store.select(selectPredictionCycle).subscribe((pred: any) => {
-      if (pred) {
-        this.predictionLoad = pred?.prediction;
-        if (this.predictionLoad) {
-          this.nextPeriod = moment(this.predictionLoad.dateNextPeriod)
-            ?.locale('es')
-            .format('LL');
-          this.nextOvulation = moment(this.predictionLoad.period)
-            ?.add(Math.round(this.predictionLoad?.numberOvulation), 'days')
-            ?.locale('es')
-            .format('LL');
-        }
-      }
-    });
+    // this.store.select(selectPredictionCycle).subscribe((pred: any) => {
+    //   if (pred) {
+    //     this.predictionLoad = pred?.prediction;
+    //     if (this.predictionLoad) {
+    //       this.nextPeriod = moment(this.predictionLoad.dateNextPeriod)
+    //         ?.locale('es')
+    //         .format('LL');
+    //       this.nextOvulation = moment(this.predictionLoad.period)
+    //         ?.add(Math.round(this.predictionLoad?.numberOvulation), 'days')
+    //         ?.locale('es')
+    //         .format('LL');
+    //     }
+    //   }
+    // });
+    //TODO: QUE EL INIT ESTE ACA DEL DISPATCH Y LAS SUBSCRICCPIONES EN LOS COMPONENTES 
   }
 }
