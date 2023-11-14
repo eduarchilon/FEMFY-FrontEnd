@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { Store } from '@ngrx/store';
-import { Cycle, CycleHistorial } from 'src/app/models/cicle.model';
-import { selectUserLogin } from 'src/app/services/redux/selectors/login.selector';
+import { Cycle } from 'src/app/models/cicle.model';
 import { AppState } from 'src/app/services/redux/store/app.store';
-import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { calculateCycleDurantionWithDates } from 'src/app/utils/average-period.utils';
+import { Observable } from 'rxjs';
+import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
 
 @Component({
   selector: 'app-cicle-historial',
@@ -14,7 +14,7 @@ import { calculateCycleDurantionWithDates } from 'src/app/utils/average-period.u
   styleUrls: ['./cicle-historial.component.scss'],
 })
 export class CicleHistorialComponent implements OnInit {
-  @Input() cycles: CycleHistorial[] = [];
+  cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
 
   color: ThemePalette = 'warn';
   mode: ProgressBarMode = 'determinate';
@@ -24,18 +24,16 @@ export class CicleHistorialComponent implements OnInit {
 
   cycleHistorial: Cycle[] = [];
   actualDurationCycle!: Date;
-  //fechaFormateada: string = this.formatDate(this.actualDurationCycle);
 
-  constructor(
-    private store: Store<AppState>,
-    private cicleService: CicleService
-  ) {}
+  constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.actualDurationCycle = this.cycles[this.cycles?.length - 1]?.dateBeging;
-    this.cycleHistorial = this.cycles.filter(
-      (objet: any) => objet?.dateEnd !== null
-    );
+    this.cyclesUser$.subscribe((cycles: Cycle[] | any) => {
+      this.actualDurationCycle = cycles[cycles?.length - 1]?.dateBeging;
+      this.cycleHistorial = cycles.filter(
+        (objet: any) => objet?.dateEnd !== null
+      );
+    });
   }
 
   calculateCycleDurantion(dateBeging: Date, dateEnd: Date): number {

@@ -14,6 +14,9 @@ import {
 import { dayOfOvulationReducers } from '../reducers/calendar.reducer';
 import { questionMenstruationReducers } from '../reducers/question.reducer';
 import { userDataReducer } from '../reducers/user-data.reducer';
+import { cycleUserReducer } from '../reducers/cycle-user.reducer';
+import { QuestionUserMenstruation } from 'src/app/models/question.model';
+import { questionUserMenstruationReducer } from '../reducers/question-menstruation.reducer';
 
 export interface AppState {
   user: UserResponse;
@@ -22,15 +25,21 @@ export interface AppState {
   numberOvulation: any;
   cyclePhaseState: CyclePhaseState;
   predictionCycle: PredictionCycle;
+  //NUEVO
   userData: UserResponse | any;
+  cycleUser: Cycle | any;
+  questionUserMenstruation: QuestionUserMenstruation | any;
 }
 
 export const appStore: ActionReducerMap<AppState> = {
   user: loginReducers,
-  userData: userDataReducer,
   cycle: cycleReducers,
   idQuestionMenstruation: questionMenstruationReducers,
   numberOvulation: dayOfOvulationReducers,
   cyclePhaseState: cyclePhaseStateReducers,
   predictionCycle: predictionReducers,
+  //NUEVO
+  userData: userDataReducer,
+  cycleUser: cycleUserReducer,
+  questionUserMenstruation: questionUserMenstruationReducer,
 };

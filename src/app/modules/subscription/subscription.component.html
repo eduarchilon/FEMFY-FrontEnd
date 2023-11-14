@@ -2,110 +2,110 @@
   <div class="w-[100%] bg-cover bg-[#f2d4fa] pt-24 py-[100px] max-w-[1280px] m-auto">
     <h2 class="text-5xl text-femfy-800 font-bold mb-10">Suscripción</h2>
 
-<div class="flex flex-row gap-[5%] max-lg:flex-col max-lg:gap-4">
-    <div class="flex flex-col justify-between max-lg:flex-col md:w-1/2">
-      <!-- Card 1 -->
-      <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
-        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
-          <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
-            Suscribite!
-          </h5>
-        </div>
-        <div class="mb-3 mt-10 flex items-center justify-center text-center">
-          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3"
-            (click)="toggleForm()">Crea el plan a tu medida</button>
-        </div>
-    
-        <div *ngIf="showForm" class="bg-white rounded-[20px] p-10">
-          <h2 class="font-bold text-femfy-800">Crear un Plan de Suscripción</h2>
-          <form [formGroup]="subscriptionForm" class="p-4 rounded shadow-md bg-[#f2d4fa]">
-          <div class="mb-4">
-            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Tipo:</label>
-            <input type="text" value="Suscripción Premium" placeholder="Suscripción Premium" name="title"
-              formControlName="title" readonly class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+    <div class="flex flex-row gap-[5%] max-lg:flex-col max-lg:gap-4">
+      <div class="flex flex-col justify-between max-lg:flex-col md:w-1/2">
+        <!-- Card 1 -->
+        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+              Suscribíte
+            </h5>
           </div>
-          <div class="mb-4">
-            <div class="mb-4">
-              <label for="unit_price" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
-              <input type="number" name="unit_price" formControlName="unit_price"
-                [placeholder]="getDefaultPlaceholder()" [readonly]="true"
-                class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
-            </div>
-          </div>
-          <div class="mb-4">
-            <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Frecuencia:</label>
-            <select name="quantity" formControlName="quantity" (change)="updateDefaultValue()" required
-              class="w-full border-2 border-gray-300 p-2 rounded-full">
-              <option value="1">Mensual</option>
-              <option value="3">Trimestral</option>
-              <option value="6">Semestral</option>
-              <option value="12">Anual</option>
-            </select>
+          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+            <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3"
+              (click)="toggleForm()">Crea el plan a tu medida</button>
           </div>
 
-          <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644"
-            name="MP-payButton"
-            class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3'>Activar
-            Suscripción</a>
-          <script type="text/javascript">
-            (function () {
-              function $MPC_load() {
-                window.$MPC_loaded !== true && (function () {
-                  var s = document.createElement("script");
-                  s.type = "text/javascript";
-                  s.async = true;
-                  s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
-                  var x = document.getElementsByTagName('script')[0];
-                  x.parentNode.insertBefore(s, x);
-                  window.$MPC_loaded = true;
+          <div *ngIf="showForm" class="bg-white rounded-[20px] p-10">
+            <h2 class="font-bold text-femfy-800">Crear un plan de suscripción</h2>
+            <form [formGroup]="subscriptionForm" class="p-4 rounded shadow-md bg-[#f2d4fa]">
+              <div class="mb-4">
+                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Tipo:</label>
+                <input type="text" value="Suscripción Premium" placeholder="Suscripción Premium" name="title"
+                  formControlName="title" readonly class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+              </div>
+              <div class="mb-4">
+                <div class="mb-4">
+                  <label for="unit_price" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+                  <input type="number" name="unit_price" formControlName="unit_price"
+                    [placeholder]="getDefaultPlaceholder()" [readonly]="true"
+                    class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Frecuencia:</label>
+                <select name="quantity" formControlName="quantity" (change)="updateDefaultValue()" required
+                  class="w-full border-2 border-gray-300 p-2 rounded-full">
+                  <option value="1">Mensual</option>
+                  <option value="3">Trimestral</option>
+                  <option value="6">Semestral</option>
+                  <option value="12">Anual</option>
+                </select>
+              </div>
+
+              <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644"
+                name="MP-payButton"
+                class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3'>Activar
+                suscripción</a>
+              <script type="text/javascript">
+                (function () {
+                  function $MPC_load() {
+                    window.$MPC_loaded !== true && (function () {
+                      var s = document.createElement("script");
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                      var x = document.getElementsByTagName('script')[0];
+                      x.parentNode.insertBefore(s, x);
+                      window.$MPC_loaded = true;
+                    })();
+                  }
+                  window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
                 })();
-              }
-              window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
-            })();
 
-            function $MPC_message(event) {
-              const data = event.data;
-              updateProfile(data);
-            }
+                function $MPC_message(event) {
+                  const data = event.data;
+                  updateProfile(data);
+                }
 
-            window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;                      
-          </script>
+                window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;                      
+              </script>
 
-          </form>
+            </form>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+              Suscripción activa
+            </h5>
+          </div>
+          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+            <button class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px] w-1/3">Cancelar
+              suscripción</button>
+          </div>
+        </div>
+
+
+
+        <!-- Card 3 -->
+        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+              También podés ayudarnos para que la app siga creciendo
+            </h5>
+          </div>
+          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+            <a href="https://link.mercadopago.com.ar/femfyapp" name="MP-payButton" target="_blank"
+              class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3 w-1/3'>Donaciones</a>
+
+          </div>
         </div>
       </div>
-    
-      <!-- Card 2 -->
-      <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
-     
-        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
-          <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
-            Suscripción activa!
-          </h5>
-        </div>
-        <div class="mb-3 mt-10 flex items-center justify-center text-center">
-          <button class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px] w-1/3">Cancelar Suscripción</button>
-        </div>
-      </div>
-    
-    
-    
-      <!-- Card 3 -->
-      <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
-     
-        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
-          <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
-            También podés ayudarnos para que la app siga creciendo!
-          </h5>
-        </div>
-        <div class="mb-3 mt-10 flex items-center justify-center text-center">
-          <a href="https://link.mercadopago.com.ar/femfyapp"
-            name="MP-payButton" target="_blank"
-            class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3 w-1/3'>Donaciones</a>
-          
-        </div>
-      </div>
-    </div>
 
       <!-- Card 4 -->
       <div class="bg-white rounded-[20px] p-10 flex-1 max-lg:p-5">
@@ -127,10 +127,7 @@
             </ul>
 
             <div class="h-[100%] flex pt-5">
-              <img
-                class="h-[400px] max-lg:h-[320px]"
-                src="./assets/images/benefits.svg"
-              />
+              <img class="h-[400px] max-lg:h-[320px]" src="./assets/images/benefits.svg" />
             </div>
           </div>
         </div>
