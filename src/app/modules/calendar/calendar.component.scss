@@ -21,18 +21,28 @@ button.example-custom-date-class-none {
 }
 
 .mat-calendar-header {
-  color: white;
+  color: #7c2385;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #7c2385 !important;
+  background-color: #fff !important;
+  border-bottom-color: #7c2385;
+  border-bottom-width: 4px;
+
+}
+.mat-calendar-controls{
+  padding: 5px !important;
+  margin: 6px !important;
+}
+.mat-mdc-button .mdc-button__label {
+  color: #7c2385;
 }
 
-.mat-mdc-button .mdc-button__label {
-  color: white;
+.mat-calendar-content{
+  padding: 8px 8px 8px 8px !important;
 }
 
 .mat-calendar-arrow {
-  fill: white !important;
+  fill: #7c2385 !important;
 }
 
 button.example-custom-date-class {
