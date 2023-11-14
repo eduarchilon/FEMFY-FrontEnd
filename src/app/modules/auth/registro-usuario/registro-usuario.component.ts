@@ -79,9 +79,9 @@ export class RegistroUsuarioComponent implements OnInit {
                       this.loaderService.showLoader();
                       //NOTIFICACION PUSH
                       if (userLogin) {
-                        this.userDataCycleService.setUserDataCycleInformation(
+                       /* this.userDataCycleService.setUserDataCycleInformation(
                           userLogin
-                        ); //COMENTAR PARA PROBAR
+                        ); //COMENTAR PARA PROBAR*/
                         this.loaderService.hideLoader();
                         this.router.navigate(['']);
                         this.dialog.open(SurveyComponent, {

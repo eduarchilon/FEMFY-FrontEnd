@@ -18,6 +18,7 @@ import { MatTooltip } from '@angular/material/tooltip';
 import { UserResponse } from 'src/app/models/user.model';
 import { Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { SurveyComponent } from '../../survey/survey.component';
 
 @Component({
   selector: 'app-index',
@@ -50,13 +51,25 @@ export class IndexComponent implements OnInit {
     private cicleService: CicleService,
     private localStorageService: LocalStorageService,
     private loaderService: LoaderService
-  ) {}
+  ) { }
 
   //NEW DATA
   averageQuestionCycleContent: number[] = [28, 28];
   userAuth!: UserResponse;
 
   ngOnInit(): void {
+    //TODO: BORRAR DESPUES
+    this.dialog.open(SurveyComponent, {
+      panelClass: [
+        '!max-w-[95vw]',
+        'max-lg:!w-[80%]',
+        'max-md:!w-[100vw]',
+        'max-xl:!w-[45%]',
+        '!w-[45%]',
+        '!rounded-[20px]',
+      ],
+      disableClose: true,
+    });
     this.userAuth = this.localStorageService.getUserByLogin();
 
     this.questionsService
