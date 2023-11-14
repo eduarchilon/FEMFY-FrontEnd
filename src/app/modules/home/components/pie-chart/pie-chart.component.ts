@@ -4,9 +4,9 @@ import {
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   Renderer2,
-  ViewChild,
 } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -16,33 +16,33 @@ import {
   DataPieChart,
   DataPieChartChildren,
 } from 'src/app/models/data-pie-chart';
-import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { setDayOfOvulation } from 'src/app/services/redux/actions/calendar.action';
 import { setCycleState } from 'src/app/services/redux/actions/cycle.action';
 import { AppState } from 'src/app/services/redux/store/app.store';
-import { CicleService } from 'src/app/services/cicle/cicle.service';
-import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import * as moment from 'moment';
 import { MatDialog } from '@angular/material/dialog';
 import { EventDayDrawerComponent } from 'src/app/modules/calendar/components/event-day-drawer/event-day-drawer.component';
-import { MatCalendar } from '@angular/material/datepicker';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { Observable, Subscription } from 'rxjs';
+import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { editUserData } from 'src/app/services/redux/actions/user/user-data-page.action';
 
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
   styleUrls: ['./pie-chart.component.scss'],
 })
-export class PieChartComponent implements OnInit, AfterViewInit {
-  @Input() cycles: Cycle[] = [];
-  @Input() cyclesWithEndNull: Cycle[] = [];
-  @Input() cyclesWithOutEndNull: Cycle[] = [];
+export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() averageQuestionCycleContent: number[] = [];
 
-  @Input() myRegisterQuestion: QuestionUserMenstruation = {}; //BOARR
+  cycles: Cycle[] = [];
+  cyclesWithEndNull: Cycle[] = [];
+  cyclesWithOutEndNull: Cycle[] = [];
 
-  //Data
-  averageCycle!: number;
+  cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
+  private cyclesUserSubscription: Subscription | null = null;
 
   //PIE-CHART
   options!: AgPolarChartOptions;
@@ -51,61 +51,69 @@ export class PieChartComponent implements OnInit, AfterViewInit {
 
   constructor(
     private store: Store<AppState>,
-    private cicleService: CicleService,
-    private localStorageService: LocalStorageService,
     private router: Router,
     public dialog: MatDialog,
     private renderer: Renderer2,
     private el: ElementRef,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private localStorageService: LocalStorageService,
+    private authService: AuthService
   ) {}
 
-  ngOnInit(): void {
-    // console.log(this.cycles);
-    // console.log(this.cyclesWithEndNull);
-    // console.log(this.cyclesWithOutEndNull);
-    // console.log(this.averageQuestionCycleContent);
-
-    this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
-      const diferenciaEnDias = moment(cycle?.dateEnd).diff(
-        moment(cycle?.dateBeging),
-        'days'
-      );
-      this.averageQuestionCycleContent.push(diferenciaEnDias);
-    });
-
-    let chat12: AgPolarSeriesOptions = {};
-    let chat13: AgPolarSeriesOptions = {};
-    if (this.cycles) {
-      this.cycleChart = this.cyclesWithEndNull[0];
-      chat12 = this.setPieChartContentData(
-        this.averageQuestionCycleContent,
-        this.cycleChart
-      );
-      chat13 = this.setPieContainerData(
-        chat12,
-        this.cyclesWithEndNull,
-        this.averageQuestionCycleContent
-      );
-      this.options = {
-        width: this.getWindowSize(),
-        height: this.getWindowSize(),
-        autoSize: true,
-        padding: {
-          top: 5,
-          right: 5,
-          bottom: 5,
-          left: 5,
-        },
-        series: [chat12, chat13],
-        legend: {
-          enabled: false,
-        },
-        background: {
-          visible: false,
-        },
-      };
+  ngOnDestroy(): void {
+    if (this.cyclesUserSubscription) {
+      this.cyclesUserSubscription.unsubscribe();
     }
+  }
+
+  ngOnInit(): void {
+    this.cyclesUserSubscription = this.cyclesUser$?.subscribe(
+      async (dataCycle: any) => {
+        if (dataCycle?.length > 0) {
+          this.cycles = await dataCycle; //TODO
+
+          this.cyclesWithEndNull = await dataCycle?.filter(
+            (item: any) => item?.dateEnd === null
+          );
+
+          this.cyclesWithOutEndNull = await dataCycle?.filter(
+            (item: any) => item?.dateEnd !== null
+          );
+          // console.log(this.averageQuestionCycleContent);
+
+          let chat12: AgPolarSeriesOptions = {};
+          let chat13: AgPolarSeriesOptions = {};
+          this.cycleChart = this.cyclesWithEndNull[0];
+          chat12 = this.setPieChartContentData(
+            this.averageQuestionCycleContent,
+            this.cycleChart
+          );
+          chat13 = this.setPieContainerData(
+            chat12,
+            this.cyclesWithEndNull,
+            this.averageQuestionCycleContent
+          );
+          this.options = {
+            width: this.getWindowSize(),
+            height: this.getWindowSize(),
+            autoSize: true,
+            padding: {
+              top: 5,
+              right: 5,
+              bottom: 5,
+              left: 5,
+            },
+            series: [chat12, chat13],
+            legend: {
+              enabled: false,
+            },
+            background: {
+              visible: false,
+            },
+          };
+        }
+      }
+    );
     this.sizeChart = window.innerWidth;
   }
 
@@ -260,6 +268,18 @@ export class PieChartComponent implements OnInit, AfterViewInit {
       }
     );
 
+    if (newDataArray[diff - 1]?.fase) {
+      this.store.dispatch(
+        editUserData({
+          userData: {
+            ...this.localStorageService.getUserByLogin(),
+            state: newDataArray[diff - 1]?.fase,
+          },
+        })
+      );
+    }
+
+    //BORRAR O ARREGLAR DESPUES
     if (newDataArray) {
       this.store.dispatch(
         setCycleState({

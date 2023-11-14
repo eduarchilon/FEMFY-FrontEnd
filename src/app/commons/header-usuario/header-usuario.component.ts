@@ -5,7 +5,6 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-
 import { NavigationEnd, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import {
@@ -63,12 +62,15 @@ export class HeaderUsuarioComponent implements OnInit {
     if (this.userResponse) {
       this.isLogging = true;
       this.store.dispatch(userDataInit());
-      this.userDataResponse$.subscribe((user: UserResponse) => {
-        this.icon = CYCLE_STATE[`${user?.state}`];
-      });
     } else {
       this.isLogging = false;
     }
+
+    this.userDataResponse$.subscribe((user: any) => {
+      if (user) {
+        this.icon = CYCLE_STATE[`${user?.state}`];
+      }
+    });
 
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {

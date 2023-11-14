@@ -3,6 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Cycle } from 'src/app/models/cicle.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-delete-cycle',
@@ -16,6 +17,7 @@ export class DeleteCycleComponent implements OnInit {
     private dialogRef: MatDialogRef<DeleteCycleComponent>,
     private cicleService: CicleService,
     private router: Router,
+    private loaderService: LoaderService,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
@@ -28,9 +30,15 @@ export class DeleteCycleComponent implements OnInit {
   }
 
   deleteCycle(cycleChart: Cycle | any): void {
-    this.cicleService.deleteCycle(cycleChart?.id).subscribe((res: any) => res);
-    this.router.navigate(['/']).then(() => {
-      location.reload();
+    this.cicleService.deleteCycle(cycleChart?.id).subscribe((res: any) => {
+      this.loaderService.showLoader();
+      if (res) {
+        this.loaderService.showLoader();
+        this.router.navigate(['/']).then(() => {
+          location.reload();
+        });
+        this.loaderService.hideLoader();
+      }
     });
   }
 }

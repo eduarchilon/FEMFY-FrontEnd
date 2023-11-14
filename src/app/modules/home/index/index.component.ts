@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarMode } from '@angular/material/progress-bar';
@@ -10,7 +10,6 @@ import { Cycle, CycleHistorial } from 'src/app/models/cicle.model';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
-import { constants } from 'src/app/constans/constants';
 import { EditCycleComponent } from '../components/edit-cycle/edit-cycle.component';
 import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.component';
 import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
@@ -30,7 +29,7 @@ import { questionUserMenstruationSelector } from 'src/app/services/redux/selecto
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent implements OnInit {
+export class IndexComponent implements OnInit, OnDestroy {
   fechaActual: Date = new Date();
   fechaFormateada: string = this.formatDate(this.fechaActual);
 
@@ -40,27 +39,30 @@ export class IndexComponent implements OnInit {
   bufferValue = 75;
   myRegisterQuestion!: QuestionUserMenstruation;
 
-  cycleChart!: Cycle;
-
   cycles: CycleHistorial[] = [];
   cyclesWithEndNull: CycleHistorial[] = [];
   cyclesWithOutEndNull: CycleHistorial[] = [];
 
   @ViewChild('editRecomendation') editRecomendation!: MatTooltip;
 
+  private cyclesUserSubscription: Subscription | null = null;
+  private userMenstruationSubscription: Subscription | null = null;
+
   constructor(
     private router: Router,
-    private authService: AuthService,
     public dialog: MatDialog,
-    private questionsService: QuestionService,
-    private cicleService: CicleService,
     private localStorageService: LocalStorageService,
     private loaderService: LoaderService,
     private store: Store<AppState>
   ) {}
 
+  ngOnDestroy(): void {
+    this.cyclesUserSubscription?.unsubscribe();
+    this.userMenstruationSubscription?.unsubscribe();
+  }
+
   //NEW DATA
-  averageQuestionCycleContent: number[] = [28, 28];
+  averageQuestionCycleContent: number[] = [];
   userAuth!: UserResponse;
 
   cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
@@ -70,32 +72,39 @@ export class IndexComponent implements OnInit {
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
     if (this.userAuth) {
-      this.store.dispatch(cycleUserInit());
+      this.store?.dispatch(cycleUserInit());
       this.store.dispatch(questionUserMenstruationInit());
     }
 
-    this.questionUserMenstruation$.subscribe((question: any) => {
-      if (question) {
-        let lcd = question[0]?.lastCycleDuration;
-        let rcd = question[0]?.regularCycleDuration;
-        this.averageQuestionCycleContent = [lcd, rcd];
-      }
-    });
+    this.userMenstruationSubscription =
+      this.questionUserMenstruation$.subscribe(async (question: any) => {
+        if (question.length > 0) {
+          let lcd = await question[0]?.lastCycleDuration;
+          let rcd = await question[0]?.regularCycleDuration;
+          if (lcd) {
+            this.averageQuestionCycleContent.push(lcd);
+          } else {
+            this.averageQuestionCycleContent.push(31);
+          }
 
-    this.cyclesUser$.subscribe((dataCycle: any) => {
-      this.loaderService.showLoader();
-      if (dataCycle) {
-        this.cyclesWithEndNull = dataCycle?.filter(
-          (item: any) => item?.dateEnd === null
-        );
-        this.cyclesWithOutEndNull = dataCycle?.filter(
-          (item: any) => item?.dateEnd !== null
-        );
-        this.cycles = dataCycle; //TODO
-        this.loaderService.hideLoader();
+          if (rcd) {
+            this.averageQuestionCycleContent.push(rcd);
+          } else {
+            this.averageQuestionCycleContent.push(31);
+          }
+        }
+      });
+
+    this.cyclesUserSubscription = this.cyclesUser$.subscribe(
+      async (dataCycle: any) => {
+        if (dataCycle) {
+          this.cyclesWithEndNull = await dataCycle?.filter(
+            (item: any) => item?.dateEnd === null
+          );
+          this.cycles = dataCycle;
+        }
       }
-      this.loaderService.hideLoader();
-    });
+    );
   }
 
   openCicleRegister(cycle: Cycle | any): void {

@@ -28,8 +28,11 @@ export class CicleHistorialComponent implements OnInit {
   constructor(private store: Store<AppState>) {}
 
   ngOnInit(): void {
-    this.cyclesUser$.subscribe((cycles: Cycle[] | any) => {
-      this.actualDurationCycle = cycles[cycles?.length - 1]?.dateBeging;
+    this.cyclesUser$.subscribe(async (cycles: Cycle[] | any) => {
+      this.actualDurationCycle = await cycles?.filter(
+        (item: any) => item?.dateEnd === null
+      )[0]?.dateBeging;
+
       this.cycleHistorial = cycles.filter(
         (objet: any) => objet?.dateEnd !== null
       );
