@@ -49,6 +49,12 @@ export class QuestionService {
     );
   }
 
+  getQuestionUserMenstruationByIdUser(idUser: number | any): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.usersUrl}/getQuestionsByUser/${idUser}`
+    );
+  }
+
   getAllQuestionUserMenstruationById(
     idRegister: number | any
   ): Observable<any> {

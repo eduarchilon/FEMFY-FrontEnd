@@ -16,11 +16,14 @@ import { DeleteCycleComponent } from '../components/delete-cycle/delete-cycle.co
 import { FinishCycleComponent } from '../components/finish-cycle/finish-cycle.component';
 import { MatTooltip } from '@angular/material/tooltip';
 import { UserResponse } from 'src/app/models/user.model';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
+import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
+import { questionUserMenstruationInit } from 'src/app/services/redux/actions/question-menstruation/question-menstruation-user-page.action';
+import { questionUserMenstruationSelector } from 'src/app/services/redux/selectors/question-menstruation.selector';
 
 @Component({
   selector: 'app-index',
@@ -60,45 +63,39 @@ export class IndexComponent implements OnInit {
   averageQuestionCycleContent: number[] = [28, 28];
   userAuth!: UserResponse;
 
+  cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
+  questionUserMenstruation$: Observable<QuestionUserMenstruation> =
+    this.store.select(questionUserMenstruationSelector);
+
   ngOnInit(): void {
     this.userAuth = this.localStorageService.getUserByLogin();
-    // if (this.userAuth) {
-    //   this.store.dispatch(cycleUserInit());
-    // }
+    if (this.userAuth) {
+      this.store.dispatch(cycleUserInit());
+      this.store.dispatch(questionUserMenstruationInit());
+    }
 
-    this.questionsService
-      .getAllQuestionUserMenstruation()
-      .subscribe((data: any) => {
-        this.loaderService.showLoader();
-        if (data) {
-          const question = data?.filter(
-            (quest: any) => quest?.userId === this.userAuth?.idUser
-          );
-          let lcd = question[0]?.lastCycleDuration;
-          let rcd = question[0]?.regularCycleDuration;
-          this.averageQuestionCycleContent = [lcd, rcd]; //TODO
-          this.loaderService.hideLoader();
-        }
-        this.loaderService.hideLoader();
-      });
+    this.questionUserMenstruation$.subscribe((question: any) => {
+      if (question) {
+        let lcd = question[0]?.lastCycleDuration;
+        let rcd = question[0]?.regularCycleDuration;
+        this.averageQuestionCycleContent = [lcd, rcd];
+      }
+    });
 
-    this.cicleService
-      .getAllCycles(this.userAuth?.idUser)
-      .subscribe((dataCycle: any) => {
-        this.loaderService.showLoader();
-        if (dataCycle) {
-          this.cyclesWithEndNull = dataCycle?.filter(
-            (item: any) => item?.dateEnd === null
-          );
-          this.cyclesWithOutEndNull = dataCycle?.filter(
-            (item: any) => item?.dateEnd !== null
-          );
-          this.cycles = dataCycle; //TODO
-          this.loaderService.hideLoader();
-        }
+    this.cyclesUser$.subscribe((dataCycle: any) => {
+      this.loaderService.showLoader();
+      if (dataCycle) {
+        this.cyclesWithEndNull = dataCycle?.filter(
+          (item: any) => item?.dateEnd === null
+        );
+        this.cyclesWithOutEndNull = dataCycle?.filter(
+          (item: any) => item?.dateEnd !== null
+        );
+        this.cycles = dataCycle; //TODO
         this.loaderService.hideLoader();
-        // this.loaderService.showLoader();
-      });
+      }
+      this.loaderService.hideLoader();
+    });
   }
 
   openCicleRegister(cycle: Cycle | any): void {
