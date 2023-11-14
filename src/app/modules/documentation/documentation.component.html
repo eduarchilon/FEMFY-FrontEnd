@@ -1,19 +1,20 @@
 <div class="bg-[#f2d4fa] px-[3vw] pt-5">
-  <div class="w-[100%] bg-cover bg-[#f2d4fa] pt-24 py-[100px] max-w-[1280px] m-auto">
+  <div class="w-[100%] bg-cover  bg-[#f2d4fa] pt-24 py-[100px] max-w-[1280px] m-auto">
     <h2 class="text-5xl text-femfy-800 font-bold mb-10 max-md:text-3xl">
       Estudios
     </h2>
     <form action="" [formGroup]="formDocumentation" (ngSubmit)="uploadFile()">
       <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-[10%]">
-        <div class="bg-white rounded-[20px] flex-1">
-          <h2 class="text-2xl font-bold max-md:text-xl text-[#7c2385] border-b-[4px] border-[#7c2385] p-[20px]">
+        <div class="flex-1 w-full bg-white rounded-[20px]">
+          <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">
             Cargar nuevo estudio
-          </h2>
+          </h5>
+
           <div class="p-10 mb-10 md:mb-0">
             <div class="mb-3">
               <label for="typeStudy" class="block font-medium text-xl mb-2">Tipo de estudio</label>
               <select id="typeStudy" formControlName="typeStudy" class="rounded-full border w-full p-4">
-                <option value="0" selected>Selecciona un tipo de estudio</option>
+                <option value="0" selected>Seleccioná un tipo de estudio</option>
                 <option *ngFor="let study of typeStudies" [value]="study.name">
                   {{ study.name }}
                 </option>
@@ -33,10 +34,11 @@
             </div>
 
             <div class="flex mt-5 max-sm:flex-col max-md:gap-4">
-              <button class="text-white font-bold rounded-full bg-[#de84ee] me-3 w-full p-3" type="submit">
+              <button class="flex-1 bg-[#de84ee] mr-2 text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+                type="submit">
                 Guardar estudio
               </button>
-              <button class="text-white font-bold rounded-full bg-[#7c2385] w-full p-3">
+              <button class="flex-1 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]">
                 Cancelar
               </button>
             </div>
@@ -47,8 +49,7 @@
             <span class="block text-xl font-bold text-center justify-center mb-5">Arrastre sus estudios</span>
             <span class="block text-xl font-bold text-center justify-center mb-5">O</span>
 
-            <span
-              class="bg-[#de84ee] text-xl font-bold text-center text-white py-[10px] px-[20px] w-[50%] rounded-[20px]">
+            <span class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">
               <label for="file" class="cursor-pointer max-sm:text-sm">
                 Cargue desde aquí
               </label>

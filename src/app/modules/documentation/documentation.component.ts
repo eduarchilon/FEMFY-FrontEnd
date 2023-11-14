@@ -33,6 +33,7 @@ export class DocumentationComponent implements OnInit {
     { id: 7, name: 'Ecografía mamaria' },
     { id: 8, name: 'Densitometría ósea' },
     { id: 9, name: 'Analítica de sangre' },
+    { id: 10, name: 'Otro' },
   ];
 
   @ViewChild('fileLabel', { static: true }) fileLabel!: ElementRef;

@@ -35,10 +35,9 @@
               </button>
             </div>
             <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-              <div class="bg-white rounded-[20px] mb-5">
-                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
-                  Datos personales
-                </h3>
+              <div class="flex-1 w-full bg-white rounded-[20px]">
+                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"> Datos personales
+                </h5>
                 <div class="grid lg:grid-cols-3 gap-4 p-5">
                   <div>
                     <label for="note" class="block text-xl mb-2">Nombre</label>
@@ -55,9 +54,8 @@
                 </div>
               </div>
               <div class="bg-white rounded-[20px] mb-5">
-                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
-                  Contacto
-                </h3>
+                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Contacto
+                </h5>
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
                   <div>
                     <label for="note" class="block text-xl mb-2">Email</label>
@@ -70,9 +68,8 @@
                 </div>
               </div>
               <div class="bg-white rounded-[20px] mb-5">
-                <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
-                  Tipo de usuario
-                </h3>
+                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Tipo de usuario
+                </h5>
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
                   <div>
                     <label>
@@ -148,9 +145,8 @@
             </div>
 
             <div class="bg-white rounded-[20px] mb-5">
-              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
-                Tipo de usuario activo
-              </h3>
+              <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Tipo de usuario activo
+              </h5>
               <ng-container *ngIf="userResponse.typeUserID === 1; else notMenstruante">
                 <p class="block text-xl mb-2 font-bold p-5" >Menstruante</p>
               </ng-container>
