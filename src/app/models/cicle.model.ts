@@ -44,6 +44,6 @@ export interface PredictionCycle {
 }
 
 export interface CyclePhaseState {
-  statePhase: DataPieChartChildren;
-  ovulationNumber: number;
+  statePhase?: DataPieChartChildren;
+  ovulationNumber?: number;
 }
