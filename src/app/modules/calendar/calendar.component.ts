@@ -13,18 +13,15 @@ import {
   PredictionCycle,
 } from 'src/app/models/cicle.model';
 import { Router } from '@angular/router';
-import { constants } from 'src/app/constans/constants';
 import { QuestionService } from 'src/app/services/question/question.service';
-import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { Store } from '@ngrx/store';
-import { selectNumberOfOvulation } from 'src/app/services/redux/selectors/calendar.selector';
 import { UserResponse } from 'src/app/models/user.model';
-import { selectPredictionCycle } from 'src/app/services/redux/selectors/cycle.selctor';
-import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
 import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
+import * as moment from 'moment';
+import { selectPredictionCycle } from 'src/app/services/redux/selectors/cycle.selctor';
 
 @Component({
   selector: 'app-calendar',
@@ -96,20 +93,20 @@ export class CalendarComponent implements OnInit {
         }
       });
 
-    // this.store.select(selectPredictionCycle).subscribe((pred: any) => {
-    //   if (pred) {
-    //     this.predictionLoad = pred?.prediction;
-    //     if (this.predictionLoad) {
-    //       this.nextPeriod = moment(this.predictionLoad.dateNextPeriod)
-    //         ?.locale('es')
-    //         .format('LL');
-    //       this.nextOvulation = moment(this.predictionLoad.period)
-    //         ?.add(Math.round(this.predictionLoad?.numberOvulation), 'days')
-    //         ?.locale('es')
-    //         .format('LL');
-    //     }
-    //   }
-    // });
-    //TODO: QUE EL INIT ESTE ACA DEL DISPATCH Y LAS SUBSCRICCPIONES EN LOS COMPONENTES 
+    this.store.select(selectPredictionCycle).subscribe((pred: any) => {
+      if (pred) {
+        this.predictionLoad = pred?.prediction;
+        if (this.predictionLoad) {
+          this.nextPeriod = moment(this.predictionLoad.dateNextPeriod)
+            ?.locale('es')
+            .format('LL');
+          this.nextOvulation = moment(this.predictionLoad.period)
+            ?.add(Math.round(this.predictionLoad?.numberOvulation), 'days')
+            ?.locale('es')
+            .format('LL');
+        }
+      }
+    });
+    //TODO: QUE EL INIT ESTE ACA DEL DISPATCH Y LAS SUBSCRICCPIONES EN LOS COMPONENTES
   }
 }
