@@ -79,7 +79,6 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
           this.cyclesWithOutEndNull = await dataCycle?.filter(
             (item: any) => item?.dateEnd !== null
           );
-          // console.log(this.averageQuestionCycleContent);
 
           let chat12: AgPolarSeriesOptions = {};
           let chat13: AgPolarSeriesOptions = {};
@@ -268,7 +267,11 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    if (newDataArray[diff - 1]?.fase) {
+    if (
+      newDataArray[diff - 1]?.fase !==
+        this.localStorageService.getUserByLogin()?.state ||
+      this.localStorageService.getUserByLogin()?.state === ''
+    ) {
       this.store.dispatch(
         editUserData({
           userData: {
@@ -459,9 +462,6 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
   setNotificactionCycle(item: any) {
     if (moment(new Date(item.date)).date() === moment(new Date()).date()) {
       console.log(item.label);
-      console.log(moment(new Date(item.date)).date());
-      console.log(moment(new Date()).date());
-
       this.notificationService
         .enviarNotificacion(
           'Información de ciclo',

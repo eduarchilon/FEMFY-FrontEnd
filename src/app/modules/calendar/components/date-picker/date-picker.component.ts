@@ -27,6 +27,10 @@ import {
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { Cycle, PredictionCycle } from 'src/app/models/cicle.model';
 import { loadedPredictionNextCycle } from 'src/app/services/redux/actions/cycle.action';
+import { Observable, Subscription } from 'rxjs';
+import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
+import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
+import { questionUserMenstruationInit } from 'src/app/services/redux/actions/question-menstruation/question-menstruation-user-page.action';
 
 @Component({
   selector: 'app-date-picker',
@@ -37,12 +41,17 @@ import { loadedPredictionNextCycle } from 'src/app/services/redux/actions/cycle.
 export class DatePickerComponent implements OnInit, OnChanges {
   daysSelected: moment.Moment[] = [];
   isOpen: boolean = true;
-  // @ViewChild('calendar') calendar!: MatCalendar<Date>;
-  sampleRange!: DateRange<moment.Moment>;
+
+  sampleRange: DateRange<moment.Moment> = new DateRange(
+    moment(null),
+    moment(null),
+  );
 
   @Input() cycle: Cycle | any | null = null;
   @Input() averageQuestionCycleContent: number[] = [];
   @Input() cyclesWithOutEndNull: Cycle[] = [];
+
+  @ViewChild('calendar') calendar!: MatCalendar<Date>;
 
   initPeriod: moment.Moment | null = null;
   endPeriod: moment.Moment | null = null;
@@ -67,65 +76,90 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    this.calendar?.updateTodaysDate();
     this.cdr.detectChanges();
   }
 
   refreshDR() {
+    this.calendar?.updateTodaysDate();
     return this.sampleRange;
   }
 
+  cyclesUser$: Observable<Cycle> = this.store.select(cyclesUserSelector);
+  private cyclesUserSubscription: Subscription | null = null;
+
+  cyclesWithEndNull!: Cycle[] | any;
+
   ngOnInit(): void {
-    this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
-      const diferenciaEnDias = moment(cycle?.dateEnd).diff(
-        moment(cycle?.dateBeging),
-        'days'
-      );
-      this.averageQuestionCycleContent.push(diferenciaEnDias);
-    });
-
+    this.calendar?.updateTodaysDate();
     const userId = this.localStorageService.getUserByLogin()?.idUser;
-    //Register Cycle
-    this.cicleService
-      .getCycle(userId, this.cycle?.dateBeging)
-      .subscribe((res: any) => {
-        if (res) {
-          this.initCycle = moment(res?.dateBeging);
-          let initCycleOvulation = moment(res?.dateBeging);
-          let result = Math.round(
-            this.setAverageCycles(this.averageQuestionCycleContent)
-          );
-          let resultOvulation = result / 2;
-          this.endCycle = this.initCycle?.add(result, 'days');
-          this.dayOvulation = initCycleOvulation?.add(resultOvulation, 'days');
 
-          this.initPeriod = moment(res?.dateBeging);
-          this.endPeriod = moment(res?.dateBeging).add(
-            this.cycle?.daysOfBleeding,
+    this.store?.dispatch(cycleUserInit());
+    this.cyclesUser$?.subscribe(async (dataCycle: any) => {
+      if (dataCycle?.length > 0) {
+        this.cyclesWithEndNull = await dataCycle?.filter(
+          (item: any) => item?.dateEnd === null
+        );
+        this.cyclesWithOutEndNull = await dataCycle?.filter(
+          (item: any) => item?.dateEnd !== null
+        );
+
+        //Register Cycle
+        if (this.cyclesWithEndNull[0]) {
+          this.cicleService
+            .getCycle(userId, this.cyclesWithEndNull[0]?.dateBeging)
+            .subscribe((res: any) => {
+              if (res) {
+                this.initCycle = moment(res?.dateBeging);
+                let initCycleOvulation = moment(res?.dateBeging);
+                let result = Math.round(
+                  this.setAverageCycles(this.averageQuestionCycleContent)
+                );
+                let resultOvulation = result / 2;
+                this.endCycle = this.initCycle?.add(result, 'days');
+                this.dayOvulation = initCycleOvulation?.add(
+                  resultOvulation,
+                  'days'
+                );
+
+                this.initPeriod = moment(res?.dateBeging);
+                this.endPeriod = moment(res?.dateBeging).add(
+                  this.cycle?.daysOfBleeding,
+                  'days'
+                );
+
+                this.sampleRange = new DateRange(
+                  this.initPeriod,
+                  this.endPeriod.add(-1, 'days')
+                );
+
+                const predictionCycle: PredictionCycle = {
+                  dateNextPeriod: moment(this.endCycle).add(1, 'day'),
+                  numberOvulation: resultOvulation,
+                  period: this.initPeriod,
+                };
+
+                this.store.dispatch(
+                  loadedPredictionNextCycle({
+                    prediction: { ...predictionCycle },
+                  })
+                );
+                this.calendar?.updateTodaysDate();
+              } else {
+                this.cdr.detectChanges();
+              }
+            });
+        }
+
+        this.cyclesWithOutEndNull?.forEach((cycle: Cycle | any) => {
+          const diferenciaEnDias = moment(cycle?.dateEnd).diff(
+            moment(cycle?.dateBeging),
             'days'
           );
-
-          this.sampleRange = new DateRange(
-            this.initPeriod,
-            this.endPeriod.add(-1, 'days')
-          );
-          console.log(this.sampleRange);
-          console.log(this.endPeriod);
-          console.log(this.initPeriod);
-          console.log(this.endCycle);
-
-          const predictionCycle: PredictionCycle = {
-            dateNextPeriod: moment(this.endCycle).add(1, 'day'),
-            numberOvulation: resultOvulation,
-            period: this.initPeriod,
-          };
-
-          this.store.dispatch(
-            loadedPredictionNextCycle({ prediction: { ...predictionCycle } })
-          );
-        } else {
-          this.cdr.detectChanges();
-        }
-      });
+          this.averageQuestionCycleContent.push(diferenciaEnDias);
+        });
+      }
+    });
 
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
@@ -158,16 +192,12 @@ export class DatePickerComponent implements OnInit, OnChanges {
       (this.daysSelected?.find((x) => x.isSame(date, 'day'))
         ? 'selected'
         : '') ||
-      //   ||
-      // (moment(this.endPeriod)?.isSame(date) ? 'end-period' : '')
       (moment(this.dayOvulation)?.isSame(date) ? 'day-ovulation' : '')
     );
   };
 
   select(event?: any, calendar?: any): void {
-    const eventFinded = this.daysSelected?.find((date: any) =>
-      date?.isSame(event)
-    );
+    this.daysSelected?.find((date: any) => date?.isSame(event));
     calendar?.updateTodaysDate();
   }
 
