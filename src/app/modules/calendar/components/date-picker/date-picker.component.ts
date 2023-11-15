@@ -44,7 +44,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   sampleRange: DateRange<moment.Moment> = new DateRange(
     moment(null),
-    moment(null),
+    moment(null)
   );
 
   @Input() cycle: Cycle | any | null = null;
@@ -118,7 +118,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
                 let resultOvulation = result / 2;
                 this.endCycle = this.initCycle?.add(result, 'days');
                 this.dayOvulation = initCycleOvulation?.add(
-                  resultOvulation,
+                  resultOvulation - 1,
                   'days'
                 );
 
