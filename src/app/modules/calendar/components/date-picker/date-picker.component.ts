@@ -165,15 +165,17 @@ export class DatePickerComponent implements OnInit, OnChanges {
     this.calendarService
       .getEventsCalendar(userId)
       .subscribe((eventsCalendar: any[]) => {
-        this.eventsNotification = eventsCalendar;
-        eventsCalendar
-          ?.filter((item) => item?.idUser === userId)
-          ?.forEach((event: any) =>
-            this.daysSelected.push(moment(event?.date))
-          );
-        this.daysSelected.push(
-          moment(this.localStorageService.getUserByLogin()?.birthdate) //ejemplo agregando el cumple no es evento
-        ); //TODO: habra fecha seteada del ciclo
+        if (eventsCalendar) {
+          this.eventsNotification = eventsCalendar;
+          eventsCalendar
+            ?.filter((item) => item?.idUser === userId)
+            ?.forEach((event: any) =>
+              this.daysSelected.push(moment(event?.date))
+            );
+          this.daysSelected.push(
+            moment(this.localStorageService.getUserByLogin()?.birthdate) //ejemplo agregando el cumple no es evento
+          ); //TODO: habra fecha seteada del ciclo
+        }
       });
     this.cdr.detectChanges();
   }
