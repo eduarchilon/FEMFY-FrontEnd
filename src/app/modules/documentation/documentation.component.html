@@ -105,6 +105,7 @@
                 </tr>
               </thead>
               <tbody>
+                
                 <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
                   <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#7c2385]">
                     {{ study.customMetadata.typeStudy }}
@@ -127,7 +128,7 @@
                       <i class="fa fa-trash w-[30px]" style="color: red" aria-hidden="true"></i>
                       Eliminar
                     </button>
-                    <button class="me-3">
+                    <button class="me-3" (click)="viewQR(study.url)">
                       <i class="fa fa-share w-[30px]" style="color: red" aria-hidden="true"></i>
                       Compartir
                     </button>

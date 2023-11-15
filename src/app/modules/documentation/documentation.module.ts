@@ -8,6 +8,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { HttpClientJsonpModule } from '@angular/common/http';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { QRGeneratorModule } from './QRGenerator/QRGenerator.module';
 
 @NgModule({
   declarations: [DocumentationComponent],
@@ -18,6 +19,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     HttpClientJsonpModule,
     MatProgressSpinnerModule,
+    QRGeneratorModule,
   ],
   providers: [LocalStorageService, LoaderService],
 })

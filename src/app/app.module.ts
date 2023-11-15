@@ -42,6 +42,7 @@ import { InformationModule } from './modules/information/information.module';
 import { UserDataEffects } from './services/redux/effects/user-data.effect';
 import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
 import { QuestionMenstruationUserEffects } from './services/redux/effects/question-menstruation-user.effect';
+import { QrCodeModule } from 'ng-qrcode';
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -65,6 +66,7 @@ import { QuestionMenstruationUserEffects } from './services/redux/effects/questi
     FormsModule,
     ReactiveFormsModule,
     SubscriptionModule,
+    QrCodeModule,
     BrowserAnimationsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),

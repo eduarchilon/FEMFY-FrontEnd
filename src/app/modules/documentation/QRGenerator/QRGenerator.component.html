@@ -1,0 +1,16 @@
+<div class="p-[20px]">
+
+    <h3 class="text-3xl font-bold text-femfy-800 mb-5">Estudio</h3>
+<!--
+        <p class="text-xl">{{ study.customMetadata.typeStudy }}</p>
+        <p class="text-xl">{{ study.customMetadata.description }}</p>
+        <p class="text-xl">{{ study.customMetadata.studyDate }}</p>
+    -->
+
+    <qr-code value={{study.fileURL}} size="300" errorCorrectionLevel="M"></qr-code>
+
+    <h3 class="text-3xl font-bold text-femfy-800 mb-5 ml-5" (click)="copyToClipboard(study.fileURL)">
+        <span style="cursor: pointer;">Copiar enlace</span>
+      </h3>
+
+</div>
