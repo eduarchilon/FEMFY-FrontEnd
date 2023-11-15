@@ -43,16 +43,16 @@ export class DeleteCycleComponent implements OnInit {
         this.router.navigate(['/']).then(() => {
           location.reload();
         });
-        this.store.dispatch(
-          editUserData({
-            userData: {
-              ...this.localStorageService.getUserByLogin(),
-              state: '',
-            },
-          })
-        );
         this.loaderService.hideLoader();
       }
     });
+    this.store.dispatch(
+      editUserData({
+        userData: {
+          ...this.localStorageService.getUserByLogin(),
+          state: '',
+        },
+      })
+    );
   }
 }
