@@ -1,8 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ConsejoDiarioComponent } from './consejo-diario.component';
+import { Store, StoreModule } from '@ngrx/store';
 
-xdescribe('ConsejoDiarioComponent', () => {
+fdescribe('ConsejoDiarioComponent', () => {
   let component: ConsejoDiarioComponent;
   let fixture: ComponentFixture<ConsejoDiarioComponent>;
 

@@ -50,14 +50,25 @@ fdescribe('LoginUsuarioComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('loginUser()', () => {
-    const authenticatedUser = {
+  it('loginUser should call login service and show loader', () => {
+    const authenticatedUser = createAuthenticatedUser('ana', 'ana');
+    setupAuthServiceLogin(authService, authenticatedUser);
+    setupLoginForm(component.formLogin, authenticatedUser.userName, authenticatedUser.password);
+
+    component.loginUser();
+
+    assertLoaderServiceShowLoader(loaderService);
+    assertAuthServiceLoginCalled(authService, authenticatedUser);
+  });
+
+  function createAuthenticatedUser(userName: string, password: string) {
+    return {
       idUser: 61,
       typeUserID: 1,
       firstName: null,
       lastName: null,
-      userName: 'ana',
-      password: 'ana',
+      userName,
+      password,
       isSuscriptor: null,
       birthdate: '1992-10-15',
       phone: null,
@@ -66,18 +77,22 @@ fdescribe('LoginUsuarioComponent', () => {
       localidad: null,
       avatar: null,
     };
-    authService.login.and.returnValue(of(authenticatedUser));
-    component.formLogin.setValue({
-      userName: authenticatedUser.userName,
-      password: authenticatedUser.password,
-    });
+  }
 
-    component.loginUser();
+  function setupAuthServiceLogin(authService: jasmine.SpyObj<AuthService>, user: any) {
+    authService.login.and.returnValue(of(user));
+  }
 
+  function setupLoginForm(formLogin: any, userName: string, password: string) {
+    formLogin.setValue({ userName, password });
+  }
+
+  function assertLoaderServiceShowLoader(loaderService: jasmine.SpyObj<LoaderService>) {
     expect(loaderService.showLoader).toHaveBeenCalled();
-    expect(authService.login).toHaveBeenCalledWith(
-      authenticatedUser.userName,
-      authenticatedUser.password
-    );
-  });
+  }
+
+  function assertAuthServiceLoginCalled(authService: jasmine.SpyObj<AuthService>, user: any) {
+    expect(authService.login).toHaveBeenCalledWith(user.userName, user.password);
+  }
+
 });
