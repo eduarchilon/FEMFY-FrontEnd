@@ -22,6 +22,7 @@ import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.
 import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
 import * as moment from 'moment';
 import { selectPredictionCycle } from 'src/app/services/redux/selectors/cycle.selctor';
+import { EventDayDrawerComponent } from './components/event-day-drawer/event-day-drawer.component';
 
 @Component({
   selector: 'app-calendar',
@@ -108,5 +109,23 @@ export class CalendarComponent implements OnInit {
       }
     });
     //TODO: QUE EL INIT ESTE ACA DEL DISPATCH Y LAS SUBSCRICCPIONES EN LOS COMPONENTES
+  }
+
+  openEventDayDrawer(): void {
+    const daySelected = moment(new Date());
+
+    this.dialog.open(EventDayDrawerComponent, {
+      panelClass: [
+        '!max-w-[95vw]',
+        'max-lg:!w-[80%]',
+        'max-md:!w-[100vw]',
+        'max-xl:!w-[50%]',
+        '!w-[50%]',
+        '!rounded-[20px]',
+      ],
+      data: {
+        daySelected,
+      },
+    });
   }
 }

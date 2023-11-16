@@ -33,5 +33,25 @@ export class QRGeneratorComponent implements OnInit {
     alert('Enlace copiado al portapapeles');
   }
 
+  shareStudy(text: string): void {
+    if ('share' in navigator) {
+      this.shareLink(text);
+    } else {
+      this.copyToClipboard(text);
+    }
+  }
+
+  async shareLink(url: string): Promise<void> {
+    try {
+      await navigator.share({
+        text: '¡Mira este enlace!',
+        url,
+      });
+      console.log('Enlace compartido con éxito');
+    } catch (error) {
+      console.error('Error al compartir el enlace', error);
+    }
+  }
+
   
 }
