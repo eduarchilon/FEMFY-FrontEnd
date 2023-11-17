@@ -9,6 +9,7 @@ import { HttpClientJsonpModule } from '@angular/common/http';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QRGeneratorModule } from './QRGenerator/QRGenerator.module';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [DocumentationComponent],
@@ -20,6 +21,7 @@ import { QRGeneratorModule } from './QRGenerator/QRGenerator.module';
     HttpClientJsonpModule,
     MatProgressSpinnerModule,
     QRGeneratorModule,
+    MatSnackBarModule,
   ],
   providers: [LocalStorageService, LoaderService],
 })

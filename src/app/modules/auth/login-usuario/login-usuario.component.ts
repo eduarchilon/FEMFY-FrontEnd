@@ -27,7 +27,7 @@ export class LoginUsuarioComponent implements OnInit {
     private router: Router,
     private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit(): void {}
@@ -51,4 +51,5 @@ export class LoginUsuarioComponent implements OnInit {
         error: (error) => error,
       });
   }
+
 }

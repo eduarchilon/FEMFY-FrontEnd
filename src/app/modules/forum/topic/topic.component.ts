@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Topic } from 'src/app/models/topic.model';
@@ -8,6 +8,9 @@ import { TopicService } from 'src/app/services/topic/topic.service';
 import { RegisterPostComponent } from '../components/register-post/register-post.component';
 import { UserService } from 'src/app/services/user/user.service';
 import { ReplayService } from 'src/app/services/replay/replay.service';
+import { ConversationComponent } from '../conversation/conversation.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-topic',
@@ -26,7 +29,9 @@ export class TopicComponent {
     private topicService: TopicService,
     private replayService: ReplayService,
     private postService: PostService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private router: Router,
+    ) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -67,4 +72,5 @@ export class TopicComponent {
       data: { idTopic: this.idTopic }
     });
   }
+
 }

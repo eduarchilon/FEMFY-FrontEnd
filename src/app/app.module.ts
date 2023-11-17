@@ -44,6 +44,7 @@ import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
 import { QuestionMenstruationUserEffects } from './services/redux/effects/question-menstruation-user.effect';
 import { QrCodeModule } from 'ng-qrcode';
 
+
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
   imports: [

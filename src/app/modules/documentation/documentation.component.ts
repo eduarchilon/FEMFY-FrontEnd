@@ -18,6 +18,7 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatDialog } from '@angular/material/dialog';
 import { QRGeneratorComponent } from './QRGenerator/QRGenerator.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-documentation',
@@ -60,6 +61,7 @@ export class DocumentationComponent implements OnInit {
     private storage: Storage,
     private loaderService: LoaderService,
     public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
   ) {
     this.formDocumentation = this.fb.group({
       description: ['', Validators.required],
@@ -106,6 +108,11 @@ export class DocumentationComponent implements OnInit {
       };
       uploadBytes(imgRef, file, { customMetadata: metadata })
         .then((snapshot) => {
+
+          this._snackBar.open('Estudio subido con éxito.', 'cerrar', {
+            duration: 5000, // Duración en milisegundos
+          })
+
           console.log('Archivo subido con éxito.', snapshot);
           this.loaderService.showLoader();
           this.getFiles();
@@ -236,18 +243,12 @@ export class DocumentationComponent implements OnInit {
   }
 
 
-  viewQR(fileURL: string): void {
+  viewQR(fileURL: string, typeStudy: string): void {
     this.dialog.open(QRGeneratorComponent, {
-      panelClass: [
-        '!max-w-[95vw]',
-        'max-lg:!w-[80%]',
-        'max-md:!w-[100vw]',
-        'max-xl:!w-[50%]',
-        '!w-[50%]',
-        '!rounded-[20px]',
-      ],
+      panelClass: ['!rounded-[20px]'],
       data: {
         fileURL,
+        typeStudy,
       },
     });
   }

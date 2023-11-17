@@ -2,6 +2,7 @@ import { Component, Inject, OnInit, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-QRGenerator',
@@ -13,6 +14,8 @@ export class QRGeneratorComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<QRGeneratorComponent>,
     private localStorageService: LocalStorageService,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public study: any,
   ) {}
 
@@ -30,7 +33,9 @@ export class QRGeneratorComponent implements OnInit {
     document.body.removeChild(el);
 
     // Puedes agregar alguna lógica adicional aquí, como mostrar un mensaje de éxito
-    alert('Enlace copiado al portapapeles');
+    this._snackBar.open('Enlace copiado al portapapeles', 'X', {
+      duration: 5000, // Duración en milisegundos
+    })
   }
 
   shareStudy(text: string): void {
