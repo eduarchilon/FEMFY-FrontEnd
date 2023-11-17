@@ -1,9 +1,9 @@
 <div class="bg-[#f2d4fa] bg-cover px-[3vw]">
     <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
         <div class="flex justify-between mb-5">
-            <div class="flex">
-            <a routerLink="/foro" class="text-3xl text-femfy-800 font-bold mb-10">Comunidad ></a>
-            <h2 class="text-3xl text-femfy-800 font-bold ml-2">{{ topic?.title }}</h2>
+            <div class="flex !font-medium text-femfy-800 text-[20px]">
+            <a routerLink="/foro" >Comunidad > </a>
+            <a>{{ topic?.title }}</a>
             </div>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
                 class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px]">Crear una

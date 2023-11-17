@@ -1,13 +1,15 @@
 <div class="bg-[#f2d4fa] py-24">
   <div class="w-[100%] max-w-[1280px] m-auto px-[3vw] md:p-0">
-    <div
-      class="flex my-10 gap-10 max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]"
-    >
+    <div class="flex justify-between mb-5 pt-[20px]">
+      <div class="flex !font-medium text-femfy-800 text-[30px]">
+        <a routerLink="/">Inicio </a>
+      </div>
+    </div>
+
+    <div class="flex my-10 gap-10 max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]">
       <!-- Card ciclo menstrual -->
       <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
-        <div
-          class="flex items-center justify-between border-b-4 border-b-[#7c2385]"
-        >
+        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
           <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
             Ciclo actual
           </h5>
@@ -17,20 +19,14 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button
-                  mat-menu-item
-                  (click)="editActualCycle(cyclesWithEndNull[0])"
-                >
+                <button mat-menu-item (click)="editActualCycle(cyclesWithEndNull[0])">
                   <mat-icon color="primary">edit_road</mat-icon>
                   <span>Editar días de sangrado</span>
                 </button>
                 <div class="w-[100%] px-2">
                   <mat-divider></mat-divider>
                 </div>
-                <button
-                  mat-menu-item
-                  (click)="deleteActualCycle(cyclesWithEndNull[0])"
-                >
+                <button mat-menu-item (click)="deleteActualCycle(cyclesWithEndNull[0])">
                   <mat-icon color="warn">delete</mat-icon>
                   <span>Eliminar ciclo</span>
                 </button>
@@ -47,28 +43,20 @@
         </div>
 
         <div class="flex justify-center rounded-full bg-white mb-5">
-          <ng-container
-            *ngIf="
+          <ng-container *ngIf="
               cyclesWithEndNull.length > 0 &&
               averageQuestionCycleContent.length > 0
-            "
-          >
-            <app-pie-chart
-              [averageQuestionCycleContent]="averageQuestionCycleContent"
-            ></app-pie-chart>
+            ">
+            <app-pie-chart [averageQuestionCycleContent]="averageQuestionCycleContent"></app-pie-chart>
           </ng-container>
           <ng-container *ngIf="cyclesWithEndNull.length === 0">
-            <img
-              class="w-[200px] h-[200px] rounded-full"
-              src="https://img.freepik.com/free-vector/pregnancy-test-concept-illustration_114360-3471.jpg?t=st=1698796129~exp=1698796729~hmac=3e83eb3e21b9da8986fb1db93f425ad2e0a17c57e99d1d5d476d0ab673efa1f5"
-            />
+            <img class="w-[200px] h-[200px] rounded-full"
+              src="https://img.freepik.com/free-vector/pregnancy-test-concept-illustration_114360-3471.jpg?t=st=1698796129~exp=1698796729~hmac=3e83eb3e21b9da8986fb1db93f425ad2e0a17c57e99d1d5d476d0ab673efa1f5" />
           </ng-container>
         </div>
 
         <ng-container *ngIf="cycles.length > 0">
-          <div
-            class="bg-[#f9eafd] border-[#7c2385] border-2 shadow-sm p-3 mb-5 mx-10 rounded-[20px]"
-          >
+          <div class="bg-[#f9eafd] border-[#7c2385] border-2 shadow-sm p-3 mb-5 mx-10 rounded-[20px]">
             <div class="flex">
               <i class="w-[20px] h-[20px] bg-[red] rounded-lg"></i>
               <p class="ml-3">Día de ciclo</p>
@@ -85,24 +73,16 @@
         </ng-container>
 
         <div class="text-center">
-          <p
-            *ngIf="cycles.length === 0"
-            class="mt-5 text-xl text-center font-medium mb-5 px-[20px]"
-          >
+          <p *ngIf="cycles.length === 0" class="mt-5 text-xl text-center font-medium mb-5 px-[20px]">
             Registrá tu ciclo y nosotros nos ocupamos del resto
           </p>
-          <button
-            class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
-            [class.me-3]="cycles.length > 0"
-            (click)="openCicleRegister(cyclesWithEndNull[0])"
-          >
+          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            [class.me-3]="cycles.length > 0" (click)="openCicleRegister(cyclesWithEndNull[0])">
             Registrar ciclo
           </button>
-          <button
-            *ngIf="cyclesWithEndNull.length > 0"
+          <button *ngIf="cyclesWithEndNull.length > 0"
             class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
-            (click)="finishActualCicle(cyclesWithEndNull[0])"
-          >
+            (click)="finishActualCicle(cyclesWithEndNull[0])">
             Finalizar ciclo
           </button>
         </div>
@@ -110,16 +90,13 @@
 
       <!-- Card historial ciclos -->
       <div class="flex-1 w-full justify-between bg-white rounded-[20px]">
-        <h5
-          class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
-        >
+        <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">
           Historial de ciclos
         </h5>
         <div class="p-[20px] flex text-black flex-col gap-[15px]">
           <ng-container *ngIf="cycles.length === 0">
             <img
-              src="https://img.freepik.com/free-vector/add-notes-concept-illustration_114360-3416.jpg?t=st=1698795300~exp=1698795900~hmac=bdbeb1b79f62750fb8d81a3441e898bde4831db81a79f8892ed2c091c3f85c44"
-            />
+              src="https://img.freepik.com/free-vector/add-notes-concept-illustration_114360-3416.jpg?t=st=1698795300~exp=1698795900~hmac=bdbeb1b79f62750fb8d81a3441e898bde4831db81a79f8892ed2c091c3f85c44" />
             <p class="mt-5 text-xl text-center font-medium">
               Todavía no existen datos cargados.
             </p>
@@ -132,9 +109,7 @@
 
       <!-- Card recomendaciones -->
       <div class="flex-1 w-full bg-white rounded-[20px]">
-        <div
-          class="flex items-center justify-between border-b-4 border-b-[#7c2385]"
-        >
+        <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
           <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
             Recomendaciones
           </h5>
@@ -143,11 +118,7 @@
               <mat-icon>more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-              <button
-                routerLink="information"
-                mat-menu-item
-                (click)="editRecomendation.show()"
-              >
+              <button routerLink="information" mat-menu-item (click)="editRecomendation.show()">
                 <mat-icon color="primary">edit_road</mat-icon>
                 <span>Editá tus recomendaciones</span>
               </button>
