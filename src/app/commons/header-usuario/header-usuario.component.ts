@@ -148,4 +148,13 @@ export class HeaderUsuarioComponent implements OnInit {
   getProfileImage(): string {
     return this.sharedProfileService.getUserProfileImage();
   }
+
+  isProfileActive(): boolean {
+    // Verifica si la ruta actual está activa
+    return this.router.isActive('/perfil', true)
+      || this.router.isActive('/subscription', true)
+      || this.router.isActive('/information', true);
+  }
+
+
 }

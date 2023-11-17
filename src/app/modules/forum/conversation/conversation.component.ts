@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models/post.model';
@@ -17,6 +17,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 
 export class ConversationComponent {
+
   replies: any[] = [];
 
   post!: Post;
@@ -38,6 +39,7 @@ export class ConversationComponent {
   ) {}
 
   ngOnInit(): void {
+ 
     this.route.paramMap.subscribe(params => {
       const idPost = params.get('id')
       if (idPost !== null) {

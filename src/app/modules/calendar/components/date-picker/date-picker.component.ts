@@ -203,8 +203,12 @@ export class DatePickerComponent implements OnInit, OnChanges {
     calendar?.updateTodaysDate();
   }
 
+
+
   openDialog(daySelected: any) {
+    console.log(daySelected);
     this.dialog.open(EventDayDrawerComponent, {
+
       panelClass: [
         '!max-w-[95vw]',
         'max-lg:!w-[80%]',
