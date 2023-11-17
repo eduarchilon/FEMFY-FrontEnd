@@ -1,20 +1,50 @@
 <div class="p-5">
   <mat-dialog-content class="text-center !m-auto">
-    <h3 class="text-femfy-800 text-2xl font-bold pb-3 mb-10">Registrar datos del periodo</h3>
+    <h3 class="text-femfy-800 text-2xl font-bold pb-3 mb-10">
+      Registrar datos del periodo
+    </h3>
     <form [formGroup]="formCycle" (ngSubmit)="registerCycle()">
       <div class="mb-5">
-        <label class="block text-gray-600 text-xl font-medium mb-2">Inicio del ciclo</label>
-        <input type="date" formControlName="dateBeging" class="outline-none rounded-full p-3" />
+        <label class="block text-gray-600 text-xl font-medium mb-2"
+          >Inicio del ciclo</label
+        >
+        <input
+          type="date"
+          formControlName="dateBeging"
+          class="outline-none rounded-full p-3"
+        />
+        <p class="text-[12px] text-[red] font-semibold" *ngIf="errorDate">
+          {{ errorDate }}
+        </p>
       </div>
       <div class="mb-10">
-        <label class="block text-gray-600 text-xl font-medium mb-2">Duración del sangrado</label>
-        <input type="number" formControlName="daysOfBleeding" class="outline-none rounded-full p-3" />
+        <label class="block text-gray-600 text-xl font-medium mb-2"
+          >Duración del sangrado</label
+        >
+        <input
+          type="number"
+          formControlName="daysOfBleeding"
+          class="outline-none rounded-full p-3"
+        />
+        <p
+          class="text-[12px] text-[red] font-semibold"
+          *ngIf="formCycle.get('daysOfBleeding')?.hasError('maxDays')"
+        >
+          La duración del sangrado no debe ser mayor a 8.
+        </p>
       </div>
       <div>
-        <button class="bg-femfy-400 text-white py-[10px] px-[20px] rounded-[20px] me-3" type="submit">
+        <button
+          class="bg-femfy-400 text-white py-[10px] px-[20px] rounded-[20px] me-3"
+          type="submit"
+          [disabled]="!formCycle.valid"
+        >
           Registrar
         </button>
-        <button class="bg-femfy-800 text-white py-[10px] px-[20px] rounded-[20px]" (click)="closeDialog()">
+        <button
+          class="bg-femfy-800 text-white py-[10px] px-[20px] rounded-[20px]"
+          (click)="closeDialog()"
+        >
           Cancelar
         </button>
       </div>

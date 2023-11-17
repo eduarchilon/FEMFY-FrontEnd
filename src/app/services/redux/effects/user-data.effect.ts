@@ -50,7 +50,7 @@ export class UserDataEffects {
       ofType(editUserData),
       concatMap((action) =>
         this.authService.updateUser(action.userData).pipe(
-          map(() => editUserDataSuccess),
+          map(() => editUserDataSuccess()),
           catchError(() =>
             of(
               editUserDataError({

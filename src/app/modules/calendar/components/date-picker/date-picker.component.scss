@@ -41,3 +41,8 @@ button.end-period {
 .mat-calendar-body-selected {
   background-color: rgba(253, 60, 60, 0.563) !important;
 }
+
+
+.mat-calendar-body-in-range>.mat-calendar-body-comparison-identical, .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after{
+  background-color: unset !important;
+}
