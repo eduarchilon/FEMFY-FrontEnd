@@ -1,8 +1,8 @@
 <div class="bg-[#f2d4fa] bg-cover px-[3vw]">
     <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
-        <div class="flex justify-between mb-5">
+        <div class="flex justify-between mb-10">
             <div class="flex">
-            <a routerLink="/foro" class="text-3xl text-femfy-800 font-bold mb-10">Comunidad ></a>
+            <a routerLink="/foro" class="text-3xl text-femfy-800 font-bold">Comunidad ></a>
             <h2 class="text-3xl text-femfy-800 font-bold ml-2">{{ topic?.title }}</h2>
             </div>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
@@ -11,7 +11,7 @@
         </div>
 
         <div *ngIf="posts.length > 0; else emptyPosts">
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10 mt-10">
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <div *ngFor="let post of posts">
                     <div class="w-full shadow-2xl rounded-[20px]">
                         <div class="bg-[#7c2385] rounded-t-[20px] shadow-xl h-[56px] p-3">

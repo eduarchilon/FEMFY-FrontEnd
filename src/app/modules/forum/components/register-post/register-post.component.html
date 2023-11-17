@@ -3,15 +3,26 @@
     <form [formGroup]="formPost" (ngSubmit)="registerPost()">
         <div class="mx-auto w-10/12">
             <div class="bg-white flex flex-col text-gray-800 p-5 mb-5">
-                <label class="block text-gray-600 text-xl font-medium mb-2">Título</label>
-                <input class="border border-gray-300 p-3 mb-4 rounded-[20px] outline-none" formControlName="title" type="text">
+                <div class="mb-4">
+                    <label class="block text-xl font-medium mb-2">Título</label>
+                    <input class="border border-gray-300 p-3 rounded-[20px] outline-none w-full" formControlName="title" type="text">
+                    <span class="block text-[12px] text-[red] font-semibold mt-3"
+                        *ngIf="formPost.get('title')?.hasError('required')">
+                        El título es obligatorio.
+                    </span>
+                </div>
 
-                <label class="block text-gray-600 text-xl font-medium mb-2">Contenido</label>
-                <textarea class="p-3 h-60 border border-gray-300 rounded-[20px] outline-none" placeholder="Escribe tu mensaje" formControlName="content"></textarea>
+                <label class="block text-xl font-medium mb-2">Contenido</label>
+                <textarea class="p-3 h-60 border border-gray-300 placeholder:text-gray-600 rounded-[20px] outline-none"
+                    placeholder="Escribe tu mensaje" formControlName="content"></textarea>
+                <span class="text-[12px] text-[red] font-semibold mt-3"
+                    *ngIf="formPost.get('content')?.hasError('required')">
+                    El contenido es obligatorio.
+                </span>
 
                 <div class="buttons flex justify-end mt-5">
                     <button type="submit"
-                        class="bg-femfy-400 text-xl p-1 px-4 font-bold text-gray-200 rounded-[20px]">Publicar</button>
+                        class="bg-femfy-400 text-dark font-medium py-[10px] px-[20px] rounded-[20px]">Publicar</button>
                 </div>
             </div>
         </div>

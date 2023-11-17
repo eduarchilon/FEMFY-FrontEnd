@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { PostService } from 'src/app/services/post/post.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -15,19 +16,21 @@ import { Router } from '@angular/router';
 export class RegisterPostComponent {
 
   idTopic!: number;
-  formPost: FormGroup;
+
+  formPost: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    content: new FormControl('', Validators.required),
+  });
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<RegisterPostComponent>,
+    private _snackBar: MatSnackBar,
     private localStorageService: LocalStorageService,
     private postService: PostService,
     private fb: FormBuilder,
     private router: Router,
   ) {
-    this.formPost = this.fb.group({
-      title: new FormControl('', Validators.required),
-      content: new FormControl('', Validators.required),
-    });
     this.idTopic = data.idTopic;
   }
 
@@ -42,13 +45,24 @@ export class RegisterPostComponent {
       .subscribe({
         next: (response: any) => {
           if (response) {
-            this.router.navigate(['/foro/' + this.idTopic]).then(() => {
+            this.router.navigate(['/foro/']).then(() => {
               location.reload();
             });
+            this.closeDialog()
+            // this.openSnackBar('Registro creado', 'OK');
           }
         },
         error: (error) => error,
       });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+    //this.formCycle.reset();
+  }
+
+  openSnackBar(message: string, action: string): void {
+    this._snackBar.open(message, action);
   }
 
 }
