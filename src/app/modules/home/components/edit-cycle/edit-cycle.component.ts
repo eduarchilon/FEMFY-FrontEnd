@@ -28,14 +28,20 @@ export class EditCycleComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  errorInput!: string;
+
   saveDaysOfBleeding(cycleChart: Cycle, daysOfBleeding: number | any): void {
-    this.cicleService
-      .editCycle({ ...cycleChart, daysOfBleeding: Number(daysOfBleeding) })
-      .subscribe({
-        next: (res: any) => res,
+    if (daysOfBleeding < 9) {
+      this.cicleService
+        .editCycle({ ...cycleChart, daysOfBleeding: Number(daysOfBleeding) })
+        .subscribe({
+          next: (res: any) => res,
+        });
+      this.router.navigate(['/']).then(() => {
+        location.reload();
       });
-    this.router.navigate(['/']).then(() => {
-      location.reload();
-    });
+    } else {
+      this.errorInput = 'La duración del sangrado no debe ser mayor a 8.';
+    }
   }
 }

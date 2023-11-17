@@ -8,7 +8,14 @@
     <h3 class="pb-3 text-2xl font-semibold">Editar días de sangrado</h3>
     <div class="mb-10">
       <label class="block text-xl mb-2">Duración del sangrado</label>
-      <input type="number" class="border-b-2" #daysOfBleeding />
+      <input
+        type="number"
+        class="outline-none rounded-full p-3"
+        #daysOfBleeding
+      />
+      <p class="text-[12px] text-[red] font-semibold" *ngIf="errorInput">
+        {{ errorInput }}
+      </p>
     </div>
     <div class="flex justify-between gap-4">
       <button

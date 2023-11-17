@@ -1,5 +1,5 @@
 <div class="max-h-[500px] overflow-y-scroll pe-[20px]">
-  <div>
+  <div *ngIf="actualDurationCycle">
     <h5 class="font-semibold">Estas en tu ciclo actual</h5>
     <h5 class="font-semibold">
       Inicio:
@@ -9,8 +9,8 @@
       }}</span>
     </h5>
   </div>
-  <br />
-  <mat-divider></mat-divider>
+  <br *ngIf="actualDurationCycle" />
+  <mat-divider *ngIf="actualDurationCycle"></mat-divider>
   <br />
   <div class="flex flex-col gap-4">
     <ng-container *ngFor="let item of cycleHistorial">

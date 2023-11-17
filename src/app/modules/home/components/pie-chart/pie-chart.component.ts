@@ -269,8 +269,8 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (
       newDataArray[diff - 1]?.fase !==
-        this.localStorageService.getUserByLogin()?.state ||
-      this.localStorageService.getUserByLogin()?.state === ''
+        this.localStorageService.getUserByLogin()?.state &&
+      this.cyclesWithEndNull.length > 0
     ) {
       this.store.dispatch(
         editUserData({
@@ -299,7 +299,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       data: dataChildrenSeries,
       innerRadiusRatio: 0.8,
       listeners: {
-        nodeClick: (event: any) => {
+        nodeDoubleClick: (event: any) => {
           this.openDialogCalendarEvent(moment(event?.datum), event?.datum);
         },
       },
@@ -324,15 +324,13 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       strokes: ['#6a6a6a'],
       tooltip: {
         renderer: ({ datum, color, sectorLabelKey }) => {
-          const handleTooltipClick = (datum: any) => {
-            this.information(datum);
-          };
+          this.information(datum);
           return [
-            `<div onclick="handleTooltipClick(${datum.id})" style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;cursor: pointer;">`,
+            `<div style="background-color: ${color}; padding: 4px 8px; border-top-left-radius: 5px; border-top-right-radius: 5px; color: white; font-weight: bold;cursor: pointer;">`,
             datum.desc || datum.label,
             `</div>`,
             `<div style="padding: 10px 8px;">`,
-            `  <strong class="flex justify-between gap-5"><p>${datum.date}</p><a><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
+            `  <strong class="flex justify-between gap-5"><p>${datum.date}</p><a href="https://femfy-stage.vercel.app/calendario"><i class="fa fa-calendar" style="color: red;" aria-hidden="true"></i></a></strong>`,
             `</div>`,
           ].join('\n');
         },
@@ -355,8 +353,9 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
     return data?.some((item: any) => item?.desc) ? 'desc' : undefined;
   }
 
+  daySelectedDrawer!: any;
   information(datum: any): void {
-    // console.log(datum);
+    this.daySelectedDrawer = datum;
   }
 
   ngAfterViewInit(): void {}
@@ -366,31 +365,26 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
 
   openDialogCalendarEvent(daySelected: any, itemChart: any): void {
     if (!this.dialogIsOpen) {
-      const element = this.el.nativeElement;
-      this.renderer.listen(element, 'dblclick', (event: MouseEvent) => {
-        if (!this.dialogIsOpen) {
-          this.dialogIsOpen = true;
-          this.dialog
-            .open(EventDayDrawerComponent, {
-              panelClass: [
-                '!max-w-[95vw]',
-                'max-lg:!w-[80%]',
-                'max-md:!w-[100vw]',
-                'max-xl:!w-[50%]',
-                '!w-[50%]',
-                '!rounded-[20px]',
-              ],
-              data: {
-                daySelected,
-                itemChart,
-              },
-            })
-            .afterClosed()
-            .subscribe(() => {
-              this.dialogIsOpen = false;
-            });
-        }
-      });
+      this.dialogIsOpen = true;
+      this.dialog
+        .open(EventDayDrawerComponent, {
+          panelClass: [
+            '!max-w-[95vw]',
+            'max-lg:!w-[80%]',
+            'max-md:!w-[100vw]',
+            'max-xl:!w-[50%]',
+            '!w-[50%]',
+            '!rounded-[20px]',
+          ],
+          data: {
+            daySelected,
+            itemChart,
+          },
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.dialogIsOpen = false;
+        });
     }
   }
 
