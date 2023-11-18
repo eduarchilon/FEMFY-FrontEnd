@@ -102,38 +102,38 @@
           Mis estudios cargados
         </h2>
         <div
-          class="overflow-x-auto max-lg:w-[100%] bg-white pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2 max-lg:mb-20">
+          class="overflow-x-auto max-lg:w-[100%] bg-white p-[20px] rounded-[20px] w-[100%] max-lg:mb-20">
           <div class="flex flex-col justify-start text-left">
             <table class="table-fixed">
               <thead class="text-white dark:border-neutral-900 text-[20px] max-lg:text-[15px]">
-                <tr>
+                <tr class=" border-b-[4px] border-[#7c2385]">
                   <th scope="col"
-                    class="pl-10 pr-6 py-4 rounded-tl-[20px] text-[#7c2385] border-b-[4px] border-[#7c2385]">
+                    class="pl-10 pr-6 pb-4 text-[#7c2385]">
                     Título
                   </th>
-                  <th scope="col" class="px-6 py-4 text-[#7c2385] border-b-[4px] border-[#7c2385]">
+                  <th scope="col" class="px-6 pb-4 text-[#7c2385]">
                     Nota del profesional
                   </th>
-                  <th scope="col" class="px-6 py-4 text-[#7c2385] border-b-[4px] border-[#7c2385] max-lg:px-10">
+                  <th scope="col" class="px-6 pb-4 text-[#7c2385] max-lg:px-10">
                     Fecha del estudio
                   </th>
-                  <th class="py-4 rounded-tr-[20px] border-b-[4px] border-[#7c2385]"></th>
+                  <th class="py-4"></th>
                 </tr>
               </thead>
               <tbody>
 
-                <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
-                  <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#7c2385]">
+                <tr class="border-b dark:border-neutral-500 border-b-[2px] border-[#7c2385]" *ngFor="let study of studies">
+                  <td class="pl-10 pr-6 py-4">
                     {{ study.customMetadata.typeStudy }}
                   </td>
-                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385]">
+                  <td class="px-6 py-4">
                     {{ study.customMetadata.description }}
                   </td>
-                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385]">
+                  <td class="px-6 py-4">
                     {{ study.customMetadata.studyDate }}
                   </td>
 
-                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385] hidden max-lg:inline-block">
+                  <td class="px-6 py-4 hidden max-lg:inline-block">
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
                     </button>
@@ -155,7 +155,7 @@
                     </mat-menu>
                   </td>
 
-                  <td class="px-6 py-4 border-b-[4px] border-[#7c2385] max-lg:hidden">
+                  <td class="px-6 py-4 max-lg:hidden">
                     <button class="me-3">
                       <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
                         <i class="fa fa-download w-[30px]" aria-hidden="true"></i>
