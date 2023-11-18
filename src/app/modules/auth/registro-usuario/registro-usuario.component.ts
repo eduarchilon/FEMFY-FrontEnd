@@ -9,6 +9,10 @@ import { NotificationService } from 'src/app/services/notification/notification.
 import { UserService } from 'src/app/services/user/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { SurveyComponent } from '../../survey/survey.component';
+import { AppState } from 'src/app/services/redux/store/app.store';
+import { Store } from '@ngrx/store';
+import { userDataInit } from 'src/app/services/redux/actions/user/user-data-page.action';
+import { loadUserDataSuccess } from 'src/app/services/redux/actions/user/user-data-api.action';
 
 @Component({
   selector: 'app-registro-usuario',
@@ -35,7 +39,8 @@ export class RegistroUsuarioComponent implements OnInit {
     private loaderService: LoaderService,
     private notificationService: NotificationService,
     private userDataCycleService: UserService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {}
@@ -79,11 +84,14 @@ export class RegistroUsuarioComponent implements OnInit {
                       this.loaderService.showLoader();
                       //NOTIFICACION PUSH
                       if (userLogin) {
-                       /* this.userDataCycleService.setUserDataCycleInformation(
+                        this.userDataCycleService.setUserDataCycleInformation(
                           userLogin
-                        ); //COMENTAR PARA PROBAR*/
+                        ); //COMENTAR PARA PROBAR
                         this.loaderService.hideLoader();
                         this.router.navigate(['']);
+                        this.store.dispatch(
+                          loadUserDataSuccess({ userData: userLogin })
+                        );
                         this.dialog.open(SurveyComponent, {
                           panelClass: [
                             '!max-w-[95vw]',

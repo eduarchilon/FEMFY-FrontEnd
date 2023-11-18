@@ -43,7 +43,14 @@ import { UserDataEffects } from './services/redux/effects/user-data.effect';
 import { CycleUserEffects } from './services/redux/effects/cycle-user.effect';
 import { QuestionMenstruationUserEffects } from './services/redux/effects/question-menstruation-user.effect';
 import { QrCodeModule } from 'ng-qrcode';
-
+import { PostEffects } from './services/redux/effects/post.effect';
+import {
+  MatBottomSheet,
+  MatBottomSheetModule,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -84,8 +91,12 @@ import { QrCodeModule } from 'ng-qrcode';
       CycleUserEffects,
       UserDataEffects,
       QuestionMenstruationUserEffects,
+      PostEffects,
     ]),
     InformationModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [
     LoaderService,

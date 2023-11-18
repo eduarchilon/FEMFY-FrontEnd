@@ -30,11 +30,13 @@ export class QuestionCongenitalService {
       );
   }
 
-  // updateUserMenopauseQuestion(event: QuestionUserMenopause): Observable<any> {
-  //   return this.http.put<any>(`${this.usersUrl}/updateQuestion`, event).pipe(
-  //     map((response) => {
-  //       return response;
-  //     })
-  //   );
-  // }
+  updateUserCongenitalQuestion(event: QuestionUserCongenital): Observable<any> {
+    return this.http
+      .put<any>(`${this.usersUrl}/updateCongenitalCause`, event)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
 }

@@ -23,6 +23,7 @@ import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.p
 import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.selector';
 import { questionUserMenstruationInit } from 'src/app/services/redux/actions/question-menstruation/question-menstruation-user-page.action';
 import { questionUserMenstruationSelector } from 'src/app/services/redux/selectors/question-menstruation.selector';
+import { SurveyComponent } from '../../survey/survey.component';
 
 @Component({
   selector: 'app-index',
@@ -70,6 +71,17 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.store.select(questionUserMenstruationSelector);
 
   ngOnInit(): void {
+    // this.dialog.open(SurveyComponent, {
+    //   panelClass: [
+    //     '!max-w-[95vw]',
+    //     'max-lg:!w-[80%]',
+    //     'max-md:!w-[100vw]',
+    //     'max-xl:!w-[50%]',
+    //     '!w-[50%]',
+    //     '!rounded-[20px]',
+    //   ],
+    //   disableClose: true,
+    // });
     this.userAuth = this.localStorageService.getUserByLogin();
     if (this.userAuth) {
       this.store?.dispatch(cycleUserInit());

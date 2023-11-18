@@ -1,13 +1,17 @@
+.mat-step-header {
+  padding: 0px !important;
+}
+
 mat-stepper {
   background-color: transparent !important;
 }
 
 ::ng-deep .mat-step-icon {
-  background-color: #af6fe8 !important;
+  background-color: white !important;
 }
 
 ::ng-deep .mat-step-icon-selected {
-  background-color: #da057a !important;
+  background-color: white !important;
 }
 
 ::ng-deep .mat-horizontal-stepper-header {
@@ -36,4 +40,14 @@ mat-stepper {
 
 ::ng-deep .mat-stepper-horizontal-line {
   border: unset !important;
+}
+
+.custom-radio-button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.custom-radio-button:hover {
+  background-color: #d9bdf5;
 }

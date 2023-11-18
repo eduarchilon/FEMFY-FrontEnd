@@ -4,6 +4,8 @@ import { SwPush } from '@angular/service-worker';
 import { LocalStorageService } from './services/local-storage/local-storage.service';
 import { constants } from './constans/constants';
 import { Router } from '@angular/router';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ChatbotComponent } from './commons/chatbot/chatbot.component';
 
 @Component({
   selector: 'app-root',
@@ -19,8 +21,13 @@ export class AppComponent {
   constructor(
     private swPush: SwPush,
     private router: Router,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private _bottomSheet: MatBottomSheet
   ) {}
+
+  openBottomSheet(): void {
+    this._bottomSheet.open(ChatbotComponent);
+  }
 
   ngOnInit(): void {
     this.userId = this.localStorageService.getUserByLogin()?.idUser;
