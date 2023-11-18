@@ -47,9 +47,9 @@
               [ngClass]="{ 'border-[#7c2385]': isProfileActive() }"
             />
           </ng-container>
-          <ng-container *ngIf="getProfileImage()">
+          <ng-container *ngIf="picture[0]?.url">
             <img
-              [src]="getProfileImage()"
+              [src]="picture[0]?.url"
               class="w-[50px] h-[50px] object-cover rounded-full border-4 border-[#7c2385]"
               [ngClass]="{ 'border-[#7c2385]': isProfileActive() }"
             />

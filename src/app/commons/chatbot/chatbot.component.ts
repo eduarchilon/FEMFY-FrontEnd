@@ -19,4 +19,8 @@ export class ChatbotComponent {
     this._bottomSheetRef.dismiss();
     event.preventDefault();
   }
+
+  closeChatBot(): void {
+    this._bottomSheetRef.dismiss();
+  }
 }

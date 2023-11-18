@@ -24,6 +24,13 @@ import { userDataInit } from 'src/app/services/redux/actions/user/user-data-page
 import { userDataSelector } from 'src/app/services/redux/selectors/user-data.selector';
 import { Observable } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import {
+  Storage,
+  ref,
+  uploadBytes,
+  listAll,
+  getDownloadURL,
+} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-header-usuario',
@@ -46,7 +53,8 @@ export class HeaderUsuarioComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
     private sharedProfileService: SharedProfileService,
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private storage: Storage
   ) {}
 
   userResponse!: UserResponse;
@@ -166,5 +174,30 @@ export class HeaderUsuarioComponent implements OnInit {
       this.router.isActive('/subscription', true) ||
       this.router.isActive('/information', true)
     );
+  }
+
+  picture: any[] = [];
+  getProfilePicture(): void {
+    const idPath = this.localStorageService.getUserByLogin()?.idUser;
+
+    const profilePath = `profile/${idPath}`;
+    const fileRef = ref(this.storage, profilePath);
+
+    listAll(fileRef)
+      .then(async (picture: any) => {
+        this.picture = [];
+
+        for (let pic of picture?.items) {
+          const url = await getDownloadURL(pic);
+
+          this.picture.push({ url: url });
+        }
+
+        this.sharedProfileService.setUserProfileImage(this.picture[0]?.url);
+        console.log(this.picture[0]?.url);
+      })
+      .catch((error: any) => {
+        console.log(error);
+      });
   }
 }
