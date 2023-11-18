@@ -12,15 +12,14 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { QuestionService } from 'src/app/services/question/question.service';
 import { SurveyComponent } from '../../survey.component';
 import { CicleService } from 'src/app/services/cicle/cicle.service';
+import { constants } from 'src/app/constans/constants';
 
 @Component({
   selector: 'app-pregunta',
   templateUrl: './pregunta.component.html',
   styleUrls: ['./pregunta.component.scss'],
 })
-
 export class PreguntaComponent implements OnInit {
-
   indicePreguntaActual: number = 0;
 
   formOneRegister: FormGroup = new FormGroup({
@@ -57,12 +56,18 @@ export class PreguntaComponent implements OnInit {
     private store: Store<AppState>,
     private localStorageService: LocalStorageService
   ) {}
-  ngOnInit(): void {}
+
+  idMenstruation!: number;
+  ngOnInit(): void {
+    this.idMenstruation = this.localStorageService.getLocalStorage(
+      constants.USER_MENSTRUATION
+    )?.idMenstruation;
+  }
 
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
+        id: this.idMenstruation,
         lastTime: this.formOneRegister?.value?.lastTime,
       })
       .subscribe({
@@ -76,7 +81,7 @@ export class PreguntaComponent implements OnInit {
   submitFormTwoRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
+        id: this.idMenstruation,
         lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
       })
       .subscribe({
@@ -88,7 +93,7 @@ export class PreguntaComponent implements OnInit {
   submitFormThreeRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
+        id: this.idMenstruation,
         regularCycleDuration:
           this.formThreeRegister?.value?.regularCycleDuration,
       })
@@ -101,7 +106,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFourRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
+        id: this.idMenstruation,
         regular: this.formFourRegister?.value.regular === '1' ? true : false,
       })
       .subscribe({
@@ -113,7 +118,7 @@ export class PreguntaComponent implements OnInit {
   submitFormFiveRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
-        id: this.localStorageService.getUserDataCycle()?.idMenstruation,
+        id: this.idMenstruation,
         bleedingDuration: this.formFiveRegister?.value?.bleedingDuration,
       })
       .subscribe({
