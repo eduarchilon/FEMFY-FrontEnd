@@ -121,8 +121,7 @@ export class ProfileComponent implements OnInit {
             duration: 5000, // Duración en milisegundos
           });
 
-          location.reload();
-
+          this.editProfile = false;
         },
         error: (error: any) => {
           this.snackBar.open('Error al actualizar los datos.', 'cerrar', {

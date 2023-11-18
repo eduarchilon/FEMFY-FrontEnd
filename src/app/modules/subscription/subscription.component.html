@@ -5,37 +5,37 @@
     <div class="flex flex-row gap-10 max-lg:flex-col">
       <div class="flex flex-col gap-10 justify-between max-lg:flex-col md:w-1/2">
         <!-- Card 1 -->
-        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
           <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
             <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
               Suscribíte
             </h5>
           </div>
-          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+          <div class="p-[20px] flex items-center justify-center text-center">
             <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
               (click)="toggleForm()">Crea el plan a tu medida</button>
           </div>
 
-          <div *ngIf="showForm" class="bg-white rounded-[20px] p-10">
-            <h2 class="font-bold text-femfy-800">Crear un plan de suscripción</h2>
-            <form [formGroup]="subscriptionForm" class="p-4 rounded shadow-md bg-[#f2d4fa]">
+          <div *ngIf="showForm" class="bg-white rounded-[20px] px-[20px] pb-[20px]">
+            <h2 class="font-bold text-femfy-800 text-xl mb-3">Crear un plan de suscripción</h2>
+            <form [formGroup]="subscriptionForm" class="p-5 shadow-md rounded-[20px] bg-[#f2d4fa]">
               <div class="mb-4">
-                <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Tipo:</label>
+                <label for="title" class="block font-medium text-xl mb-2">Tipo:</label>
                 <input type="text" value="Suscripción Premium" placeholder="Suscripción Premium" name="title"
-                  formControlName="title" readonly class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+                  formControlName="title" readonly class="w-full border-2 border-gray-300 p-4 rounded-full font-bold" />
               </div>
               <div class="mb-4">
                 <div class="mb-4">
-                  <label for="unit_price" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+                  <label for="unit_price" class="block font-medium text-xl mb-2">Valor:</label>
                   <input type="number" name="unit_price" formControlName="unit_price"
                     [placeholder]="getDefaultPlaceholder()" [readonly]="true"
-                    class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+                    class="w-full border-2 border-gray-300 p-4 rounded-full font-bold" />
                 </div>
               </div>
               <div class="mb-4">
-                <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Frecuencia:</label>
+                <label for="quantity" class="block font-medium text-xl mb-2">Frecuencia:</label>
                 <select name="quantity" formControlName="quantity" (change)="updateDefaultValue()" required
-                  class="w-full border-2 border-gray-300 p-2 rounded-full">
+                  class="w-full border-2 border-gray-300 p-4 rounded-full">
                   <option value="1">Mensual</option>
                   <option value="3">Trimestral</option>
                   <option value="6">Semestral</option>
@@ -43,10 +43,12 @@
                 </select>
               </div>
 
+              <div class="mt-5 text-end">
               <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644"
                 name="MP-payButton"
-                class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3'>Activar
+                class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] mt-5'>Activar
                 suscripción</a>
+              </div>
               <script type="text/javascript">
                 (function () {
                   function $MPC_load() {
@@ -76,14 +78,14 @@
         </div>
 
         <!-- Card 2 -->
-        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
 
           <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
             <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
               Suscripción activa
             </h5>
           </div>
-          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+          <div class="p-[20px] flex items-center justify-center text-center">
             <button class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Cancelar
               suscripción</button>
           </div>
@@ -92,14 +94,14 @@
 
 
         <!-- Card 3 -->
-        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px] mb-4">
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
 
           <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
             <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
               También podés ayudarnos para que la app siga creciendo
             </h5>
           </div>
-          <div class="mb-3 mt-10 flex items-center justify-center text-center">
+          <div class="p-[20px] flex items-center justify-center text-center">
             <a href="https://link.mercadopago.com.ar/femfyapp" name="MP-payButton" target="_blank"
               class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Donaciones</a>
 
