@@ -231,16 +231,15 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
     }, 0);
 
     const diff = moment(new Date())
-      .add(1, 'days')
+      .add(1, 'day')
       .diff(this.cycleChart?.dateBeging, 'days');
 
     const dataChildrenSeries: DataPieChartChildren[] = newDataArray.map(
       (item: any) => {
         item.date = moment(cycleChart[0]?.dateBeging)
-          .add(item.id - 1, 'days')
+          .add(item.id - 1, 'day')
           ?.locale('es')
           .format('L');
-        // console.log(item.id === diff);
         // console.log(item.id);
         // console.log(diff);
 

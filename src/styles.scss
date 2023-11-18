@@ -152,3 +152,14 @@ textarea:active {
   border-top-left-radius: 20px !important;
   border-top-right-radius: 20px !important;
 }
+
+.mat-mdc-menu-panel {
+  width: inherit !important;
+  overflow: inherit !important;
+  min-width: unset !important;
+  max-width: unset !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 0 !important;
+}

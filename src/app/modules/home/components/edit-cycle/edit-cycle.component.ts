@@ -22,6 +22,7 @@ export class EditCycleComponent implements OnInit {
 
   ngOnInit(): void {
     this.cycleChart = this.data?.cycleChart;
+    console.log(this.cycleChart);
   }
 
   closeDialog(): void {
