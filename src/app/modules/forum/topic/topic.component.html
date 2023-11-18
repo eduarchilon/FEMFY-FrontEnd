@@ -1,9 +1,9 @@
-<div class="bg-[#f2d4fa] bg-cover px-[3vw]">
-    <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
-        <div class="flex justify-between mb-10">
-            <div class="flex">
-            <a routerLink="/foro" class="text-3xl text-femfy-800 font-bold">Comunidad ></a>
-            <h2 class="text-3xl text-femfy-800 font-bold ml-2">{{ topic?.title }}</h2>
+<div class="bg-[#f2d4fa] bg-cover pt-28 pb-32 px-[3vw]">
+    <div class="w-[100%] max-w-[1280px] m-auto">
+        <div class="flex justify-between mb-5">
+            <div class="flex !font-medium text-femfy-800 text-[30px]">
+                <a routerLink="/foro">Comunidad > </a>
+                <a class="ml-2">{{ topic?.title }}</a>
             </div>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
                 class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]">Crear una
@@ -23,7 +23,8 @@
                             <div class="mb-3">
                                 <p class="text-[#7c2385] font-bold text-2xl">Por: {{ post.username }}</p>
                                 <span class="text-md text-gray-500">{{ post.createdDate | date: 'dd/MM/yy HH:mm'}}</span>
-                                <p class="mt-3">{{ post.content.length > 150 ? (post.content | slice:0:150) + '...' : post.content }}</p>
+                                <p class="mt-3">{{ post.content.length > 150 ? (post.content | slice:0:150) + '...' :
+                                    post.content }}</p>
                             </div>
                             <div class="flex justify-between">
                                 <span class="text-[#7c2385]">{{ post.replies.length }} comentarios</span>

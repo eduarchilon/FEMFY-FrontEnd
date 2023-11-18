@@ -1,9 +1,10 @@
-<div class="bg-[#f2d4fa] bg-cover px-[3vw]">
-    <div class="w-[100%] pt-[100px] pb-[150px] lg:py-[130px] max-w-[1280px] m-auto">
+<div class="bg-[#f2d4fa] pt-28 pb-32 bg-cover px-[3vw]">
+    <div class="w-[100%] max-w-[1280px] m-auto">
 
-        <div class="flex">
-            <a routerLink="/foro" class="text-3xl text-femfy-800 font-bold mb-10">Comunidad ></a>
-            <a routerLink="/" class="text-3xl text-femfy-800 font-bold ml-2"></a>
+        <div class="flex !font-medium text-femfy-800 text-[30px] mb-5">
+            <a routerLink="/foro">Comunidad > </a>
+            <a routerLink="/foro/{id}" class="mx-2">{{ post?.topicId }} ></a>
+            <a routerLink="/">{{ post?.title }}</a>
         </div>
 
         <h2 class="text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
