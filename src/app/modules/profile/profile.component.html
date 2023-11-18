@@ -1,5 +1,5 @@
 <div class="bg-[#f2d4fa] px-[3vw]">
-  <div class="pb-[300px] pt-10 mt-20 px-5 max-w-[1280px] m-auto">
+  <div class="pb-[300px] pt-10 mt-20 max-w-[1280px] m-auto">
     <div class="container mx-auto">
       <div class="lg:flex lg:gap-10 items-center">
         <div class="lg:w-1/3 text-center mb-5 md:mb-0">
@@ -12,7 +12,7 @@
               <img [src]="picture[0]?.url" class="w-[100%] h-[100%] object-cover rounded-full" />
             </ng-container>
           </div>
-          <span class="text-5xl font-bold block mb-10">{{
+          <span class="text-5xl font-bold block mb-5">{{
             userResponse.userName
             }}</span>
 
@@ -28,14 +28,14 @@
         <div class="lg:w-2/3">
           <ng-container *ngIf="editProfile; else readOnlyProfile">
             <!-- Editable profile view -->
-            <div class="flex justify-between mb-10">
-              <h2 class="text-5xl text-femfy-800 font-bold">Editar perfil</h2>
+            <div class="flex justify-between mb-5">
+              <h2 class="flex !font-medium text-femfy-800 text-[30px]">Editar perfil</h2>
               <button class="bg-[#7c2385] text-white font-semibold rounded-[20px] p-3" (click)="disableEditMode()">
                 Cancelar
               </button>
             </div>
             <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-              <div class="flex-1 w-full bg-white rounded-[20px] mb-10">
+              <div class="flex-1 w-full bg-white rounded-[20px] mb-5">
                 <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Datos personales</h5>
                 <div class="grid lg:grid-cols-3 gap-4 p-5">
                   <div>
@@ -52,7 +52,7 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-white rounded-[20px] mb-10">
+              <div class="bg-white rounded-[20px] mb-5">
                 <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Contacto</h5>
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
                   <div>
@@ -65,7 +65,7 @@
                   </div>
                 </div>
               </div>
-              <div class="bg-white rounded-[20px] mb-10">
+              <div class="bg-white rounded-[20px] mb-5">
                 <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Tipo de usuario
                 </h5>
                 <div class="flex justify-between p-5">
@@ -101,7 +101,7 @@
           <ng-template #readOnlyProfile>
             <!-- Read-only profile view -->
             <div class="flex justify-between mb-5">
-              <h2 class="text-5xl text-femfy-800 font-bold">Perfil</h2>
+              <h2 class="flex !font-medium text-femfy-800 text-[30px]">Perfil</h2>
               <button class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]" (click)="enableEditMode()">
                 Modificar
               </button>
