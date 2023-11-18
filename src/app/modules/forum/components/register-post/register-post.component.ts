@@ -33,7 +33,7 @@ export class RegisterPostComponent {
   ) {
     this.idTopic = data.idTopic;
   }
-
+//prueba
   registerPost(): void {
     this.postService.registerPost({
       title: this.formPost.value.title,
