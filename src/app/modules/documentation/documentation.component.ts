@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { QRGeneratorComponent } from './QRGenerator/QRGenerator.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+
 @Component({
   selector: 'app-documentation',
   templateUrl: './documentation.component.html',
@@ -242,6 +243,10 @@ export class DocumentationComponent implements OnInit {
     }
   }
 
+  refreshPage() {
+    location.reload();
+  }
+
 
   viewQR(fileURL: string, typeStudy: string): void {
     this.dialog.open(QRGeneratorComponent, {
@@ -252,6 +257,6 @@ export class DocumentationComponent implements OnInit {
       },
     });
   }
-  
+ 
 
 }

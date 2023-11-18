@@ -122,6 +122,9 @@ export class ProfileComponent implements OnInit {
           this.snackBar.open('Datos actualizados con éxito.', 'cerrar', {
             duration: 5000, // Duración en milisegundos
           });
+
+          location.reload();
+
         },
         error: (error: any) => {
           this.snackBar.open('Error al actualizar los datos.', 'cerrar', {
