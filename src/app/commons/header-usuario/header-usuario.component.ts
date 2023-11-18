@@ -72,6 +72,7 @@ export class HeaderUsuarioComponent implements OnInit {
     if (this.userResponse) {
       this.store.dispatch(userDataInit());
       this.isLogging = true;
+      this.getProfilePicture();
       this.store.dispatch(userDataInit());
     } else {
       this.isLogging = false;
@@ -81,6 +82,7 @@ export class HeaderUsuarioComponent implements OnInit {
       if (user?.idUser) {
         this.icon = CYCLE_STATE[`${user?.state}`];
         this.isLogging = true;
+        this.getProfilePicture();
       } else {
         this.isLogging = false;
       }

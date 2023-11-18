@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { constants } from 'src/app/constans/constants';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
 
@@ -15,7 +16,12 @@ export class QuestionMenopausicaComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  idMenopause!: number;
+  ngOnInit(): void {
+    this.idMenopause = this.localStorageService.getLocalStorage(
+      constants.USER_MENOPAUSE
+    )?.idMenopause;
+  }
 
   updateQuestionMenopause(value: string, question: string) {
     switch (question) {
@@ -24,7 +30,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             aumentoDePeso: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -33,7 +39,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInLibido: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -42,7 +48,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInMenstrualCycle: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -51,7 +57,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             changesInSkinAndHair: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -60,7 +66,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             lossOfBoneDensity: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -69,7 +75,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             moodChanges: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -78,7 +84,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             sleepingDifficulties: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -87,7 +93,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             suffocation: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;
@@ -96,7 +102,7 @@ export class QuestionMenopausicaComponent implements OnInit {
           .updateUserMenopauseQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             vaginalDryness: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idMenopause,
+            id: this.idMenopause,
           })
           .subscribe((res: any) => res);
         break;

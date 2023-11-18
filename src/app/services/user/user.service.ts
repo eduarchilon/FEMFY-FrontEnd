@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HistorialService } from '../historial/historial.service';
 import { QuestionService } from '../question/question.service';
 import { QuestionMenopausicaService } from '../question-menopausica/question-menopausica.service';
-import { UserResponse } from 'src/app/models/user.model';
+import { UserDataCycle, UserResponse } from 'src/app/models/user.model';
 import { LocalStorageService } from '../local-storage/local-storage.service';
 import {
   emptyQuestionCongenitalResponse,
@@ -46,6 +46,12 @@ export class UserService {
           userId: user.idUser,
         })
         .subscribe((response: any) => {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER_HISTORIAL,
+            JSON.stringify({
+              idHistorial: response?.id,
+            })
+          );
           return response;
         });
 
@@ -55,6 +61,12 @@ export class UserService {
           userId: user.idUser,
         })
         .subscribe((response: any) => {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER_MENSTRUATION,
+            JSON.stringify({
+              idMenstruation: response?.id,
+            })
+          );
           return response;
         });
 
@@ -65,6 +77,12 @@ export class UserService {
           userId: user.idUser,
         })
         .subscribe((response: any) => {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER_MENOPAUSE,
+            JSON.stringify({
+              idMenopause: response?.id,
+            })
+          );
           return response;
         });
 
@@ -75,6 +93,12 @@ export class UserService {
           userId: user.idUser,
         })
         .subscribe((response: any) => {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER_CONGENITAL,
+            JSON.stringify({
+              idCongenital: response?.id,
+            })
+          );
           return response;
         });
 
@@ -85,6 +109,12 @@ export class UserService {
           userId: user.idUser,
         })
         .subscribe((response: any) => {
+          this.localStorageService.setKeyValueLocalStorage(
+            constants.USER_HORMONAL,
+            JSON.stringify({
+              idHormonal: response?.id,
+            })
+          );
           return response;
         });
     }

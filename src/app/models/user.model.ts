@@ -27,7 +27,7 @@ export interface UserRequest extends UserResponse {
 }
 
 export interface UserDataCycle {
-  userId: number;
+  userId?: number;
   idHistorial?: number;
   idMenstruation?: number;
   idMenopause?: number;

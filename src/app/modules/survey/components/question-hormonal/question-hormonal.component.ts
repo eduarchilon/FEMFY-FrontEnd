@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { constants } from 'src/app/constans/constants';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionHormonalService } from 'src/app/services/question-hormonal/question-hormonal.service';
 
@@ -15,7 +16,12 @@ export class QuestionHormonalComponent {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  idHormonal!: number;
+  ngOnInit(): void {
+    this.idHormonal = this.localStorageService.getLocalStorage(
+      constants.USER_HORMONAL
+    )?.idHormonal;
+  }
 
   finishQuestion(): void {
     this.router.navigate(['/']).then(() => {
@@ -30,7 +36,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             another: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -39,7 +45,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             anotherDescription: text,
-            id: 20,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -48,7 +54,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             hyperprolactinemia: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -57,7 +63,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             hypothalamicDisorders: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -66,7 +72,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             hypothyroidism: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -75,7 +81,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             insulinResistance: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -84,7 +90,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             polycysticOvarySyndrome: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -93,7 +99,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             prematureOvarianFailure: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;
@@ -102,7 +108,7 @@ export class QuestionHormonalComponent {
           .updateUserHormonalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             sheehanSyndrome: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idHormonal,
+            id: this.idHormonal,
           })
           .subscribe((res: any) => res);
         break;

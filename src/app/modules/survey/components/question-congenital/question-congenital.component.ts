@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { constants } from 'src/app/constans/constants';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { QuestionCongenitalService } from 'src/app/services/question-congenital/question-congenital.service';
 
@@ -15,7 +16,12 @@ export class QuestionCongenitalComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  idCongenital!: number;
+  ngOnInit(): void {
+    this.idCongenital = this.localStorageService.getLocalStorage(
+      constants.USER_CONGENITAL
+    )?.idCongenital;
+  }
 
   updateQuestionMenopause(value: string, question: string, text?: any): void {
     switch (question) {
@@ -24,7 +30,7 @@ export class QuestionCongenitalComponent implements OnInit {
           .updateUserCongenitalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             another: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idCongenital,
+            id: this.idCongenital,
           })
           .subscribe((res: any) => res);
         break;
@@ -33,7 +39,7 @@ export class QuestionCongenitalComponent implements OnInit {
           .updateUserCongenitalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             anotherDescription: text?.target?.value,
-            id: this.localStorageService.getUserDataCycle()?.idCongenital,
+            id: this.idCongenital,
           })
           .subscribe((res: any) => res);
         break;
@@ -42,7 +48,7 @@ export class QuestionCongenitalComponent implements OnInit {
           .updateUserCongenitalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             malformationsUterine: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idCongenital,
+            id: this.idCongenital,
           })
           .subscribe((res: any) => res);
         break;
@@ -51,7 +57,7 @@ export class QuestionCongenitalComponent implements OnInit {
           .updateUserCongenitalQuestion({
             userId: this.localStorageService.getUserByLogin()?.idUser,
             turnerSyndrome: value === '1' ? 1 : 0,
-            id: this.localStorageService.getUserDataCycle()?.idCongenital,
+            id: this.idCongenital,
           })
           .subscribe((res: any) => res);
         break;

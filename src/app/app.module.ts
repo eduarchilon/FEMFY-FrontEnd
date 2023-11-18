@@ -51,6 +51,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [AppComponent, MercadoPagoComponent],
@@ -97,6 +98,7 @@ import { MatIconModule } from '@angular/material/icon';
     MatBottomSheetModule,
     MatButtonModule,
     MatIconModule,
+    MatMenuModule,
   ],
   providers: [
     LoaderService,
