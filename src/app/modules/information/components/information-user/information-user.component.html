@@ -6,7 +6,7 @@
     <form [formGroup]="formInformationMenstruation" (ngSubmit)="submitInformationMenstruation()">
       <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
         <span class="font-medium">¿Qué día fue tu última menstruación? (primer día del ciclo)</span>
-        <input matInput type="date" class="text-center border rounded-full w-28" formControlName="lastTime" />
+        <input matInput type="date" [(ngModel)]="defaultDate" class="text-center border rounded-full w-28" formControlName="lastTime" />
       </div>
       <mat-divider></mat-divider>
       <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
