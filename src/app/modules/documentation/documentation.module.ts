@@ -10,6 +10,8 @@ import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { QRGeneratorModule } from './QRGenerator/QRGenerator.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [DocumentationComponent],
@@ -22,6 +24,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatProgressSpinnerModule,
     QRGeneratorModule,
     MatSnackBarModule,
+    MatMenuModule,
+    MatIconModule,
   ],
   providers: [LocalStorageService, LoaderService],
 })
