@@ -98,6 +98,11 @@ export class AuthService {
 
   logoutUser(): void {
     this.localStorageService.deleteValue(constants.USER);
+    this.localStorageService.deleteValue(constants.USER_CONGENITAL);
+    this.localStorageService.deleteValue(constants.USER_HISTORIAL);
+    this.localStorageService.deleteValue(constants.USER_HORMONAL);
+    this.localStorageService.deleteValue(constants.USER_MENOPAUSE);
+    this.localStorageService.deleteValue(constants.USER_MENSTRUATION);
   }
 
   updateUser(user: UserResponse): Observable<any> {

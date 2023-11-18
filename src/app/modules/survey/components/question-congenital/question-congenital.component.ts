@@ -18,7 +18,7 @@ export class QuestionCongenitalComponent implements OnInit {
 
   idCongenital!: number;
   ngOnInit(): void {
-    this.idCongenital = this.localStorageService.getLocalStorage(
+    this.idCongenital = this.localStorageService.parseLocalStorage(
       constants.USER_CONGENITAL
     )?.idCongenital;
   }
