@@ -76,7 +76,7 @@ export class RegisterCicleComponent implements OnInit {
       }
       this.cicleService
         .registerCycle({
-          dateBeging: new Date(this.formCycle?.value?.dateBeging),
+          dateBeging: this.formCycle?.value?.dateBeging,
           daysOfBleeding: this.formCycle?.value?.daysOfBleeding,
           idUser: this.localStorageService.getUserByLogin()?.idUser,
         })

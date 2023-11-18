@@ -134,8 +134,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
                 );
 
                 const predictionCycle: PredictionCycle = {
-                  dateNextPeriod: moment(this.endCycle).add(1, 'day'),
-                  numberOvulation: resultOvulation,
+                  dateNextPeriod: moment(this.endCycle),
+                  numberOvulation: resultOvulation -1,
                   period: this.initPeriod,
                 };
 
