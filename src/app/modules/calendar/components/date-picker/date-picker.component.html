@@ -13,7 +13,7 @@
     ></mat-calendar>
   </div>
 </mat-card>
-<ng-container>
+<ng-container *ngIf="eventsNotification.length > 0">
   <app-events-notification
     [events]="eventsNotification"
   ></app-events-notification>

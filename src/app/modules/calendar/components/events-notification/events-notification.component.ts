@@ -47,9 +47,11 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
           horaActual === hour &&
           minutosActuales === minutes
         ) {
+          console.log(event?.title, event?.description);
+
           this.sendNotification(event?.title, event?.description);
         }
-      }, 60000);
+      }, 30000);
     });
   }
 
