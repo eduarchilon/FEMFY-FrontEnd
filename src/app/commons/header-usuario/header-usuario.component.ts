@@ -23,6 +23,7 @@ import { SharedProfileService } from 'src/app/services/profilePicture/profilePic
 import { userDataInit } from 'src/app/services/redux/actions/user/user-data-page.action';
 import { userDataSelector } from 'src/app/services/redux/selectors/user-data.selector';
 import { Observable } from 'rxjs';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-header-usuario',
@@ -44,7 +45,8 @@ export class HeaderUsuarioComponent implements OnInit {
     private authService: AuthService,
     private localStorageService: LocalStorageService,
     private store: Store<AppState>,
-    private sharedProfileService: SharedProfileService
+    private sharedProfileService: SharedProfileService,
+    private loaderService: LoaderService
   ) {}
 
   userResponse!: UserResponse;
@@ -60,6 +62,7 @@ export class HeaderUsuarioComponent implements OnInit {
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
     if (this.userResponse) {
+      this.store.dispatch(userDataInit());
       this.isLogging = true;
       this.store.dispatch(userDataInit());
     } else {
@@ -67,8 +70,11 @@ export class HeaderUsuarioComponent implements OnInit {
     }
 
     this.userDataResponse$.subscribe((user: any) => {
-      if (user) {
+      if (user?.idUser) {
         this.icon = CYCLE_STATE[`${user?.state}`];
+        this.isLogging = true;
+      } else {
+        this.isLogging = false;
       }
     });
 
@@ -130,10 +136,14 @@ export class HeaderUsuarioComponent implements OnInit {
   }
 
   logoutUser(): void {
-    this.isLogging = false;
+    this.loaderService.showLoader();
     this.authService.logoutUser();
     this.router.navigate(['/']).then(() => {
-      location.reload();
+      this.isLogging = false;
+      if (this.isLogging === false) {
+        this.authService.logoutUser();
+        location.reload();
+      }
     });
   }
 
@@ -151,10 +161,10 @@ export class HeaderUsuarioComponent implements OnInit {
 
   isProfileActive(): boolean {
     // Verifica si la ruta actual está activa
-    return this.router.isActive('/perfil', true)
-      || this.router.isActive('/subscription', true)
-      || this.router.isActive('/information', true);
+    return (
+      this.router.isActive('/perfil', true) ||
+      this.router.isActive('/subscription', true) ||
+      this.router.isActive('/information', true)
+    );
   }
-
-
 }

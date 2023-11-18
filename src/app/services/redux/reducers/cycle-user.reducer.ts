@@ -17,5 +17,5 @@ export const cycleUserReducer = createReducer(
   on(loadCyclesUserSuccess, (state, action) => ({
     ...state,
     cycleUser: action.cyclesUser,
-  }))
+  })),
 );

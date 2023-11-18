@@ -5,14 +5,13 @@ import { environment } from 'src/environments/environment';
 import { Post } from 'src/app/models/post.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PostService {
-
   apiUrl: string = environment.apiUrlLocal + '/forumPosts';
 
-  constructor(private http: HttpClient) { }
-  
+  constructor(private http: HttpClient) {}
+
   getPostById(idPost: number): Observable<any> {
     return this.http.get<any[]>(`${this.apiUrl}/${idPost}`).pipe(
       map((response) => {
@@ -30,11 +29,8 @@ export class PostService {
   }
 
   getAllPostsByTopic(idTopic: number): Observable<any> {
-    return this.http.get<any[]>(`${this.apiUrl}/getForumPostsByTopic/${idTopic}`).pipe(
-      map((response) => {
-        return response;
-      })
+    return this.http.get<any[]>(
+      `${this.apiUrl}/getForumPostsByTopic/${idTopic}`
     );
   }
-
 }

@@ -10,12 +10,17 @@ import { UserService } from 'src/app/services/user/user.service';
 import { ReplayService } from 'src/app/services/replay/replay.service';
 import { ConversationComponent } from '../conversation/conversation.component';
 import { Router } from '@angular/router';
-
+import { AppState } from 'src/app/services/redux/store/app.store';
+import { Store } from '@ngrx/store';
+import { postInit } from 'src/app/services/redux/actions/post/post.page.action';
+import { postSelector } from 'src/app/services/redux/selectors/post.selector';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { LoaderService } from 'src/app/services/loader/loader.service';
 
 @Component({
   selector: 'app-topic',
   templateUrl: './topic.component.html',
-  styleUrls: ['./topic.component.scss']
+  styleUrls: ['./topic.component.scss'],
 })
 export class TopicComponent {
   posts: any[] = [];
@@ -23,7 +28,8 @@ export class TopicComponent {
   topic!: Topic;
   idTopic!: number;
 
-  constructor(private http: HttpClient,
+  constructor(
+    private http: HttpClient,
     public dialog: MatDialog,
     private route: ActivatedRoute,
     private topicService: TopicService,
@@ -31,13 +37,31 @@ export class TopicComponent {
     private postService: PostService,
     private userService: UserService,
     private router: Router,
-    ) { }
+    private store: Store<AppState>,
+    private localStorageService: LocalStorageService,
+    private loaderServices: LoaderService
+  ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const idTopic = params.get('id')
+    this.store.dispatch(postInit());
+    this.store.select(postSelector).subscribe((data: any) => {
+      this.loaderServices.showLoader();
+      if (
+        this.idTopic ===
+          Number(this.localStorageService.getLocalStorage('idTopic')) &&
+        data.length > 0
+      ) {
+        this.loaderServices.showLoader();
+        console.log(data);
+        // this.loaderServices.hideLoader();
+      }
+      this.loaderServices.hideLoader();
+    });
+    
+    this.route.paramMap.subscribe((params) => {
+      const idTopic = params.get('id');
       if (idTopic !== null) {
-        this.idTopic = parseInt(idTopic)
+        this.idTopic = parseInt(idTopic);
       }
     });
 
@@ -58,7 +82,7 @@ export class TopicComponent {
   getConversationsByTopic() {
     this.postService.getAllPostsByTopic(this.idTopic).subscribe((data: any) => {
       this.posts = data;
-      this.posts.forEach(post => {
+      this.posts.forEach((post) => {
         this.userService.getUserById(post.userId).subscribe((data: any) => {
           post.username = data.userName;
         });
@@ -69,8 +93,7 @@ export class TopicComponent {
   openPostRegister(): void {
     const dialogRef = this.dialog.open(RegisterPostComponent, {
       panelClass: ['!rounded-[20px]'],
-      data: { idTopic: this.idTopic }
+      data: { idTopic: this.idTopic },
     });
   }
-
 }

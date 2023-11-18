@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, map } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { TopicService } from 'src/app/services/topic/topic.service';
@@ -19,8 +20,9 @@ export class ForumComponent {
     private router: Router,
     private loaderService: LoaderService,
     private postService: PostService,
-    private topicService: TopicService
-  ) { }
+    private topicService: TopicService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   spinnerConsumer: string = 'ForumComponent';
   topics: any[] = [];
@@ -51,5 +53,12 @@ export class ForumComponent {
 
   getRedirectUrl(topicId: number): string {
     return `/foro/${topicId}`;
+  }
+
+  saveId(id: Number): void {
+    this.localStorageService.setKeyValueLocalStorage(
+      'idTopic',
+      JSON.stringify(id)
+    );
   }
 }

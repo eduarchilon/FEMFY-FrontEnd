@@ -17,6 +17,8 @@ import { userDataReducer } from '../reducers/user-data.reducer';
 import { cycleUserReducer } from '../reducers/cycle-user.reducer';
 import { QuestionUserMenstruation } from 'src/app/models/question.model';
 import { questionUserMenstruationReducer } from '../reducers/question-menstruation.reducer';
+import { Post } from 'src/app/models/post.model';
+import { postReducer } from '../reducers/post.reducer';
 
 export interface AppState {
   user: UserResponse;
@@ -29,6 +31,7 @@ export interface AppState {
   userData: UserResponse | any;
   cycleUser: Cycle | any;
   questionUserMenstruation: QuestionUserMenstruation | any;
+  post: Post | any;
 }
 
 export const appStore: ActionReducerMap<AppState> = {
@@ -42,4 +45,5 @@ export const appStore: ActionReducerMap<AppState> = {
   userData: userDataReducer,
   cycleUser: cycleUserReducer,
   questionUserMenstruation: questionUserMenstruationReducer,
+  post: postReducer,
 };

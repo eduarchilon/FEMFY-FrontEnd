@@ -33,5 +33,5 @@ export interface UserDataCycle {
   idMenopause?: number;
   idOther?: number;
   idHormonal?: number;
-  idCongenital?: Number;
+  idCongenital?: number;
 }

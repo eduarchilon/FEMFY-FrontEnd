@@ -30,11 +30,13 @@ export class QuestionHormonalService {
       );
   }
 
-  // updateUserMenopauseQuestion(event: QuestionUserMenopause): Observable<any> {
-  //   return this.http.put<any>(`${this.usersUrl}/updateQuestion`, event).pipe(
-  //     map((response) => {
-  //       return response;
-  //     })
-  //   );
-  // }
+  updateUserHormonalQuestion(event: QuestionUserHormonal): Observable<any> {
+    return this.http
+      .put<any>(`${this.usersUrl}/updateHormonalCause`, event)
+      .pipe(
+        map((response) => {
+          return response;
+        })
+      );
+  }
 }

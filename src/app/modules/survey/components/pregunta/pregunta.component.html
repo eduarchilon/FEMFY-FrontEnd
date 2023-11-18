@@ -1,22 +1,5 @@
-<div class="m-auto max-w-[1000px] pb-5 mb-5 bg-white">
+<div class="m-auto">
   <mat-stepper #stepper class="bg-white">
-    <!-- <mat-step>
-      <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
-        ¿Ya tuviste tu primera menstruación?
-      </p>
-      <div class="w-full md:w-1/2 m-auto justify-between flex flex-col items-center">
-        <mat-radio-group>
-          <mat-radio-button value="1" (click)="stepper.next()"
-            class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg mr-3">
-            <span class="font-medium">Si</span>
-          </mat-radio-button>
-          <mat-radio-button value="2" (click)="redirection()"
-            class="bg-white custom-radio-button mb-5 py-5 p-3 rounded-lg ml-3">
-            <span class="font-medium">No</span>
-          </mat-radio-button>
-        </mat-radio-group>
-      </div>
-    </mat-step>-->
     <mat-step>
       <form [formGroup]="formOneRegister" (ngSubmit)="submitFormOneRegister()">
         <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">

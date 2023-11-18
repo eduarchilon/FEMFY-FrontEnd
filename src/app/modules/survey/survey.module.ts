@@ -16,6 +16,10 @@ import { QuestionMenopausicaComponent } from './components/question-menopausica/
 import { QuestionOtroComponent } from './components/question-otro/question-otro.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { QuestionMenopausicaService } from 'src/app/services/question-menopausica/question-menopausica.service';
+import { QuestionCongenitalComponent } from './components/question-congenital/question-congenital.component';
+import { QuestionHormonalComponent } from './components/question-hormonal/question-hormonal.component';
+import { QuestionCongenitalService } from 'src/app/services/question-congenital/question-congenital.service';
+import { QuestionHormonalService } from 'src/app/services/question-hormonal/question-hormonal.service';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,8 @@ import { QuestionMenopausicaService } from 'src/app/services/question-menopausic
     PreguntaComponent,
     QuestionMenopausicaComponent,
     QuestionOtroComponent,
+    QuestionCongenitalComponent,
+    QuestionHormonalComponent,
   ],
   imports: [
     CommonModule,
@@ -41,6 +47,8 @@ import { QuestionMenopausicaService } from 'src/app/services/question-menopausic
     CicleService,
     AuthService,
     QuestionMenopausicaService,
+    QuestionCongenitalService,
+    QuestionHormonalService
   ],
 })
 export class SurveyModule {}

@@ -17,6 +17,7 @@ import { LoaderComponent } from './loader/loader.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { ChatbotComponent } from './chatbot/chatbot.component';
 import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
+import { LoaderService } from '../services/loader/loader.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,6 @@ import { MobileMenuComponent } from './mobile-menu/mobile-menu.component';
     LoaderComponent,
     MobileMenuComponent,
   ],
-  providers: [AuthService, LocalStorageService],
+  providers: [AuthService, LocalStorageService, LoaderService],
 })
 export class CommonsModule {}
