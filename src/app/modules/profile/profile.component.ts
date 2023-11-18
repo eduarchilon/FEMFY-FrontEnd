@@ -189,4 +189,8 @@ export class ProfileComponent implements OnInit {
         console.log(error);
       });
   }
+  
+  isTypeUserIDSelected(value: number): boolean {
+    return this.profileForm.get('typeUserID')?.value === value;
+  }
 }

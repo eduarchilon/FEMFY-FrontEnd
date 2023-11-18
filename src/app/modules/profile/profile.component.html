@@ -28,64 +28,62 @@
         <div class="lg:w-2/3">
           <ng-container *ngIf="editProfile; else readOnlyProfile">
             <!-- Editable profile view -->
-            <div class="flex justify-between mb-5">
+            <div class="flex justify-between mb-10">
               <h2 class="text-5xl text-femfy-800 font-bold">Editar perfil</h2>
               <button class="bg-[#7c2385] text-white font-semibold rounded-[20px] p-3" (click)="disableEditMode()">
                 Cancelar
               </button>
             </div>
             <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
-              <div class="flex-1 w-full bg-white rounded-[20px]">
-                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"> Datos personales
-                </h5>
+              <div class="flex-1 w-full bg-white rounded-[20px] mb-10">
+                <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Datos personales</h5>
                 <div class="grid lg:grid-cols-3 gap-4 p-5">
                   <div>
-                    <label for="note" class="block text-xl mb-2">Nombre</label>
+                    <label for="note" class="block font-medium text-xl mb-2">Nombre</label>
                     <input type="text" formControlName="firstName" class="rounded-full border w-full p-4" />
                   </div>
                   <div>
-                    <label for="note" class="block text-xl mb-2">Apellido</label>
+                    <label for="note" class="block font-medium text-xl mb-2">Apellido</label>
                     <input type="text" formControlName="lastName" class="rounded-full border w-full p-4" />
                   </div>
                   <div>
-                    <label for="note" class="block text-xl mb-2">Fecha de nacimiento</label>
+                    <label for="note" class="block font-medium text-xl mb-2">Fecha de nacimiento</label>
                     <input type="date" formControlName="birthdate" class="rounded-full border w-full p-4" />
                   </div>
                 </div>
               </div>
-              <div class="bg-white rounded-[20px] mb-5">
-                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Contacto
-                </h5>
+              <div class="bg-white rounded-[20px] mb-10">
+                <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Contacto</h5>
                 <div class="grid lg:grid-cols-2 gap-4 p-5">
                   <div>
-                    <label for="note" class="block text-xl mb-2">Email</label>
-                    <input type="text" class="rounded-full border w-full p-4" />
+                    <label for="note" class="block font-medium text-xl mb-2">Email</label>
+                    <input type="text" formControlName="email" class="rounded-full border w-full p-4" />
                   </div>
                   <div>
-                    <label for="note" class="block text-xl mb-2">Teléfono</label>
+                    <label for="note" class="block font-medium text-xl mb-2">Teléfono</label>
                     <input type="text" formControlName="phone" class="rounded-full border w-full p-4" />
                   </div>
                 </div>
               </div>
-              <div class="bg-white rounded-[20px] mb-5">
-                <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Tipo de usuario
+              <div class="bg-white rounded-[20px] mb-10">
+                <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Tipo de usuario
                 </h5>
-                <div class="grid lg:grid-cols-2 gap-4 p-5">
+                <div class="flex justify-between p-5">
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" value="1" />
+                      <input type="radio" formControlName="typeUserID" [value]="1" [checked]="isTypeUserIDSelected(1)"/>
                       Menstruante
                     </label>
                   </div>
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" value="2" />
+                      <input type="radio" formControlName="typeUserID" [value]="2" [checked]="isTypeUserIDSelected(2)"/>
                       Etapa Menopáusica
                     </label>
                   </div>
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" value="3" />
+                      <input type="radio" formControlName="typeUserID" [value]="3" [checked]="isTypeUserIDSelected(3)"/>
                       No menstruante
                     </label>
                   </div>
