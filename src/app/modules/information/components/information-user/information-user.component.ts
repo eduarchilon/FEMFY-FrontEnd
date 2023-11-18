@@ -9,12 +9,13 @@ import { QuestionService } from 'src/app/services/question/question.service';
 @Component({
   selector: 'app-information-user',
   templateUrl: './information-user.component.html',
-  styleUrls: ['./information-user.component.scss']
+  styleUrls: ['./information-user.component.scss'],
 })
 export class InformationUserComponent implements OnInit {
   userResponse!: UserResponse;
   userQuestions: QuestionUserMenstruation = {};
 
+  defaultDate!: string;
   constructor(
     private questionService: QuestionService,
     private localStorageService: LocalStorageService,
@@ -28,6 +29,8 @@ export class InformationUserComponent implements OnInit {
       .getQuestionUserMenstruationByIdUser(this.userResponse?.idUser)
       .subscribe((questions: QuestionUserMenstruation | any) => {
         this.userQuestions = questions[0];
+        this.defaultDate = this.userQuestions.lastTime;
+
         this.formInformationMenstruation = this.fb.group({
           lastTime: [this.userQuestions.lastTime],
           lastCycleDuration: [this.userQuestions.lastCycleDuration],
@@ -44,22 +47,28 @@ export class InformationUserComponent implements OnInit {
     regular: new FormControl(''),
     regularCycleDuration: new FormControl(''),
     bleedingDuration: new FormControl(''),
-  })
+  });
 
   submitInformationMenstruation(): void {
     this.questionService
-    .updateUserMenstruationQuestion({
-      ...this.userQuestions,
-      lastTime: this.formInformationMenstruation.value.lastime,
-      lastCycleDuration: this.formInformationMenstruation.value.lastCycleDuration,
-      regular: this.formInformationMenstruation.value.regular === false ? false : true,
-      regularCycleDuration: this.formInformationMenstruation.value.regularCycleDuration,
-      bleedingDuration: this.formInformationMenstruation.value.bleedingDuration,
-    })
-    .subscribe((res) => {
-      this.openSnackBar('Guardado con éxito', 'X');
-      return res;
-    });
+      .updateUserMenstruationQuestion({
+        ...this.userQuestions,
+        lastTime: this.formInformationMenstruation.value.lastime,
+        lastCycleDuration:
+          this.formInformationMenstruation.value.lastCycleDuration,
+        regular:
+          this.formInformationMenstruation.value.regular === false
+            ? false
+            : true,
+        regularCycleDuration:
+          this.formInformationMenstruation.value.regularCycleDuration,
+        bleedingDuration:
+          this.formInformationMenstruation.value.bleedingDuration,
+      })
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X');
+        return res;
+      });
   }
 
   openSnackBar(message: string, action: string) {
