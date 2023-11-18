@@ -13,6 +13,7 @@ import {
   listAll,
   getDownloadURL,
   getMetadata,
+  deleteObject,
 } from '@angular/fire/storage';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
@@ -227,19 +228,30 @@ export class DocumentationComponent implements OnInit {
   }
 
 
-  deleteFile(fullPath: string): void {
-    if (confirm('¿Estás seguro de que deseas eliminar este archivo?')) {
-      /*const storageRef = firebase.storage().ref();
-      //const fileRef = storageRef.child(fullPath);
+  async deleteFile(studyFile: any): Promise<void> {
+    const isConfirmed = window.confirm('¿Estás seguro de eliminar este archivo?');
 
-      fileRef.delete()
-       .then(() => {
-          console.log('Archivo eliminado correctamente');
-          // Puedes realizar otras acciones aquí
-        })
-        .catch(() => {
-          console.error('Error al eliminar el archivo:');
-        });*/
+    if (!isConfirmed) {
+      return;
+    }
+
+
+    try {
+      const idUser = this.localStorageService.getUserByLogin()?.idUser;
+      const filePath = `${idUser}/${studyFile.name}`;
+      const fileRef = ref(this.storage, filePath);
+
+      // Eliminar el archivo
+      await deleteObject(fileRef);
+
+      // Actualizar la lista de archivos después de eliminar
+      await this.getFiles();
+
+      this._snackBar.open('Estudio eliminado correctamente.', 'X', {
+        duration: 5000, // Duración en milisegundos
+      })
+    } catch (error) {
+      console.error('Error al eliminar el archivo:', error);
     }
   }
 
