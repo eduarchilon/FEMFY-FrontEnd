@@ -36,6 +36,12 @@ export class QuestionMenopausicaService {
       })
     );
   }
+  
+  getQuestionUserMenopauseByIdUser(idUser: number | any): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.usersUrl}/getQuestionsByUser/${idUser}`
+    );
+  }
 
   getQuestionMenopausica(): Observable<any> {
     return this.http.get<any>(`${this.usersUrl}/getAllQuestions`).pipe(

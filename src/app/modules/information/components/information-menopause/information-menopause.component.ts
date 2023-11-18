@@ -22,211 +22,53 @@ export class InformationMenopauseComponent implements OnInit {
     private questionMenopausica: QuestionMenopausicaService
   ) {}
 
-  formaumentoDePeso: FormGroup = new FormGroup({
+  formInformationMenopause: FormGroup = new FormGroup({
     aumentoDePeso: new FormControl(''),
-  });
-
-  formchangesInLibido: FormGroup = new FormGroup({
     changesInLibido: new FormControl(''),
-  });
-
-  formchangesInMenstrualCycle: FormGroup = new FormGroup({
     changesInMenstrualCycle: new FormControl(''),
-  });
-
-  formchangesInSkinAndHair: FormGroup = new FormGroup({
     changesInSkinAndHair: new FormControl(''),
-  });
-
-  formlossOfBoneDensity: FormGroup = new FormGroup({
     lossOfBoneDensity: new FormControl(''),
-  });
-
-  formmoodChanges: FormGroup = new FormGroup({
     moodChanges: new FormControl(''),
-  });
-
-  formsleepingDifficulties: FormGroup = new FormGroup({
     sleepingDifficulties: new FormControl(''),
-  });
-
-  formsuffocation: FormGroup = new FormGroup({
     suffocation: new FormControl(''),
-  });
-
-  formvaginalDryness: FormGroup = new FormGroup({
     vaginalDryness: new FormControl(''),
-  });
+  })
 
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
     this.questionMenopausica
-      .getQuestionMenopausica()
-      .subscribe((menopause: QuestionUserMenopause[] | any[]) => {
-        this.userMenopauseQustions = menopause?.filter(
-          (ques: QuestionUserMenopause) =>
-            ques?.userId === this.userResponse.idUser
-        )[0];
+      .getQuestionUserMenopauseByIdUser(this.userResponse?.idUser)
+      .subscribe((menopauseQuestions: QuestionUserMenopause[] | any[]) => {
+        this.userMenopauseQustions = menopauseQuestions[0];
 
-        this.formaumentoDePeso = this.fb.group({
+        this.formInformationMenopause = this.fb.group({
           aumentoDePeso: [this.userMenopauseQustions?.aumentoDePeso],
-        });
-
-        this.formchangesInLibido = this.fb.group({
           changesInLibido: [this.userMenopauseQustions?.changesInLibido],
-        });
-
-        this.formchangesInMenstrualCycle = this.fb.group({
-          changesInMenstrualCycle: [
-            this.userMenopauseQustions?.changesInMenstrualCycle,
-          ],
-        });
-
-        this.formchangesInSkinAndHair = this.fb.group({
-          changesInSkinAndHair: [
-            this.userMenopauseQustions?.changesInSkinAndHair,
-          ],
-        });
-
-        this.formlossOfBoneDensity = this.fb.group({
+          changesInMenstrualCycle: [this.userMenopauseQustions?.changesInMenstrualCycle],
+          changesInSkinAndHair: [this.userMenopauseQustions?.changesInSkinAndHair],
           lossOfBoneDensity: [this.userMenopauseQustions?.lossOfBoneDensity],
-        });
-
-        this.formmoodChanges = this.fb.group({
           moodChanges: [this.userMenopauseQustions?.moodChanges],
-        });
-
-        this.formsleepingDifficulties = this.fb.group({
-          sleepingDifficulties: [
-            this.userMenopauseQustions?.sleepingDifficulties,
-          ],
-        });
-
-        this.formsuffocation = this.fb.group({
+          sleepingDifficulties: [this.userMenopauseQustions?.sleepingDifficulties],
           suffocation: [this.userMenopauseQustions?.suffocation],
-        });
-
-        this.formvaginalDryness = this.fb.group({
           vaginalDryness: [this.userMenopauseQustions?.vaginalDryness],
         });
+        console.log(this.userMenopauseQustions)
       });
   }
 
-  submit1(): void {
+  submitInformationMenopause(): void {
     this.questionMenopausica
       .updateUserMenopauseQuestion({
         ...this.userMenopauseQustions,
-        aumentoDePeso:
-          this.formaumentoDePeso.value.aumentoDePeso === false ? 0 : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit2(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        changesInLibido:
-          this.formchangesInLibido.value.changesInLibido === false ? 0 : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit3(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        changesInMenstrualCycle:
-          this.formchangesInMenstrualCycle.value.changesInMenstrualCycle ===
-          false
-            ? 0
-            : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit4(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        changesInSkinAndHair:
-          this.formchangesInSkinAndHair.value.changesInSkinAndHair === false
-            ? 0
-            : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit5(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        lossOfBoneDensity:
-          this.formlossOfBoneDensity.value.lossOfBoneDensity === false ? 0 : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit6(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        moodChanges: this.formmoodChanges.value.moodChanges === false ? 0 : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit7(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        sleepingDifficulties:
-          this.formsleepingDifficulties.value.sleepingDifficulties === false
-            ? 0
-            : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit8(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        suffocation: this.formsuffocation.value.suffocation === false ? 0 : 1,
-      })
-      .subscribe((res) => {
-        this.openSnackBar('Guardado con éxito', 'X');
-        return res;
-      });
-  }
-
-  submit9(): void {
-    this.questionMenopausica
-      .updateUserMenopauseQuestion({
-        ...this.userMenopauseQustions,
-        vaginalDryness:
-          this.formvaginalDryness.value.vaginalDryness === false ? 0 : 1,
+        aumentoDePeso: this.formInformationMenopause.value.aumentoDePeso === false ? 0 : 1,
+        changesInLibido: this.formInformationMenopause.value.changesInLibido === false ? 0 : 1,
+        changesInMenstrualCycle: this.formInformationMenopause.value.changesInMenstrualCycle === false ? 0 : 1,
+        changesInSkinAndHair: this.formInformationMenopause.value.changesInSkinAndHair === false ? 0 : 1,
+        lossOfBoneDensity: this.formInformationMenopause.value.lossOfBoneDensity === false ? 0 : 1,
+        moodChanges: this.formInformationMenopause.value.moodChanges === false ? 0 : 1,
+        sleepingDifficulties: this.formInformationMenopause.value.sleepingDifficulties === false ? 0 : 1,
+        suffocation: this.formInformationMenopause.value.suffocation === false ? 0 : 1,
+        vaginalDryness: this.formInformationMenopause.value.vaginalDryness === false ? 0 : 1,
       })
       .subscribe((res) => {
         this.openSnackBar('Guardado con éxito', 'X');

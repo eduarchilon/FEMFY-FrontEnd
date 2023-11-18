@@ -4,7 +4,7 @@
       Estudios
     </h2>
     <form action="" [formGroup]="formDocumentation" (ngSubmit)="uploadFile()">
-      <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-[10%]">
+      <div class="flex justify-between max-lg:flex-col max-lg:gap-4 gap-10">
         <div class="flex-1 w-full bg-white rounded-[20px]">
           <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">
             Cargar nuevo estudio
@@ -38,7 +38,8 @@
                 type="submit">
                 Guardar estudio
               </button>
-              <button class="flex-1 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]" (click)="refreshPage()">
+              <button class="flex-1 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+                (click)="refreshPage()">
                 Cancelar
               </button>
             </div>
@@ -65,19 +66,16 @@
           </div>
         </div>
 
-
-        <div class="hidden max-lg:flex max-lg:gap-4 gap-[10%]">
-          <div class="w-full bg-white rounded-[20px] p-5 flex justify-between">
-            <button class="w-1/2 bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
-              type="submit">
-              Guardar estudio
-            </button>
-            <button class="w-1/2 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]" (click)="refreshPage()">
-              Cancelar
-            </button>
-          </div>
+        <div class="hidden max-lg:flex max-lg:gap-4">
+          <button class="w-1/2 bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]" type="submit">
+            Guardar estudio
+          </button>
+          <button class="w-1/2 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            (click)="refreshPage()">
+            Cancelar
+          </button>
         </div>
-      
+
 
       </div>
     </form>
@@ -103,7 +101,8 @@
         <h2 class="text-4xl text-femfy-800 font-bold mb-10">
           Mis estudios cargados
         </h2>
-        <div class="overflow-x-auto max-lg:w-[100%] bg-white pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2 max-lg:mb-20">
+        <div
+          class="overflow-x-auto max-lg:w-[100%] bg-white pt-[20px] pb-[35px]  rounded-[20px] w-[100%] mt-2 max-lg:mb-20">
           <div class="flex flex-col justify-start text-left">
             <table class="table-fixed">
               <thead class="text-white dark:border-neutral-900 text-[20px] max-lg:text-[15px]">
@@ -122,7 +121,7 @@
                 </tr>
               </thead>
               <tbody>
-                
+
                 <tr class="border-b dark:border-neutral-500" *ngFor="let study of studies">
                   <td class="pl-10 pr-6 py-4 border-b-[4px] border-[#7c2385]">
                     {{ study.customMetadata.typeStudy }}
@@ -138,24 +137,24 @@
                     <button mat-icon-button [matMenuTriggerFor]="menu">
                       <mat-icon>more_vert</mat-icon>
                     </button>
-                  <mat-menu #menu="matMenu">
-                    <button mat-menu-item>
-                      <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
-                        <mat-icon>file_download</mat-icon>
-                        Descargar
-                      </a>
-                    </button>
-                    <button mat-menu-item (click)="deleteFile(study.files)">
-                      <mat-icon style="color: #7c2385;">delete</mat-icon>
-                      Eliminar
-                    </button>
-                    <button mat-menu-item (click)="viewQR(study.url, study.customMetadata.typeStudy)">
-                      <mat-icon style="color: #7c2385;">share</mat-icon>
-                      Compartir
-                    </button>
-                  </mat-menu>
+                    <mat-menu #menu="matMenu">
+                      <button mat-menu-item>
+                        <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
+                          <mat-icon>file_download</mat-icon>
+                          Descargar
+                        </a>
+                      </button>
+                      <button mat-menu-item (click)="deleteFile(study.files)">
+                        <mat-icon style="color: #7c2385;">delete</mat-icon>
+                        Eliminar
+                      </button>
+                      <button mat-menu-item (click)="viewQR(study.url, study.customMetadata.typeStudy)">
+                        <mat-icon style="color: #7c2385;">share</mat-icon>
+                        Compartir
+                      </button>
+                    </mat-menu>
                   </td>
-                  
+
                   <td class="px-6 py-4 border-b-[4px] border-[#7c2385] max-lg:hidden">
                     <button class="me-3">
                       <a [href]="study.url" download="{{ study.files.name }}" target="_blank">
@@ -174,7 +173,7 @@
                     </button>
                   </td>
 
-                  
+
 
                 </tr>
               </tbody>
