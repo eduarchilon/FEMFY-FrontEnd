@@ -18,9 +18,10 @@ export class QuestionMenopausicaComponent implements OnInit {
 
   idMenopause!: number;
   ngOnInit(): void {
-    this.idMenopause = this.localStorageService.getLocalStorage(
+    this.idMenopause = this.localStorageService.parseLocalStorage(
       constants.USER_MENOPAUSE
     )?.idMenopause;
+    console.log(this.idMenopause);
   }
 
   updateQuestionMenopause(value: string, question: string) {

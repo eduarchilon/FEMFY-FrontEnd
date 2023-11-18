@@ -59,7 +59,7 @@ export class PreguntaComponent implements OnInit {
 
   idMenstruation!: number;
   ngOnInit(): void {
-    this.idMenstruation = this.localStorageService.getLocalStorage(
+    this.idMenstruation = this.localStorageService.parseLocalStorage(
       constants.USER_MENSTRUATION
     )?.idMenstruation;
   }

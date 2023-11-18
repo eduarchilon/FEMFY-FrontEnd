@@ -18,7 +18,7 @@ export class QuestionHormonalComponent {
 
   idHormonal!: number;
   ngOnInit(): void {
-    this.idHormonal = this.localStorageService.getLocalStorage(
+    this.idHormonal = this.localStorageService.parseLocalStorage(
       constants.USER_HORMONAL
     )?.idHormonal;
   }
