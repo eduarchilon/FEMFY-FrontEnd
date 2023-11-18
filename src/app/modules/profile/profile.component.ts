@@ -50,7 +50,7 @@ export class ProfileComponent implements OnInit {
     private sharedProfileService: SharedProfileService,
     private snackBar: MatSnackBar,
     private profileService: ProfileService,
-    private _snackBar: MatSnackBar,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -65,7 +65,7 @@ export class ProfileComponent implements OnInit {
       phone: [this.userResponse.phone],
       email: [this.userResponse.email],
       typeUserID: [this.userResponse.typeUserID],
-      idUser: [this.localStorageService.getUserByLogin()?.idUser]
+      idUser: [this.localStorageService.getUserByLogin()?.idUser],
     });
     this.getProfilePicture();
   }
@@ -85,7 +85,7 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.valid) {
       const updatedUserData = this.profileForm.value;
 
-      const userData = {    
+      const userData = {
         ...updatedUserData,
         typeUserID: this.localStorageService.getUserByLogin()?.typeUserID,
         userName: this.localStorageService.getUserByLogin()?.userName,
@@ -96,13 +96,12 @@ export class ProfileComponent implements OnInit {
       // Utiliza una solicitud PUT para actualizar el perfil
       this.http.put(`${this.apiUrl}`, updatedUserData).subscribe({
         next: (data: any) => {
-
           const keys = [];
           const values = [];
 
           keys.push('firstName');
           values.push(updatedUserData.firstName);
-        
+
           keys.push('lastName');
           values.push(updatedUserData.lastName);
 
@@ -179,10 +178,10 @@ export class ProfileComponent implements OnInit {
           const url = await getDownloadURL(pic);
 
           this.picture.push({ url: url });
-          this.sharedProfileService.setUserProfileImage(url);
         }
 
-        console.log(this.picture);
+        this.sharedProfileService.setUserProfileImage(this.picture[0]?.url);
+        console.log(this.picture[0]?.url);
       })
       .catch((error: any) => {
         console.log(error);
