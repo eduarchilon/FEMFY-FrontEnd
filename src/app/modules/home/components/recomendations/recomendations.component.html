@@ -1,13 +1,13 @@
 <div class="max-h-[500px] !overflow-x-hidden" #scrollingContent>
   <ng-container *ngIf="isNull === true">
     <ng-container
-      *ngFor="let item of recommendations?.recommendationsByFamilyHistory"
+      *ngFor="let item of recommendations?.recommendationsByFamilyHistory; let i = index"
     >
       <div
         class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
         (click)="viewRecomendation(item)"
       >
-        <p class="flex-1 font-semibold text-[13px]">
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
           {{ item.description | cutText }}
         </p>
         <mat-icon class="text-[20px] text-femfy-800"
@@ -19,13 +19,13 @@
   </ng-container>
   <ng-container *ngIf="isNull === true">
     <ng-container
-      *ngFor="let item of recommendations?.recommendationsByDocuments"
+      *ngFor="let item of recommendations?.recommendationsByDocuments; let i = index"
     >
       <div
         class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
         (click)="viewRecomendation(item)"
       >
-        <p class="flex-1 font-semibold text-[13px]">
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
           {{ item.description | cutText }}
         </p>
         <mat-icon class="text-[20px] text-femfy-800"
@@ -38,13 +38,13 @@
 
   <ng-container *ngIf="isNull === true">
     <ng-container
-      *ngFor="let item of recommendations?.recommendationsByTypeUser"
+      *ngFor="let item of recommendations?.recommendationsByTypeUser; let i = index"
     >
       <div
         class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
         (click)="viewRecomendation(item)"
       >
-        <p class="flex-1 font-semibold text-[13px]">
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
           {{ item.description | cutText }}
         </p>
         <mat-icon class="text-[20px] text-femfy-800"

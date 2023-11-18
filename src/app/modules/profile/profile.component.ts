@@ -91,8 +91,6 @@ export class ProfileComponent implements OnInit {
         userName: this.localStorageService.getUserByLogin()?.userName,
       };
 
-      
-
       console.log(userData);
 
       // Utiliza una solicitud PUT para actualizar el perfil
