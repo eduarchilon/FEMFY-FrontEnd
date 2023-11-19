@@ -1,24 +1,40 @@
 <div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
-  <div class="flex justify-between">
-    <p>Recordar a Jose</p>
-    <div class="flex gap-3">
-      <span>No</span>
-      <mat-slide-toggle
-        color="accent"
-        (change)="setVinculateToFriend(data?.item)"
-      ></mat-slide-toggle>
-      <span>Sí</span>
+  <!-- <ng-container *ngIf="!userResponse.phone">
+    <div class="py-10">
+      <p>Debe registrar sus número de What's App para poder enviar mensajes</p>
     </div>
-    <p>Enviar ahora</p>
-  </div>
+  </ng-container>
+  <ng-container *ngIf="userResponse.phone"> -->
+    <div class="flex justify-between">
+      <p>Recordar a Jose</p>
+      <div class="flex gap-3">
+        <span>No</span>
+        <mat-slide-toggle
+          color="accent"
+          [checked]="vinculateToFriend"
+          (change)="setVinculateToFriend($event, data?.item)"
+        ></mat-slide-toggle>
+        <span>Sí</span>
+      </div>
+      <button mat-mini-fab color="primary" (click)="sendToFriend(data?.item)">
+        <mat-icon>send</mat-icon>
+      </button>
+    </div>
 
-  <div class="flex justify-between">
-    <p>Recordarme por mensaje</p>
-    <div class="flex gap-3">
-      <span>No</span>
-      <mat-slide-toggle color="accent"></mat-slide-toggle>
-      <span>Sí</span>
+    <div class="flex justify-between">
+      <p>Recordarme por mensaje</p>
+      <div class="flex gap-3">
+        <span>No</span>
+        <mat-slide-toggle
+          color="accent"
+          [checked]="vinculateToMe"
+          (change)="setVinculateToMe($event, data?.item)"
+        ></mat-slide-toggle>
+        <span>Sí</span>
+      </div>
+      <button mat-mini-fab color="primary" (click)="sendToMe(data?.item)">
+        <mat-icon>send</mat-icon>
+      </button>
     </div>
-    <p>Enviar ahora</p>
-  </div>
+  <!-- </ng-container> -->
 </div>
