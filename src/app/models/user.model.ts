@@ -11,7 +11,7 @@ export interface UserResponse {
   lastName?: string;
   phone?: string;
   userName?: string;
-  isSuscripto?: boolean;
+  isSuscriptor?: boolean | number;
   idUser?: number;
   typeUserID?: number;
   localidad?: string;

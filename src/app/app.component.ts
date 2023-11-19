@@ -29,8 +29,15 @@ export class AppComponent {
     this._bottomSheet.open(ChatbotComponent);
   }
 
+  isChatBot!: boolean;
+
   ngOnInit(): void {
     this.userId = this.localStorageService.getUserByLogin()?.idUser;
+    const isSuscriptor =
+      this.localStorageService.getUserByLogin()?.isSuscriptor;
+    if (isSuscriptor === 0 || isSuscriptor === true) {
+      this.isChatBot = true;
+    }
     this.subscribeToNotifications();
   }
 
