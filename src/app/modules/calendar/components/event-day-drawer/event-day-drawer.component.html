@@ -14,12 +14,21 @@
         Crear nuevo evento
       </h3>
       <ng-container *ngIf="data?.itemChart">
-        <p class="pb-5">
-          Estás en la etapa de :
-          <span class="text-black font-bold">
-            {{ data?.itemChart?.label }}</span
+        <div class="flex justify-between items-center py-5">
+          <p>
+            Estás en la etapa de :
+            <span class="text-black font-bold">
+              {{ data?.itemChart?.label }}</span
+            >
+          </p>
+          <button
+            mat-mini-fab
+            class="!bg-green-600"
+            (click)="sendWhatsAppPhase(data?.itemChart)"
           >
-        </p>
+            <mat-icon [svgIcon]="iconWhatsApp?.name"></mat-icon>
+          </button>
+        </div>
       </ng-container>
       <!-- <p>{{ eventDaySelected | json }}</p> -->
       <form

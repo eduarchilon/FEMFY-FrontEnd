@@ -242,7 +242,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
           .format('L');
         // console.log(item.id);
         // console.log(diff);
-
+        item.hour = '10:00';
         item.width = (newDataArray.length / sumaTotal) * 100;
         item.desc = '';
         if (item.id === diff) {
@@ -265,6 +265,8 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         return item;
       }
     );
+
+    console.log(dataChildrenSeries);
 
     if (
       newDataArray[diff - 1]?.fase !==

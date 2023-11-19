@@ -21,6 +21,8 @@ import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
   styleUrls: ['./whats-app-drawer.component.scss'],
 })
 export class WhatsAppDrawerComponent implements OnInit {
+  //TODO: *Texto en negrita* , ~Texto tachado~, *_Texto en negrita y cursiva_*, Hola,\nEsto es un nuevo párrafo.
+
   constructor(
     private notificationService: NotificationService,
     private router: Router,
@@ -38,6 +40,8 @@ export class WhatsAppDrawerComponent implements OnInit {
   userResponse!: UserResponse;
 
   ngOnInit(): void {
+    console.log(this.data?.itemChart);
+
     this.userResponse = this.localStorageService.getUserByLogin();
     this.vinculateToFriend = this.data?.item?.isFriendWPVinculate;
     this.vinculateToMe = this.data?.item?.isMyWPVinculate;
@@ -86,6 +90,16 @@ export class WhatsAppDrawerComponent implements OnInit {
   }
 
   sendToFriend(item: EventCalendar): void {
+    const msgString: string = `¡Hola!
+                          \nEl evento de *${
+                            this.userResponse?.firstName ||
+                            this.userResponse?.userName
+                          }* del día ${moment(new Date(item?.date))
+      .locale('es')
+      .format('LL')} a las ${item?.hour}:
+                          \n*${item?.title || 'Sin titulo'}*
+                          \n_${item?.description || 'Sin descripción'}_`;
+
     const msg: WhatsAppMessage = {
       phone: '5491168087762',
       message: `${item?.description}`,
@@ -100,11 +114,28 @@ export class WhatsAppDrawerComponent implements OnInit {
   }
 
   sendToMe(item: EventCalendar): void {
+    //DATA EXAMPLE:
+    // date: '2023-11-21T03:00:00.000Z';
+    // description: 'Tomar pastilla para dolores.';
+    // hour: '12:00';
+    // id: '1';
+    // idUser: 3;
+    // isFriendWPVinculate: false;
+    // isMyWPVinculate: false;
+    // title: 'Paracetamol 500';
+    // console.log(moment(new Date(item?.date)).locale('es').format('LL'));
+    const msgString: string = `¡Hola!
+                          \nTu evento del día ${moment(new Date(item?.date))
+                            .locale('es')
+                            .format('LL')} a las ${item?.hour}:
+                          \n*${item?.title || 'Sin titulo'}*
+                          \n_${item?.description || 'Sin descripción'}_`;
+
     const phoneNumber: any = this.userResponse?.phone?.split('+');
     console.log(phoneNumber[1]);
     const msg: WhatsAppMessage = {
       phone: phoneNumber[1],
-      message: `${item?.description}`,
+      message: msgString,
     };
     this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
       next: (res: any) => {
