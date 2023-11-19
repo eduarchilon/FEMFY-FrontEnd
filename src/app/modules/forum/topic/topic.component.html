@@ -6,8 +6,8 @@
                 <a class="ml-2">{{ topic?.title }}</a>
             </div>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
-                class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px] my-5 md:my-0">Crear una
-                charla</button>
+                class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px] my-5 md:my-0 max-lg:hidden">Crear una
+                nueva charla</button>
         </div>
 
         <div *ngIf="posts.length > 0; else emptyPosts">
@@ -40,10 +40,15 @@
             </div>
         </div>
 
+        <button *ngIf="posts.length > 0" (click)="openPostRegister()"
+                class="hidden max-lg:flex max-lg:mb-20 bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px] my-5 md:my-0">Crear una nueva
+                charla
+        </button>
+
         <ng-template #emptyPosts>
             <div class="w-full">
                 <div class="lg:flex w-full bg-white rounded-[20px] max-lg:mb-20">
-                    <img class="w-[500px] h-[500px] rounded-[20px]"
+                    <img class="w-[500px] h-[500px] rounded-[20px] max-lg:h-[380px] max-lg:w-[380px]"
                         src="https://img.freepik.com/free-vector/curiosity-search-concept-illustration_114360-10670.jpg?w=826&t=st=1698810066~exp=1698810666~hmac=e47964787c2e0ddc5abcc50655821d8002e4dce66668ba60cc2d6e0dc38165ff">
                     <div class="text-center m-auto px-10 lg:px-20">
                         <p class="font-bold text-femfy-800 text-4xl mb-10">Oops! parece que no hay

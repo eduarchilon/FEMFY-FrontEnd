@@ -7,7 +7,7 @@
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-10">
       <div *ngFor="let topic of topics">
         <div class="w-full mx-auto shadow-2xl rounded-[20px] relative mb-10">
-          <a routerLink="/foro/{{ topic.id }}" (click)="saveId(topic.id)">
+          <a routerLink="/foro/{{ topic.id }}" (click)="saveIdAndTitle(topic.id)">
             <img [src]="getImageUrl(topic.image)" class="w-full rounded-[20px]" />
             <div class="bg-[#7c2385] rounded-full absolute bottom-[-20px] left-0 w-full">
               <h3 class="text-xl text-white text-center font-semibold p-3">

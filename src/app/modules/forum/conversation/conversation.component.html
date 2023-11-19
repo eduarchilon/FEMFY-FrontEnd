@@ -9,47 +9,66 @@
         <h2 class="text-4xl md:text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
         <!--<span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>-->
 
-        <div class="bg-white w-full my-5 p-[20px] rounded-[20px]">
-            <div class="mb-3">
-                <p class="text-xl font-semibold text-[#7c2385]">{{ post.username }}</p>
-                <span class="text-gray-500">{{ post.createdDate | date: 'dd/MM/yy HH:mm' }}</span>
-            </div>
-            <p>{{ post.content }}</p>
+    <div class="bg-white w-full my-5 p-[20px] rounded-[20px]">
+      <div class="mb-3">
+        <p class="text-xl font-semibold text-[#7c2385]">{{ post.username }}</p>
+        <span class="text-gray-500">{{
+          post.createdDate | date : "dd/MM/yy HH:mm"
+        }}</span>
+      </div>
+      <p>{{ post.content }}</p>
+    </div>
+
+    <h3 class="text-3xl text-femfy-800 font-bold my-5">Comentarios</h3>
+
+    <div class="bg-white rounded-[20px] p-[20px]">
+      <div *ngFor="let reply of replies">
+        <div class="mb-5 pb-5 w-full border-b">
+          <div class="mb-3">
+            <p class="text-xl text-[#7c2385]">{{ reply.username }}</p>
+            <span class="text-gray-500">{{
+              reply.createdDate | date : "dd/MM/yy HH:mm"
+            }}</span>
+          </div>
+          <p [innerHTML]="sanitizeHtml(reply.content)"></p>
         </div>
-
-        <h3 class="text-3xl text-femfy-800 font-bold my-5">Comentarios</h3>
-
-        <div class="bg-white rounded-[20px] p-[20px]">
-            <div *ngFor="let reply of replies">
-                <div class="mb-5 pb-5 w-full border-b">
-                    <div class="mb-3">
-                        <p class="text-xl text-[#7c2385]">{{ reply.username }}</p>
-                        <span class="text-gray-500">{{ reply.createdDate | date: 'dd/MM/yy HH:mm' }}</span>
-                    </div>
-                    <p [innerHTML]="sanitizeHtml(reply.content)"></p>
-                </div>
-            </div>
-            <div *ngIf="!showFormComment" class="flex justify-end mt-3">
-                <button (click)="openFormComment()"
-                    class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Añadir
-                    comentario</button>
-            </div>
-            <ng-container *ngIf="showFormComment">
-                <form [formGroup]="formComment" (ngSubmit)="submitFormComment()">
-                    <editor formControlName="content" apiKey="a6vdvz9sejlchv64d0vru3my7nrendb2eggh9vy4dvpum6sg" [init]="{
+      </div>
+      <div *ngIf="!showFormComment" class="flex justify-end mt-3 max-lg:block max-lg:mt-0">
+        <button
+          (click)="openFormComment()"
+          class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] "
+        >
+          Añadir comentario
+        </button>
+      </div>
+      <ng-container *ngIf="showFormComment">
+        <form [formGroup]="formComment" (ngSubmit)="submitFormComment()">
+          <editor
+            formControlName="content"
+            apiKey="a6vdvz9sejlchv64d0vru3my7nrendb2eggh9vy4dvpum6sg"
+            [init]="{
                         menubar: 'edit format',
                         placeholder: 'Escribe tu comentario',
                         toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent | removeformat',
-                      }">
-                    </editor>
-                    <div class="text-end mt-5">
-                        <button type="submit"
-                            class="bg-[#de84ee] text-xl font-bold rounded-[20px] py-2 px-3 me-3 text-white">Enviar</button>
-                        <button (click)="closeFormComment()"
-                            class="bg-[#7c2385] text-xl font-bold rounded-[20px] py-2 px-3 text-white">Cancelar</button>
-                    </div>
-                </form>
-            </ng-container>
-        </div>
+                      }"
+          >
+          </editor>
+          <div class="text-end mt-5">
+            <button
+              type="submit"
+              class="bg-[#de84ee] text-xl font-bold rounded-[20px] py-2 px-3 me-3 text-white"
+            >
+              Enviar
+            </button>
+            <button
+              (click)="closeFormComment()"
+              class="bg-[#7c2385] text-xl font-bold rounded-[20px] py-2 px-3 text-white"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </ng-container>
     </div>
+  </div>
 </div>
