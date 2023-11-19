@@ -206,7 +206,6 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
 
   openDialog(daySelected: any) {
-    console.log(daySelected);
     this.dialog.open(EventDayDrawerComponent, {
 
       panelClass: [

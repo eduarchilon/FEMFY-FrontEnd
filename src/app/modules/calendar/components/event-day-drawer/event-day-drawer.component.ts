@@ -59,8 +59,6 @@ export class EventDayDrawerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.data?.itemChart);
-
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService
@@ -183,7 +181,7 @@ export class EventDayDrawerComponent implements OnInit {
         }
       })
       .catch((error: any) => {
-        console.error('Ocurrió un error al crear el evento:', error);
+        error;
       });
   }
 

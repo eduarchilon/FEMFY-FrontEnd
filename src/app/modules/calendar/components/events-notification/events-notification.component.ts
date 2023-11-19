@@ -23,7 +23,6 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
     private router: Router
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.events);
     this.events.forEach((event: EventCalendar | any) => {
       setInterval(() => {
         //La fecha de hoy y las horas
@@ -47,8 +46,6 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
           horaActual === hour &&
           minutosActuales === minutes
         ) {
-          console.log(event?.title, event?.description);
-
           this.sendNotification(event?.title, event?.description);
         }
       }, 30000);
@@ -56,8 +53,6 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.events);
-
     this.events.forEach((event: EventCalendar | any) => {
       setInterval(() => {
         //La fecha de hoy y las horas

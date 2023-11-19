@@ -56,8 +56,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userResponse = this.localStorageService.getUserByLogin();
 
-    console.log(this.localStorageService.getUserByLogin());
-
     this.profileForm = this.fb.group({
       firstName: [this.userResponse.firstName],
       lastName: [this.userResponse.lastName],
@@ -90,8 +88,6 @@ export class ProfileComponent implements OnInit {
         typeUserID: this.localStorageService.getUserByLogin()?.typeUserID,
         userName: this.localStorageService.getUserByLogin()?.userName,
       };
-
-      console.log(userData);
 
       // Utiliza una solicitud PUT para actualizar el perfil
       this.http.put(`${this.apiUrl}`, updatedUserData).subscribe({
@@ -141,8 +137,6 @@ export class ProfileComponent implements OnInit {
     if (files.length > 0) {
       this.selectedFile = files[0];
 
-      console.log(files[0]);
-
       if (this.selectedFile) {
         const file = this.selectedFile;
         const idPath = this.localStorageService.getUserByLogin()?.idUser;
@@ -151,14 +145,13 @@ export class ProfileComponent implements OnInit {
 
         uploadBytes(imgRef, file)
           .then((snapshot) => {
-            console.log('Archivo subido con éxito.', snapshot);
             this.snackBar.open('Foto subida correctamente', 'cerrar', {
               duration: 5000, // Duración en milisegundos
             });
             window.location.reload();
           })
           .catch((error) => {
-            console.error('Error al subir el archivo:', error);
+            error;
           });
       }
     }
@@ -181,13 +174,13 @@ export class ProfileComponent implements OnInit {
         }
 
         this.sharedProfileService.setUserProfileImage(this.picture[0]?.url);
-        console.log(this.picture[0]?.url);
+        // console.log(this.picture[0]?.url);
       })
       .catch((error: any) => {
-        console.log(error);
+        error;
       });
   }
-  
+
   isTypeUserIDSelected(value: number): boolean {
     return this.profileForm.get('typeUserID')?.value === value;
   }
