@@ -1,0 +1,89 @@
+<div class="bg-white rounded-[20px] max-lg:mb-32">
+    <h4 class="text-2xl max-md:text-xl p-[20px] text-femfy-800 border-b-4 border-femfy-800 font-semibold">
+        Información de usuaria (Hormonal)
+    </h4>
+    <div class="p-5">
+        <form [formGroup]="formInformationHormonal" (ngSubmit)="submitInformationHormonal()">
+            <!-- hyperprolactinemia -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Experimentaste ciclos menstruales escasos siendo cada vez menos frecuentes o
+                    secreción de leche por la mama fuera del periodo de lactancia?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="hyperprolactinemia"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--hypothalamicDisorders -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Notaste una alteración persistente en tu ciclo menstrual, como cambios en la
+                    duración, frecuencia o intensidad del sangrado?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="hypothalamicDisorders"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--hypothyroidism -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Sentiste cansancio continuo, aumento de peso inexplicable, intolerancia al
+                    frío y cambios en tu piel como sequedad o escamación?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="hypothyroidism"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--insulinResistance -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Experimentaste un aumento inusual de peso y problemas con los niveles de
+                    azúcar en sangre?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="insulinResistance"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--polycysticOvarySyndrome -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Notaste irregularidades en tu ciclo menstrual junto con aumento de vello en
+                    zonas como el rostro, pecho o espalda, o experimentado dificultades para concebir?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="polycysticOvarySyndrome"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--prematureOvarianFailure -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">¿Pasaste por una suspensión permanente en tu ciclo menstrual a una edad
+                    temprana o estas enfrentado dificultades persistentes para concebir?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="prematureOvarianFailure"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+            <!--sheehanSyndrome -->
+            <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+                <span class="font-medium">Si diste a luz con anterioridad, ¿Experimentaste una hemorragia importante durante el proceso?</span>
+                <div class="flex gap-3">
+                    <span>No</span>
+                    <mat-slide-toggle color="accent" formControlName="sheehanSyndrome"></mat-slide-toggle>
+                    <span>Sí</span>
+                </div>
+            </div>
+            <div class="flex justify-end mt-5">
+                <button class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px]" type="submit">
+                    Guardar cambios
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
