@@ -3,11 +3,10 @@
 
         <div class="flex !font-medium text-femfy-800 text-[30px] mb-5">
             <a routerLink="/foro">Comunidad > </a>
-            <a routerLink="/foro/{id}" class="mx-2">{{ post?.topicId }} ></a>
-            <a routerLink="/">{{ post?.title }}</a>
+            <a routerLink="/foro/{id}" class="mx-2">{{ topic?.title }}</a>
         </div>
 
-        <h2 class="text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
+        <h2 class="text-4xl md:text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
         <!--<span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>-->
 
         <div class="bg-white w-full my-5 p-[20px] rounded-[20px]">

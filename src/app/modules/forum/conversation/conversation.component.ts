@@ -18,6 +18,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/services/redux/store/app.store';
 import { postInit } from 'src/app/services/redux/actions/post/post.page.action';
 import { postSelector } from 'src/app/services/redux/selectors/post.selector';
+import { TopicService } from 'src/app/services/topic/topic.service';
+import { Topic } from 'src/app/models/topic.model';
 
 @Component({
   selector: 'app-section',
@@ -26,6 +28,7 @@ import { postSelector } from 'src/app/services/redux/selectors/post.selector';
 })
 export class ConversationComponent {
   replies: any[] = [];
+  topic!: Topic;
 
   post!: Post;
   idPost!: number;
@@ -39,6 +42,7 @@ export class ConversationComponent {
     private sanitizer: DomSanitizer,
     private postService: PostService,
     private replayService: ReplayService,
+    private topicService: TopicService,
     private localStorageService: LocalStorageService,
     private fb: FormBuilder,
     private userService: UserService,
@@ -100,6 +104,10 @@ export class ConversationComponent {
 
       this.userService.getUserById(this.post.userId).subscribe((data: any) => {
         this.post.username = data.userName;
+      });
+
+      this.topicService.getTopicById(data.topicId).subscribe((topic: any) => {
+        this.topic = topic
       });
     });
   }

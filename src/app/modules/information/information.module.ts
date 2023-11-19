@@ -16,7 +16,8 @@ import { LocalStorageService } from 'src/app/services/local-storage/local-storag
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { InformationMenopauseComponent } from './components/information-menopause/information-menopause.component';
-import { InformationOtherComponent } from './components/information-other/information-other.component';
+import { InformationHormonalComponent } from './components/information-hormonal/information-hormonal.component';
+import { InformationCongenitalComponent } from './components/information-congenital/information-congenital.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { InformationOtherComponent } from './components/information-other/inform
     InformationHistorialComponent,
     InformationUserComponent,
     InformationMenopauseComponent,
-    InformationOtherComponent,
+    InformationHormonalComponent,
+    InformationCongenitalComponent,
   ],
   imports: [
     CommonModule,

@@ -39,4 +39,10 @@ export class QuestionHormonalService {
         })
       );
   }
+
+  getQuestionUserHormonalByIdUser(idUser: number | any): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.usersUrl}/getQuestionsByUser/${idUser}`
+    );
+  }
 }
