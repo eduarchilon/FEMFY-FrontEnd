@@ -1,5 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
@@ -25,6 +29,7 @@ export class WhatsAppDrawerComponent implements OnInit {
     private calendarService: CalendarService,
     private whatsAppService: WhatsAppService,
     private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
     private localStorageService: LocalStorageService
   ) {}
 
@@ -48,6 +53,10 @@ export class WhatsAppDrawerComponent implements OnInit {
     //     // console.log('enviado');
     //   }
     // }, 1000);
+  }
+
+  closeDialogAll(): void {
+    this.dialog.closeAll();
   }
 
   setVinculateToFriend(event: any, item: EventCalendar): void {
@@ -91,8 +100,10 @@ export class WhatsAppDrawerComponent implements OnInit {
   }
 
   sendToMe(item: EventCalendar): void {
+    const phoneNumber: any = this.userResponse?.phone?.split('+');
+    console.log(phoneNumber[1]);
     const msg: WhatsAppMessage = {
-      phone: '5491168087762',
+      phone: phoneNumber[1],
       message: `${item?.description}`,
     };
     this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
