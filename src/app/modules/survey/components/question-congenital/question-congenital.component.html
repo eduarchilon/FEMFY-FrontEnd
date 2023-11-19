@@ -1,0 +1,73 @@
+<div class="m-auto">
+  <mat-stepper #stepper>
+    <!-- another 
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          another
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('1', 'another')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('2', 'another')">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>-->
+    <!-- malformationsUterine -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Experimentaste síntomas como dolor pélvico crónico, ciclos menstruales dolorosos o anormalidades en el
+          sangrado menstrual?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('1', 'malformationsUterine')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('2', 'malformationsUterine')">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- turnerSyndrome-->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          Durante la pubertad, ¿Experimentaste retraso en el desarrollo sexual o signos como baja estatura y ausencia de
+          menstruación?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('1', 'turnerSyndrome')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionMenopause('2', 'turnerSyndrome')">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" (click)="finishQuestion()"
+            class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Finalizar
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

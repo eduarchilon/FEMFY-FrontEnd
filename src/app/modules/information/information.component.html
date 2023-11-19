@@ -1,0 +1,29 @@
+<div class="bg-[#f2d4fa] pt-28 pb-32 px-[3vw]">
+  <div class="w-[100%] bg-cover bg-[#f2d4fa] max-w-[1280px] m-auto">
+    <div class="flex justify-between mb-5">
+      <div class="flex !font-medium text-femfy-800 text-[30px]">
+        <a routerLink="/information">Información personal</a>
+      </div>
+    </div>
+
+    <div>
+      <div [ngSwitch]="typeUser">
+        <div *ngSwitchCase="1">
+          <app-information-user></app-information-user>
+        </div>
+        <div *ngSwitchCase="2">
+          <app-information-menopause></app-information-menopause>
+        </div>
+        <div *ngSwitchCase="3">
+          <app-information-hormonal></app-information-hormonal>
+        </div>
+        <div *ngSwitchCase="4">
+          <app-information-congenital></app-information-congenital>
+        </div>
+      </div>
+    </div>
+    <div class="mt-10">
+      <app-information-historial></app-information-historial>
+    </div>
+  </div>
+</div>

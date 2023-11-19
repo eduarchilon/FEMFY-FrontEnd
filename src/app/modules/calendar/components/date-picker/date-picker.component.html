@@ -1,0 +1,25 @@
+<mat-card
+  *ngIf="daysSelected.length > 0"
+  class="demo-inline-calendar-card w-[100%] !rounded-[20px] shadow-xl"
+>
+  <div (click)="$event.stopPropagation()">
+    <mat-calendar
+      #calendar
+      (selectedChange)="select($event, calendar); selectDate($event)"
+      [dateClass]="isSelected"
+      [selected]="sampleRange"
+      [comparisonStart]="sampleRange.start"
+      [comparisonEnd]="sampleRange.end"
+    ></mat-calendar>
+  </div>
+</mat-card>
+<ng-container *ngIf="eventsNotification.length > 0">
+  <app-events-notification
+    [events]="eventsNotification"
+  ></app-events-notification>
+</ng-container>
+<ng-container *ngIf="daysSelected.length <= 0">
+  <div class="flex justify-center items-center w-[100%] h-[100%]">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-container>

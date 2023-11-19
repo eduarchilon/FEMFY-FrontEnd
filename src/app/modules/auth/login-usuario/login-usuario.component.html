@@ -1,21 +1,49 @@
-<div class="w-[100%] h-screen bg-cover pt-16 bg-[#FF97A5] flex justify-center text-white">
-  <div class="w-[50%] flex justify-center items-center flex-col max-lg:hidden">
-    <div>
-      <h1 class="text-[50px] max-xl:text-[70px] font-bold min-w-[85%] w-[inherit] text-left">Siempre es un placer poder
-        ayudarte.</h1>
+<div class="px-[3vw]">
+  <div class="w-[100%] bg-cover pt-50 flex items-center py-[200px]  max-w-[1280px] m-auto">
+    <div class="w-[50%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0">
+      <div
+        class="bg-white max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center py-[100px]">
+        <img class="w-[100px]" src="./assets/images/isotipo.svg" />
+        <h2 class="text-[32px] text-femfy-800 font-bold text-center pb-[15px] pt-[2px]">
+          ¡Bienvenida!
+        </h2>
+        <div class="py-5 text-[red] font-semibold text-center" *ngIf="isUserNotFinded">
+          <p>Usuario y contraseña incorrecta</p>
+        </div>
+        <form class="flex flex-col gap-[14px] w-[100%]" autocomplete="off" [formGroup]="formLogin"
+          (ngSubmit)="loginUser()">
+          <input class="rounded-full outline-none p-3" autocomplete="userName" type="text" placeholder="Usuario"
+            formControlName="userName" />
+          <mat-error class="py-5 text-[red] font-semibold text-center" *ngIf="
+              formLogin.get('userName')?.touched &&
+              formLogin.get('userName')?.hasError('required')
+            ">
+            El nombre de usuario es requerido
+          </mat-error>
+          <input class="rounded-full outline-none p-3" autocomplete="password" type="password" placeholder="Contraseña"
+            formControlName="password" />
+          <mat-error class="py-5 text-[red] font-semibold text-center" *ngIf="
+              formLogin.get('password')?.touched &&
+              formLogin.get('password')?.hasError('required')
+            ">
+            La contraseña es requerida
+          </mat-error>
+          <button class="bg-femfy-400 rounded-[20px] py-[10px] disabled:cursor-not-allowed" type="submit"
+            [disabled]="formLogin.invalid">
+            Ingresar
+          </button>
+        </form>
+
+        <a class="text-femfy-600 pt-[10px] underline">Olvidé mi contraseña</a>
+        <a routerLink="/registro-usuario" class="text-femfy-600 underline">Registrate</a>
+      </div>
     </div>
-  </div>
-  <div class="">
-    <div class="bg-[#FACAEC] rounded-[20px] p-12 xl:p-16 2xl:p-36 drop-shadow-xl flex flex-col items-center">
-      <img class="w-[100px] " src="../../../../assets/images/isotipo.svg">
-      <h2 class="text-[32px] font-bold text-center mb-14 pt-[2px]">¡Bienvenida!</h2>
-      <form class="flex flex-col gap-[14px] w-[100%]">
-        <input class="rounded-[20px] p-[10px]" type="email" placeholder="Email">
-        <input class="rounded-[20px] p-[10px] mb-14" type="password" placeholder="Contraseña">
-        <button class="bg-[#D8B4F8] rounded-[20px] py-[10px] ">Registrar</button>
-      </form>
-      <a class="text-white pt-[10px]">Olvidé mi contraseña</a>
-      <a routerLink="/login-usuario" class="text-white">Registrate</a>
+
+    <div class="w-[50%] flex items-center flex-col max-lg:hidden">
+      <img class="w-[375px]" src="./assets/images/login-landing.png" />
+      <h1 class="text-[50px] text-femfy-800 max-xl:text-[40px] font-bold min-w-[85%] w-[inherit] text-center">
+        Siempre es un placer poder ayudarte.
+      </h1>
     </div>
   </div>
 </div>

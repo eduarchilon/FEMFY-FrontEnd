@@ -1,0 +1,69 @@
+<!-- <ng-container *ngIf="scrolledUp"> -->
+<div
+  *ngIf="isSurveyInit === false"
+  class="bg-white fixed bottom-0 lg:hidden w-[100vw] rounded-t-2xl shadow-inner z-50"
+>
+  <div
+    [ngClass]="{
+        flex: true,
+        'max-md:justify-between': isLogging,
+        'max-md:justify-evenly': !isLogging,
+        'max-lg:justify-start': isLogging || !isLogging,
+        'max-lg:gap-4': isLogging || !isLogging,
+        'py-[5px]': isLogging || !isLogging,
+        'px-[5vw]': isLogging || !isLogging,
+        'items-center': isLogging || !isLogging,
+      }"
+  >
+    <ng-container
+      *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
+    >
+      <div class="flex flex-col justify-center items-center">
+        <button mat-icon-button routerLink="{{ menu.path }}">
+          <mat-icon
+            [ngClass]="{
+              'text-gray-400': !isActiveRoute(menu.path),
+              'text-purple-700': isActiveRoute(menu.path)
+            }"
+            >{{ menu.icon }}</mat-icon
+          >
+        </button>
+        <span
+          class="text-[10px]"
+          [ngClass]="{
+              'font-normal': !isActiveRoute(menu.path),
+              'font-bold': isActiveRoute(menu.path),
+            }"
+          >{{ menu.label }}</span
+        >
+      </div>
+    </ng-container>
+    <ng-container *ngIf="isLogging">
+      <div
+        class="max-lg:flex-1 max-lg:flex max-lg:justify-end max-md:flex-grow-0"
+      >
+        <div class="flex flex-col justify-center items-center">
+          <button mat-icon-button routerLink="information">
+            <mat-icon
+              class="text-gray-400"
+              [ngClass]="{
+                'text-gray-400': !isActiveRoute('information'),
+                'text-purple-700': isActiveRoute('information')
+              }"
+              >more_vert</mat-icon
+            >
+          </button>
+          <span
+            class="text-[10px]"
+            [ngClass]="{
+              'font-normal': !isActiveRoute('information'),
+              'font-bold': isActiveRoute('information'),
+            }"
+            >Más</span
+          >
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+<!-- </ng-container> -->

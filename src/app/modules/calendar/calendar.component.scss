@@ -1,0 +1,74 @@
+.demo-inline-calendar-card {
+  border-radius: 15px;
+}
+
+button.example-custom-date-class {
+  background: orange !important;
+  border-radius: 100% !important;
+  //   width: 90%;
+  //   height: 90%;
+}
+
+button.example-custom-date-class-none {
+  background: unset !important;
+  //   width: 90%;
+  //   height: 90%;
+}
+
+.spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+.mat-calendar-header {
+  color: #7c2385;
+  font-weight: bold;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #fff !important;
+  border-bottom-color: #7c2385;
+  border-bottom-width: 4px;
+
+}
+.mat-calendar-controls{
+  padding: 5px !important;
+  margin: 6px !important;
+}
+.mat-mdc-button .mdc-button__label {
+  color: #7c2385;
+}
+
+.mat-calendar-content{
+  padding: 8px 8px 8px 8px !important;
+}
+
+.mat-calendar-arrow {
+  fill: #7c2385 !important;
+}
+
+button.example-custom-date-class {
+  color: white !important;
+  background: #a35edf !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected):not(
+    .mat-calendar-body-comparison-identical
+  ) {
+  border-color: #a35edf !important;
+}
+
+button.colores {
+  background-color: yellow !important;
+}
+
+.colores {
+  background-color: yellow !important;
+}
+
+button.colores-next {
+  background-color: rgb(255, 31, 1) !important;
+}
+
+.colores-next {
+  background-color: rgb(255, 31, 1) !important;
+}

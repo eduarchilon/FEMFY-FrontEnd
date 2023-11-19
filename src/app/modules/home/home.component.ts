@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
+import { Store } from '@ngrx/store';
+import { UserResponse } from 'src/app/models/user.model';
+import { AppState } from 'src/app/services/redux/store/app.store';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +11,18 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    // private store: Store<AppState>,
+    private localStorageService: LocalStorageService
+  ) {}
 
-  get isLogging(): boolean {
-    return this.authService.isLoggin;
+  isLogging: boolean = false;
+  userResponse!: UserResponse;
+
+  ngOnInit(): void {
+    // this.store.dispatch(loadCycles());
+    this.userResponse = this.localStorageService.getUserByLogin();
+    this.userResponse ? (this.isLogging = true) : (this.isLogging = false);
   }
-
-  ngOnInit(): void {}
 }

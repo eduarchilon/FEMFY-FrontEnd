@@ -1,0 +1,27 @@
+<div class="bg-[#f2d4fa] pt-28 pb-40 px-[3vw]">
+  <div class="w-[100%] max-w-[1280px] m-auto">
+    <h2 class="flex !font-medium text-femfy-800 text-[30px] mb-5">Comunidad</h2>
+    <ng-container *ngIf="topics.length < 1">
+      <div class="h-[700px]"></div>
+    </ng-container>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-x-32 gap-y-10">
+      <div *ngFor="let topic of topics">
+        <div class="w-full mx-auto shadow-2xl rounded-[20px] relative mb-10">
+          <a routerLink="/foro/{{ topic.id }}" (click)="saveIdAndTitle(topic.id)">
+            <img [src]="getImageUrl(topic.image)" class="w-full rounded-[20px]" />
+            <div class="bg-[#7c2385] rounded-full absolute bottom-[-20px] left-0 w-full">
+              <h3 class="text-xl text-white text-center font-semibold p-3">
+                {{ topic?.title }}
+              </h3>
+            </div>
+          </a>
+        </div>
+        <span class="block text-lg text-center font-semibold">
+          <ng-container *ngIf="topic.forumPosts.length > 0; else noMessages">
+            {{ topic.forumPosts.length }} mensajes</ng-container>
+          <ng-template #noMessages> No existen mensajes</ng-template>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

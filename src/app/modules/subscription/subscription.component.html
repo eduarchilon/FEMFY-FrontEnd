@@ -1,0 +1,264 @@
+<div class="bg-[#f2d4fa] px-[3vw] pt-28 pb-32">
+  <div class="w-[100%] bg-cover bg-[#f2d4fa] max-w-[1280px] m-auto">
+    <div class="flex justify-between mb-5">
+      <div class="flex !font-medium text-femfy-800 text-[30px]">
+        <a routerLink="/subscription">Suscripción</a>
+      </div>
+    </div>
+
+    <div class="flex flex-row gap-10 max-lg:flex-col">
+      <div class="flex flex-col gap-10 justify-between max-lg:flex-col md:w-1/2">
+        <!-- Card 1 -->
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
+              Suscribíte
+            </h5>
+          </div>
+          <div class="p-[20px] flex items-center justify-center text-center">
+            <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+              (click)="toggleForm()">Crea el plan a tu medida</button>
+          </div>
+
+          <div *ngIf="showForm" class="bg-white rounded-[20px] px-[20px] pb-[20px]">
+            <h2 class="font-bold text-femfy-800 text-xl mb-3">Crear un plan de suscripción</h2>
+            <form [formGroup]="subscriptionForm" class="p-5 shadow-md rounded-[20px] bg-[#f2d4fa]">
+              <div class="mb-4">
+                <label for="title" class="block font-medium text-xl mb-2">Tipo:</label>
+                <input type="text" value="Suscripción Premium" placeholder="Suscripción Premium" name="title"
+                  formControlName="title" readonly class="w-full border-2 border-gray-300 p-4 rounded-full font-bold" />
+              </div>
+              <div class="mb-4">
+                <div class="mb-4">
+                  <label for="unit_price" class="block font-medium text-xl mb-2">Valor:</label>
+                  <input type="number" name="unit_price" formControlName="unit_price"
+                    [placeholder]="getDefaultPlaceholder()" [readonly]="true"
+                    class="w-full border-2 border-gray-300 p-4 rounded-full font-bold" />
+                </div>
+              </div>
+              <div class="mb-4">
+                <label for="quantity" class="block font-medium text-xl mb-2">Frecuencia:</label>
+                <select name="quantity" formControlName="quantity" (change)="updateDefaultValue()" required
+                  class="w-full border-2 border-gray-300 p-4 rounded-full">
+                  <option value="1">Mensual</option>
+                  <option value="3">Trimestral</option>
+                  <option value="6">Semestral</option>
+                  <option value="12">Anual</option>
+                </select>
+              </div>
+
+              <div class="mt-5 text-end">
+              <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644"
+                name="MP-payButton"
+                class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] mt-5'>Activar
+                suscripción</a>
+              </div>
+              <script type="text/javascript">
+                (function () {
+                  function $MPC_load() {
+                    window.$MPC_loaded !== true && (function () {
+                      var s = document.createElement("script");
+                      s.type = "text/javascript";
+                      s.async = true;
+                      s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                      var x = document.getElementsByTagName('script')[0];
+                      x.parentNode.insertBefore(s, x);
+                      window.$MPC_loaded = true;
+                    })();
+                  }
+                  window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+                })();
+
+                function $MPC_message(event) {
+                  const data = event.data;
+                  updateProfile(data);
+                }
+
+                window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;                      
+              </script>
+
+            </form>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
+
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
+              Suscripción activa
+            </h5>
+          </div>
+          <div class="p-[20px] flex items-center justify-center text-center">
+            <button class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Cancelar
+              suscripción</button>
+          </div>
+        </div>
+
+
+
+        <!-- Card 3 -->
+        <div class="flex-1 w-full bg-white rounded-[20px] mb-4">
+
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
+              También podés ayudarnos para que la app siga creciendo
+            </h5>
+          </div>
+          <div class="p-[20px] flex items-center justify-center text-center">
+            <a href="https://link.mercadopago.com.ar/femfyapp" name="MP-payButton" target="_blank"
+              class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Donaciones</a>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="md:w-1/2">
+        <div class="flex-1 w-full bg-white rounded-[20px] max-lg:mb-32">
+          <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Conocé nuestros beneficios</h5>
+
+          <div class="flex flex-col text-center p-[20px]">
+            <ul class="space-y-2">
+              <li class="font-bold text-[#AF6FE8] text-center text-lg">
+                <i class="fa fa-comments" aria-hidden="true"></i> Acceso ilimitado 24/7 con nuestro chatbot.
+              </li>
+              <li class="font-bold text-[#AF6FE8] text-center text-lg">
+                <i class="fa fa-file" aria-hidden="true"></i> Carga y distribución de estudios con profesionales.
+              </li>
+              <li class="font-bold text-[#AF6FE8] text-center text-lg">
+                <i class="fa fa-wrench" aria-hidden="true"></i> Soporte técnico preferencial.
+              </li>
+            </ul>
+
+            <div class="h-[100%] flex pt-5 justify-center">
+              <img class="h-[400px] max-lg:h-[320px]" src="./assets/images/benefits.svg" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CARD 1 
+    <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
+      <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+        <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+          Suscribite!
+        </h5>
+      </div>
+        <div class="mb-3 mt-10 !items-center !justify-center text-center">
+          <button class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3 "
+            (click)="toggleForm()">Crea el plan a tu medida</button>
+        </div>
+
+
+        <div *ngIf="showForm" class="bg-white rounded-[20px] p-10">
+          <h2 class="font-bold">Crear un Plan de Suscripción</h2>
+          <form [formGroup]="subscriptionForm" class="p-4 rounded shadow-md">
+            <div class="mb-4">
+              <label for="title" class="block text-gray-700 text-sm font-bold mb-2">Tipo:</label>
+              <input type="text" value="Suscripción Premium" placeholder="Suscripción Premium" name="title"
+                formControlName="title" readonly class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+            </div>
+            <div class="mb-4">
+              <div class="mb-4">
+                <label for="unit_price" class="block text-gray-700 text-sm font-bold mb-2">Valor:</label>
+                <input type="number" name="unit_price" formControlName="unit_price"
+                  [placeholder]="getDefaultPlaceholder()" [readonly]="true"
+                  class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="quantity" class="block text-gray-700 text-sm font-bold mb-2">Frecuencia:</label>
+              <select name="quantity" formControlName="quantity" (change)="updateDefaultValue()" required
+                class="w-full border-2 border-gray-300 p-2 rounded-full">
+                <option value="1">Mensual</option>
+                <option value="3">Trimestral</option>
+                <option value="6">Semestral</option>
+                <option value="12">Anual</option>
+              </select>
+            </div>
+
+            <a href="https://www.mercadopago.com.ar/subscriptions/checkout?preapproval_plan_id=2c9380848b62d278018b81f0a1f01644"
+              name="MP-payButton"
+              class='bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3'>Activar
+              Suscripción</a>
+            <script type="text/javascript">
+              (function () {
+                function $MPC_load() {
+                  window.$MPC_loaded !== true && (function () {
+                    var s = document.createElement("script");
+                    s.type = "text/javascript";
+                    s.async = true;
+                    s.src = document.location.protocol + "//secure.mlstatic.com/mptools/render.js";
+                    var x = document.getElementsByTagName('script')[0];
+                    x.parentNode.insertBefore(s, x);
+                    window.$MPC_loaded = true;
+                  })();
+                }
+                window.$MPC_loaded !== true ? (window.attachEvent ? window.attachEvent('onload', $MPC_load) : window.addEventListener('load', $MPC_load, false)) : null;
+              })();
+
+              function $MPC_message(event) {
+                const data = event.data;
+                updateProfile(data);
+              }
+
+              window.$MPC_loaded !== true ? (window.addEventListener("message", $MPC_message)) : null;                      
+            </script>
+
+          </form>
+        </div>
+
+CARD 2
+
+        <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
+          <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+            <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+              Suscripción activa!
+            </h5>
+          </div>
+            <div class="mb-3 mt-10 !items-center !justify-center text-center">
+              <button class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]">Cancelar
+                Suscripción</button>
+            </div>
+        </div>
+
+CARD 3
+
+          <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
+            <div class="flex items-center justify-between border-b-4 border-b-[#7c2385]">
+              <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+                También podés ayudarnos para que la app siga creciendo!
+              </h5>
+            </div>
+             <div class="mb-3 mt-10 !items-center !justify-center text-center">
+          <button
+            class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px] me-3 ">Donaciones</button>
+        </div>
+
+CARD 4
+
+      <div class="md:w-2/5 bg-white rounded-[20px] p-6">
+        <div class="text-center border-white border-dashed border-4 p-6 py-24">
+          <h2 class="text-4xl font-semibold mb-5">Conocé nuestros beneficios</h2>
+          <div class="mb-3 mt-20">
+            <ul class="space-y-2 mb-20">
+              <li class="font-bold text-[#AF6FE8] text-left">
+                <i class="fa fa-comments" aria-hidden="true"></i> Acceso ilimitado 24/7 con nuestro chatbot.
+              </li>
+              <li class="font-bold text-[#AF6FE8] text-left">
+                <i class="fa fa-file" aria-hidden="true"></i> Carga y distribución de estudios con profesionales.
+              </li>
+              <li class="font-bold text-[#AF6FE8] text-left">
+                <i class="fa fa-wrench" aria-hidden="true"></i> Soporte técnico preferencial.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  -->

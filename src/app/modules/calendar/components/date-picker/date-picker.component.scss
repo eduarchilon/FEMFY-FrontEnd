@@ -1,0 +1,48 @@
+/** No CSS for this example */
+//DIAS CON EVENTOS
+button.selected {
+  background: rgb(255, 242, 0) !important;
+  border-radius: 100% !important;
+}
+
+.selected {
+  background: rgb(255, 242, 0) !important;
+  border-radius: 100% !important;
+}
+
+button.day-ovulation {
+  background: rgb(1, 177, 56) !important;
+  border-radius: 100% !important;
+}
+
+.day-ovulation {
+  background: rgb(1, 177, 56) !important;
+  border-radius: 100% !important;
+}
+
+button.end-period {
+  background: rgb(205, 34, 34) !important;
+  border-radius: 100% !important;
+}
+
+.end-period {
+  background: rgb(205, 34, 34) !important;
+  border-radius: 100% !important;
+}
+
+.drop-calendar {
+  width: 30rem;
+}
+
+.mat-calendar-body-in-range::before {
+  background-color: rgba(253, 60, 60, 0.363) !important;
+}
+
+.mat-calendar-body-selected {
+  background-color: rgba(253, 60, 60, 0.563) !important;
+}
+
+
+.mat-calendar-body-in-range>.mat-calendar-body-comparison-identical, .mat-calendar-body-in-comparison-range.mat-calendar-body-in-range::after{
+  background-color: unset !important;
+}

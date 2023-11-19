@@ -1,0 +1,39 @@
+<div class="m-auto">
+  <div [ngSwitch]="questionOtherType">
+    <div *ngSwitchCase="3">
+      <app-question-congenital></app-question-congenital>
+    </div>
+    <div *ngSwitchCase="4">
+      <app-question-hormonal></app-question-hormonal>
+    </div>
+    <div *ngSwitchDefault>
+      <mat-stepper #stepper>
+        <mat-step>
+          <p
+            class="text-3xl text-[#7c2385] mb-10 text-center font-bold max-sm:text-xl"
+          >
+            Que tipo de porblema de salud tenes
+          </p>
+          <div class="w-full md:w-1/2 m-auto">
+            <mat-radio-group>
+              <mat-radio-button
+                value="1"
+                (click)="selectOther('3')"
+                class="bg-white custom-radio-button py-5 p-3 rounded-lg"
+              >
+                <span class="font-semibold">Tengo patologias congenitas</span>
+              </mat-radio-button>
+              <mat-radio-button
+                value="2"
+                (click)="selectOther('4')"
+                class="bg-white custom-radio-button py-5 p-3 rounded-lg"
+              >
+                <span class="font-semibold">Tengo problemas hormonales</span>
+              </mat-radio-button>
+            </mat-radio-group>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>

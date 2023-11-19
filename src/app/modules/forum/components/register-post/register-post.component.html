@@ -1,0 +1,27 @@
+<div class="p-5">
+    <h3 class="text-femfy-800 text-2xl font-bold pb-3">
+        Nueva publicación
+    </h3>
+    <form [formGroup]="formPost" (ngSubmit)="registerPost()">
+        <div class="mx-auto">
+            <div class="bg-white flex flex-col text-gray-800">
+                <label class="block text-gray-600 text-xl font-medium mb-2">Título</label>
+                <input class="border border-gray-300 p-3 mb-4 rounded-[20px] outline-none" formControlName="title"
+                    type="text">
+
+                <label class="block text-gray-600 text-xl font-medium mb-2">Contenido</label>
+                <editor formControlName="content" apiKey="a6vdvz9sejlchv64d0vru3my7nrendb2eggh9vy4dvpum6sg" [init]="{
+                    menubar: 'edit format',
+                    placeholder: 'Escribe tu comentario',
+                    toolbar: 'undo redo | fontfamily fontsize | bold italic underline strikethrough | align lineheight | numlist bullist indent outdent | removeformat',
+                  }">
+                </editor>
+
+                <div class="buttons flex justify-end mt-5">
+                    <button type="submit"
+                        class="bg-femfy-400 text-xl p-1 px-4 font-bold text-gray-200 rounded-[20px]">Publicar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

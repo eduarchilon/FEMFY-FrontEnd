@@ -1,1 +1,42 @@
-<p>cicle-historial works!</p>
+<div class="max-h-[500px] overflow-y-scroll pe-[20px]">
+  <div *ngIf="actualDurationCycle">
+    <h5 class="font-semibold">Estas en tu ciclo actual</h5>
+    <h5 class="font-semibold">
+      Inicio:
+
+      <span class="font-normal">{{
+        actualDurationCycle | date : "dd 'de' LLLL"
+      }}</span>
+    </h5>
+  </div>
+  <br *ngIf="actualDurationCycle" />
+  <mat-divider *ngIf="actualDurationCycle"></mat-divider>
+  <br />
+  <div class="flex flex-col gap-4">
+    <ng-container *ngFor="let item of cycleHistorial">
+      <div>
+        <h5 class="font-semibold">
+          Duración del ciclo:
+          <span class="font-normal"
+            >{{
+              calculateCycleDurantion(item.dateBeging, item.dateEnd)
+            }}
+            días</span
+          >
+        </h5>
+        <h5 class="font-semibold">
+          Duración del período:
+          <span class="font-normal">{{ item.daysOfBleeding }} días </span>
+        </h5>
+        <h5 class="font-semibold">
+          Fecha:
+          <span class="font-normal"
+            >{{ item.dateBeging | date : "dd 'de' LLLL" }} al
+            {{ item.dateEnd | date : "dd 'de' LLLL" }}</span
+          >
+        </h5>
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="bg-white rounded-[20px] max-lg:mb-32">
+  <h4 class="text-2xl max-md:text-xl p-[20px] text-femfy-800 border-b-4 border-femfy-800 font-semibold">Información de
+    historial familiar</h4>
+    <div class="p-5">
+      <form [formGroup]="formInformationHistorial" (ngSubmit)="submitInformationHistorial()">
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">En tu familia, ¿alguien ha recibido un diagnóstico de cáncer de mama?</span>
+          <div class="flex gap-3">
+            <span>No</span>
+            <mat-slide-toggle color="accent" formControlName="breastCancer"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">En tu familia, ¿Existe un historial de cáncer de ovario en tu familia?</span>
+          <div class="flex gap-3">
+            <span>No</span>
+            <mat-slide-toggle color="accent" formControlName="ovarianCancer"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">En tu familia, ¿Alguna de las mujeres en tu familia ha sido diagnosticada con
+            endometriosis?</span>
+          <div class="flex gap-3">
+            <span>No</span>
+            <mat-slide-toggle color="accent" formControlName="endometriosis"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">¿Alguna de tus parientes cercanas ha sido diagnosticada con el síndrome de ovario
+            poliquístico?</span>
+          <div class="flex gap-3">
+            <span>No</span>
+            <mat-slide-toggle color="accent" formControlName="sop"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">¿Tienes algún conocido en tu familia que haya experimentado la menopausia a una edad
+            temprana?</span>
+          <div class="flex gap-3">
+            <span>No</span>
+            <mat-slide-toggle color="accent" formControlName="earlyMenopause"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+          <span class="font-medium">¿Tienes conocimiento de si algún miembro de tu familia ha tenido miomas
+            uterinos?</span>
+          <div class="flex gap-3">
+            <span>No</span><mat-slide-toggle color="accent" formControlName="uterineFibroids"></mat-slide-toggle>
+            <span>Sí</span>
+          </div>
+        </div>
+        <div class="flex justify-end mt-5">
+          <button class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            type="submit">
+            Guardar
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>

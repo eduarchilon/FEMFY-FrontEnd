@@ -1,0 +1,24 @@
+<div class="p-5">
+  <mat-dialog-content class="text-center !m-auto">
+    <h3 class="text-femfy-800 text-2xl font-bold pb-3 mb-10">Finalizar ciclo</h3>
+    <div class="mb-10">
+      <p class="block text-gray-600 text-xl font-medium mb-2">Puede finalizar el ciclo hoy o elegir la fecha donde finalizó</p>
+      <input type="date" class="outline-none rounded-full p-3" #endDate (change)="resetForm()" />
+      <div *ngIf="validationDate" class="py-4">
+        <mat-error>
+          {{ validationDate }}
+        </mat-error>
+      </div>
+    </div>
+
+    <div>
+      <button [disabled]="endDate.value === ''" (click)="saveFinishCycle(cycleChart, endDate.value)"
+        class="bg-femfy-400 text-white py-[10px] px-[20px] rounded-[20px] me-3" type="submit">
+        Confirmar
+      </button>
+      <button class="bg-femfy-800 text-white py-[10px] px-[20px] rounded-[20px]" (click)="closeDialog()">
+        Cancelar
+      </button>
+    </div>
+  </mat-dialog-content>
+</div>

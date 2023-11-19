@@ -1,0 +1,42 @@
+<div class="bg-white rounded-[20px]">
+  <h4 class="text-2xl max-md:text-xl p-[20px] text-femfy-800 border-b-4 border-femfy-800 font-semibold">
+    Información de usuario (Menstruante) 
+  </h4>
+  <div class="p-5">
+    <form [formGroup]="formInformationMenstruation" (ngSubmit)="submitInformationMenstruation()">
+      <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+        <span class="font-medium">¿Qué día fue tu última menstruación? (primer día del ciclo)</span>
+        <input matInput type="date" [(ngModel)]="defaultDate" class="text-center border rounded-full w-28" formControlName="lastTime" />
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+        <span class="font-medium">¿Qué duración tuvo aproximadamente ese último ciclo?</span>
+        <input type="number" class="text-center border rounded-full w-28" formControlName="lastCycleDuration" />
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+        <span class="font-medium">¿Sos regular?</span>
+        <div class="flex gap-3">
+          <span>No</span>
+          <mat-slide-toggle color="accent" formControlName="regular"></mat-slide-toggle>
+          <span>Sí</span>
+        </div>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+        <span class="font-medium">¿Qué duración tienen regularmente tu ciclos?</span>
+        <input type="number" class="text-center border rounded-full w-28" formControlName="regularCycleDuration" />
+      </div>
+      <mat-divider></mat-divider>
+      <div class="flex justify-between items-center py-3 max-sm:flex-col max-sm:items-start">
+        <span class="font-medium"> ¿Qué duración tuvo tu último sangrado?</span>
+        <input type="number" class="text-center border rounded-full w-28" formControlName="bleedingDuration" />
+      </div>
+      <div class="flex justify-end mt-5">
+        <button class="bg-femfy-400 text-white font-medium py-[10px] px-[20px] rounded-[20px]" type="submit">
+          Guardar cambios
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,370 @@
+<div class="bg-[#f2d4fa] px-[3vw]">
+  <div class="pb-[300px] pt-10 mt-20 max-w-[1280px] m-auto">
+    <div class="container mx-auto">
+      <div class="lg:flex lg:gap-10 items-center">
+        <div class="lg:w-1/3 text-center mb-5 md:mb-0">
+          <div
+            class="mb-5 rounded-full border-8 border-[#7c2385] w-[337px] h-[337px] mx-auto"
+          >
+            <ng-container *ngIf="!picture[0]?.url">
+              <img
+                src="./assets/images/account.png"
+                alt="account"
+                class="w-[100%] h-[100%] object-cover rounded-full"
+              />
+            </ng-container>
+            <ng-container *ngIf="picture[0]?.url">
+              <img
+                [src]="picture[0]?.url"
+                class="w-[100%] h-[100%] object-cover rounded-full"
+              />
+            </ng-container>
+          </div>
+          <span class="text-5xl font-bold block mb-5">{{
+            userResponse.userName
+          }}</span>
+
+          <span class="text-xl underline underline-offset-4">
+            <label for="file" class="cursor-pointer text">
+              Cambiar foto de perfil
+            </label>
+            <input
+              type="file"
+              id="file"
+              name="profile"
+              class="hidden"
+              mat-stroked-button
+              (change)="uploadProfilePicture($event)"
+            />
+          </span>
+        </div>
+        <div class="lg:w-2/3">
+          <ng-container *ngIf="editProfile; else readOnlyProfile">
+            <!-- Editable profile view -->
+            <div class="flex justify-between mb-5">
+              <h2 class="flex !font-medium text-femfy-800 text-[30px]">
+                Editar perfil
+              </h2>
+            </div>
+            <form [formGroup]="profileForm" (ngSubmit)="updateProfile()">
+              <div class="flex-1 w-full bg-white rounded-[20px] mb-5">
+                <h5
+                  class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+                >
+                  Datos personales
+                </h5>
+                <div class="grid lg:grid-cols-3 gap-4 p-5">
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Nombre</label
+                    >
+                    <input
+                      type="text"
+                      formControlName="firstName"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Apellido</label
+                    >
+                    <input
+                      type="text"
+                      formControlName="lastName"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Fecha de nacimiento</label
+                    >
+                    <input
+                      type="date"
+                      formControlName="birthdate"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-[20px] mb-5">
+                <h5
+                  class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+                >
+                  Contacto
+                </h5>
+                <div class="grid lg:grid-cols-2 gap-4 p-5">
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Email</label
+                    >
+                    <input
+                      type="text"
+                      formControlName="email"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Teléfono</label
+                    >
+                    <input
+                      type="tel"
+                      formControlName="phone"
+                      placeholder="+541112345678"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-[20px] mb-5">
+                <h5
+                  class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+                >
+                  Contacto extra
+                </h5>
+                <div class="grid lg:grid-cols-2 gap-4 p-5">
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Nombre</label
+                    >
+                    <input
+                      type="text"
+                      formControlName="friendsName"
+                      placeholder="Nombre"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                  <div>
+                    <label for="note" class="block font-medium text-xl mb-2"
+                      >Teléfono</label
+                    >
+                    <input
+                      type="text"
+                      placeholder="+541112345678"
+                      formControlName="friendsPhone"
+                      class="rounded-full border w-full p-4"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="bg-white rounded-[20px] mb-5">
+                <h5
+                  class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+                >
+                  Tipo de usuario
+                </h5>
+                <div class="flex justify-between p-5">
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        formControlName="typeUserID"
+                        [value]="1"
+                        [checked]="isTypeUserIDSelected(1)"
+                      />
+                      Menstruante
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        formControlName="typeUserID"
+                        [value]="2"
+                        [checked]="isTypeUserIDSelected(2)"
+                      />
+                      Etapa Menopáusica
+                    </label>
+                  </div>
+                  <div>
+                    <label>
+                      <input
+                        type="radio"
+                        formControlName="typeUserID"
+                        [value]="3"
+                        [checked]="isTypeUserIDSelected(3)"
+                      />
+                      No menstruante
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="text-end mb-5">
+                <button
+                  class="bg-[#de84ee] m-2 text-white font-semibold rounded-[20px] p-3"
+                  type="submit"
+                >
+                  Guardar cambios
+                </button>
+                <button
+                  class="bg-[#7c2385] text-white font-semibold rounded-[20px] p-3"
+                  (click)="disableEditMode()"
+                >
+                  Cancelar
+                </button>
+              </div>
+            </form>
+          </ng-container>
+
+          <ng-template #readOnlyProfile>
+            <!-- Read-only profile view -->
+            <div class="flex justify-between mb-5">
+              <h2 class="flex !font-medium text-femfy-800 text-[30px]">
+                Perfil
+              </h2>
+              <button
+                class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+                (click)="enableEditMode()"
+              >
+                Modificar
+              </button>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h3
+                class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]"
+              >
+                Datos personales
+              </h3>
+              <div class="grid lg:grid-cols-3 gap-4 p-5">
+                <div>
+                  <label for="firstName" class="block text-xl mb-2 font-bold"
+                    >Nombre</label
+                  >
+                  <p>{{ userResponse.firstName || "Sin nombre" }}</p>
+                </div>
+                <div>
+                  <label for="lastName" class="block text-xl mb-2 font-bold"
+                    >Apellido</label
+                  >
+                  <p>{{ userResponse.lastName || "Sin apellido" }}</p>
+                </div>
+                <div>
+                  <label for="note" class="block text-xl mb-2 font-bold"
+                    >Fecha de nacimiento</label
+                  >
+                  <p>{{ userResponse.birthdate | date : "dd/MM/yyyy" }}</p>
+                </div>
+              </div>
+            </div>
+            <div class="bg-white rounded-[20px] mb-5">
+              <h3
+                class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]"
+              >
+                Contacto
+              </h3>
+              <div class="grid lg:grid-cols-2 gap-4 p-5">
+                <div>
+                  <label for="email" class="block text-xl mb-2 font-bold"
+                    >Email</label
+                  >
+                  <p>{{ userResponse.email }}</p>
+                </div>
+                <div>
+                  <label for="phone" class="block text-xl mb-2 font-bold"
+                    >Teléfono</label
+                  >
+                  <p>{{ userResponse.phone || "Sin número" }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h3
+                class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]"
+              >
+                Contacto extra
+              </h3>
+              <div class="gap-4 p-5">
+                <h6 class="max-lg:mb-4 text-[#7c2385] font-bold mb-4">
+                  Completá éste teléfono si querés que alguien de tu familia
+                  reciba notificaciones y recordatorios al igual que vos.
+                </h6>
+                <div class="grid lg:grid-cols-2 gap-4 p-5">
+                  <div>
+                    <label for="email" class="block text-xl mb-2 font-bold"
+                      >Nombre</label
+                    >
+                    <p>
+                      {{
+                        userResponse.friendsName !== "" ||
+                        userResponse.friendsName !== null
+                          ? userResponse.friendsName
+                          : "Sin nombre"
+                      }}
+                    </p>
+                  </div>
+                  <div>
+                    <label for="phone" class="block text-xl mb-2 font-bold"
+                      >Teléfono</label
+                    >
+                    <p>
+                      {{
+                        userResponse.friendsPhone !== null
+                          ? userResponse.friendsPhone
+                          : "Sin número"
+                      }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h5
+                class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+              >
+                Tipo de usuario activo
+              </h5>
+              <ng-container
+                *ngIf="userResponse.typeUserID === 1; else notMenstruante"
+              >
+                <p class="block text-xl mb-2 font-bold p-5">Menstruante</p>
+              </ng-container>
+
+              <ng-template #notMenstruante>
+                <ng-container
+                  *ngIf="userResponse.typeUserID === 2; else etapaMenopausica"
+                >
+                  <p class="block text-xl mb-2 font-bold p-5">
+                    Etapa Menopausica
+                  </p>
+                </ng-container>
+                <ng-template #etapaMenopausica>
+                  <p class="block text-xl mb-2 font-bold p-5">No menstruante</p>
+                </ng-template>
+              </ng-template>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h3
+                class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]"
+              >
+                Tu plan
+              </h3>
+              <div class="text-center px-5 py-10">
+                <p
+                  class="text-2xl font-bold"
+                  *ngIf="userResponse.isSuscriptor === 0"
+                >
+                  Versión premium
+                </p>
+                <p
+                  class="text-2xl font-bold"
+                  *ngIf="
+                    userResponse.isSuscriptor === 1 ||
+                    userResponse.isSuscriptor === null ||
+                    userResponse.isSuscriptor === undefined
+                  "
+                >
+                  Versión gratuita
+                </p>
+              </div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

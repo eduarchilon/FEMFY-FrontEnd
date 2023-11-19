@@ -1,170 +1,177 @@
-<!-- <div class="w-[100%] bg-cover bg-[#FF97A5] pt-24 px-[5vw] text-white">
-  <div
-    class="w-[100%] max-lg:w-[100%] max-lg:px-[20%] max-md:px-[10%] max-sm:px-0 flex flex-col items-center"
-  >
-    <div
-      class="bg-[#FACAEC] max-sm:bg-[inherit] px-[50px] max-sm:px-[0] rounded-[20px] w-[70%] max-xl:w-[100%] flex flex-col items-center pt-[80px] pb-[100px]"
-    >
-      <img class="w-[100px]" src="../../../../assets/images/isotipo.svg" />
-      <h2 class="text-[32px] font-bold text-center w-[50%] pb-[15px] pt-[2px]">
-        ¿Ya tuviste tu primera menstruación?
-      </h2>
-      <div
-        class="checkbox-container pt-[30px] pb-[100px] text-black flex flex-col items-center gap-[5px] w-[100%]"
-      >
-        <label class="custom-checkbox-label">
-          <input type="checkbox" class="custom-checkbox" />
-          <span class="rounded-50"></span>
-          Sí
-        </label>
-        <label class="custom-checkbox-label">
-          <input
-            type="checkbox"
-            class="custom-checkbox bg-[#6B83FF] rounded-50"
-          />
-          No
-        </label>
+<div class="bg-[#f2d4fa] pt-28 pb-32">
+  <div class="w-[100%] max-w-[1280px] m-auto px-[3vw] md:p-0">
+    <div class="flex justify-between mb-5">
+      <div class="flex !font-medium text-femfy-800 text-[30px]">
+        <a routerLink="/">Inicio </a>
       </div>
-      <button
-        class="bg-[#D8B4F8] w-[70%] text-white m-auto rounded-[20px] py-[10px]"
-      >
-        Registrar
-      </button>
-
-      <a routerLink="/login-usuario" class="text-white">Omitir</a>
     </div>
-  </div>
-</div> -->
 
-<div class="w-[100%] bg-cover bg-[#FEA8B1] pt-24 py-[100px]">
-  <div
-    class="text-white flex items-stretch gap-[5%] h-fit max-lg:flex-col max-lg:items-center max-lg:gap-[40px]"
-  >
     <div
-      class="max-lg:w-[100%] flex flex-col gap-[46px] items-center bg-[#FF97A5] px-[32px] py-[35px] rounded-[20px] w-[30%] justify-center"
+      class="flex mb-10 gap-10 max-lg:flex-col max-lg:items-center max-lg:gap-[40px] min-h-[650px]"
     >
-      <div class="flex flex-col items-center gap-[10px]">
-        <div class="rounded-full">
-          <app-pie-chart></app-pie-chart>
-        </div>
-        <button class="bg-[#D8B4F8] py-[10px] px-[20px] rounded-[20px]">
-          Registrar período
-        </button>
-      </div>
-      <div class="flex">
+      <!-- Card ciclo menstrual -->
+      <div class="flex-1 w-full bg-white pb-[35px] rounded-[20px]">
         <div
-          class="bg-[#FCF8F8] rounded-[20px] flex flex-col items-center gap-[15px] p-[15px]"
+          class="flex items-center justify-between border-b-4 border-b-[#7c2385]"
         >
-          <span class="text-black text-center"
-            >Registrá tu estado de ánimo</span
+          <h5 class="text-[#7c2385] p-[20px] font-bold text-2xl">
+            Ciclo actual
+          </h5>
+          <ng-container *ngIf="cyclesWithEndNull.length > 0">
+            <div class="flex justify-end w-fit">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button
+                  mat-menu-item
+                  (click)="editActualCycle(cyclesWithEndNull[0])"
+                >
+                  <mat-icon color="primary">edit_road</mat-icon>
+                  <span>Editar días de sangrado</span>
+                </button>
+                <div class="w-[100%] px-2">
+                  <mat-divider></mat-divider>
+                </div>
+                <button
+                  mat-menu-item
+                  (click)="deleteActualCycle(cyclesWithEndNull[0])"
+                >
+                  <mat-icon color="warn">delete</mat-icon>
+                  <span>Eliminar ciclo</span>
+                </button>
+              </mat-menu>
+            </div>
+          </ng-container>
+        </div>
+
+        <div class="my-5">
+          <span class="block text-center">Hoy es</span>
+          <span class="block text-center font-bold text-[30px]">
+            {{ fechaFormateada }}
+          </span>
+        </div>
+
+        <div class="flex justify-center rounded-full bg-white mb-5">
+          <ng-container
+            *ngIf="
+              cyclesWithEndNull.length > 0 &&
+              averageQuestionCycleContent.length > 0
+            "
           >
+            <app-pie-chart
+              [averageQuestionCycleContent]="averageQuestionCycleContent"
+            ></app-pie-chart>
+          </ng-container>
+          <ng-container *ngIf="cyclesWithEndNull.length === 0">
+            <img
+              class="w-[200px] h-[200px] rounded-full"
+              src="https://img.freepik.com/free-vector/pregnancy-test-concept-illustration_114360-3471.jpg?t=st=1698796129~exp=1698796729~hmac=3e83eb3e21b9da8986fb1db93f425ad2e0a17c57e99d1d5d476d0ab673efa1f5"
+            />
+          </ng-container>
+        </div>
+
+        <ng-container *ngIf="cycles.length > 0">
+          <div
+            class="bg-[#f9eafd] border-[#7c2385] border-2 shadow-sm p-3 mb-5 mx-10 rounded-[20px]"
+          >
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[red] rounded-lg"></i>
+              <p class="ml-3">Día de ciclo</p>
+            </div>
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[green] rounded-lg"></i>
+              <p class="ml-3">Día de ovulación</p>
+            </div>
+            <div class="flex">
+              <i class="w-[20px] h-[20px] bg-[yellow] rounded-lg"></i>
+              <p class="ml-3">Día del fin del ciclo probable</p>
+            </div>
+          </div>
+        </ng-container>
+
+        <div class="text-center">
+          <p
+            *ngIf="cycles.length === 0"
+            class="mt-5 text-xl text-center font-medium mb-5 px-[20px]"
+          >
+            Registrá tu ciclo y nosotros nos ocupamos del resto
+          </p>
           <button
-            class="bg-[#FEA8B1] active:bg-[#FF97A5] text-white flex items-center justify-center p-[20px] rounded-full"
+            class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            [class.me-3]="cycles.length > 0"
+            (click)="openCicleRegister(cyclesWithEndNull[0])"
           >
-            <mat-icon>add</mat-icon>
+            Registrar ciclo
+          </button>
+          <button
+            *ngIf="cyclesWithEndNull.length > 0"
+            class="bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+            (click)="finishActualCicle(cyclesWithEndNull[0])"
+          >
+            Finalizar ciclo
           </button>
         </div>
-        <div></div>
       </div>
-    </div>
-    <div
-      class="w-[70%] flex flex-col justify-between h-100 gap-[20px] max-lg:w-[100%]"
-    >
-      <div class="bg-[#FF97A5] p-[20px] rounded-[20px]">
-        <h4 class="text-[48px] font-bold text-[#545F71] pb-[20px]">
-          Consejos diarios
-        </h4>
-        <div class="flex justify-between gap-3">
-          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
-            Consejo 1
-          </div>
-          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
-            Consejo 1
-          </div>
-          <div class="bg-[#FCF8F8] rounded-[20px] flex-1 py-[30px]">
-            Consejo 1
-          </div>
+
+      <!-- Card historial ciclos -->
+      <div class="flex-1 w-full justify-between bg-white rounded-[20px]">
+        <h5
+          class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+        >
+          Historial de ciclos
+        </h5>
+        <div class="p-[20px] flex text-black flex-col gap-[15px]">
+          <ng-container *ngIf="cycles.length === 0">
+            <img
+              src="https://img.freepik.com/free-vector/add-notes-concept-illustration_114360-3416.jpg?t=st=1698795300~exp=1698795900~hmac=bdbeb1b79f62750fb8d81a3441e898bde4831db81a79f8892ed2c091c3f85c44"
+            />
+            <p class="mt-5 text-xl text-center font-medium">
+              Todavía no existen datos cargados.
+            </p>
+          </ng-container>
+          <ng-container *ngIf="cycles.length > 0">
+            <app-cicle-historial class="text-black"></app-cicle-historial>
+          </ng-container>
         </div>
       </div>
-      <div class="flex gap-10 w-[100%] text-black max-lg:flex-col">
-        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-          <h5 class="p-[20px] text-black font-semibold text-[20px]">
-            Mis ciclos
+
+      <!-- Card recomendaciones -->
+      <div class="flex-1 w-full bg-white rounded-[20px] max-lg:mb-20">
+        <div
+          class="flex items-center justify-between border-b-4 border-b-[#7c2385]"
+        >
+          <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
+            Recomendaciones
           </h5>
-          <mat-divider></mat-divider>
-          <div class="p-[20px]">
-            <h5>Duración del ciclo anterior</h5>
-            <span class="font-semibold">37 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo anterior</h5>
-            <span class="font-semibold">5 días</span>
-            <br />
-            <br />
-            <h5>Duración del ciclo mas corto</h5>
-            <span class="font-semibold">28 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo mas corto</h5>
-            <span class="font-semibold">3 días</span>
-            <br />
-            <br />
-            <h5>Duración del ciclo mas largo</h5>
-            <span class="font-semibold">70 días</span>
-            <br />
-            <br />
-            <h5>Duración del periodo mas largo</h5>
-            <span class="font-semibold">7 días</span>
+          <div>
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button
+                routerLink="information"
+                mat-menu-item
+                (click)="editRecomendation.show()"
+              >
+                <mat-icon color="primary">edit_road</mat-icon>
+                <span>Editá tus recomendaciones</span>
+              </button>
+            </mat-menu>
           </div>
+          <!--<span routerLink="historial" #editRecomendation="matTooltip" (click)="editRecomendation.show()"
+                  matTooltip="Editá tus recomendaciones" class="material-icons cursor-pointer">edit</span>-->
         </div>
-        <div class="bg-[#FF97A5] rounded-[20px] w-[50%] max-lg:w-[100%]">
-          <h5 class="p-[20px] text-black font-semibold text-[20px]">
-            Historial de clicos
-          </h5>
-          <mat-divider></mat-divider>
-          <div class="p-[20px] flex flex-col gap-[15px]">
-            <div>
-              <h5>Ciclo actual: 10 días</h5>
-              <span>Inicio 5 ago</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
-            <div>
-              <h5>70 días</h5>
-              <span>21 jun - 5 ago</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
-            <div>
-              <h5>31 días</h5>
-              <span>31 may - 21 jun</span>
-              <br />
-              <br />
-              <mat-progress-bar
-                [color]="color"
-                [mode]="mode"
-                [value]="value"
-                [bufferValue]="bufferValue"
-              >
-              </mat-progress-bar>
-            </div>
-          </div>
+        <div class="p-[10px] list-disc">
+          <app-recomendations></app-recomendations>
         </div>
       </div>
     </div>
   </div>
 </div>
+<!-- <iframe
+  style="height: 100vh; width: 100vw"
+  frameBorder="0"
+  src="https://widget.writesonic.com/CDN/index.html?service-base-url=https://api.botsonic.ai&token=385b2825-4921-4791-8c73-f0cb275f4766&base-origin=https://bot.writesonic.com&instance-name=Botsonic&standalone=true&page-url=https://bot.writesonic.com/b66392de-ca79-4609-8a79-d9970103e70f?t=share&workspace_id=020ad082-7453-42d1-a284-b3246933fa90"
+>
+</iframe> -->

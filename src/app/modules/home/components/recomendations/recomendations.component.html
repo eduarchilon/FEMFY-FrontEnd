@@ -1,0 +1,66 @@
+<div class="max-h-[500px] !overflow-x-hidden" #scrollingContent>
+  <ng-container *ngIf="isNull === true">
+    <ng-container
+      *ngFor="let item of recommendations?.recommendationsByFamilyHistory; let i = index"
+    >
+      <div
+        class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
+        (click)="viewRecomendation(item)"
+      >
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
+          {{ item.description | cutText }}
+        </p>
+        <mat-icon class="text-[20px] text-femfy-800"
+          >arrow_forward_ios</mat-icon
+        >
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+  <ng-container *ngIf="isNull === true">
+    <ng-container
+      *ngFor="let item of recommendations?.recommendationsByDocuments; let i = index"
+    >
+      <div
+        class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
+        (click)="viewRecomendation(item)"
+      >
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
+          {{ item.description | cutText }}
+        </p>
+        <mat-icon class="text-[20px] text-femfy-800"
+          >arrow_forward_ios</mat-icon
+        >
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="isNull === true">
+    <ng-container
+      *ngFor="let item of recommendations?.recommendationsByTypeUser; let i = index"
+    >
+      <div
+        class="p-[10px] flex items-center justify-between w-[100%] hover:bg-white/30 cursor-pointer rounded-[10px]"
+        (click)="viewRecomendation(item)"
+      >
+        <p [ngClass]="{'negrita': i < 3}" class="flex-1 font-semibold text-[13px]">
+          {{ item.description | cutText }}
+        </p>
+        <mat-icon class="text-[20px] text-femfy-800"
+          >arrow_forward_ios</mat-icon
+        >
+      </div>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </ng-container>
+
+  <ng-container *ngIf="isNull === false">
+    <img
+      src="https://img.freepik.com/free-vector/notify-concept-illustration_114360-4297.jpg?w=826&t=st=1698795300~exp=1698795900~hmac=62434a9ec1c5cf88b0be7fe70be5067389f2399cd9a7c78d72e46751398623b0"
+    />
+    <p class="mt-5 text-xl text-center font-medium">
+      No hay recomendaciones por el momento
+    </p>
+  </ng-container>
+</div>

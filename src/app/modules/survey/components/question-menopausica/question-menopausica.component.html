@@ -1,0 +1,231 @@
+<div class="m-auto">
+  <mat-stepper #stepper>
+    <!-- weight_gain -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Estás experimentando un aumento de peso?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'aumentoDePeso')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'aumentoDePeso')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <!-- <button
+            mat-button
+            matStepperPrevious
+            class="!text-white !rounded-full !bg-[#AF6FE8]/50 !p-5 me-3"
+          >
+            Volver
+          </button> -->
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- changes_in_libido -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Has notado cambios en la libido?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'changesInLibido')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'changesInLibido')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- changes_in_menstrual_cycle -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Ha experimentado cambios en la regularidad o intensidad de su ciclo
+          menstrual últimamente?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'changesInMenstrualCycle')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'changesInMenstrualCycle')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- changes_in_skin_and_hair -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Ha notado alteraciones en la condición de su piel o cabello
+          recientemente?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'changesInSkinAndHair')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'changesInSkinAndHair')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- loss_of_bone_density -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Ha experimentado alguna disminución en la densidad de sus huesos o le
+          han diagnosticado osteoporosis durante o después de la menopausia?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'lossOfBoneDensity')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'lossOfBoneDensity')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- mood_changes -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Ha notado cambios significativos en su estado de ánimo durante la
+          menopausia?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'moodChanges')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="0" (change)="updateQuestionMenopause('0', 'moodChanges')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- 	sleeping_difficulties -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Ha experimentado dificultades para conciliar el sueño o mantener un
+          sueño constante durante la menopausia?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'sleepingDifficulties')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="2" (change)="updateQuestionMenopause('2', 'sleepingDifficulties')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- suffocation -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          Los sofocos, ¿han sido una experiencia en tu transición a la
+          menopausia?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'suffocation')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="2" (change)="updateQuestionMenopause('2', 'suffocation')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Siguiente
+          </button>
+        </div>
+      </form>
+    </mat-step>
+    <!-- vaginal_dryness -->
+    <mat-step>
+      <form>
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Has experimentado sequedad vaginal durante la menopausia?
+        </p>
+        <div class="flex justify-center">
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1" (change)="updateQuestionMenopause('1', 'vaginalDryness')"><span
+                class="max-sm:text-sm">Si</span></mat-radio-button>
+            <mat-radio-button value="2" (change)="updateQuestionMenopause('0', 'vaginalDryness')"><span
+                class="max-sm:text-sm">No</span></mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="text-center">
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
+            Volver
+          </button>
+          <button mat-button matStepperNext type="submit" (click)="finishQuestion()"
+            class="!text-white !rounded-full !bg-[#de84ee] !p-5">
+            Finalizar
+          </button>
+        </div>
+      </form>
+    </mat-step>
+  </mat-stepper>
+</div>

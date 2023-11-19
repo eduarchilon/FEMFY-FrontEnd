@@ -1,34 +1,64 @@
-<ng-container *ngIf="!isLogging">
-  <div
-    class="w-[100%] bg-cover h-screen flex items-center pt-24 max-lg:gap-[80px] gap-[10%]"
-  >
-    <div class="h-[100%] flex max-lg:hidden w-[60%] max-xl:w-[70%]">
-      <img
-        class="animate-slide-in duration-1000"
-        src="../../../../assets/images/fondo-landing-chica.png"
-      />
+<ng-container>
+  <div class="bg-[#f2d4fa]">
+    <div class="max-w-[1280px] m-auto px-[3vw]">
+      <div
+        class="w-[100%] bg-cover flex items-center max-lg:gap-[10px] max-lg:flex-col gap-[10%] max-lg:pb-[20px]">
+        <div class="h-[100%] max-sm:pt-[100px] flex max-lg:hidden w-[60%] pt-[100px] max-xl:w-[70%]">
+          <img class="h-[800px] max-lg:h-[320px]" src="./assets/images/fondo-landing-chica.png" />
+        </div>
+        <div class="w-[40%] flex flex-col max-sm:pt-[100px] pb-[40px] justify-start max-lg:w-[100%] max-lg:text-center max-xl:w-[30%]">
+          <h1 class="text-[4rem] text-[white] font-extrabold max-xl:text-[44px] leading-[4rem] max-lg:text-[40px]">
+            Tu ciclo en un sólo lugar
+          </h1>
+          <p class="text-[40px] text-gray-700 max-xl:text-[26px] leading-[45px] max-lg:text-[20px] pt-14 max-lg:pt-5">
+            Conocé y controlá tu cuerpo y salud ginecológica en una sola
+            plataforma
+          </p>
+          <div class="pt-14 max-lg:pt-5">
+            <div class="hidden max-lg:flex pb-5 justify-center items-center">
+              <img class="max-lg:h-[320px]" src="./assets/images/fondo-landing-chica.png" />
+            </div>
+          </div>
+          <div class="flex justify-center items-center pb-[35px]">
+            <a href="#landingCalendar" class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">
+              ¡Explorá!
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
-    <div
-      class="w-[40%] flex flex-col gap-[30px] max-lg:w-[100%] max-lg:text-center max-lg:gap-[40px] max-xl:w-[30%]"
-    >
-      <h1
-        class="text-[70px] text-[white] font-extrabold max-xl:text-[44px] max-lg:text-[40px]"
-      >
-        Tu ciclo en un solo lugar
-      </h1>
-      <p class="text-[40px] text-[white] max-xl:text-[26px] max-lg:text-[20px]">
-        Conocé tu cuerpo y controlá tus ciclos en una sola plataforma
-      </p>
-      <button
-        (click)="handleLoggingUser()"
-        class="bg-[#D8B4F8] rounded-[20px] text-[white] py-4 m-auto px-[120px]"
-      >
-        Explorá
-      </button>
+    <div class="bg-[#fea8b1]">
+      <div id="landingCalendar"
+        class="max-w-[1280px] m-auto px-[3vw]w-[100%] bg-cover flex max-lg:flex-col-reverse items-center py-20 max-lg:gap-[20px] gap-[10%] px-[5vw]">
+        <div class="w-[40%] pt-[1px] flex flex-col justify-start max-lg:w-[100%] max-lg:text-center max-xl:w-[30%]">
+          <p class="text-[40px] text-[white] max-xl:text-[26px] leading-[45px] max-lg:text-[20px] pt-14 max-lg:pt-0">
+            Registrá estudios. Recibí recordatorios. Cuidá tu salud
+            ginecológica.
+          </p>
+        </div>
+        <div class="flex w-[60%] max-xl:w-[70%]">
+          <img class="" src="./assets/images/calendar.svg" />
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-[1280px] m-auto px-[3vw] mb-20">
+      <div class="w-[100%] pb-5 bg-cover flex items-center pt-20 gap-[10%] px-[5vw] max-lg:flex-col max-lg:gap-[20px]">
+        <div class="flex w-[60%] max-xl:w-[70%]">
+          <img class="" src="./assets/images/chat.svg" />
+        </div>
+        <div class="w-[40%] pt-[10px] flex flex-col justify-start max-lg:w-[100%] max-lg:text-center max-xl:w-[30%]">
+          <p class="text-[45px] text-gray-700 max-xl:text-[26px] leading-[45px] max-lg:text-[20px] pt-14 max-lg:pt-0">
+            Compartí tus experiencias y ayudá a otras mujeres en nuestro foro.
+          </p>
+          <div class="pt-14 max-lg:pt-10 max-lg:pb-10 flex justify-center items-center max-lg:mb-20">
+            <button routerLink="registro-usuario"
+              class="bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]">
+              Registrate
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-</ng-container>
-
-<ng-container *ngIf="isLogging">
-  <app-index></app-index>
 </ng-container>

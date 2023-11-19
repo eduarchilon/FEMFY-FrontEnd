@@ -1,60 +1,82 @@
-<div
+<div *ngIf="isSurveyInit === false"
   #navBar
-  class="py-4 text-white fixed top-0 md:z-50 bg-[#FEA8B1] px-[5vw] w-[100vw] z-10"
+  class="py-4 max-sm:py-2 text-dark fixed top-0 lg:z-50 bg-white px-[3vw] w-[100vw] z-10"
 >
-  <nav class="flex justify-between items-center">
-    <a routerLink="" class="text-xl font-bold">femfy</a>
-    <button mat-fab class="lg:hidden text-xl" (click)="menuToggle()">
-      <mat-icon class="text-[2rem] active:text-[2.5rem]">menu</mat-icon>
-    </button>
-    <div class="hidden lg:flex space-x-4">
+  <nav class="flex justify-between items-center max-w-[1280px] m-auto">
+    <!--<a routerLink="" class="text-xl font-bold"></a>-->
+    <div class="flex items-center gap-[10px] cursor-pointer" routerLink="">
+      <img class="h-[40px]" src="./assets/images/isotipo.svg" alt="" />
+      <h1
+        style="user-select: none"
+        class="font-semibold text-[40px] text-black italic"
+      >
+        femfy
+      </h1>
+    </div>
+    <div
+      class="flex space-x-4 text-[20px] items-center"
+    >
       <a
-        *ngFor="
-          let menu of filterMenuDesktop(
-            isLogging ? menuLogueado : menuNoLogueado
-          )
-        "
-        routerLinkActive="text-[black] font-semibold"
+        class="p-3 max-lg:hidden"
+        *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
+        routerLinkActive="text-white font-semibold bg-[#7c2385] rounded-full"
         [routerLinkActiveOptions]="{ exact: true }"
         routerLink="{{ menu.path }}"
         >{{ menu.label }}</a
       >
+      <ng-container *ngIf="isLogging">
+        <ng-container *ngIf="icon">
+          <button
+            #myTooltip="matTooltip"
+            (click)="myTooltip.show()"
+            matTooltip="{{ icon?.desc }}"
+            class="block"
+          >
+            <mat-icon class="m-2 mt-4 animate-bounce" [svgIcon]="icon?.name"></mat-icon>
+          </button>
+        </ng-container>
+        <button
+          class="flex items-center"
+          [matMenuTriggerFor]="menuProfileButton"
+        >
+          <ng-container *ngIf="!getProfileImage()">
+            <img
+              src="./assets/images/account.png"
+              alt="account"
+              class="w-[50px] h-[50px] object-cover rounded-full border-4"
+              [ngClass]="{ 'border-[#7c2385]': isProfileActive() }"
+            />
+          </ng-container>
+          <ng-container *ngIf="picture[0]?.url">
+            <img
+              [src]="picture[0]?.url"
+              class="w-[50px] h-[50px] object-cover rounded-full border-4 border-[#7c2385]"
+              [ngClass]="{ 'border-[#7c2385]': isProfileActive() }"
+            />
+          </ng-container>
+          <mat-icon class="text-[#7c2385]">arrow_drop_down</mat-icon>
+        </button>
+        <mat-menu #menuProfileButton="matMenu">
+          <ng-container *ngFor="let item of menuProfile">
+            <button
+              mat-menu-item
+              routerLinkActive="text-[black] font-semibold"
+              [routerLinkActiveOptions]="{ exact: true }"
+              routerLink="{{ item.path }}"
+            >
+              <mat-icon color="{{ item.iconColor }}">{{ item.icon }}</mat-icon>
+              {{ item.label }}
+            </button>
+            <div class="px-2">
+              <mat-divider></mat-divider>
+            </div>
+          </ng-container>
+          <button mat-menu-item (click)="logoutUser()">
+            <mat-icon color="warn">logout</mat-icon>
+            Cerrar sesión
+          </button>
+        </mat-menu>
+      </ng-container>
     </div>
   </nav>
-</div>
-
-<div
-  #backdrop
-  (click)="backdropView()"
-  class="hidden fixed top-0 left-0 h-screen w-full bg-black opacity-50 z-10"
-></div>
-
-<div
-  #drawer
-  class="bg-white fixed top-0 left-0 h-screen w-56 shadow-lg p-4 transform -translate-x-full transition-transform duration-300 ease-in-out z-50"
->
-  <button
-    mat-fab
-    class="absolute top-2 right-2 text-xl"
-    (click)="closeDrawerButton()"
-  >
-    <mat-icon class="text-[1rem] active:text-[1.5rem]">close</mat-icon>
-  </button>
-  <ul class="space-y-4 my-8 px-2">
-    <ng-container
-      *ngFor="let menu of isLogging ? menuLogueado : menuNoLogueado"
-    >
-      <li>
-        <a
-          class="text-[20px] font-semibold active:text-[22px]"
-          (click)="handleRouter(menu.path)"
-          routerLink="{{ menu.path }}"
-          routerLinkActive="text-[#FF97A5]"
-          [routerLinkActiveOptions]="{ exact: true }"
-          >{{ menu.label }}</a
-        >
-      </li>
-      <mat-divider></mat-divider>
-    </ng-container>
-  </ul>
 </div>

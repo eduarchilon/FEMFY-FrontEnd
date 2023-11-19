@@ -39,24 +39,127 @@ $femfy-ui-theme: mat.define-light-theme(
 @tailwind components;
 @tailwind utilities;
 
+@import "~font-awesome/css/font-awesome.css";
 @import url("https://fonts.googleapis.com/css2?family=Kodchasan:wght@500&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 @layer base {
   html {
-    font-family: "Raleway", system-ui, sans-serif;
+    font-family: "Raleway", sans-serif !important;
   }
 }
 
-html,
-body {
-  height: 100%;
+body,
+mat-dialog-content {
+  margin: 0 !important;
+  font-family: "Raleway", sans-serif !important;
 }
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
 body {
-  margin: 0;
-  font-family: "Kodchasan", "Raleway", system-ui, sans-serif;
+  margin-bottom: 7em;
+  background-color: #f2d4fa !important;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 * {
   -webkit-tap-highlight-color: transparent; /* Para Chrome y Safari */
   tap-highlight-color: rgba(0, 0, 0, 0); /* Para otros navegadores */
   touch-action: auto !important;
+}
+
+.without-background {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+.spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+#spinner-loading {
+  background-color: unset !important;
+  box-shadow: unset !important;
+}
+
+/* Estilizar la barra de desplazamiento vertical */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la barra de desplazamiento vertical */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #a254fa; /* Color del "pulgar" de la barra de desplazamiento */
+  border-radius: 4px; /* Borde redondeado del "pulgar" */
+}
+
+/* Estilizar la barra de desplazamiento horizontal */
+::-webkit-scrollbar-horizontal {
+  height: 8px; /* Altura de la barra de desplazamiento horizontal */
+}
+
+::-webkit-scrollbar-thumb:horizontal {
+  background-color: #a254fa; /* Color del "pulgar" de la barra de desplazamiento horizontal */
+  border-radius: 4px; /* Borde redondeado del "pulgar" */
+}
+
+.ag-chart-tooltip.ag-chart-tooltip-no-interaction,
+.ag-chart-tooltip {
+  z-index: 1 !important;
+  position: absolute !important;
+}
+
+.ag-chart-tooltip.ag-chart-tooltip-no-animation,
+.ag-chart-tooltip {
+  z-index: 1 !important;
+  position: absolute !important;
+}
+
+.mat-icon-white {
+  color: #ffffff !important;
+  fill: #ffffff !important;
+}
+
+input,
+textarea {
+  background-color: #fcf5fe;
+}
+
+input:hover,
+input:active,
+textarea:hover,
+textarea:active {
+  border: 2px solid #7c2385 !important;
+}
+
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 20px !important;
+  -webkit-border-radius: 20px !important;
+  -moz-border-radius: 20px !important;
+  -ms-border-radius: 20px !important;
+  -o-border-radius: 20px !important;
+}
+
+.mat-bottom-sheet-container {
+  padding: 5px;
+  border-top-left-radius: 20px !important;
+  border-top-right-radius: 20px !important;
+}
+
+.mat-mdc-menu-panel {
+  width: inherit !important;
+  overflow: inherit !important;
+  min-width: unset !important;
+  max-width: unset !important;
+}
+
+.mat-mdc-menu-content {
+  padding: 0 !important;
 }

@@ -1,10 +1,111 @@
-<div class="w-[100%] h-screen dark:bg-cover bg-[#FF97A5] pt-24">
-  <h1 class="text-[40px]">CALENDARIO</h1>
-  <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus saepe fuga
-    blanditiis corrupti, necessitatibus animi voluptatem quisquam? Molestias
-    possimus fugiat ea. Nobis reiciendis doloremque animi laborum perspiciatis
-    ut ea aliquid.
-  </p>
-  <button routerLink="">Home</button>
+<div class="bg-[#f2d4fa] pt-24 md:pt-36 pb-[120px]">
+  <div class="lg:flex gap-10 w-full max-w-[1280px] m-auto p-5 md:p-0">
+    <div class="flex-1 w-full mb-10 lg:mb-0 relative">
+      <div class="w-full mb-5 relative">
+        <ng-container>
+          <app-date-picker
+            [cycle]="cycle"
+            [averageQuestionCycleContent]="averageQuestionCycleContent"
+            [cyclesWithOutEndNull]="cyclesWithOutEndNull"
+          >
+          </app-date-picker>
+          <button
+            (click)="openEventDayDrawer()"
+            class="bg-white text-[#7c2385] font-bold px-6 py-4 rounded-full text-2xl absolute bottom-0 right-0 -mb-2 -mr-2 border-2 border-[#7c2385]"
+          >
+            <i class="fa fa-plus-circle text-2xl" aria-hidden="true"></i>
+          </button>
+        </ng-container>
+      </div>
+    </div>
+
+    <div class="">
+      <div class="flex-1 w-full bg-white rounded-[20px]">
+        <h5
+          class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+        >
+          Próximo ciclo
+        </h5>
+        <div class="flex flex-col h-[100%] gap-10 max-xl:gap-5 px-5 py-5">
+          <div class="flex items-center gap-5">
+            <img
+              class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+              src="./assets/images/isotipo.svg"
+            />
+            <div class="">
+              <span class="text-2xl font-semibold max-lg:text-xl"
+                >Siguiente período:</span
+              >
+              <p *ngIf="nextPeriod" class="text-lg">
+                {{ nextPeriod }}
+              </p>
+              <p *ngIf="!nextPeriod" class="text-lg">
+                No hay datos cargados para predecir
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <img
+              class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+              src="https://gravida.com/wp-content/uploads/2016/01/ovum.png"
+            />
+            <div class="">
+              <span class="text-2xl font-semibold max-lg:text-xl"
+                >Predicción día de ovulación:</span
+              >
+              <p *ngIf="nextOvulation" class="text-lg">
+                {{ nextOvulation }}
+              </p>
+              <p *ngIf="!nextOvulation" class="text-lg">
+                No hay datos cargados para predecir
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-5">
+            <img
+              class="w-[80px] h-[80px] max-xl:w-[50px] max-xl:h-[50px]"
+              src="https://th.bing.com/th/id/R.10c4dd6a751ddb0ef4b4897a2aaf6f98?rik=zUkA1iUuxUFG6w&riu=http%3a%2f%2fclipart-library.com%2fimages%2fkT85qG9Lc.png&ehk=5RcemOKTQCzs3%2bpUNmF7hPuU0gnp%2bbtCJXdDZ60mQJs%3d&risl=&pid=ImgRaw&r=0"
+            />
+            <div class="">
+              <span class="text-2xl font-semibold max-lg:text-xl"
+                >Predicción días fértiles:</span
+              >
+              <p *ngIf="nextOvulation" class="text-lg">5 días</p>
+              <p *ngIf="!nextOvulation" class="text-lg">
+                No hay datos cargados para predecir
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex-1 w-full bg-white rounded-[20px] my-10 max-lg:mb-20">
+        <h5
+          class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"
+        >
+          Referencias
+        </h5>
+        <div class="flex flex-wrap gap-5 px-5 py-5">
+          <div class="flex gap-2 items-center max-sm:text-sm">
+            <i
+              class="w-[40px] h-[20px] border-2 border-indigo-600 rounded-lg"
+            ></i>
+            <p>Hoy</p>
+          </div>
+          <div class="flex gap-2 items-center max-sm:text-sm">
+            <i class="w-[40px] h-[20px] bg-[yellow] rounded-lg"></i>
+            <p>Eventos</p>
+          </div>
+          <div class="flex gap-2 items-center max-sm:text-sm">
+            <i class="w-[40px] h-[20px] bg-[red] rounded-lg"></i>
+            <p>Período</p>
+          </div>
+          <div class="flex gap-2 items-center max-sm:text-sm">
+            <i class="w-[40px] h-[20px] bg-[green] rounded-lg"></i>
+            <p>Ovulación</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

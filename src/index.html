@@ -5,17 +5,35 @@
     <title>femfy</title>
     <base href="/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="assets/images/isotipo.svg" />
+    <link rel="icon" type="image/x-icon" href="./assets/images/isotipo.svg" />
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&amp;display=swap"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <meta name="theme-color" content="#FEA8B1" />
   </head>
+  <script
+    async
+    defer
+    src="https://apis.google.com/js/api.js"
+    onload="gapiLoaded()"
+  ></script>
+  <script
+    async
+    defer
+    src="https://accounts.google.com/gsi/client"
+    onload="gisLoaded()"
+  ></script>
+  <script
+    type="text/javascript"
+    src="./assets/scripts/googleEvents.js"
+  ></script>
   <body>
     <app-root></app-root>
     <script>
@@ -23,5 +41,15 @@
       localStorage.theme = "light";
       document.documentElement.classList.remove("dark");
     </script>
+    <noscript
+      >Please enable JavaScript to continue using this application.</noscript
+    >
+    <script 
+    src="https://sdk.mercadopago.com/js/v2"
+    ></script>
+    <script
+    type="text/javascript"
+    src="./assets/scripts/mercadoPago.js"
+  ></script>
   </body>
 </html>

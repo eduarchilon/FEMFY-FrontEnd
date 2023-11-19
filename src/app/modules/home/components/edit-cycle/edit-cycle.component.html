@@ -1,0 +1,35 @@
+<div class="p-5">
+  <div class="flex justify-end px-5">
+    <button (click)="closeDialog()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <mat-dialog-content class="!m-auto">
+    <h3 class="pb-3 text-2xl font-semibold">Editar días de sangrado</h3>
+    <div class="mb-10">
+      <label class="block text-xl mb-2">Duración del sangrado</label>
+      <input
+        type="number"
+        class="outline-none rounded-full p-3"
+        #daysOfBleeding
+      />
+      <p class="text-[12px] text-[red] font-semibold" *ngIf="errorInput">
+        {{ errorInput }}
+      </p>
+    </div>
+    <div class="flex justify-between gap-4">
+      <button
+        (click)="saveDaysOfBleeding(cycleChart, daysOfBleeding.value)"
+        class="flex-1 bg-[#de84ee] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+      >
+        Guardar
+      </button>
+      <button
+        class="flex-1 bg-[#7c2385] text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+        (click)="closeDialog()"
+      >
+        Cancelar
+      </button>
+    </div>
+  </mat-dialog-content>
+</div>

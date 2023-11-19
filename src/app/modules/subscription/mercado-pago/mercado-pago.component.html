@@ -1,0 +1,63 @@
+<h2 class="text-4xl font-bold m-5">Formulario de pago.</h2>
+
+<form id="form-checkout" class="bg-white p-4 rounded shadow-md">
+    <div class="mb-4">
+      <div id="form-checkout__cardNumber" class="container">
+        <!-- Contenido del campo cardNumber -->
+      </div>
+    </div>
+  
+    <div class="mb-4">
+      <div id="form-checkout__expirationDate" class="container">
+        <!-- Contenido del campo expirationDate -->
+      </div>
+    </div>
+  
+    <div class="mb-4">
+      <div id="form-checkout__securityCode" class="container">
+        <!-- Contenido del campo securityCode -->
+      </div>
+    </div>
+  
+    <div class="mb-4">
+      <input type="text" id="form-checkout__cardholderName" placeholder="Titular de la tarjeta" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+    </div>
+  
+    <div class="mb-4">
+      <select id="form-checkout__issuer" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold">
+        <!-- Opciones del campo issuer -->
+      </select>
+    </div>
+  
+    <div class="mb-4">
+      <select id="form-checkout__installments" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold">
+        <!-- Opciones del campo installments -->
+      </select>
+    </div>
+  
+    <div class="mb-4">
+      <select id="form-checkout__identificationType" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold">
+        <!-- Opciones del campo identificationType -->
+      </select>
+    </div>
+  
+    <div class="mb-4">
+      <input type="text" id="form-checkout__identificationNumber" placeholder="Número del documento" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+    </div>
+  
+    <div class="mb-4">
+      <input type="email" id="form-checkout__cardholderEmail" placeholder="E-mail" class="w-full border-2 border-gray-300 p-2 rounded-full font-bold" />
+    </div>
+  
+    <div class="mb-4">
+      <button type="submit" id="form-checkout__submit" class="bg-[#AF6FE8] text-white font-bold py-2 px-4 rounded-full w-full">
+        Pagar
+      </button>
+    </div>
+  
+    <div class="mb-4">
+      <progress value="0" class="progress-bar">
+        Cargando...
+      </progress>
+    </div>
+  </form>
