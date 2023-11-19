@@ -1,6 +1,10 @@
 import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
@@ -18,6 +22,7 @@ import {
 } from 'src/app/constans/mat-icon.data';
 import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
 import { WhatsAppMessage } from 'src/app/models/whats-app-message.model';
+import { WhatsAppDrawerComponent } from '../whats-app-drawer/whats-app-drawer.component';
 declare var createGoogleEvent: any;
 
 @Component({
@@ -55,7 +60,8 @@ export class EventDayDrawerComponent implements OnInit {
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: any, //fecha,
     private _snackBar: MatSnackBar,
-    private whatsAppService: WhatsAppService
+    private whatsAppService: WhatsAppService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -101,6 +107,7 @@ export class EventDayDrawerComponent implements OnInit {
 
   closeDialog(): void {
     this.dialogRef.close();
+    // location.reload();
   }
 
   registerEevent(): void {
@@ -192,17 +199,30 @@ export class EventDayDrawerComponent implements OnInit {
     });
   }
 
-  sendWhatsApp(): void {
-    const msg: WhatsAppMessage = {
-      phone: '5491168087762',
-      message: 'Hola!!! Te hablo desde femfy',
-    };
-    this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
-      next: (res: any) => {
-        if (res) {
-          this.openSnackBar('¡Mensaje enviado!', 'Ok');
-        }
+  sendWhatsApp(item: any): void {
+    this.dialog.open(WhatsAppDrawerComponent, {
+      panelClass: [
+        '!max-w-[95vw]',
+        'max-lg:!w-[80%]',
+        'max-md:!w-[100vw]',
+        'max-xl:!w-[50%]',
+        '!w-[50%]',
+        '!rounded-[20px]',
+      ],
+      data: {
+        item,
       },
     });
+    // const msg: WhatsAppMessage = {
+    //   phone: '5491168087762',
+    //   message: 'Hola!!! Te hablo desde femfy',
+    // };
+    // this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
+    //   next: (res: any) => {
+    //     if (res) {
+    //       this.openSnackBar('¡Mensaje enviado!', 'Ok');
+    //     }
+    //   },
+    // });
   }
 }

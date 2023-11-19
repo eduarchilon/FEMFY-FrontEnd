@@ -14,4 +14,14 @@ export class WhatsAppService {
   sendWhatsaAppMessage(event: WhatsAppMessage): Observable<any> {
     return this.httpClient.post<any>(`${this.apiUrl}`, event);
   }
+
+  apiNotification: boolean = false;
+
+  getWhatsAppApiNotification(): boolean {
+    return this.apiNotification;
+  }
+
+  setWhatsAppApiNotification(value: boolean): void {
+    this.apiNotification = value;
+  }
 }

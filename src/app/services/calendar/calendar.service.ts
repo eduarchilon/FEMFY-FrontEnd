@@ -37,4 +37,8 @@ export class CalendarService {
       })
     );
   }
+
+  editEventCalendar(idEvent: string, event: EventCalendar): Observable<any> {
+    return this.http.put<any>(`${this.usersUrl}/${idEvent}`, event);
+  }
 }

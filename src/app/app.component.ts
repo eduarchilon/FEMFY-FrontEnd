@@ -6,6 +6,7 @@ import { constants } from './constans/constants';
 import { Router } from '@angular/router';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { ChatbotComponent } from './commons/chatbot/chatbot.component';
+import { WhatsAppService } from './services/whats-app/whats-app.service';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,8 @@ export class AppComponent {
     private swPush: SwPush,
     private router: Router,
     private localStorageService: LocalStorageService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private whatsAppService: WhatsAppService
   ) {}
 
   openBottomSheet(): void {

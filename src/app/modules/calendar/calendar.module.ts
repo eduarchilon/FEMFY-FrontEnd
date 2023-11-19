@@ -45,6 +45,8 @@ import { EventsNotificationComponent } from './components/events-notification/ev
 import { QuestionService } from 'src/app/services/question/question.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
+import { WhatsAppDrawerComponent } from './components/whats-app-drawer/whats-app-drawer.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -53,6 +55,7 @@ registerLocaleData(localeEs, 'es-ES');
     EventDayDrawerComponent,
     DatePickerComponent,
     EventsNotificationComponent,
+    WhatsAppDrawerComponent,
   ],
   imports: [
     CommonModule,
@@ -71,6 +74,7 @@ registerLocaleData(localeEs, 'es-ES');
     MatProgressSpinnerModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatSlideToggleModule
   ],
   exports: [EventDayDrawerComponent, DatePickerComponent],
   providers: [

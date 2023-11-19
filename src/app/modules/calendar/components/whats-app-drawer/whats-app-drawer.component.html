@@ -1,0 +1,24 @@
+<div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
+  <div class="flex justify-between">
+    <p>Recordar a Jose</p>
+    <div class="flex gap-3">
+      <span>No</span>
+      <mat-slide-toggle
+        color="accent"
+        (change)="setVinculateToFriend(data?.item)"
+      ></mat-slide-toggle>
+      <span>Sí</span>
+    </div>
+    <p>Enviar ahora</p>
+  </div>
+
+  <div class="flex justify-between">
+    <p>Recordarme por mensaje</p>
+    <div class="flex gap-3">
+      <span>No</span>
+      <mat-slide-toggle color="accent"></mat-slide-toggle>
+      <span>Sí</span>
+    </div>
+    <p>Enviar ahora</p>
+  </div>
+</div>
