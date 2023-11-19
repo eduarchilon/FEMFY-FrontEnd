@@ -23,6 +23,7 @@ import {
 import { SharedProfileService } from 'src/app/services/profilePicture/profilePicture.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProfileService } from 'src/app/services/profile/profile.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -50,7 +51,8 @@ export class ProfileComponent implements OnInit {
     private sharedProfileService: SharedProfileService,
     private snackBar: MatSnackBar,
     private profileService: ProfileService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,8 @@ export class ProfileComponent implements OnInit {
       email: [this.userResponse.email],
       typeUserID: [this.userResponse.typeUserID],
       idUser: [this.localStorageService.getUserByLogin()?.idUser],
+      friendsName: [this.localStorageService.getUserByLogin()?.friendsName],
+      friendsPhone: [this.localStorageService.getUserByLogin()?.friendsPhone],
     });
     this.getProfilePicture();
   }
@@ -83,45 +87,19 @@ export class ProfileComponent implements OnInit {
     if (this.profileForm.valid) {
       const updatedUserData = this.profileForm.value;
 
-      const userData = {
+      const userData: UserResponse = {
+        ...this.userResponse,
         ...updatedUserData,
-        typeUserID: this.localStorageService.getUserByLogin()?.typeUserID,
-        userName: this.localStorageService.getUserByLogin()?.userName,
       };
 
-      // Utiliza una solicitud PUT para actualizar el perfil
-      this.http.put(`${this.apiUrl}`, updatedUserData).subscribe({
-        next: (data: any) => {
-          const keys = [];
-          const values = [];
-
-          keys.push('firstName');
-          values.push(updatedUserData.firstName);
-
-          keys.push('lastName');
-          values.push(updatedUserData.lastName);
-
-          keys.push('birthdate');
-          values.push(updatedUserData.birthdate);
-
-          keys.push('phone');
-          values.push(updatedUserData.phone);
-
-          keys.push('typeUserID');
-          values.push(updatedUserData.typeUserID);
-
-          this.localStorageService.setKeysAndValuesLocalStorage(keys, values);
-
-          this.snackBar.open('Datos actualizados con éxito.', 'cerrar', {
-            duration: 5000, // Duración en milisegundos
-          });
-
-          this.editProfile = false;
-        },
-        error: (error: any) => {
-          this.snackBar.open('Error al actualizar los datos.', 'cerrar', {
-            duration: 5000, // Duración en milisegundos
-          });
+      this.authService.updateUser({ ...userData }).subscribe({
+        next: (res: any) => {
+          if (res) {
+            this.editProfile = false;
+            this.snackBar.open('Datos actualizados con éxito.', 'cerrar', {
+              duration: 5000, // Duración en milisegundos
+            });
+          }
         },
       });
     }
