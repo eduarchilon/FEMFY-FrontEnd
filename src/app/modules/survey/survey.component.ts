@@ -60,14 +60,14 @@ export class SurveyComponent implements OnInit {
         break;
       case '3':
         this.questionType = 3;
-        this.authService
-          .updateUser({ ...this.userResponse, typeUserID: 3 })
-          .subscribe({
-            next: (res: any) => {
-              return res;
-            },
-            error: (err: any) => err,
-          });
+        // this.authService
+        //   .updateUser({ ...this.userResponse, typeUserID: 3 })
+        //   .subscribe({
+        //     next: (res: any) => {
+        //       return res;
+        //     },
+        //     error: (err: any) => err,
+        //   });
         break;
       default:
         break;

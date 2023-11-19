@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { UserResponse } from 'src/app/models/user.model';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 
 @Component({
   selector: 'app-question-otro',
@@ -7,18 +10,39 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuestionOtroComponent implements OnInit {
   questionOtherType!: number;
+  userResponse!: UserResponse;
 
-  constructor() {}
-  ngOnInit(): void {}
+  constructor(
+    private authService: AuthService,
+    private localStorageService: LocalStorageService
+  ) {}
+  ngOnInit(): void {
+    this.userResponse = this.localStorageService.getUserByLogin();
+  }
 
   selectOther(value: string | number): void {
     switch (value) {
-      case '1':
-        this.questionOtherType = 1;
-        console.log(value);
+      case '3':
+        this.questionOtherType = 3;
+        this.authService
+          .updateUser({ ...this.userResponse, typeUserID: 3 })
+          .subscribe({
+            next: (res: any) => {
+              return res;
+            },
+            error: (err: any) => err,
+          });
         break;
-      case '2':
-        this.questionOtherType = 2;
+      case '4':
+        this.questionOtherType = 4;
+        this.authService
+          .updateUser({ ...this.userResponse, typeUserID: 4 })
+          .subscribe({
+            next: (res: any) => {
+              return res;
+            },
+            error: (err: any) => err,
+          });
         console.log(value);
         break;
       default:

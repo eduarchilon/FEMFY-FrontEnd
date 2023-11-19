@@ -1,9 +1,9 @@
 <div class="m-auto">
   <div [ngSwitch]="questionOtherType">
-    <div *ngSwitchCase="1">
+    <div *ngSwitchCase="3">
       <app-question-congenital></app-question-congenital>
     </div>
-    <div *ngSwitchCase="2">
+    <div *ngSwitchCase="4">
       <app-question-hormonal></app-question-hormonal>
     </div>
     <div *ngSwitchDefault>
@@ -18,14 +18,14 @@
             <mat-radio-group>
               <mat-radio-button
                 value="1"
-                (click)="selectOther('1')"
+                (click)="selectOther('3')"
                 class="bg-white custom-radio-button py-5 p-3 rounded-lg"
               >
                 <span class="font-semibold">Tengo patologias congenitas</span>
               </mat-radio-button>
               <mat-radio-button
                 value="2"
-                (click)="selectOther('2')"
+                (click)="selectOther('4')"
                 class="bg-white custom-radio-button py-5 p-3 rounded-lg"
               >
                 <span class="font-semibold">Tengo problemas hormonales</span>
