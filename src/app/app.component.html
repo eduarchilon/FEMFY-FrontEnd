@@ -7,11 +7,26 @@
       <mat-icon>smart_toy</mat-icon>
     </button>
   </div> -->
-  <div class="fixed bottom-24 z-50 right-10 max-lg:right-3">
-    <button mat-fab [matMenuTriggerFor]="menu" color="accent">
-      <mat-icon>smart_toy</mat-icon>
-    </button>
-  </div>
+  <ng-container *ngIf="isChatBot">
+    <div class="fixed bottom-24 z-50 right-10 max-lg:right-3">
+      <button
+        mat-fab
+        [matMenuTriggerFor]="menu"
+        color="accent"
+        class="max-lg:!hidden"
+      >
+        <mat-icon>smart_toy</mat-icon>
+      </button>
+      <button
+        mat-fab
+        color="accent"
+        (click)="openBottomSheet()"
+        class="max-lg:!block !hidden"
+      >
+        <mat-icon>smart_toy</mat-icon>
+      </button>
+    </div>
+  </ng-container>
 </div>
 <mat-menu #menu="matMenu">
   <div class="h-[50vh] !max-sm:h-[90vh] max-lg:w-auto">
