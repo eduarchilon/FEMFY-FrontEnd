@@ -5,6 +5,7 @@ export interface Post {
     createdDate?: Date | string;
     userId?: number;
     topicId?: number;
+    topicTitle?: string;
     username?: string;
     replies?: number;
   }

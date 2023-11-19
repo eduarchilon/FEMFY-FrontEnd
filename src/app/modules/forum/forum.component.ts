@@ -55,10 +55,10 @@ export class ForumComponent {
     return `/foro/${topicId}`;
   }
 
-  saveId(id: Number): void {
+  saveIdAndTitle(id: Number): void {
     this.localStorageService.setKeyValueLocalStorage(
-      'idTopic',
-      JSON.stringify(id)
+      'idTopic', 
+      JSON.stringify(id),
     );
   }
 }
