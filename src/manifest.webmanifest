@@ -1,8 +1,8 @@
 {
   "name": "Femfy",
   "short_name": "Femfy",
-  "theme_color": "#FEA8B1",
-  "background_color": "#FEA8B1",
+  "theme_color": "#f2d4fa",
+  "background_color": "#f2d4fa",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",

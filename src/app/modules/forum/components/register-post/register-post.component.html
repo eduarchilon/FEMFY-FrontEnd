@@ -1,13 +1,17 @@
-<div class="w-[700px] bg-white p-4">
-    <div class="text-center font-bold text-3xl my-5 text-femfy-800">Nueva publicación</div>
+<div class="p-5">
+    <h3 class="text-femfy-800 text-2xl font-bold pb-3 mb-10">
+        Nueva publicación
+    </h3>
     <form [formGroup]="formPost" (ngSubmit)="registerPost()">
-        <div class="mx-auto w-10/12">
+        <div class="mx-auto">
             <div class="bg-white flex flex-col text-gray-800 p-5 mb-5">
                 <label class="block text-gray-600 text-xl font-medium mb-2">Título</label>
-                <input class="border border-gray-300 p-3 mb-4 rounded-[20px] outline-none" formControlName="title" type="text">
+                <input class="border border-gray-300 p-3 mb-4 rounded-[20px] outline-none" formControlName="title"
+                    type="text">
 
                 <label class="block text-gray-600 text-xl font-medium mb-2">Contenido</label>
-                <textarea class="p-3 h-60 border border-gray-300 rounded-[20px] outline-none" placeholder="Escribe tu mensaje" formControlName="content"></textarea>
+                <textarea class="p-3 h-60 border border-gray-300 rounded-[20px] outline-none"
+                    placeholder="Escribe tu mensaje" formControlName="content"></textarea>
 
                 <div class="buttons flex justify-end mt-5">
                     <button type="submit"

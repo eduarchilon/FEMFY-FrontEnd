@@ -48,7 +48,7 @@ export class TopicComponent {
       this.loaderServices.showLoader();
       if (
         this.idTopic ===
-          Number(this.localStorageService.getLocalStorage('idTopic')) &&
+        Number(this.localStorageService.getLocalStorage('idTopic')) &&
         data.length > 0
       ) {
         this.loaderServices.showLoader();
@@ -57,7 +57,7 @@ export class TopicComponent {
       }
       this.loaderServices.hideLoader();
     });
-    
+
     this.route.paramMap.subscribe((params) => {
       const idTopic = params.get('id');
       if (idTopic !== null) {
@@ -92,7 +92,12 @@ export class TopicComponent {
 
   openPostRegister(): void {
     const dialogRef = this.dialog.open(RegisterPostComponent, {
-      panelClass: ['!rounded-[20px]'],
+      panelClass: ['!max-w-[95vw]',
+        'max-lg:!w-[80%]',
+        'max-md:!w-[100vw]',
+        'max-xl:!w-[50%]',
+        '!w-[50%]',
+        '!rounded-[20px]',],
       data: { idTopic: this.idTopic },
     });
   }
