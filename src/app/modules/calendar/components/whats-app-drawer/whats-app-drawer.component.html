@@ -1,4 +1,4 @@
-<div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
+<div class="!w-[100%] p-5 max-md:py-5">
   <div class="flex justify-between items-center pb-4">
     <h3 class="text-3xl text-femfy-800 font-bold max-md:text-3xl">
       Configuración de mensajes
@@ -36,7 +36,7 @@
         <div *ngIf="!userResponse?.friendsPhone">
           <button (click)="closeDialogAll()"
             routerLink="/perfil"
-            class="bg-[#8492ee] m-2 text-white font-semibold rounded-[20px] p-2"
+            class="bg-[#7C2385] m-2 text-white font-semibold rounded-[20px] p-2 max-lg:text-xl"
           >
             Configurar número de contacto
           </button>
@@ -45,7 +45,7 @@
 
       <div class="flex justify-between my-4 items-center">
         <p>Recordarme por mensaje</p>
-        <div class="flex gap-3">
+        <div class="flex gap-2 ml-[5.5rem] max-lg:ml-0">
           <span>No</span>
           <mat-slide-toggle
             color="accent"
