@@ -48,23 +48,47 @@ export class InformationHistorialComponent implements OnInit {
     sop: new FormControl(''),
     earlyMenopause: new FormControl(''),
     uterineFibroids: new FormControl(''),
-  })
+  });
+
+  convertValueToInteger(value: number): number {
+    let newValue = 0;
+    if (value === 1) {
+      newValue = 1;
+    } else {
+      newValue = 0;
+    }
+    return newValue;
+  }
 
   submitInformationHistorial(): void {
+    console.log(this.formInformationHistorial.value?.earlyMenopause);
+    let formResult: QuestionsUserFamilyHistory = {
+      id: this.userHistorial?.id,
+      userId: this.userHistorial?.userId,
+      breastCancer: this.convertValueToInteger(
+        this.formInformationHistorial.value.breastCancer
+      ),
+      ovarianCancer: this.convertValueToInteger(
+        this.formInformationHistorial.value.ovarianCancer
+      ),
+      endometriosis: this.convertValueToInteger(
+        this.formInformationHistorial.value.endometriosis
+      ),
+      sop: this.convertValueToInteger(this.formInformationHistorial.value.sop),
+      earlyMenopause: this.convertValueToInteger(
+        this.formInformationHistorial.value.earlyMenopause
+      ),
+      uterineFibroids: this.convertValueToInteger(
+        this.formInformationHistorial.value.uterineFibroids
+      ),
+    };
     this.historyService
-    .updateUserHistoryQuestion({
-      ...this.userHistorial,
-      breastCancer: this.formInformationHistorial.value.breastCancer === false ? 0 : 1,
-      ovarianCancer: this.formInformationHistorial.value.ovarianCancer === false ? 0 : 1,
-      endometriosis: this.formInformationHistorial.value.endometriosis === false ? 0 : 1,
-      sop: this.formInformationHistorial.value.sop === false ? 0 : 1,
-      earlyMenopause: this.formInformationHistorial.value.earlyMenopause === false ? 0 : 1,
-      uterineFibroids: this.formInformationHistorial.value.uterineFibroids === false ? 0 : 1,
-    })
-    .subscribe((res) => {
-      this.openSnackBar('Guardado con éxito', 'X');
-      return res;
-    });
+      .updateUserHistoryQuestion(formResult)
+      .subscribe((res) => {
+        this.openSnackBar('Guardado con éxito', 'X');
+        console.log(res);
+        return res;
+      });
   }
 
   openSnackBar(message: string, action: string) {

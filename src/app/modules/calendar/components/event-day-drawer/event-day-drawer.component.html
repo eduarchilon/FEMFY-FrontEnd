@@ -79,6 +79,13 @@
                 <p class="max-sm:text-[12px]">{{ item.description }}</p>
                 <div class="flex gap-3 self-end">
                   <button
+                    mat-mini-fab
+                    class="!bg-green-600"
+                    (click)="sendWhatsApp()"
+                  >
+                    <mat-icon [svgIcon]="iconWhatsApp?.name"></mat-icon>
+                  </button>
+                  <button
                     (click)="vinculateGoogleClendar(item)"
                     mat-mini-fab
                     class="!bg-white"

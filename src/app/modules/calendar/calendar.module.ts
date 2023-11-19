@@ -44,6 +44,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { EventsNotificationComponent } from './components/events-notification/events-notification.component';
 import { QuestionService } from 'src/app/services/question/question.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
 registerLocaleData(localeEs, 'es-ES');
 
 @NgModule({
@@ -88,6 +89,7 @@ registerLocaleData(localeEs, 'es-ES');
     LoaderService,
     QuestionService,
     MAT_RANGE_DATE_SELECTION_MODEL_PROVIDER,
+    WhatsAppService,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
 })
