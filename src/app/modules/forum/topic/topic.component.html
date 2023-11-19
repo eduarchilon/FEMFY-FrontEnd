@@ -1,12 +1,12 @@
 <div class="bg-[#f2d4fa] pt-28 pb-32">
     <div class="w-[100%] max-w-[1280px] m-auto px-[3vw] md:p-0">
         <div class="flex justify-between mb-5">
-            <div class="flex !font-medium text-femfy-800 text-[30px]">
+            <div class="lg:flex !font-medium text-femfy-800 text-[30px]">
                 <a routerLink="/foro">Comunidad > </a>
                 <a class="ml-2">{{ topic?.title }}</a>
             </div>
             <button *ngIf="posts.length > 0" (click)="openPostRegister()"
-                class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]">Crear una
+                class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px] my-5 md:my-0">Crear una
                 charla</button>
         </div>
 
