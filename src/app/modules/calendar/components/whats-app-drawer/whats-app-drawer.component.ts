@@ -100,10 +100,11 @@ export class WhatsAppDrawerComponent implements OnInit {
       .format('LL')} a las ${item?.hour}:
                           \n*${item?.title || 'Sin titulo'}*
                           \n_${item?.description || 'Sin descripción'}_`;
-
+    const phoneNumber: any = this.userResponse?.friendsPhone?.split('+');
+    console.log(phoneNumber[1]);
     const msg: WhatsAppMessage = {
-      phone: '5491168087762',
-      message: `${item?.description}`,
+      phone: phoneNumber[1],
+      message: msgString,
     };
     this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
       next: (res: any) => {
@@ -148,11 +149,62 @@ export class WhatsAppDrawerComponent implements OnInit {
   }
 
   sendToFriendChart(itemChart: DataPieChartChildren): void {
-    console.log(itemChart);
+    // color: 'green';
+    // date: '15/11/2023';
+    // dayCount: 1;
+    // desc: 'Ovulación' || 'Fin del ciclo' || 'Hoy / Ovulación';
+    // fase: 'fertileDay';
+    // hour: '10:00';
+    // id: 15;
+    // label: 'Dias Fértiles';
+    // width: 100;
+    const msgString: string = `¡Hola!
+    \nEl ciclo de *${
+      this.userResponse?.firstName || this.userResponse?.userName
+    }* del día ${moment(this.data?.daySelected).locale('es').format('LL')}:
+    \nEstas en etápa de ${itemChart?.label} ${
+      itemChart?.desc !== '' && itemChart?.desc !== 'Hoy / Ovulación'
+        ? 'y estas en ' + itemChart?.desc
+        : ''
+    }`;
+    const phoneNumber: any = this.userResponse?.friendsPhone?.split('+');
+    console.log(phoneNumber[1]);
+    const msg: WhatsAppMessage = {
+      phone: phoneNumber[1],
+      message: msgString,
+    };
+    this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.openSnackBar('¡Mensaje enviado!', 'X');
+        }
+      },
+    });
   }
 
   sendToMeChart(itemChart: DataPieChartChildren): void {
-    console.log(itemChart);
+    const msgString: string = `¡Hola!
+                          \nTu ciclo del día ${moment(this.data?.daySelected)
+                            .locale('es')
+                            .format('LL')}:
+                          \nEstas en etápa de ${itemChart?.label} ${
+      itemChart?.desc !== '' && itemChart?.desc !== 'Hoy / Ovulación'
+        ? 'y estas en ' + itemChart?.desc
+        : ''
+    }`;
+    const phoneNumber: any = this.userResponse?.phone?.split('+');
+    console.log(phoneNumber[1]);
+    const msg: WhatsAppMessage = {
+      phone: phoneNumber[1],
+      message: msgString,
+    };
+    this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.openSnackBar('¡Mensaje enviado!', 'X');
+        }
+      },
+    });
   }
 
   openSnackBar(message: string, action: string) {
