@@ -14,4 +14,5 @@ export interface DataPieChartChildren extends DataPieChart {
   width: number;
   desc?: string | '';
   date?: moment.Moment | any | string;
+  hour?: string | any;
 }

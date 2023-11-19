@@ -24,6 +24,7 @@ import { cyclesUserSelector } from 'src/app/services/redux/selectors/cycle-user.
 import { questionUserMenstruationInit } from 'src/app/services/redux/actions/question-menstruation/question-menstruation-user-page.action';
 import { questionUserMenstruationSelector } from 'src/app/services/redux/selectors/question-menstruation.selector';
 import { SurveyComponent } from '../../survey/survey.component';
+import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
 
 @Component({
   selector: 'app-index',
@@ -54,7 +55,8 @@ export class IndexComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private localStorageService: LocalStorageService,
     private loaderService: LoaderService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private whatsAppService: WhatsAppService
   ) {}
 
   ngOnDestroy(): void {
@@ -86,6 +88,8 @@ export class IndexComponent implements OnInit, OnDestroy {
     if (this.userAuth) {
       this.store?.dispatch(cycleUserInit());
       this.store.dispatch(questionUserMenstruationInit());
+      if (this.whatsAppService.getWhatsAppApiNotification()) {
+      }
     }
 
     this.userMenstruationSubscription =

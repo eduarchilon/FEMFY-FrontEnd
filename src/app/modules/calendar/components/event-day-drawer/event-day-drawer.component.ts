@@ -213,16 +213,21 @@ export class EventDayDrawerComponent implements OnInit {
         item,
       },
     });
-    // const msg: WhatsAppMessage = {
-    //   phone: '5491168087762',
-    //   message: 'Hola!!! Te hablo desde femfy',
-    // };
-    // this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
-    //   next: (res: any) => {
-    //     if (res) {
-    //       this.openSnackBar('¡Mensaje enviado!', 'Ok');
-    //     }
-    //   },
-    // });
+  }
+
+  sendWhatsAppPhase(itemChart: any): void {
+    this.dialog.open(WhatsAppDrawerComponent, {
+      panelClass: [
+        '!max-w-[95vw]',
+        'max-lg:!w-[80%]',
+        'max-md:!w-[100vw]',
+        'max-xl:!w-[50%]',
+        '!w-[50%]',
+        '!rounded-[20px]',
+      ],
+      data: {
+        itemChart,
+      },
+    });
   }
 }

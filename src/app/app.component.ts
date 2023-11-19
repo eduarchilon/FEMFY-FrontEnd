@@ -41,6 +41,10 @@ export class AppComponent {
       this.isChatBot = true;
     }
     this.subscribeToNotifications();
+
+    if (this.userId) {
+      this.whatsAppService.setWhatsAppApiNotification(true);
+    }
   }
 
   subscribeToNotifications(): void {

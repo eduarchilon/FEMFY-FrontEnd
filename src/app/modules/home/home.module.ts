@@ -36,6 +36,7 @@ import { RecomendationService } from 'src/app/services/recomendation/recomendati
 import { CutTextPipe } from 'src/app/utils/pipes/cut-text/cut-text.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NotificationService } from 'src/app/services/notification/notification.service';
+import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { NotificationService } from 'src/app/services/notification/notification.
     LoaderService,
     { provide: LOCALE_ID, useValue: 'es-ES' },
     RecomendationService,
-    NotificationService
+    NotificationService,
+    WhatsAppService,
   ],
 })
 export class HomeModule {}
