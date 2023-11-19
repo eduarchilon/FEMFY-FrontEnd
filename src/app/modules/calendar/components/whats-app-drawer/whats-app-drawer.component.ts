@@ -7,6 +7,7 @@ import {
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { DataPieChartChildren } from 'src/app/models/data-pie-chart';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { UserResponse } from 'src/app/models/user.model';
 import { WhatsAppMessage } from 'src/app/models/whats-app-message.model';
@@ -144,6 +145,14 @@ export class WhatsAppDrawerComponent implements OnInit {
         }
       },
     });
+  }
+
+  sendToFriendChart(itemChart: DataPieChartChildren): void {
+    console.log(itemChart);
+  }
+
+  sendToMeChart(itemChart: DataPieChartChildren): void {
+    console.log(itemChart);
   }
 
   openSnackBar(message: string, action: string) {

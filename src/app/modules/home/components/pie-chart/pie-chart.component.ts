@@ -266,7 +266,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
-    console.log(dataChildrenSeries);
+    // console.log(dataChildrenSeries);
 
     if (
       newDataArray[diff - 1]?.fase !==
