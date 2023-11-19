@@ -12,7 +12,12 @@ import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { EventCalendar } from 'src/app/models/event-calendar.model';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { GOOGLE_CALENDAR_ICON } from 'src/app/constans/mat-icon.data';
+import {
+  GOOGLE_CALENDAR_ICON,
+  WHATS_APP_ICON,
+} from 'src/app/constans/mat-icon.data';
+import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
+import { WhatsAppMessage } from 'src/app/models/whats-app-message.model';
 declare var createGoogleEvent: any;
 
 @Component({
@@ -37,6 +42,7 @@ export class EventDayDrawerComponent implements OnInit {
   spinnerConsumer: string = 'EventDayDrawerComponent';
 
   iconCalendar: any = GOOGLE_CALENDAR_ICON;
+  iconWhatsApp: any = WHATS_APP_ICON;
 
   constructor(
     private dialogRef: MatDialogRef<EventDayDrawerComponent>,
@@ -48,7 +54,8 @@ export class EventDayDrawerComponent implements OnInit {
     private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
     @Inject(MAT_DIALOG_DATA) public data: any, //fecha,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar,
+    private whatsAppService: WhatsAppService
   ) {}
 
   ngOnInit(): void {
@@ -184,6 +191,20 @@ export class EventDayDrawerComponent implements OnInit {
     this._snackBar.open(message, action, {
       horizontalPosition: 'right',
       verticalPosition: 'top',
+    });
+  }
+
+  sendWhatsApp(): void {
+    const msg: WhatsAppMessage = {
+      phone: '5491168087762',
+      message: 'Hola!!! Te hablo desde femfy',
+    };
+    this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
+      next: (res: any) => {
+        if (res) {
+          this.openSnackBar('¡Mensaje enviado!', 'Ok');
+        }
+      },
     });
   }
 }

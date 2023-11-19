@@ -12,6 +12,7 @@ export const MAT_ICONS: MatIconCustom[] = [
   { name: 'folicularDay', path: './assets/svg/folicular.svg' },
   { name: 'luteaDay', path: './assets/svg/lutea.svg' },
   { name: 'googleCalendar', path: './assets/svg/google-calendar-icon.svg' },
+  { name: 'whatsApp', path: './assets/svg/whats-app-icon.svg' },
 ];
 
 export const CUSTOM_ICONS: any = {
@@ -60,6 +61,12 @@ export const GOOGLE_CALENDAR_ICON = {
   name: 'googleCalendar',
   path: './assets/svg/google-calendar-icon.svg',
   desc: 'Vincular a Google Calendar',
+};
+
+export const WHATS_APP_ICON = {
+  name: 'whatsApp',
+  path: './assets/svg/whats-app-icon.svg',
+  desc: "Vincular por What's App",
 };
 
 // //FOOTER

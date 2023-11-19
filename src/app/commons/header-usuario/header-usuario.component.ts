@@ -196,10 +196,9 @@ export class HeaderUsuarioComponent implements OnInit {
         }
 
         this.sharedProfileService.setUserProfileImage(this.picture[0]?.url);
-        console.log(this.picture[0]?.url);
       })
       .catch((error: any) => {
-        console.log(error);
+        error;
       });
   }
 }
