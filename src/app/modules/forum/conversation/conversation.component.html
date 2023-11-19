@@ -1,29 +1,13 @@
 <div class="bg-[#f2d4fa] pt-28 pb-32 bg-cover px-[3vw]">
-  <div class="w-[100%] max-w-[1280px] m-auto">
-    <div class="flex !font-medium text-femfy-800 text-[30px] mb-5">
-      <a routerLink="/foro">Comunidad > </a>
-      <a routerLink="/foro/{id}" class="mx-2"
-        >{{
-          post?.topicId === 1
-            ? "Pareja"
-            : post?.topicId === 2
-            ? "Maternidad"
-            : post?.topicId === 3
-            ? "Nutrición"
-            : post?.topicId === 4
-            ? "Piscología"
-            : post?.topicId === 5
-            ? "Sexualidad"
-            : post?.topicId === 6
-            ? "Variados"
-            : ""
-        }}</a
-      >
-      <a routerLink="/" class="max-lg:hidden">> {{ post?.title }}</a>
-    </div>
+    <div class="w-[100%] max-w-[1280px] m-auto">
 
-    <h2 class="text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
-    <!--<span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>-->
+        <div class="flex !font-medium text-femfy-800 text-[30px] mb-5">
+            <a routerLink="/foro">Comunidad > </a>
+            <a routerLink="/foro/{id}" class="mx-2">{{ topic?.title }}</a>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl text-[#7c2385] font-bold mb-5">{{ post.title }}</h2>
+        <!--<span class="text-[20px] text-black font-medium">Última respuesta: 9 de junio de 2020 a las 3:19</span>-->
 
     <div class="bg-white w-full my-5 p-[20px] rounded-[20px]">
       <div class="mb-3">

@@ -1,122 +1,21 @@
 <div class="m-auto">
   <mat-stepper #stepper>
-    <!-- another -->
-    <mat-step>
-      <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          another
-        </p>
-        <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'another')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'another')"
-                >No</span
-              ></mat-radio-button
-            >
-          </mat-radio-group>
-        </div>
-        <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
-            Siguiente
-          </button>
-        </div>
-      </form>
-    </mat-step>
-    <!-- anotherDescription -->
-    <mat-step>
-      <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          anotherDescription
-        </p>
-        <div class="flex justify-center">
-          <textarea
-            #anotherDescription
-            class="text-gray-500 rounded-md w-[100%] p-3 mb-5"
-          ></textarea>
-        </div>
-        <div class="text-center">
-          <button
-            mat-button
-            matStepperPrevious
-            class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3"
-          >
-            Volver
-          </button>
-          <button
-            mat-button
-            matStepperNext
-            type="button"
-            (click)="
-              updateQuestionHormonal(
-                '',
-                'anotherDescription',
-                anotherDescription.value
-              )
-            "
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
-            Siguiente
-          </button>
-        </div>
-      </form>
-    </mat-step>
     <!-- hyperprolactinemia -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          hyperprolactinemia
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Experimentaste ciclos menstruales escasos siendo cada vez menos frecuentes o secreción de leche por la mama fuera del periodo de lactancia?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'hyperprolactinemia')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'hyperprolactinemia')"
-                >No</span
-              ></mat-radio-button
-            >
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('1', 'hyperprolactinemia')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('2', 'hyperprolactinemia')">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
@@ -125,39 +24,19 @@
     <!--hypothalamicDisorders -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          hypothalamicDisorders
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Notaste una alteración persistente en tu ciclo menstrual, como cambios en la duración, frecuencia o intensidad del sangrado?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'hypothalamicDisorders')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'hypothalamicDisorders')"
-                >No</span
-              ></mat-radio-button
-            >
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('1', 'hypothalamicDisorders')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('2', 'hypothalamicDisorders')">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
@@ -166,80 +45,40 @@
     <!--hypothyroidism -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          hypothyroidism
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Sentiste cansancio continuo, aumento de peso inexplicable, intolerancia al frío y cambios en tu piel como sequedad o escamación?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'hypothyroidism')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'hypothyroidism')"
-                >No</span
-              ></mat-radio-button
-            >
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('1', 'hypothyroidism')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('2', 'hypothyroidism')">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
       </form>
     </mat-step>
-    <!--hypothyroidism -->
+    <!--insulinResistance -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          insulinResistance
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Experimentaste un aumento inusual de peso y problemas con los niveles de azúcar en sangre?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'insulinResistance')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'insulinResistance')"
-                >No</span
-              ></mat-radio-button
-            >
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('1', 'insulinResistance')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('2', 'insulinResistance')">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
@@ -248,43 +87,21 @@
     <!--polycysticOvarySyndrome -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          polycysticOvarySyndrome
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Notaste irregularidades en tu ciclo menstrual junto con aumento de vello en zonas como el rostro, pecho o espalda, o experimentado dificultades para concebir?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm" (change)="
                   updateQuestionHormonal('1', 'polycysticOvarySyndrome')
-                "
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="
+                ">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm" (change)="
                   updateQuestionHormonal('2', 'polycysticOvarySyndrome')
-                "
-                >No</span
-              ></mat-radio-button
-            >
+                ">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
@@ -293,43 +110,21 @@
     <!--prematureOvarianFailure -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          prematureOvarianFailure
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          ¿Pasaste por una suspensión permanente en tu ciclo menstrual a una edad temprana o estas enfrentado dificultades persistentes para concebir?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm" (change)="
                   updateQuestionHormonal('1', 'prematureOvarianFailure')
-                "
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="
+                ">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm" (change)="
                   updateQuestionHormonal('2', 'prematureOvarianFailure')
-                "
-                >No</span
-              ></mat-radio-button
-            >
+                ">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Siguiente
           </button>
         </div>
@@ -338,47 +133,23 @@
     <!--sheehanSyndrome -->
     <mat-step>
       <form>
-        <p
-          class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base"
-        >
-          sheehanSyndrome
+        <p class="text-2xl text-black !my-5 text-center font-semibold max-sm:text-base">
+          Si diste a luz con anterioridad, ¿Experimentaste una hemorragia importante durante el proceso?
         </p>
         <div class="flex justify-center">
-          <mat-radio-group
-            class="flex flex-col mb-5 gap-3"
-            aria-label="Select an option"
-          >
-            <mat-radio-button value="1"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('1', 'sheehanSyndrome')"
-                >Si</span
-              ></mat-radio-button
-            >
-            <mat-radio-button value="0"
-              ><span
-                class="max-sm:text-sm"
-                (change)="updateQuestionHormonal('2', 'sheehanSyndrome')"
-                >No</span
-              ></mat-radio-button
-            >
+          <mat-radio-group class="flex flex-col mb-5 gap-3" aria-label="Select an option">
+            <mat-radio-button value="1"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('1', 'sheehanSyndrome')">Si</span></mat-radio-button>
+            <mat-radio-button value="0"><span class="max-sm:text-sm"
+                (change)="updateQuestionHormonal('2', 'sheehanSyndrome')">No</span></mat-radio-button>
           </mat-radio-group>
         </div>
         <div class="text-center">
-          <button
-            mat-button
-            matStepperPrevious
-            class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3"
-          >
+          <button mat-button matStepperPrevious class="!text-white !rounded-full !bg-[#7c2385] !p-5 me-3">
             Volver
           </button>
-          <button
-            mat-button
-            matStepperNext
-            type="submit"
-            (click)="finishQuestion()"
-            class="!text-white !rounded-full !bg-[#de84ee] !p-5"
-          >
+          <button mat-button matStepperNext type="submit" (click)="finishQuestion()"
+            class="!text-white !rounded-full !bg-[#de84ee] !p-5">
             Finalizar
           </button>
         </div>

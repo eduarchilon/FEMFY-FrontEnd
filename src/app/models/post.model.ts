@@ -1,5 +1,5 @@
 export interface Post {
-    id?: number;
+    id?: number | null;
     title?: string;
     content?: string;
     createdDate?: Date | string;
@@ -7,6 +7,6 @@ export interface Post {
     topicId?: number;
     topicTitle?: string;
     username?: string;
-    replies?: number;
+    replies?: number | [];
   }
   

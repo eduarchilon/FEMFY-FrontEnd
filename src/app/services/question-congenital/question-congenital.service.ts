@@ -39,4 +39,10 @@ export class QuestionCongenitalService {
         })
       );
   }
+
+  getQuestionUserCongenitalByIdUser(idUser: number | any): Observable<any> {
+    return this.http.get<any[]>(
+      `${this.usersUrl}/getQuestionsByUser/${idUser}`
+    );
+  }
 }

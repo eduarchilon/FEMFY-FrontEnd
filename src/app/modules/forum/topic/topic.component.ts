@@ -16,6 +16,7 @@ import { postInit } from 'src/app/services/redux/actions/post/post.page.action';
 import { postSelector } from 'src/app/services/redux/selectors/post.selector';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-topic',
@@ -32,6 +33,7 @@ export class TopicComponent {
     private http: HttpClient,
     public dialog: MatDialog,
     private route: ActivatedRoute,
+    private sanitizer: DomSanitizer,
     private topicService: TopicService,
     private replayService: ReplayService,
     private postService: PostService,
@@ -100,5 +102,9 @@ export class TopicComponent {
         '!rounded-[20px]',],
       data: { idTopic: this.idTopic },
     });
+  }
+
+  sanitizeHtml(html: string): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 }
