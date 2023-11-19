@@ -66,24 +66,27 @@
                 </div>
               </div>
               <div class="bg-white rounded-[20px] mb-5">
-                <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">                  Tipo de usuario
+                <h5 class="p-5 text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl"> Tipo de usuario
                 </h5>
                 <div class="flex justify-between p-5">
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" [value]="1" [checked]="isTypeUserIDSelected(1)"/>
+                      <input type="radio" formControlName="typeUserID" [value]="1"
+                        [checked]="isTypeUserIDSelected(1)" />
                       Menstruante
                     </label>
                   </div>
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" [value]="2" [checked]="isTypeUserIDSelected(2)"/>
+                      <input type="radio" formControlName="typeUserID" [value]="2"
+                        [checked]="isTypeUserIDSelected(2)" />
                       Etapa Menopáusica
                     </label>
                   </div>
                   <div>
                     <label>
-                      <input type="radio" formControlName="typeUserID" [value]="3" [checked]="isTypeUserIDSelected(3)"/>
+                      <input type="radio" formControlName="typeUserID" [value]="3"
+                        [checked]="isTypeUserIDSelected(3)" />
                       No menstruante
                     </label>
                   </div>
@@ -102,7 +105,8 @@
             <!-- Read-only profile view -->
             <div class="flex justify-between mb-5">
               <h2 class="flex !font-medium text-femfy-800 text-[30px]">Perfil</h2>
-              <button class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]" (click)="enableEditMode()">
+              <button class="bg-femfy-800 text-white font-medium py-[10px] px-[20px] rounded-[20px]"
+                (click)="enableEditMode()">
                 Modificar
               </button>
             </div>
@@ -143,12 +147,26 @@
             </div>
 
             <div class="bg-white rounded-[20px] mb-5">
-              <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Tipo de usuario activo
+              <h3 class="text-2xl text-[#7c2385] rounded-t-[20px] font-bold px-5 py-3 border-b-4 border-b-[#7c2385]">
+                Contacto extra
+              </h3>
+              <div class="gap-4 p-5">
+                <h6>Completá éste teléfono si querés que alguien de tu familia reciba notificaciones y recordatorios al igual que vos</h6>
+                <div>
+                  <label for="friendsPhone" class="block text-xl mb-2 font-bold">Teléfono</label>
+                  <p>{{ userResponse.friendsPhone || "Sin número" }}</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-[20px] mb-5">
+              <h5 class="p-[20px] text-[#7c2385] border-b-4 border-b-[#7c2385] font-bold text-2xl">Tipo de usuario
+                activo
               </h5>
               <ng-container *ngIf="userResponse.typeUserID === 1; else notMenstruante">
-                <p class="block text-xl mb-2 font-bold p-5" >Menstruante</p>
+                <p class="block text-xl mb-2 font-bold p-5">Menstruante</p>
               </ng-container>
-            
+
               <ng-template #notMenstruante>
                 <ng-container *ngIf="userResponse.typeUserID === 2; else etapaMenopausica">
                   <p class="block text-xl mb-2 font-bold p-5">Etapa Menopausica</p>

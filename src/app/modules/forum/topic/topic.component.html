@@ -1,5 +1,5 @@
-<div class="bg-[#f2d4fa] bg-cover pt-28 pb-32 px-[3vw]">
-    <div class="w-[100%] max-w-[1280px] m-auto">
+<div class="bg-[#f2d4fa] pt-28 pb-32">
+    <div class="w-[100%] max-w-[1280px] m-auto px-[3vw] md:p-0">
         <div class="flex justify-between mb-5">
             <div class="flex !font-medium text-femfy-800 text-[30px]">
                 <a routerLink="/foro">Comunidad > </a>
@@ -22,7 +22,8 @@
                         <div class="bg-white w-full rounded-b-[20px] h-[240px] p-5 flex flex-col justify-between">
                             <div class="mb-3">
                                 <p class="text-[#7c2385] font-bold text-2xl">Por: {{ post.username }}</p>
-                                <span class="text-md text-gray-500">{{ post.createdDate | date: 'dd/MM/yy HH:mm'}}</span>
+                                <span class="text-md text-gray-500">{{ post.createdDate | date: 'dd/MM/yy
+                                    HH:mm'}}</span>
                                 <p class="mt-3">{{ post.content.length > 150 ? (post.content | slice:0:150) + '...' :
                                     post.content }}</p>
                             </div>
@@ -43,7 +44,7 @@
 
         <ng-template #emptyPosts>
             <div class="w-full">
-                <div class="bg-white lg:flex w-full lg:mt-10 rounded-[20px]">
+                <div class="lg:flex w-full bg-white rounded-[20px] max-lg:mb-20">
                     <img class="w-[500px] h-[500px] rounded-[20px]"
                         src="https://img.freepik.com/free-vector/curiosity-search-concept-illustration_114360-10670.jpg?w=826&t=st=1698810066~exp=1698810666~hmac=e47964787c2e0ddc5abcc50655821d8002e4dce66668ba60cc2d6e0dc38165ff">
                     <div class="text-center m-auto px-10 lg:px-20">
