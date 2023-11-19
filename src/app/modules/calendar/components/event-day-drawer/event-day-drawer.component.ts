@@ -227,6 +227,7 @@ export class EventDayDrawerComponent implements OnInit {
       ],
       data: {
         itemChart,
+        daySelected: this.data.daySelected,
       },
     });
   }
