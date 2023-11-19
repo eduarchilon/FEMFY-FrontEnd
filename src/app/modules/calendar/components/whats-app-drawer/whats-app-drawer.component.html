@@ -1,40 +1,49 @@
 <div class="!w-[100%] p-5 max-md:px-0 max-md:py-5">
+  <div class="flex justify-between items-center pb-2">
+    <h3 class="text-3xl text-femfy-800 font-bold max-md:text-3xl">
+      Configuración de mensajes
+    </h3>
+    <button (click)="closeDialog()" mat-icon-button>
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
   <!-- <ng-container *ngIf="!userResponse.phone">
     <div class="py-10">
       <p>Debe registrar sus número de What's App para poder enviar mensajes</p>
     </div>
   </ng-container>
   <ng-container *ngIf="userResponse.phone"> -->
+  <div class="pb-2">
     <div class="flex justify-between">
-      <p>Recordar a Jose</p>
+      <p>Recordar a contacto extra</p>
       <div class="flex gap-3">
         <span>No</span>
-        <mat-slide-toggle
-          color="accent"
-          [checked]="vinculateToFriend"
-          (change)="setVinculateToFriend($event, data?.item)"
-        ></mat-slide-toggle>
+        <mat-slide-toggle color="accent" [checked]="vinculateToFriend"
+          (change)="setVinculateToFriend($event, data?.item)"></mat-slide-toggle>
         <span>Sí</span>
       </div>
-      <button mat-mini-fab color="primary" (click)="sendToFriend(data?.item)">
+      <button mat-mini-fab color="accent" (click)="sendToFriend(data?.item)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
 
-    <div class="flex justify-between">
+    <div class="flex justify-between my-4">
       <p>Recordarme por mensaje</p>
       <div class="flex gap-3">
         <span>No</span>
-        <mat-slide-toggle
-          color="accent"
-          [checked]="vinculateToMe"
-          (change)="setVinculateToMe($event, data?.item)"
-        ></mat-slide-toggle>
+        <mat-slide-toggle color="accent" [checked]="vinculateToMe"
+          (change)="setVinculateToMe($event, data?.item)"></mat-slide-toggle>
         <span>Sí</span>
       </div>
-      <button mat-mini-fab color="primary" (click)="sendToMe(data?.item)">
+      <button mat-mini-fab color="accent" (click)="sendToMe(data?.item)">
         <mat-icon>send</mat-icon>
       </button>
     </div>
+    <div class="text-end mb-2">
+      <button class="bg-[#de84ee] m-2 text-white font-semibold rounded-[20px] p-3" type="submit">
+        Guardar cambios
+      </button>
+    </div>
+  </div>
   <!-- </ng-container> -->
 </div>

@@ -84,7 +84,7 @@ export class WhatsAppDrawerComponent implements OnInit {
     this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
       next: (res: any) => {
         if (res) {
-          this.openSnackBar('¡Mensaje enviado!', 'Ok');
+          this.openSnackBar('¡Mensaje enviado!', 'X');
         }
       },
     });
@@ -98,7 +98,7 @@ export class WhatsAppDrawerComponent implements OnInit {
     this.whatsAppService.sendWhatsaAppMessage(msg).subscribe({
       next: (res: any) => {
         if (res) {
-          this.openSnackBar('¡Mensaje enviado!', 'Ok');
+          this.openSnackBar('¡Mensaje enviado!', 'X');
         }
       },
     });
@@ -106,8 +106,13 @@ export class WhatsAppDrawerComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      horizontalPosition: 'right',
+      horizontalPosition: 'center',
       verticalPosition: 'top',
     });
+  }
+
+  closeDialog(): void {
+    this.dialogRef.close();
+    // location.reload();
   }
 }
