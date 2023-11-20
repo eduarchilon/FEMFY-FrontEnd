@@ -1,4 +1,4 @@
-<div class="!w-[100%] p-5 max-md:py-5">
+<div class="!w-[100%] p-10 max-md:py-5 max-lg:p-5">
   <div class="flex justify-between items-center pb-4">
     <h3 class="text-3xl text-femfy-800 font-bold max-md:text-3xl">
       Configuración de mensajes
@@ -11,7 +11,7 @@
     <ng-container *ngIf="!userResponse.phone">
       <div class="py-10">
         <p>
-          Debe registrar sus número de What's App para poder enviar mensajes
+          Debe registrar sus número de WhatsApp para poder enviar mensajes
         </p>
       </div>
     </ng-container>
@@ -40,7 +40,7 @@
             <button
               (click)="closeDialogAll()"
               routerLink="/perfil"
-              class="bg-[#7C2385] m-2 text-white font-semibold rounded-[20px] p-2 max-lg:text-xl"
+              class="bg-[#7C2385] m-2 text-white font-semibold rounded-[20px] p-2 max-lg:text-[0.95rem]"
             >
               Configurar número de contacto
             </button>
@@ -49,7 +49,7 @@
 
         <div class="flex justify-between my-4 items-center">
           <p>Recordarme por mensaje</p>
-          <div class="flex gap-2 ml-[5.5rem] max-lg:ml-0">
+          <div class="flex gap-2 ml-[5.5rem] max-lg:ml-0 max-lg:gap-1 max-lg:mr-[1.5rem]">
             <span>No</span>
             <mat-slide-toggle
               color="accent"
@@ -78,7 +78,7 @@
     <ng-container *ngIf="!userResponse.phone">
       <div class="py-10">
         <p>
-          Debe registrar sus número de What's App para poder enviar mensajes
+          Debe registrar sus número de WhatsApp para poder enviar mensajes
         </p>
       </div>
     </ng-container>
@@ -98,7 +98,7 @@
             <button
               (click)="closeDialogAll()"
               routerLink="/perfil"
-              class="bg-[#7C2385] m-2 text-white font-semibold rounded-[20px] p-2 max-lg:text-xl"
+              class="bg-[#7C2385] m-2 text-white font-semibold rounded-[20px] p-2 max-lg:text-[0.95rem]"
             >
               Configurar número de contacto
             </button>

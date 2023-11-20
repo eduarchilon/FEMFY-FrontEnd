@@ -43,17 +43,10 @@ export class DocumentationComponent implements OnInit {
 
   @ViewChild('fileLabel', { static: true }) fileLabel!: ElementRef;
 
-  formDocumentation: FormGroup = new FormGroup({
-    description: new FormControl('', Validators.required),
-    fileName: new FormControl('', Validators.required),
-    idUser: new FormControl('', Validators.required),
-    studyDate: new FormControl('', Validators.required),
-    typeStudy: new FormControl('', Validators.required),
-  });
+  formDocumentation: FormGroup;
 
   selectedFile: File | null = null;
 
-  fileBase64: string = '';
   loader: boolean = false;
 
   constructor(
@@ -67,7 +60,6 @@ export class DocumentationComponent implements OnInit {
   ) {
     this.formDocumentation = this.fb.group({
       description: ['', Validators.required],
-      fileBase64: [''], // Este campo lo llenarás cuando se cargue un archivo
       fileExt: [''], // Este campo lo llenarás cuando se cargue un archivo
       fileName: ['', Validators.required],
       idUser: ['', Validators.required],
@@ -92,6 +84,8 @@ export class DocumentationComponent implements OnInit {
   }
 
   uploadFile() {
+
+    // Carga del archivo en FireBase
     this.loaderService.showLoader();
     if (this.selectedFile) {
       const file = this.selectedFile;
@@ -108,6 +102,31 @@ export class DocumentationComponent implements OnInit {
         studyDate: this.formDocumentation.get('studyDate')?.value,
         typeStudy: this.formDocumentation.get('typeStudy')?.value,
       };
+
+
+      const formData = {
+        fileExt: this.getFileExtension(this.selectedFile.name),
+        description: this.formDocumentation.get('description')?.value,
+        fileName: this.selectedFile.name,
+        idUser: this.localStorageService.getUserByLogin()?.idUser,
+        studyDate: this.formDocumentation.get('studyDate')?.value,
+        typeStudy: {
+          idTypeStudy: this.findTypeIdByName(this.formDocumentation.get('typeStudy')?.value),
+          description: this.formDocumentation.get('typeStudy')?.value
+        }
+      };
+
+      console.log (formData);
+
+      this.documentationService.uploadFile(formData).subscribe(
+        (response) => {
+          console.log('Datos enviados con éxito', response);
+        },
+        (error) => {
+          console.error('Error al enviar datos', error);
+        });
+      
+
       uploadBytes(imgRef, file, { customMetadata: metadata })
         .then((snapshot) => {
 
@@ -116,6 +135,7 @@ export class DocumentationComponent implements OnInit {
           })
 
           console.log('Archivo subido con éxito.', snapshot);
+
           this.loaderService.showLoader();
           this.getFiles();
           this.loaderService.hideLoader();
@@ -126,53 +146,20 @@ export class DocumentationComponent implements OnInit {
       this.loaderService.hideLoader();
       this.formDocumentation.reset();
     }
+
     this.loaderService.hideLoader();
     this.formDocumentation.reset();
     this.getFiles();
+
+    
   }
 
-  /* uploadFile(): void {
 
-    if (this.selectedFile) {
-      const formData = new FormData();
-      
-      formData.append('fileBase64', this.fileBase64);
-      formData.append('fileExt', this.getFileExtension(this.selectedFile.name));
-      formData.append('description', this.formDocumentation.get('description')?.value);
-      formData.append('fileName', this.selectedFile.name);
-      formData.append('idUser', JSON.stringify(this.localStorageService.getUserByLogin()?.idUser));
-      formData.append('studyDate', this.formDocumentation.get('studyDate')?.value);
+  findTypeIdByName(name: string): number | null {
+    const study = this.typeStudies.find((type) => type.name === name);
   
-      formData.append('typeStudy', this.formDocumentation.get('typeStudy')?.value);
-
-      console.log(this.fileBase64);
-      console.log(this.getFileExtension(this.selectedFile.name));
-      console.log(this.formDocumentation.get('description')?.value);
-      console.log(this.selectedFile.name);
-      console.log(JSON.stringify(this.localStorageService.getUserByLogin()?.idUser));
-      console.log(this.formDocumentation.get('studyDate')?.value);
-      console.log(JSON.stringify(this.formDocumentation.get('typeStudy')?.value));
-
-      
-      this.documentationService.uploadFile(formData).subscribe(
-        (response) => {
-          console.log('Datos enviados con éxito', response);
-        },
-        (error) => {
-          console.error('Error al enviar datos', error);
-        });
-     }
-  } */
-
-  convertFileToBase64(file: File) {
-    const reader = new FileReader();
-
-    reader.onloadend = () => {
-      this.fileBase64 = reader.result as string;
-      console.log('Archivo convertido a base64:', this.fileBase64);
-    };
-
-    reader.readAsDataURL(file);
+    // Si se encuentra un tipo con ese nombre, devuelve su id; de lo contrario, devuelve null.
+    return study ? study.id : null;
   }
 
   getFileExtension(filename: string): string {
