@@ -16,7 +16,7 @@ export class DocumentationService {
     ) { }
 
 
-    uploadFile(fileData: FormData): Observable<any> {
+    uploadFile(fileData: any): Observable<any> {
       return this.http.post(`${this.usersUrl}/uploadFile`, fileData);
     }
   
