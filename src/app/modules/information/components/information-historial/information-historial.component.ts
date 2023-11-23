@@ -52,10 +52,10 @@ export class InformationHistorialComponent implements OnInit {
 
   convertValueToInteger(value: number): number {
     let newValue = 0;
-    if (value === 0) {
-      newValue = 0;
-    } else {
+    if (value === 1) {
       newValue = 1;
+    } else {
+      newValue = 0;
     }
     return newValue;
   }
