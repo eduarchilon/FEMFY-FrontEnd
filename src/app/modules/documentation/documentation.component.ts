@@ -49,6 +49,9 @@ export class DocumentationComponent implements OnInit {
 
   loader: boolean = false;
 
+  userId!: number | any;
+  isCompartir!: boolean;
+
   constructor(
     private documentationService: DocumentationService,
     private localStorageService: LocalStorageService,
@@ -66,9 +69,18 @@ export class DocumentationComponent implements OnInit {
       studyDate: ['', Validators.required],
       typeStudy: ['', Validators.required],
     });
+
+
   }
 
   ngOnInit(): void {
+    this.userId = this.localStorageService.getUserByLogin()?.idUser;
+    const isSuscriptor =
+      this.localStorageService.getUserByLogin()?.isSuscriptor;
+    if (isSuscriptor === 0 || isSuscriptor === true  || isSuscriptor !== null) {
+      this.isCompartir = true;
+    }
+
     this.getFiles();
   }
 
@@ -116,7 +128,7 @@ export class DocumentationComponent implements OnInit {
         }
       };
 
-      console.log (formData);
+      console.log(formData);
 
       this.documentationService.uploadFile(formData).subscribe(
         (response) => {
@@ -125,7 +137,7 @@ export class DocumentationComponent implements OnInit {
         (error) => {
           console.error('Error al enviar datos', error);
         });
-      
+
 
       uploadBytes(imgRef, file, { customMetadata: metadata })
         .then((snapshot) => {
@@ -151,13 +163,13 @@ export class DocumentationComponent implements OnInit {
     this.formDocumentation.reset();
     this.getFiles();
 
-    
+
   }
 
 
   findTypeIdByName(name: string): number | null {
     const study = this.typeStudies.find((type) => type.name === name);
-  
+
     // Si se encuentra un tipo con ese nombre, devuelve su id; de lo contrario, devuelve null.
     return study ? study.id : null;
   }
@@ -184,11 +196,11 @@ export class DocumentationComponent implements OnInit {
           const url = await getDownloadURL(files);
 
           this.studies.push({ url: url, files: files, customMetadata: meta });
-       }
+        }
 
-       this.studies.forEach((estudio) => {
-        estudio.customMetadata.studyDate = this.formatDate(estudio.customMetadata.studyDate);
-      });
+        this.studies.forEach((estudio) => {
+          estudio.customMetadata.studyDate = this.formatDate(estudio.customMetadata.studyDate);
+        });
 
         this.loader = false;
 
@@ -210,7 +222,7 @@ export class DocumentationComponent implements OnInit {
     const dia = date.getDate().toString().padStart(2, '0');
     const mes = (date.getMonth() + 1).toString().padStart(2, '0');
     const anio = date.getFullYear();
-  
+
     return `${dia}-${mes}-${anio}`;
   }
 
@@ -256,6 +268,6 @@ export class DocumentationComponent implements OnInit {
       },
     });
   }
- 
+
 
 }
