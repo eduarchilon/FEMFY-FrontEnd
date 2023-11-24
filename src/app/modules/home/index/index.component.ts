@@ -74,17 +74,6 @@ export class IndexComponent implements OnInit, OnDestroy {
     this.store.select(questionUserMenstruationSelector);
 
   ngOnInit(): void {
-    // this.dialog.open(SurveyComponent, {
-    //   panelClass: [
-    //     '!max-w-[95vw]',
-    //     'max-lg:!w-[80%]',
-    //     'max-md:!w-[100vw]',
-    //     'max-xl:!w-[50%]',
-    //     '!w-[50%]',
-    //     '!rounded-[20px]',
-    //   ],
-    //   disableClose: true,
-    // });
     this.userAuth = this.localStorageService.getUserByLogin();
     if (this.userAuth) {
       this.store?.dispatch(cycleUserInit());
@@ -101,13 +90,13 @@ export class IndexComponent implements OnInit, OnDestroy {
           if (lcd) {
             this.averageQuestionCycleContent.push(lcd);
           } else {
-            this.averageQuestionCycleContent.push(31);
+            this.averageQuestionCycleContent.push(35);
           }
 
           if (rcd) {
             this.averageQuestionCycleContent.push(rcd);
           } else {
-            this.averageQuestionCycleContent.push(31);
+            this.averageQuestionCycleContent.push(35);
           }
         }
       });

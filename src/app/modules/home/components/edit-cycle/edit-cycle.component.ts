@@ -32,7 +32,7 @@ export class EditCycleComponent implements OnInit {
   errorInput!: string;
 
   saveDaysOfBleeding(cycleChart: Cycle, daysOfBleeding: number | any): void {
-    if (daysOfBleeding < 9) {
+    if (daysOfBleeding < 8) {
       this.cicleService
         .editCycle({ ...cycleChart, daysOfBleeding: Number(daysOfBleeding) })
         .subscribe({

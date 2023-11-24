@@ -21,6 +21,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import * as moment from 'moment';
 import { cycleUserInit } from 'src/app/services/redux/actions/cycle/cycle-user.page.action';
+import { Cycle } from 'src/app/models/cicle.model';
 
 @Component({
   selector: 'app-register-cicle',
@@ -38,9 +39,14 @@ export class RegisterCicleComponent implements OnInit {
     ]),
   });
 
-  idUser!: number;
+  cycles!: Cycle[] | any;
+
+  idUser!: number | any;
 
   spinnerConsumer: string = 'RegisterCicleComponent';
+  errorDate!: string;
+  errorDateBeging!: string;
+  dateChangeValue!: string;
 
   constructor(
     private dialogRef: MatDialogRef<RegisterCicleComponent>,
@@ -55,7 +61,14 @@ export class RegisterCicleComponent implements OnInit {
     private notificationService: NotificationService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idUser = this.localStorageService.getUserByLogin()?.idUser;
+    this.cicleService.getAllCycles(this.idUser).subscribe({
+      next: (res: any) => {
+        this.cycles = res;
+      },
+    });
+  }
 
   closeDialog(): void {
     this.dialogRef.close();
@@ -63,11 +76,31 @@ export class RegisterCicleComponent implements OnInit {
   }
 
   registerCycle(): void {
+    const filterCycles: Cycle[] = this.cycles?.filter(
+      (item: Cycle | any) => item?.dateEnd !== null
+    );
+
+    let validateDate: boolean = false;
+    filterCycles?.forEach((item: Cycle) => {
+      console.log(moment(item?.dateBeging).month());
+      console.log(moment(this.dateChangeValue).date());
+
+      if (item?.dateBeging === this.dateChangeValue) {
+        validateDate = true;
+      } else if (moment(this.dateChangeValue).isBefore(moment(item?.dateEnd))) {
+        validateDate = true;
+      } else {
+        validateDate = false;
+      }
+    });
+
     const isDateAfterToday = moment(
       new Date(this.formCycle?.value?.dateBeging)
     ).isAfter(moment(), 'day');
     if (isDateAfterToday) {
       this.errorDate = 'El Inicio del ciclo no puede ser mayor al día de hoy.';
+    } else if (validateDate) {
+      this.errorDateBeging = 'Ya existe un ciclo anterior con esa fecha.';
     } else {
       if (this.data?.id) {
         this.cicleService
@@ -121,10 +154,14 @@ export class RegisterCicleComponent implements OnInit {
 
   validateDaysOfBleeding(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
-    if (value > 8) {
+    if (value > 7) {
       return { maxDays: true };
     }
     return null;
   }
-  errorDate!: string;
+
+  onDateChange(event: any): void {
+    this.errorDateBeging = '';
+    this.dateChangeValue = event?.target?.value;
+  }
 }
