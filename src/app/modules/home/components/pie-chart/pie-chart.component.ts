@@ -151,10 +151,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       {
         id: 4,
-        dayCount:
-          Number(
-            Math.round(daysCycleComplete) - cycleChart?.daysOfBleeding - 3
-          ) - 5,
+        dayCount: 20,
         label: 'Días Infértiles',
         color: '#bfdbfe',
         fase: 'luteaDay',

@@ -107,4 +107,8 @@ export class TopicComponent {
   sanitizeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
+
+  // cutText(valuText: string): string{
+  //   return valuText.length >  ? value.substring(0, limit) + '...' : value;
+  // }
 }
