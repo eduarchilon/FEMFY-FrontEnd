@@ -50,9 +50,9 @@ export class InformationHistorialComponent implements OnInit {
     uterineFibroids: new FormControl(''),
   });
 
-  convertValueToInteger(value: number): number {
+  convertValueToInteger(value: number | boolean): number {
     let newValue = 0;
-    if (value === 1) {
+    if (value === 1 || value === true) {
       newValue = 1;
     } else {
       newValue = 0;
@@ -61,7 +61,7 @@ export class InformationHistorialComponent implements OnInit {
   }
 
   submitInformationHistorial(): void {
-    console.log(this.formInformationHistorial.value?.earlyMenopause);
+    console.log(this.formInformationHistorial.value);
     let formResult: QuestionsUserFamilyHistory = {
       id: this.userHistorial?.id,
       userId: this.userHistorial?.userId,
