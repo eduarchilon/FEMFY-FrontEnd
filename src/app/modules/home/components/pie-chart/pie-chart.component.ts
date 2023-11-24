@@ -128,7 +128,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
     let data: DataPieChart[] = [
       {
         id: 1,
-        dayCount: Number(cycleChart?.daysOfBleeding), //duracion de sangrado
+        dayCount: Number(cycleChart?.daysOfBleeding), //duracion de sangrado 6
         label: 'Sangrado',
         color: '#fda4af',
         fase: 'menstrualDay',
@@ -136,7 +136,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
       {
         id: 2,
         dayCount: Number(
-          Math.round(daysCycleComplete / 2 - 5) - cycleChart?.daysOfBleeding
+          Math.round(daysCycleComplete / 2 - 5) - cycleChart?.daysOfBleeding //
         ),
         label: 'Días Infértiles',
         color: '#bfdbfe',
@@ -153,8 +153,8 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         id: 4,
         dayCount:
           Number(
-            Math.round(daysCycleComplete) - cycleChart?.daysOfBleeding - 3 - 5
-          ) + 2,
+            Math.round(daysCycleComplete) - cycleChart?.daysOfBleeding - 3
+          ) - 5,
         label: 'Días Infértiles',
         color: '#bfdbfe',
         fase: 'luteaDay',
@@ -258,6 +258,12 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         if (item.id === Math.round(daysAverageCycle / 2) && item.id === diff) {
           item.color = 'red';
           item.desc = 'Hoy / Ovulación';
+        } else if (
+          item.id === Math.round(daysAverageCycle) &&
+          item.id === diff
+        ) {
+          item.color = 'red';
+          item.desc = 'Hoy / Fin del ciclo';
         }
         item.date;
 

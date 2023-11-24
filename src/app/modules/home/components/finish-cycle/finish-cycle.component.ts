@@ -33,6 +33,15 @@ export class FinishCycleComponent implements OnInit {
   }
 
   saveFinishCycle(cycleChart: Cycle, endDate: Date | any | string): void {
+    const newDate = new Date();
+    let año = newDate.getFullYear();
+    let mes = newDate.getMonth() + 1;
+    let dia = newDate.getDate();
+
+    let fechaFormateada = `${año}-${mes < 10 ? '0' : ''}${mes}-${
+      dia < 10 ? '0' : ''
+    }${dia}`;
+
     this.validationDate = '';
     const end = moment(endDate);
     const beging = moment(new Date(cycleChart?.dateBeging));
@@ -51,7 +60,7 @@ export class FinishCycleComponent implements OnInit {
           next: (res: any) => {
             this.cicleService
               .registerCycle({
-                dateBeging: new Date(),
+                dateBeging: fechaFormateada,
                 daysOfBleeding: cycleChart?.daysOfBleeding,
                 idUser: cycleChart?.idUser,
               })

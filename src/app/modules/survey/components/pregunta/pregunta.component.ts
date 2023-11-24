@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -27,11 +29,17 @@ export class PreguntaComponent implements OnInit {
   });
 
   formTwoRegister: FormGroup = new FormGroup({
-    lastCycleDuration: new FormControl('', Validators.required),
+    lastCycleDuration: new FormControl('', [
+      Validators.required,
+      this.validateLastCycle,
+    ]),
   });
 
   formThreeRegister: FormGroup = new FormGroup({
-    regularCycleDuration: new FormControl('', Validators.required),
+    regularCycleDuration: new FormControl('', [
+      Validators.required,
+      this.validateLastCycle,
+    ]),
   });
 
   formFourRegister: FormGroup = new FormGroup({
@@ -64,6 +72,8 @@ export class PreguntaComponent implements OnInit {
     )?.idMenstruation;
   }
 
+  isMax!: boolean;
+
   submitFormOneRegister(): void {
     this.questionsService
       .updateUserMenstruationQuestion({
@@ -79,15 +89,19 @@ export class PreguntaComponent implements OnInit {
   }
 
   submitFormTwoRegister(): void {
-    this.questionsService
-      .updateUserMenstruationQuestion({
-        id: this.idMenstruation,
-        lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
-      })
-      .subscribe({
-        next: (response: any) => response,
-        error: (error) => error,
-      });
+    if (this.formTwoRegister?.value?.lastCycleDuration <= 40) {
+      this.questionsService
+        .updateUserMenstruationQuestion({
+          id: this.idMenstruation,
+          lastCycleDuration: this.formTwoRegister?.value?.lastCycleDuration,
+        })
+        .subscribe({
+          next: (response: any) => response,
+          error: (error) => error,
+        });
+    } else {
+      this.isMax = true;
+    }
   }
 
   submitFormThreeRegister(): void {
@@ -132,6 +146,14 @@ export class PreguntaComponent implements OnInit {
 
   redirection(): void {
     this.router.navigate(['']);
+  }
+
+  validateLastCycle(control: AbstractControl): ValidationErrors | null {
+    const value = control.value;
+    if (value > 35) {
+      return { maxDays: true };
+    }
+    return null;
   }
 
   // calculateEndCycle(data: FisrtCycle): Date | undefined {

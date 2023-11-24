@@ -158,15 +158,13 @@ export class WhatsAppDrawerComponent implements OnInit {
     // id: 15;
     // label: 'Dias Fértiles';
     // width: 100;
-    const msgString: string = `¡Hola!
-    \nEl ciclo de *${
-      this.userResponse?.firstName || this.userResponse?.userName
-    }* del día ${moment(this.data?.daySelected).locale('es').format('LL')}:
-    \nEstas en etápa de ${itemChart?.label} ${
-      itemChart?.desc !== '' && itemChart?.desc !== 'Hoy / Ovulación'
-        ? 'y estas en ' + itemChart?.desc
+    const msgString: string = `¡Hola *${this.userResponse?.friendsName}*! 
+    \n${this.userResponse?.firstName || this.userResponse?.userName}, el día ${moment(this.data?.daySelected).locale('es').format('LL')} está en etapa de ${itemChart?.label} ${
+      itemChart?.desc !== '' && itemChart?.desc === 'Hoy / Ovulación'
+        ? 'y está en ' + itemChart?.desc
         : ''
     }`;
+    
     const phoneNumber: any = this.userResponse?.friendsPhone?.split('+');
     console.log(phoneNumber[1]);
     const msg: WhatsAppMessage = {
@@ -187,11 +185,12 @@ export class WhatsAppDrawerComponent implements OnInit {
                           \nTu ciclo del día ${moment(this.data?.daySelected)
                             .locale('es')
                             .format('LL')}:
-                          \nEstas en etápa de ${itemChart?.label} ${
-      itemChart?.desc !== '' && itemChart?.desc !== 'Hoy / Ovulación'
+                          \nEstás en etapa de ${itemChart?.label} ${
+      itemChart?.desc !== '' && itemChart?.desc === 'Hoy / Ovulación'
         ? 'y estas en ' + itemChart?.desc
         : ''
     }`;
+    
     const phoneNumber: any = this.userResponse?.phone?.split('+');
     console.log(phoneNumber[1]);
     const msg: WhatsAppMessage = {
