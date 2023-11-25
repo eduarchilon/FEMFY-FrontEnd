@@ -43,11 +43,6 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
-    path: 'foro/conversation',
-    component: ConversationComponent,
-    canActivate: [LoginGuardian],
-  },
-  {
     path: 'foro/:id',
     component: TopicComponent,
     canActivate: [LoginGuardian],
@@ -63,7 +58,6 @@ const routes: Routes = [
     canActivate: [LoginGuardian],
   },
   {
-
     path: 'subscription',
     component: SubscriptionComponent,
     canActivate: [LoginGuardian],

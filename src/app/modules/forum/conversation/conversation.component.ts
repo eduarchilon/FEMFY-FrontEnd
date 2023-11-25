@@ -62,7 +62,6 @@ export class ConversationComponent {
       .getAllRepliesByPost(this.idPost)
       .subscribe((data: any) => {
         this.replies = data;
-
         this.replies.forEach((reply) => {
           this.userService.getUserById(reply.userId).subscribe((data: any) => {
             reply.username = data.userName;
@@ -89,10 +88,18 @@ export class ConversationComponent {
       .subscribe({
         next: (response: any) => {
           if (response) {
-            this.router.navigate(['/post/' + this.idPost]).then(() => {
-              location.reload();
-            });
+            this.showFormComment = false;
           }
+          this.getDataReplays();
+          // console.log('/post/' + this.idPost);
+          // window.location.href = `${
+          //   'https://femfy-stage.vercel.app/post/' + this.idPost
+          // }`;
+          // if (response) {
+          //   this.router.navigate(['/post/' + this.idPost]).then(() => {
+          //     location.reload();
+          //   });
+          // }
         },
         error: (error) => error,
       });
@@ -107,7 +114,7 @@ export class ConversationComponent {
       });
 
       this.topicService.getTopicById(data.topicId).subscribe((topic: any) => {
-        this.topic = topic
+        this.topic = topic;
       });
     });
   }
@@ -122,5 +129,22 @@ export class ConversationComponent {
 
   closeFormComment() {
     this.showFormComment = false;
+  }
+
+  cutText(valuText: string): string {
+    return valuText?.length > 20 ? valuText + '...' : valuText;
+  }
+
+  getDataReplays(): void {
+    this.replayService
+      .getAllRepliesByPost(this.idPost)
+      .subscribe((data: any) => {
+        this.replies = data;
+        this.replies?.forEach((reply: any) => {
+          this.userService.getUserById(reply?.userId).subscribe((data: any) => {
+            reply.username = data.userName;
+          });
+        });
+      });
   }
 }
