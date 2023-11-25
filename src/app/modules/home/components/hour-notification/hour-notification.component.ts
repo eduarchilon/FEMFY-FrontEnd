@@ -50,6 +50,7 @@ export class HourNotificationComponent implements OnInit {
             duration: 5000, // Duración en milisegundos
           });
           this.closeDialog();
+          location.reload();
         }
       },
     });
