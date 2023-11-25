@@ -50,7 +50,7 @@ export class TopicComponent {
       this.loaderServices.showLoader();
       if (
         this.idTopic ===
-        Number(this.localStorageService.getLocalStorage('idTopic')) &&
+          Number(this.localStorageService.getLocalStorage('idTopic')) &&
         data.length > 0
       ) {
         this.loaderServices.showLoader();
@@ -94,12 +94,14 @@ export class TopicComponent {
 
   openPostRegister(): void {
     const dialogRef = this.dialog.open(RegisterPostComponent, {
-      panelClass: ['!max-w-[95vw]',
+      panelClass: [
+        '!max-w-[95vw]',
         'max-lg:!w-[80%]',
         'max-md:!w-[100vw]',
         'max-xl:!w-[50%]',
         '!w-[50%]',
-        '!rounded-[20px]',],
+        '!rounded-[20px]',
+      ],
       data: { idTopic: this.idTopic },
     });
   }
@@ -108,7 +110,7 @@ export class TopicComponent {
     return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
-  // cutText(valuText: string): string{
-  //   return valuText.length >  ? value.substring(0, limit) + '...' : value;
-  // }
+  cutText(valuText: string): string {
+    return valuText?.length > 20 ? valuText.slice(0, 22) + '...' : valuText;
+  }
 }
