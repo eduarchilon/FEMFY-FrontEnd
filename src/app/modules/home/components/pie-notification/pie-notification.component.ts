@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { DataPieChartChildren } from 'src/app/models/data-pie-chart';
+import { UserResponse } from 'src/app/models/user.model';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
@@ -26,10 +27,8 @@ export class PieNotificationComponent implements OnChanges, OnInit {
   ) {}
 
   ngOnInit(): void {
-    const user = this.localStorageService.getUserByLogin();
+    const user: UserResponse = this.localStorageService.getUserByLogin();
     this.events?.forEach((event: DataPieChartChildren | any) => {
-      console.log(event);
-      
       setInterval(() => {
         //La fecha de hoy y las horas
         const ahora = new Date();
@@ -37,7 +36,7 @@ export class PieNotificationComponent implements OnChanges, OnInit {
         const minutosActuales = ahora.getMinutes();
 
         //Obtengo la hora y minutos
-        const time = event?.hour?.split(':');
+        const time: any = user?.emotion?.split(':');
         let hour = 0;
         let minutes = 0;
         if (event?.hour && time.length === 2) {

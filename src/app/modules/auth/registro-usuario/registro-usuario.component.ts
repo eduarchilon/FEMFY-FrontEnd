@@ -71,6 +71,7 @@ export class RegistroUsuarioComponent implements OnInit {
           password: this.formRegister?.value?.password,
           birthdate: this.formRegister?.value?.birthdate,
           email: this.formRegister?.value?.email,
+          emotion: '10:00',
         })
         .subscribe({
           next: (response: Observable<any>) => {
