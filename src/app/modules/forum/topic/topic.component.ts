@@ -47,18 +47,7 @@ export class TopicComponent {
   ngOnInit(): void {
     this.store.dispatch(postInit());
     this.store.select(postSelector).subscribe((data: any) => {
-      this.loaderServices.showLoader();
-      if (
-        this.idTopic ===
-          Number(this.localStorageService.getLocalStorage('idTopic')) &&
-        data.length > 0
-      ) {
-        this.loaderServices.showLoader();
-        console.log(data);
-        this.getConversationsByTopic();
-        // this.loaderServices.hideLoader();
-      }
-      this.loaderServices.hideLoader();
+      this.getConversationsByTopic();
     });
 
     this.route.paramMap.subscribe((params) => {
