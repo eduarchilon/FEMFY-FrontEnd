@@ -138,21 +138,21 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         dayCount: Number(
           Math.round(daysCycleComplete / 2 - 5) - cycleChart?.daysOfBleeding //
         ),
-        label: 'Días Infértiles',
+        label: 'Días infértiles',
         color: '#bfdbfe',
         fase: 'folicularDay',
       },
       {
         id: 3,
         dayCount: 5,
-        label: 'Dias Fértiles',
+        label: 'Días fértiles',
         color: '#d9f99d',
         fase: 'fertileDay',
       },
       {
         id: 4,
         dayCount: 20,
-        label: 'Días Infértiles',
+        label: 'Días infértiles',
         color: '#bfdbfe',
         fase: 'luteaDay',
       },
@@ -368,6 +368,14 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
   // @ViewChild('tooltipCalendar') tooltipCalendar!: MatCalendar<Date>;
 
   openDialogCalendarEvent(daySelected: any, itemChart: any): void {
+    const dateArray = itemChart?.date?.split('/');
+
+    const newDate = new Date(
+      Number(dateArray[2]),
+      Number(dateArray[1]) - 1,
+      Number(dateArray[0])
+    );
+
     if (!this.dialogIsOpen) {
       this.dialogIsOpen = true;
       this.dialog
@@ -381,7 +389,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
             '!rounded-[20px]',
           ],
           data: {
-            daySelected,
+            daySelected: moment(new Date(newDate)),
             itemChart,
           },
         })
