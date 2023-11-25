@@ -55,6 +55,7 @@ export class TopicComponent {
       ) {
         this.loaderServices.showLoader();
         console.log(data);
+        this.getConversationsByTopic();
         // this.loaderServices.hideLoader();
       }
       this.loaderServices.hideLoader();
@@ -64,6 +65,7 @@ export class TopicComponent {
       const idTopic = params.get('id');
       if (idTopic !== null) {
         this.idTopic = parseInt(idTopic);
+        this.store.dispatch(postInit());
       }
     });
 
@@ -112,5 +114,11 @@ export class TopicComponent {
 
   cutText(valuText: string): string {
     return valuText?.length > 20 ? valuText.slice(0, 22) + '...' : valuText;
+  }
+
+  formatText(value: string): string {
+    const palabras = value.split(/<\/?p>/);
+    const text = palabras.join(' ');
+    return text.length > 130 ? text.slice(0, 130) + '...' : text;
   }
 }
