@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { Topic } from 'src/app/models/topic.model';
@@ -109,5 +109,15 @@ export class TopicComponent {
     const palabras = value.split(/<\/?p>/);
     const text = palabras.join(' ');
     return text.length > 130 ? text.slice(0, 130) + '...' : text;
+  }
+
+  allowReload = false;
+
+  // Maneja el evento beforeunload
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    if (!this.allowReload) {
+      this.router.navigate(['/']);
+    }
   }
 }
