@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { PostService } from 'src/app/services/post/post.service';
+import { postInit } from 'src/app/services/redux/actions/post/post.page.action';
+import { AppState } from 'src/app/services/redux/store/app.store';
 import { SpinnerService } from 'src/app/services/spinner/spinner.service';
 import { TopicService } from 'src/app/services/topic/topic.service';
 
@@ -21,13 +24,15 @@ export class ForumComponent {
     private loaderService: LoaderService,
     private postService: PostService,
     private topicService: TopicService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private store: Store<AppState>
   ) {}
 
   spinnerConsumer: string = 'ForumComponent';
   topics: any[] = [];
 
   ngOnInit() {
+    this.store.dispatch(postInit());
     this.topicService.getAllTopics().subscribe({
       next: (response: any) => {
         this.loaderService.showLoader();
@@ -57,8 +62,8 @@ export class ForumComponent {
 
   saveIdAndTitle(id: Number): void {
     this.localStorageService.setKeyValueLocalStorage(
-      'idTopic', 
-      JSON.stringify(id),
+      'idTopic',
+      JSON.stringify(id)
     );
   }
 }

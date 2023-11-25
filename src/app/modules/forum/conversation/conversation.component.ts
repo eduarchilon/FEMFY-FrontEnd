@@ -147,4 +147,9 @@ export class ConversationComponent {
         });
       });
   }
+
+  formatText(value: string | any): string {
+    const palabras = value.split(/<\/?p>/);
+    return palabras.join(' ');
+  }
 }

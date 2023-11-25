@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { PostService } from 'src/app/services/post/post.service';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -11,14 +16,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { loadPostSuccess } from 'src/app/services/redux/actions/post/post.api.action';
 import { postInit } from 'src/app/services/redux/actions/post/post.page.action';
 
-
 @Component({
   selector: 'app-register-post',
   templateUrl: './register-post.component.html',
-  styleUrls: ['./register-post.component.scss']
+  styleUrls: ['./register-post.component.scss'],
 })
 export class RegisterPostComponent {
-
   idTopic!: number;
   formPost: FormGroup;
 
@@ -45,13 +48,14 @@ export class RegisterPostComponent {
   }
 
   registerPost(): void {
-    this.postService.registerPost({
-      title: this.formPost.value.title,
-      content: this.formPost.value.content,
-      createdDate: new Date(),
-      userId: this.localStorageService.getUserByLogin()?.idUser,
-      topicId: this.idTopic,
-    })
+    this.postService
+      .registerPost({
+        title: this.formPost.value.title,
+        content: this.formPost.value.content,
+        createdDate: new Date(),
+        userId: this.localStorageService.getUserByLogin()?.idUser,
+        topicId: this.idTopic,
+      })
       .subscribe({
         next: (response: any) => {
           // siempre retorna un 505 error pero registra igual, hay que revisar la api
@@ -60,7 +64,7 @@ export class RegisterPostComponent {
         error: (error) => {
           this.closeDialog();
           this.openSnackBar('Tu publicación fue registrada con éxito', 'X');
-          //this.store.dispatch()
+          this.store.dispatch(postInit());
         },
       });
   }
@@ -71,5 +75,4 @@ export class RegisterPostComponent {
       verticalPosition: 'top',
     });
   }
-
 }
