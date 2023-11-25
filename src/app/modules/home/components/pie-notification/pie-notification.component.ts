@@ -75,7 +75,7 @@ export class PieNotificationComponent implements OnChanges, OnInit {
         const minutosActuales = ahora.getMinutes();
 
         //Obtengo la hora y minutos
-        const time = event?.hour?.split(':');
+        const time: any = user?.emotion?.split(':');
         let hour = 0;
         let minutes = 0;
         if (event?.hour && time.length === 2) {
