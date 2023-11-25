@@ -65,6 +65,8 @@ export class EventDayDrawerComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.data);
+
     const userId = this.localStorageService.getUserByLogin()?.idUser;
     //TODO: cambiar api para que se pueda buscar por idUser
     this.calendarService

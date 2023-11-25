@@ -37,6 +37,8 @@ import { editUserData } from 'src/app/services/redux/actions/user/user-data-page
 export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() averageQuestionCycleContent: number[] = [];
 
+  eventdataChildrenSeries!: DataPieChartChildren[];
+
   cycles: Cycle[] = [];
   cyclesWithEndNull: Cycle[] = [];
   cyclesWithOutEndNull: Cycle[] = [];
@@ -239,7 +241,7 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
           .format('L');
         // console.log(item.id);
         // console.log(diff);
-        item.hour = '10:00';
+        item.hour = this.localStorageService.getUserByLogin().emotion;
         item.width = (newDataArray.length / sumaTotal) * 100;
         item.desc = '';
         if (item.id === diff) {
@@ -268,6 +270,8 @@ export class PieChartComponent implements OnInit, AfterViewInit, OnDestroy {
         return item;
       }
     );
+
+    this.eventdataChildrenSeries = dataChildrenSeries;
 
     // console.log(dataChildrenSeries);
 

@@ -7,23 +7,29 @@ import {
 } from '@angular/core';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
-import { EventCalendar } from 'src/app/models/event-calendar.model';
+import { DataPieChartChildren } from 'src/app/models/data-pie-chart';
+import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 
 @Component({
-  selector: 'app-events-notification',
-  templateUrl: './events-notification.component.html',
-  styleUrls: ['./events-notification.component.scss'],
+  selector: 'app-pie-notification',
+  templateUrl: './pie-notification.component.html',
+  styleUrls: ['./pie-notification.component.scss'],
 })
-export class EventsNotificationComponent implements OnInit, OnChanges {
-  @Input() events: EventCalendar[] = [];
+export class PieNotificationComponent implements OnChanges, OnInit {
+  @Input() events: DataPieChartChildren[] = [];
 
   constructor(
     private notificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private localStorageService: LocalStorageService
   ) {}
-  ngOnChanges(changes: SimpleChanges): void {
-    this.events?.forEach((event: EventCalendar | any) => {
+
+  ngOnInit(): void {
+    const user = this.localStorageService.getUserByLogin();
+    this.events?.forEach((event: DataPieChartChildren | any) => {
+      console.log(event);
+      
       setInterval(() => {
         //La fecha de hoy y las horas
         const ahora = new Date();
@@ -39,21 +45,30 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
           minutes = parseInt(time[1], 10);
         }
 
-        const eventDay = moment(event?.date);
+        const eventDay = moment(event?.hour);
 
         if (
           moment(ahora).isSame(eventDay, 'day') &&
           horaActual === hour &&
           minutosActuales === minutes
         ) {
-          this.sendNotification(event?.title, event?.description);
+          console.log(
+            `¡Hola ${user?.firstName || user?.userName}!`,
+            `Hoy es tu etapa de:  ${event?.label}`
+          );
+
+          this.sendNotification(
+            `¡Hola ${user?.firstName || user?.userName}!`,
+            `Hoy es tu etapa de:  ${event?.label}`
+          );
         }
       }, 30000);
     });
   }
 
-  ngOnInit(): void {
-    this.events.forEach((event: EventCalendar | any) => {
+  ngOnChanges(changes: SimpleChanges): void {
+    const user = this.localStorageService.getUserByLogin();
+    this.events?.forEach((event: DataPieChartChildren | any) => {
       setInterval(() => {
         //La fecha de hoy y las horas
         const ahora = new Date();
@@ -69,16 +84,32 @@ export class EventsNotificationComponent implements OnInit, OnChanges {
           minutes = parseInt(time[1], 10);
         }
 
-        const eventDay = moment(event?.date);
+        const dateArray = event?.date?.split('/');
+
+        const newDate = new Date(
+          Number(dateArray[2]),
+          Number(dateArray[1]) - 1,
+          Number(dateArray[0])
+        );
+
+        const eventDay = moment(newDate);
 
         if (
           moment(ahora).isSame(eventDay, 'day') &&
           horaActual === hour &&
           minutosActuales === minutes
         ) {
-          this.sendNotification(event?.title, event?.description);
+          console.log(
+            `¡Hola ${user?.firstName || user?.userName}!`,
+            `Hoy es tu etapa de:  ${event?.label}`
+          );
+
+          this.sendNotification(
+            `¡Hola ${user?.firstName || user?.userName}!`,
+            `Hoy es tu etapa de:  ${event?.label}`
+          );
         }
-      }, 60000);
+      }, 30000);
     });
   }
 

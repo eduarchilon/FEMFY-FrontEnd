@@ -37,6 +37,8 @@ import { CutTextPipe } from 'src/app/utils/pipes/cut-text/cut-text.pipe';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { NotificationService } from 'src/app/services/notification/notification.service';
 import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
+import { PieNotificationComponent } from './components/pie-notification/pie-notification.component';
+import { HourNotificationComponent } from './components/hour-notification/hour-notification.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +52,8 @@ import { WhatsAppService } from 'src/app/services/whats-app/whats-app.service';
     DeleteCycleComponent,
     FinishCycleComponent,
     RecomendationsComponent,
+    PieNotificationComponent,
+    HourNotificationComponent,
     CutTextPipe,
   ],
   imports: [

@@ -40,6 +40,16 @@
                   <mat-icon color="warn">delete</mat-icon>
                   <span>Eliminar ciclo</span>
                 </button>
+                <div class="w-[100%] px-2">
+                  <mat-divider></mat-divider>
+                </div>
+                <button
+                  mat-menu-item
+                  (click)="editHourNotification()"
+                >
+                  <mat-icon style="color: yellow">notifications</mat-icon>
+                  <span>Hora de notificación</span>
+                </button>
               </mat-menu>
             </div>
           </ng-container>
@@ -119,30 +129,26 @@
         <div
           class="flex items-center justify-between border-b-4 border-b-[#7c2385]"
         >
-        <h5
-          class="p-[20px] text-[#7c2385] font-bold text-2xl"
-        >
-          Historial de ciclos
-        </h5>
+          <h5 class="p-[20px] text-[#7c2385] font-bold text-2xl">
+            Historial de ciclos
+          </h5>
 
-        <ng-container *ngIf="cycles.length > 0">
-          <div class="flex justify-end w-fit">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-              <button
-                mat-menu-item (click)="generatePDF(cycles)"
-              >
-                <mat-icon color="primary">share</mat-icon>
-                <span>Compartir historial de ciclos</span>
+          <ng-container *ngIf="cycles.length > 0">
+            <div class="flex justify-end w-fit">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
               </button>
-              <div class="w-[100%] px-2">
-                <mat-divider></mat-divider>
-              </div>
-            </mat-menu>
-          </div>
-        </ng-container>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="generatePDF(cycles)">
+                  <mat-icon color="primary">share</mat-icon>
+                  <span>Compartir historial de ciclos</span>
+                </button>
+                <div class="w-[100%] px-2">
+                  <mat-divider></mat-divider>
+                </div>
+              </mat-menu>
+            </div>
+          </ng-container>
         </div>
 
         <div class="p-[20px] flex text-black flex-col gap-[15px]">
@@ -159,7 +165,6 @@
           </ng-container>
         </div>
       </div>
-
 
       <!-- Card recomendaciones -->
       <div class="flex-1 w-full bg-white rounded-[20px] max-lg:mb-20">

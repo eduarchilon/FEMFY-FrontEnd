@@ -29,6 +29,7 @@ import { jsPDF } from 'jspdf';
 import * as moment from 'moment';
 import { LOGO_DATA_URL } from 'src/app/constans/data-url';
 import { calculateCycleDurantionWithDates } from 'src/app/utils/average-period.utils';
+import { HourNotificationComponent } from '../components/hour-notification/hour-notification.component';
 
 @Component({
   selector: 'app-index',
@@ -278,5 +279,11 @@ export class IndexComponent implements OnInit, OnDestroy {
 
     // Abre una nueva ventana o pestaña con la vista previa del PDF
     window.open(url, '_blank');
+  }
+
+  editHourNotification(): void {
+    const dialogRef = this.dialog.open(HourNotificationComponent, {
+      panelClass: ['max-md:!w-[50%]', 'max-sm:!w-[100%]', '!rounded-[20px]'],
+    });
   }
 }
