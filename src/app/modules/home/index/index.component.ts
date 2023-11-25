@@ -191,47 +191,33 @@ export class IndexComponent implements OnInit, OnDestroy {
     pdf.text(`Usuaria: ${nombreUsuario}`, 10, 30);
     pdf.text(`Correo: ${correoUsuario}`, 10, 40);
 
-    console.log(cycles);
-
     cycles.forEach((CycleHistorial, index) => {
       const textY = 60 + index * 50;
     
+      console.log(cycles);
+
       if (index === 0) {
         pdf.text(`Ciclo actual`, 20, textY);
         pdf.text(`Inicio: ${this.formatDate(new Date(CycleHistorial.dateBeging))}`, 20, textY + 10);
-        pdf.text(
-          `Duración estimado del período: ${CycleHistorial.daysOfBleeding} días`, 20, textY + 20);
+        pdf.text(`Duración estimado del período: ${CycleHistorial.daysOfBleeding} días`, 20, textY + 20);
         pdf.setDrawColor(171, 95, 232);
         pdf.setLineWidth(0.5);
         pdf.line(20, textY + 40, 190, textY + 40);
-      } if(CycleHistorial.dateEnd === null){
-        
-      }
-      
-      else {
+      } else if (CycleHistorial.dateEnd !== null) {
         pdf.text(`Ciclo ${index + 1}`, 20, textY);
-
+    
         const startDate = new Date(CycleHistorial.dateBeging);
         const endDate = new Date(CycleHistorial.dateEnd);
-        
+    
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime())) {
           console.error("Fechas no válidas");
         } else {
           const durationInDays = Math.ceil((endDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24));
-        
           pdf.text(`Duración del ciclo: ${durationInDays} días`, 20, textY + 10);
         }
-
-        pdf.text(
-          `Duración del período: ${CycleHistorial.daysOfBleeding} días`,
-          20,
-          textY + 20
-        );
-        pdf.text(
-          `Fecha: ${this.formatDate(new Date(CycleHistorial.dateBeging))} al ${this.formatDate(new Date(CycleHistorial.dateEnd))}`,
-          20,
-          textY + 30
-        );
+    
+        pdf.text(`Duración del período: ${CycleHistorial.daysOfBleeding} días`, 20, textY + 20);
+        pdf.text(`Fecha: ${this.formatDate(new Date(CycleHistorial.dateBeging))} al ${this.formatDate(new Date(CycleHistorial.dateEnd))}`, 20, textY + 30);
     
         // Dibujar una línea violeta después de cada ciclo (excepto el último)
         pdf.setDrawColor(171, 95, 232);
