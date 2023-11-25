@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { LoaderService } from 'src/app/services/loader/loader.service';
 import { LocalStorageService } from 'src/app/services/local-storage/local-storage.service';
+import { NotificationService } from 'src/app/services/notification/notification.service';
 import { AppState } from 'src/app/services/redux/store/app.store';
 
 @Component({
@@ -27,6 +28,7 @@ export class LoginUsuarioComponent implements OnInit {
     private router: Router,
     private loaderService: LoaderService,
     private localStorageService: LocalStorageService,
+    private notificationService: NotificationService,
     private store: Store<AppState>,
   ) {}
 
@@ -41,6 +43,14 @@ export class LoginUsuarioComponent implements OnInit {
           if (authenticatedUser) {
             this.loaderService.hideLoader();
             this.router.navigate(['/']).then(() => {
+              this.notificationService
+              .enviarNotificacion(
+                '¡Bienvenida a Femfy!',
+                'Me alegra verte de nuevo. 😊'
+              )
+              .subscribe({
+                next: (res: any) => res,
+              });
               location.reload();
             });
           } else {
