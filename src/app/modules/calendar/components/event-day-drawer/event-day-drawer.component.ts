@@ -231,4 +231,63 @@ export class EventDayDrawerComponent implements OnInit {
       },
     });
   }
+
+  vinculateGoogleClendarChart(event: any): void {
+    //   {
+    //     "id": 15,
+    //     "dayCount": 1,
+    //     "label": "Días fértiles",
+    //     "color": "green",
+    //     "width": 100,
+    //     "fase": "fertileDay",
+    //     "date": "08/12/2023",
+    //     "hour": "10:00",
+    //     "desc": "Ovulación"
+    // }
+
+    const dateArray = event?.date?.split('/');
+
+    const newDate = new Date(
+      Number(dateArray[2]),
+      Number(dateArray[1]) - 1,
+      Number(dateArray[0])
+    );
+
+    let desc = '';
+    if (event?.desc === 'Ovulación' || event?.desc === 'Fin del ciclo') {
+      desc = ' y ' + event?.desc;
+    }
+    const emailUser = this.localStorageService.getUserByLogin()?.email;
+    const date = moment(new Date(newDate));
+    const date2 = moment(new Date(newDate));
+    const time = this.formRegisterEvent?.value?.hour?.split(':');
+    let hour = 0;
+    let minutes = 0;
+    if (time.length === 2) {
+      hour = parseInt(time[0], 10);
+      minutes = parseInt(time[1], 10);
+      date.set({ hour: hour, minute: minutes });
+      date2.set({ hour: hour, minute: minutes });
+    }
+    const realDate = new Date(newDate);
+    const startTime = date.toISOString()?.slice(0, 18) + '-00:00';
+    const endTime = date2.toISOString()?.slice(0, 18) + '-00:00';
+    const eventDetails = {
+      email: emailUser,
+      startTime: startTime,
+      endTime: endTime,
+      summary: `${event?.label}${desc}`,
+      location: 'Buenos Aires, Argentina',
+      description: `${event?.label}${desc}`,
+    };
+    createGoogleEvent(eventDetails)
+      .then((success: any) => {
+        if (success) {
+          this.openSnackBar('Etapa vinculada a Google Calendar', 'Cerrar');
+        }
+      })
+      .catch((error: any) => {
+        error;
+      });
+  }
 }

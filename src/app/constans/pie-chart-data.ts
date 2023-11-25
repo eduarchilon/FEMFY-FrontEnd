@@ -1,6 +1,6 @@
 import { DataPieChart, DataPieChartChildren } from '../models/data-pie-chart';
 
-export function obtenerDiasEnMesActual() {
+export function obtenerDíasEnMesActual() {
   const fechaActual = new Date();
   // Obtiene el mes actual (0-11, donde 0 es enero y 11 es diciembre)
   const mesActual = fechaActual.getMonth();
@@ -9,35 +9,35 @@ export function obtenerDiasEnMesActual() {
   // Crea una nueva fecha para el último día del mes actual
   const ultimoDiaDelMes = new Date(añoActual, mesActual + 1, 0);
   // Obtiene el número de día del último día del mes actual
-  const numeroDeDias = ultimoDiaDelMes.getDate();
-  return numeroDeDias;
+  const numeroDeDías = ultimoDiaDelMes.getDate();
+  return numeroDeDías;
 }
 
-const diasEnMesActual = obtenerDiasEnMesActual();
-const diasRestantes = diasEnMesActual - (5 + 6 + 5);
+const DíasEnMesActual = obtenerDíasEnMesActual();
+const DíasRestantes = DíasEnMesActual - (5 + 6 + 5);
 
 export const data: DataPieChart[] = [
   {
     id: 1,
-    dayCount: obtenerDiasEnMesActual() - (obtenerDiasEnMesActual() - 5),
+    dayCount: obtenerDíasEnMesActual() - (obtenerDíasEnMesActual() - 5),
     label: 'Sangrado',
     color: '#fda4af',
   },
   {
     id: 2,
-    dayCount: obtenerDiasEnMesActual() - (obtenerDiasEnMesActual() - 6),
+    dayCount: obtenerDíasEnMesActual() - (obtenerDíasEnMesActual() - 6),
     label: 'Periodo seguro',
     color: '#bfdbfe',
   },
   {
     id: 3,
-    dayCount: obtenerDiasEnMesActual() - (obtenerDiasEnMesActual() - 5),
-    label: 'Dias fertiles',
+    dayCount: obtenerDíasEnMesActual() - (obtenerDíasEnMesActual() - 5),
+    label: 'Días fértiles',
     color: '#d9f99d',
   },
   {
     id: 4,
-    dayCount: diasRestantes,
+    dayCount: DíasRestantes,
     label: 'Periodo seguro',
     color: '#bfdbfe',
   },
@@ -122,39 +122,39 @@ export let data2: DataPieChartChildren[] = [
     color: '#3b82f6',
     width: 0,
   },
-  //Dias fertiles
+  //Días fértiles
   {
     id: 12,
     dayCount: 5,
-    label: 'Dias fertiles',
+    label: 'Días fértiles',
     color: '#84cc16',
     width: 0,
   },
   {
     id: 13,
     dayCount: 5,
-    label: 'Dias fertiles',
+    label: 'Días fértiles',
     color: '#84cc16',
     width: 0,
   },
   {
     id: 14,
     dayCount: 5,
-    label: 'Dias fertiles',
+    label: 'Días fértiles',
     color: '#84cc16',
     width: 0,
   },
   {
     id: 15,
     dayCount: 5,
-    label: 'Dias fertiles',
+    label: 'Días fértiles',
     color: '#84cc16',
     width: 0,
   },
   {
     id: 16,
     dayCount: 5,
-    label: 'Dias fertiles',
+    label: 'Días fértiles',
     color: '#84cc16',
     width: 0,
   },

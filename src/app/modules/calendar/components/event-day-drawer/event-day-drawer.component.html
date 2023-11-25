@@ -14,20 +14,34 @@
         Crear nuevo evento
       </h3>
       <ng-container *ngIf="data?.itemChart">
-        <div class="flex justify-between items-center py-5">
-          <p>
+        <div class="flex justify-between items-center py-5 max-lg:flex-col">
+          <p class="max-lg:self-baseline">
             Estás en la etapa de :
             <span class="text-black font-bold">
               {{ data?.itemChart?.label }}</span
             >
           </p>
-          <button
-            mat-mini-fab
-            class="!bg-green-600"
-            (click)="sendWhatsAppPhase(data?.itemChart)"
-          >
-            <mat-icon [svgIcon]="iconWhatsApp?.name"></mat-icon>
-          </button>
+          <div class="flex gap-2 max-lg:self-end">
+            <button
+              *ngIf="
+                data?.itemChart.desc === 'Ovulación' ||
+                data?.itemChart.desc === 'Fin del ciclo' ||
+                data?.itemChart.label === 'Días fértiles'
+              "
+              (click)="vinculateGoogleClendarChart(data?.itemChart)"
+              mat-mini-fab
+              class="!bg-white"
+            >
+              <mat-icon [svgIcon]="iconCalendar?.name"></mat-icon>
+            </button>
+            <button
+              mat-mini-fab
+              class="!bg-green-600"
+              (click)="sendWhatsAppPhase(data?.itemChart)"
+            >
+              <mat-icon [svgIcon]="iconWhatsApp?.name"></mat-icon>
+            </button>
+          </div>
         </div>
       </ng-container>
       <!-- <p>{{ eventDaySelected | json }}</p> -->

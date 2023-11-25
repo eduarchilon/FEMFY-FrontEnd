@@ -64,12 +64,12 @@ function scheduleEvent(eventDetails) {
       dateTime: eventDetails.endTime,
       timeZone: "America/Los_Angeles",
     },
-    recurrence: ["RRULE:FREQ=DAILY;COUNT=2"],
+    recurrence: ["RRULE:FREQ=DAILY;COUNT=1"],
     attendees: [{ email: eventDetails.email }],
     reminders: {
       useDefault: false,
       overrides: [
-        { method: "email", minutes: 24 * 60 },
+        { method: "email", minutes: 60 },
         { method: "popup", minutes: 10 },
       ],
     },
